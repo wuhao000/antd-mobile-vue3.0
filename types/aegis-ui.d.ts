@@ -6,7 +6,6 @@ import {ButtonComponent} from './components/button';
 import {CalendarComponent} from './components/calendar';
 import {CardComponent} from './components/card';
 import {CarouselComponent} from './components/carousel';
-import {ChartComponent} from './components/chart';
 import {CheckboxComponent} from './components/checkbox';
 import {DatePickerComponent} from './components/date-picker';
 import {DatePickerViewComponent} from './components/date-picker-view';
@@ -62,8 +61,6 @@ export class Calendar extends CalendarComponent {
 export class Card extends CardComponent {
 }
 export class Carousel extends CarouselComponent {
-}
-export class Chart extends ChartComponent {
 }
 export class Checkbox extends CheckboxComponent {
 }

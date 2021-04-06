@@ -3,6 +3,7 @@
 </template>
 <script lang="ts">
   import {computed, defineComponent, ref} from 'vue';
+  import {useRoute} from 'vue-router';
 
   export default defineComponent({
     name: 'Components',
@@ -10,7 +11,8 @@
       const refreshing = ref(false);
 
       const component = computed(() => {
-        return this.$route.query && this.$route.query['component'] as string;
+        const route = useRoute();
+        return route.query && route.query['component'] as string;
       });
       const refresh = () => {
         refreshing.value = true;

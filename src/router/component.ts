@@ -57,13 +57,6 @@ export default [{
   },
   component: () => import('../generated/carousel/index.vue')
 }, {
-  path: 'chart',
-  name: 'Chart 图表',
-  meta: {
-    tag: '数据展示'
-  },
-  component: () => import('../generated/chart/index.vue')
-}, {
   path: 'checkbox',
   name: 'Checkbox 复选框',
   meta: {

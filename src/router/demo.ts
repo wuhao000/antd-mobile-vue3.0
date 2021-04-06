@@ -36,10 +36,6 @@ export default [{
   name: 'm-carousel',
   component: () => import('../generated/carousel/demo.vue')
 }, {
-  path: 'm-chart',
-  name: 'm-chart',
-  component: () => import('../generated/chart/demo.vue')
-}, {
   path: 'm-checkbox',
   name: 'm-checkbox',
   component: () => import('../generated/checkbox/demo.vue')

@@ -9,6 +9,10 @@ let customNumberKeyboard: any = null;
 export default defineComponent({
   name: 'MNumberInput',
   props: {
+    onConfirm: {},
+    onChange: {},
+    onFocus: {},
+    onBlur: {},
     placeholder: {default: ''},
     disabled: {type: Boolean, default: false},
     editable: {type: Boolean, default: true},

@@ -14,8 +14,12 @@ const Tab = defineComponent({
     selected: {
       type: Boolean as PropType<boolean>
     },
-    selectedIcon: {},
-    icon: {},
+    selectedIcon: {
+      type: Object as PropType<any>
+    },
+    icon: {
+      type: Object as PropType<any>
+    },
     title: {
       type: String as PropType<string>
     },
@@ -42,7 +46,7 @@ const Tab = defineComponent({
         title,
         prefixCls
       } = props;
-      const realIcon = selected ? selectedIcon : icon;
+      const realIcon: any = selected ? selectedIcon : icon;
       const iconDom = realIcon ? (
         isVNode(realIcon) ? realIcon : <IconRes
           class={`${prefixCls}-image`}

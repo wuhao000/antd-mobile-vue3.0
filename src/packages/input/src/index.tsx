@@ -366,7 +366,6 @@ export default defineComponent({
       control: () => {
         return <div class={controlCls}>
           {type === 'money' ? (
-            // @ts-ignore
             <CustomInput
               {
                 ...{

@@ -6,24 +6,10 @@ module.exports = function(api) {
 
   return {
     presets: [
-      [
-        '@babel/preset-env',
-        {
-          loose: true,
-          modules: useESModules ? false : 'commonjs'
-        }
-      ],
-      [
-        '@vue/babel-preset-jsx',
-        {
-          functional: false
-        }
-      ],
+      ['@vue/cli-plugin-babel/preset', { useBuiltIns: 'entry' }],
       '@babel/preset-typescript'
     ],
     plugins: [
-      ['@babel/plugin-proposal-decorators', { legacy: true }],
-      ['transform-class-properties', { loose: true }],
       '@babel/plugin-transform-runtime',
       '@babel/plugin-transform-object-assign'
     ]

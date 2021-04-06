@@ -16,13 +16,12 @@
       ReadMe, DevelopDoc
     },
     setup(props, {emit, slots}) {
-      const form = reactive({});
-
-
+      const form = reactive({
+        value: null
+      });
       onMounted(() => {
         form.value = '2';
       });
-
       return {
         form
       };
