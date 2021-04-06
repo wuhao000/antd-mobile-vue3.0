@@ -1,0 +1,23 @@
+<template>
+  <div class="demo">
+    <code-box :code="code"
+              :markdown="md">
+    </code-box>
+  </div>
+</template>
+<script lang="ts">
+  import source from './{{{demoName}}}.txt';
+  import md from '../../packages/{{{dir}}}/demo/{{{demoName}}}.md';
+  import CodeBox from '../../components/code-box.vue';
+  import {defineComponent} from 'vue';
+
+  export default defineComponent({
+    components: {CodeBox},
+    setup() {
+      return {
+        code: source,
+        md
+      }
+    }
+  })
+</script>

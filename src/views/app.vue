@@ -1,0 +1,83 @@
+<template>
+  <router-view/>
+</template>
+<script lang="ts">
+  import {defineComponent} from 'vue';
+
+  export default defineComponent({
+    name: 'App',
+    setup(props, {emit, slots}) {
+
+
+      return {};
+    }
+  });
+</script>
+<style lang="less">
+  @import "../assets/styles/common";
+  @import "../assets/styles/custom";
+  @import "../../node_modules/ant-design-vue/es/style/themes/default";
+
+  body {
+    background: @body-background;
+  }
+
+  #app-header {
+    height: 60px;
+  }
+
+  #app-body {
+    padding: @padding-xs;
+  }
+
+  .ant-layout {
+    height: 100%;
+
+    &, &-header, &-sider, &-footer, &-content {
+      background: transparent;
+      padding: 0;
+    }
+
+    &-header {
+      line-height: 1;
+    }
+
+    &-header, &-footer {
+      height: auto;
+    }
+
+    &-sider {
+      & > &-children {
+        overflow: auto;
+      }
+    }
+
+    &-content {
+      flex: 1;
+      overflow: auto;
+    }
+  }
+
+  #app-content {
+    background: white;
+    padding: @padding-sm 200px 144px @padding-lg;
+  }
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
+  #app-nav {
+    background: white;
+    margin-right: @padding-xs;
+  }
+
+  .bg-white {
+    background: white;
+  }
+
+  .demo {
+    margin: @padding-md 0;
+  }
+</style>

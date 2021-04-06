@@ -1,0 +1,18 @@
+<template>
+  <div>
+    {{{tmpl}}}
+  </div>
+</template>
+<script lang="ts">
+  import DemoWrapper from '../../components/demo-wrapper';
+  {{{imports}}}
+  import {defineComponent} from 'vue';
+
+  export default defineComponent({
+    components: {{{{components}}} DemoWrapper},
+    setup() {
+      return {};
+    }
+  });
+</script>
+
