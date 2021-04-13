@@ -88,7 +88,7 @@ export default defineComponent({
       }
       const style = child.props.style;
       if (style) {
-        child.props.class = Object.assign(style, activeStyle);
+        child.props.style = Object.assign(style, activeStyle);
       } else {
         child.props.style = activeStyle;
       }

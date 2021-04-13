@@ -102,9 +102,7 @@ export default defineComponent({
       if (dataItem) {
         const {icon, text} = dataItem;
         itemEl = (
-            <div
-                class={`${props.prefixCls}-item-inner-content column-num-${columnNum}`}
-            >
+            <div class={`${props.prefixCls}-item-inner-content column-num-${columnNum}`}>
               {renderIcon(icon, props.prefixCls)}
               <div class={`${props.prefixCls}-text`}>{text}</div>
             </div>
@@ -142,11 +140,10 @@ export default defineComponent({
                 >
                   <Flex.Item
                       class={`${prefixCls}-item`}
-                      onClick={() => {
-                        emit('click', el, dataIndex);
+                      onClick={(e) => {
+                        emit('click', el, dataIndex, e);
                       }}
-                      style={colStyle}
-                  >
+                      style={colStyle}>
                     {renderItem(el, dataIndex, cols)}
                   </Flex.Item>
                 </TouchFeedback>

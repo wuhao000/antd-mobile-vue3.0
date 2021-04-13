@@ -18,10 +18,14 @@ export default defineComponent({
   render() {
     const {prefixCls, ...restProps} = this;
     const wrapCls = classnames(`${prefixCls}-item`);
-    const props = filterHTMLAttrs({
+    const props = {
       ...restProps,
-      ...this.$attrs
-    });
+      ...this.$attrs,
+      onClick: (e) => {
+        e.stopPropagation();
+        this.$emit('click', e);
+      }
+    };
     return (
       <div class={wrapCls}
            {...props}>

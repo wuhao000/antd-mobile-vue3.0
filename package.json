@@ -1,6 +1,6 @@
 {
   "name": "antd-mobile-vue-next",
-  "version": "0.0.1-9",
+  "version": "0.0.1-10",
   "description": "基于Vue 3.0、vite2.0 移植的ant-design-mobile组件库",
   "main": "es/index.js",
   "keyword": "antd antd-mobile vue vue3 vite antd-mobile-vue",
@@ -18,7 +18,6 @@
   },
   "private": false,
   "scripts": {
-    "build2": "rollup -c",
     "dev": "tsc -p build && npm run docs && vite",
     "create": "tsc -p build && node build/create.js && npm run docs",
     "docs": "tsc -p build && node build/check.js && node build/def.js && node build/docs.js",
