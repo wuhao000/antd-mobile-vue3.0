@@ -48,9 +48,8 @@ export default defineComponent({
       mode,
       prefixCls,
       action,
-      marqueeProps,
-      ...restProps
-    } = this;
+      marqueeProps
+    } = this.$props;
     const icon = this.$slots.icon?.() ?? this.icon ?? <Icon type="voice" size="xxs"/>;
     const extraProps: any = {};
     let operationDom: any = null;
@@ -60,8 +59,7 @@ export default defineComponent({
           class={`${prefixCls}-operation`}
           onClick={this.onClick}
           role="button"
-          aria-label="close"
-        >
+          aria-label="close">
           {this.$slots.action?.() ?? action ?? <Icon type="cross" size="md"/>}
         </div>
       );
@@ -83,7 +81,9 @@ export default defineComponent({
     const wrapCls = classnames(prefixCls);
 
     return this.show ? (
-      <div class={wrapCls} onClick={(e) => {
+      <div class={wrapCls}
+           {...this.$attrs}
+           onClick={(e) => {
         if (extraProps.onClick) {
           extraProps.onClick(e);
         }

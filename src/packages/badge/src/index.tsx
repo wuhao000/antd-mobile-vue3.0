@@ -17,14 +17,14 @@ export default defineComponent({
     let {
       overflowCount,
       text
-    } = this;
+    } = this.$props;
     const {
       prefixCls,
       size,
       dot,
       corner,
       hot
-    } = this;
+    } = this.$props;
     overflowCount = overflowCount as number;
     text =
         typeof text === 'number' && text > overflowCount

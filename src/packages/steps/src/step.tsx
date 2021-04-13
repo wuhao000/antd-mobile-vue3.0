@@ -114,7 +114,7 @@ export default defineComponent({
       status = 'wait', iconPrefix, icon, wrapperStyle,
       adjustMarginRight, stepNumber,
       description, title, progressDot, ...restProps
-    } = this;
+    } = this.$props;
 
     const classString = classNames(
       `${prefixCls}-item`,
@@ -131,6 +131,7 @@ export default defineComponent({
     return (
       <div
         {...restProps}
+        {...this.$attrs}
         class={classString}
         style={stepItemStyle}
       >

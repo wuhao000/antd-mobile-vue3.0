@@ -389,8 +389,8 @@ const Drawer = defineComponent({
   render() {
     const {
       prefixCls, position, transitions,
-      touch, enableDragHandle, sidebar, docked, visible
-    } = this;
+      touch, enableDragHandle, sidebar, docked
+    } = this.$props;
 
     const sidebarStyle: any = {...this.sidebarStyle};
     const contentStyle: any = {...this.contentStyle};

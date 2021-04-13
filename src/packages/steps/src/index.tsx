@@ -52,7 +52,7 @@ export default defineComponent({
       prefixCls, direction,
       labelPlacement, iconPrefix, status, size, current, progressDot,
       ...restProps
-    } = this;
+    } = this.$props;
     const adjustedlabelPlacement = !!progressDot ? 'vertical' : labelPlacement;
     const classString = classNames(prefixCls, `${prefixCls}-${direction}`, {
       [`${prefixCls}-${size}`]: size,
@@ -110,7 +110,9 @@ export default defineComponent({
       return child;
     });
     return (
-      <div class={classString} {...filterHTMLAttrs(restProps)}>
+      <div class={classString}
+           {...this.$attrs}
+           {...filterHTMLAttrs(restProps)}>
         {content}
       </div>
     );

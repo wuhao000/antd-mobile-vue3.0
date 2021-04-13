@@ -1,4 +1,3 @@
-import {filterHTMLAttrs} from '../../utils/dom';
 import classNames from 'classnames';
 import {
   computed,
@@ -13,6 +12,7 @@ import {
 } from 'vue';
 
 import Icon from '../../icon';
+import {filterHTMLAttrs} from '../../utils/dom';
 import {getScrollEventTarget, getScrollTop} from './util';
 
 function setTransform(nodeStyle: any, value: any) {
@@ -301,8 +301,10 @@ export default defineComponent({
   render() {
     const {
       prefixCls, getScrollContainer,
-      direction, value, indicator, distanceToRefresh, ...restProps
-    } = this;
+      direction, value, distanceToRefresh,
+      ...restProps
+    } = this.$props;
+    const indicator = this.indicator;
 
     const renderChildren = <div>{this.$slots.default()}</div>;
     const renderRefresh = (cls: string) => {
@@ -324,11 +326,9 @@ export default defineComponent({
       return renderRefresh(`${prefixCls}-content ${prefixCls}-${direction}`);
     }
     return (
-      <div
-        ref={this.setContainerRef}
-        class={classNames(this.className, prefixCls, `${prefixCls}-${direction}`)}
-        {...filterHTMLAttrs(restProps)}
-      >
+      <div ref={this.setContainerRef}
+           class={classNames(this.className, prefixCls, `${prefixCls}-${direction}`)}
+           {...filterHTMLAttrs({...restProps, ...this.$attrs})}>
         {renderRefresh(`${prefixCls}-content`)}
       </div>
     );

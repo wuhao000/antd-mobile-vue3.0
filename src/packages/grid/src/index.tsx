@@ -200,13 +200,13 @@ export default defineComponent({
       bordered,
       carousel,
       square,
-      activeStyle,
       cols,
-      carouselMaxRow,
-      renderItem,
-      activeClassName,
-      ...restPropsForCarousel
+      carouselMaxRow
     } = this;
+    const restPropsForCarousel = {
+      itemStyle: this.itemStyle,
+      ...this.$attrs
+    }
     const initialSlideWidth = this.initialSlideWidth;
     const dataLength = (data && data.length) || 0;
     let rowCount = Math.ceil(dataLength / cols);

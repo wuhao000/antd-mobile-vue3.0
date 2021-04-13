@@ -34,9 +34,9 @@ const TimePicker = defineComponent({
     const getMinTime = (date?: Date) => {
       const minDate = props.minDate;
       if (!date ||
-          date.getFullYear() > minDate.getFullYear() ||
-          date.getMonth() > minDate.getMonth() ||
-          date.getDate() > minDate.getDate()
+        date.getFullYear() > minDate.getFullYear() ||
+        date.getMonth() > minDate.getMonth() ||
+        date.getDate() > minDate.getDate()
       ) {
         return MIN_DATE;
       }
@@ -45,9 +45,9 @@ const TimePicker = defineComponent({
     const getMaxTime = (date?: Date) => {
       const maxDate = props.maxDate as Date;
       if (!date ||
-          date.getFullYear() < maxDate.getFullYear() ||
-          date.getMonth() < maxDate.getMonth() ||
-          date.getDate() < maxDate.getDate()
+        date.getFullYear() < maxDate.getFullYear() ||
+        date.getMonth() < maxDate.getMonth() ||
+        date.getDate() < maxDate.getDate()
       ) {
         return MAX_DATE;
       }
@@ -58,31 +58,34 @@ const TimePicker = defineComponent({
     };
   },
   render() {
-    const {locale, title, value, defaultValue, prefixCls, pickerPrefixCls, clientHeight} = this;
+    const {
+      locale, title, value, defaultValue,
+      prefixCls, pickerPrefixCls, clientHeight
+    } = this.$props;
     const date: Date = value || defaultValue || undefined;
     const height = (clientHeight && clientHeight * 3 / 8 - 52) || Number.POSITIVE_INFINITY;
 
     return (
-        <div class="time-picker">
-          <div class="title">{title}</div>
-          {
-            <DateTimePicker
-                prefixCls={prefixCls}
-                pickerPrefixCls={pickerPrefixCls}
-                style={{
-                  height: height > 164 || height < 0 ? 164 : height,
-                  overflow: 'hidden'
-                }}
-                mode="time"
-                value={date}
-                locale={locale as any}
-                minDate={this.getMinTime(date)}
-                maxDate={this.getMaxTime(date)}
-                onChange={this.onDateChange}
-                use12Hours
-            />
-          }
-        </div>
+      <div class="time-picker">
+        <div class="title">{title}</div>
+        {
+          <DateTimePicker
+            prefixCls={prefixCls}
+            pickerPrefixCls={pickerPrefixCls}
+            style={{
+              height: height > 164 || height < 0 ? 164 : height,
+              overflow: 'hidden'
+            }}
+            mode="time"
+            value={date}
+            locale={locale as any}
+            minDate={this.getMinTime(date)}
+            maxDate={this.getMaxTime(date)}
+            onChange={this.onDateChange}
+            use12Hours
+          />
+        }
+      </div>
     );
   }
 });

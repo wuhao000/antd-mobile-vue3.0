@@ -459,7 +459,7 @@ export default defineComponent({
     const value = this.state.values;
     const {
       disabled, pickerPrefixCls, prefixCls, itemStyle
-    } = this;
+    } = this.$props;
     const pickerProps = {
       style: {
         flexDirection: 'row',

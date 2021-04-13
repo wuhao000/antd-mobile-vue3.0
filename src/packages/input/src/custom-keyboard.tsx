@@ -20,7 +20,7 @@ const KeyboardItem = defineComponent({
       label,
       iconOnly,
       ...restProps
-    } = this;
+    } = this.$props;
     let value: any = this.$slots.default?.();
     const type = this.type;
     if (type === 'keyboard-delete') {
@@ -38,12 +38,14 @@ const KeyboardItem = defineComponent({
             activeClassName={`${prefixCls}-item-active`}>
           <td
               ref="td"
-              // tslint:disable-next-line:jsx-no-multiline-js
               onClick={e => {
                 this.$emit('click', e, this.value);
               }}
               class={wrapCls}
-              {...restProps}
+              {...{
+                ...restProps,
+                ...this.$attrs
+              }}
           >
             {this.$slots.default?.()}
             {iconOnly && <i class="sr-only">{label}</i>}

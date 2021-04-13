@@ -14,7 +14,7 @@ export default defineComponent({
     return {};
   },
   render() {
-    const {locale} = this;
+    const {locale} = this.$props;
     const {week} = locale;
     return (
       <div class="week-panel">

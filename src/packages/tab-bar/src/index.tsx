@@ -92,7 +92,7 @@ const TabBar = defineComponent({
       noRenderContent,
       prerenderingSiblingsNumber,
       tabBarPosition
-    } = this;
+    } = this.$props;
     return (
       <div class={prefixCls}>
         <Tabs renderTabBar={this.renderTabBar}

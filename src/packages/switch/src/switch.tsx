@@ -48,7 +48,7 @@ const Switch = defineComponent({
       platform,
       color,
       ...restProps
-    } = this;
+    } = this.$props;
     const wrapCls = classnames(prefixCls, {
       [`${prefixCls}-android`]: platform === 'android'
     });

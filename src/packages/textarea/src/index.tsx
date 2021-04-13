@@ -156,7 +156,7 @@ export default defineComponent({
       title,
       autoHeight,
       disabled
-    } = this;
+    } = this.$props;
     const {value, focus} = this.state as any;
     const hasCount = count! > 0 && this.rows! > 1;
 

@@ -16,7 +16,7 @@ export default defineComponent({
     }
   },
   render() {
-    const {prefixCls, ...restProps} = this;
+    const {prefixCls, ...restProps} = this.$props;
     const wrapCls = classnames(`${prefixCls}-item`);
     const props = {
       ...restProps,

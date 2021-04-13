@@ -22,7 +22,7 @@ export default defineComponent({
       thumbStyle,
       extra,
       title
-    } = this;
+    } = this.$props;
     const wrapCls = `${prefixCls}-header`;
     return (
       <div class={wrapCls}>

@@ -494,7 +494,7 @@ const Tabs = defineComponent({
     };
   },
   render() {
-    const {prefixCls, tabBarPosition, tabDirection, useOnPan} = this;
+    const {prefixCls, tabBarPosition, tabDirection, useOnPan} = this.$props;
     const isTabVertical = this.isTabVertical(tabDirection);
     const tabBarProps: any = {
       ...this.getTabBarBaseProps()

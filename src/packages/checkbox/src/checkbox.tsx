@@ -42,7 +42,7 @@ const Checkbox = defineComponent({
     return {onClick};
   },
   render() {
-    const {prefixCls} = this;
+    const {prefixCls} = this.$props;
     const wrapCls = classnames(`${prefixCls}-wrapper`);
     const mark = (
       <label class={wrapCls}>

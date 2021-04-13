@@ -1,3 +1,4 @@
+import {unwrapFragment} from '../utils/vue';
 import {defineComponent, onUpdated, Ref, ref, VNode} from 'vue';
 
 export default defineComponent({
@@ -11,9 +12,9 @@ export default defineComponent({
     const active: Ref<boolean> = ref(false);
     const triggerEvent = (type, isActive, ev) => {
       const eventType = `on${type}`;
-      const children = slots.default && slots.default()[0];
-      if (children[eventType]) {
-        children[eventType](ev);
+      const onlyChild = unwrapFragment(slots.default())[0];
+      if (onlyChild[eventType]) {
+        onlyChild[eventType](ev);
       }
       if (isActive !== active.value) {
         active.value = isActive;
@@ -64,7 +65,7 @@ export default defineComponent({
     };
   },
   render() {
-    const {disabled, activeClassName, activeStyle} = this;
+    const {disabled, activeClassName, activeStyle} = this.$props;
     const events = disabled ? undefined : {
       onTouchstart: this.onTouchStart,
       onTouchmove: this.onTouchMove,

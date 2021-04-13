@@ -215,7 +215,7 @@ const DefaultTabBar = defineComponent({
     const {
       prefixCls, animated, tabs = [], page = 0, activeTab = 0,
       tabBarBackgroundColor, tabBarUnderlineStyle, tabBarPosition
-    } = this;
+    } = this.$props;
     const renderUnderline = !this.card && this.renderUnderline;
     const {isMoving, transform, showNext, showPrev} = this;
     const isTabBarVertical = this.isTabBarVertical();

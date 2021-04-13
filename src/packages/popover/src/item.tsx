@@ -31,8 +31,7 @@ export default defineComponent({
       disabled,
       firstItem,
       activeStyle,
-      ...restProps
-    } = this;
+    } = this.$props;
     const cls = classnames(`${prefixCls}-item`, {
       [`${prefixCls}-item-disabled`]: disabled
     });
@@ -46,7 +45,7 @@ export default defineComponent({
             disabled={disabled}
             activeClassName={activeClass}
             activeStyle={activeStyle}>
-          <div class={cls} {...restProps}
+          <div class={cls} {...this.$attrs}
                onClick={e => {
                  if (!this.disabled) {
                    this.$emit('click', e);

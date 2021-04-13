@@ -176,14 +176,13 @@ const SingleMonth = defineComponent({
   },
   render() {
     const {title} = this.monthData;
-    const {renderWeeks} = this;
     return (
       <div class="single-month">
         <div class="month-title">
           {title}
         </div>
         <div class="date">
-          {renderWeeks()}
+          {this.renderWeeks()}
         </div>
       </div>
     );

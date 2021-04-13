@@ -7,7 +7,7 @@ export default defineComponent({
     displayType: {type: String}
   },
   render() {
-    const {displayType, visible} = this;
+    const {displayType, visible} = this.$props;
     return <div
       class="animate"
       style={{display: visible ? displayType : 'none'}}>

@@ -47,14 +47,15 @@ const TabPane = defineComponent({
     };
   },
   render() {
-    const {active, fixX, fixY, ...props} = this;
+    const {active, fixX, fixY, ...props} = this.$props;
     const style = {
       ...fixX && this.offsetX ? getTransformPropValue(getPxStyle(-this.offsetX, 'px', false)) : {},
       ...fixY && this.offsetY ? getTransformPropValue(getPxStyle(-this.offsetY, 'px', true)) : {}
     };
     return <div style={style}
                 {...filterHTMLAttrs({
-                  ...this.$props, ...this.$attrs
+                  ...this.$props,
+                  ...this.$attrs
                 })}
                 ref={this.setLayout}>
       {this.$slots.default()}
