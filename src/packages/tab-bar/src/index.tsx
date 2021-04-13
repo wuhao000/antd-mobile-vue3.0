@@ -73,20 +73,6 @@ const TabBar = defineComponent({
         {slots.default()}
       </div>;
     };
-    const getTabs = () => {
-      return slots.default().map((c: VNode, index: number) => {
-        const props = Object.assign({}, c.props as any);
-        if (props.icon && !props.selectedIcon) {
-          props.selectedIcon = props.icon;
-        }
-        return {
-          props,
-          onClick: () => {
-            store.currentTab = index;
-          }
-        };
-      });
-    };
     const instance = getCurrentInstance();
     provide('tabBar', {
       setCurrentTab,
@@ -95,7 +81,7 @@ const TabBar = defineComponent({
     });
     provide('store', store);
     return {
-      getTabs, store, renderTabBar
+      store, renderTabBar
     };
   },
   render() {
@@ -107,11 +93,9 @@ const TabBar = defineComponent({
       prerenderingSiblingsNumber,
       tabBarPosition
     } = this;
-    const tabs = this.getTabs();
     return (
       <div class={prefixCls}>
-        <Tabs tabs={tabs}
-              renderTabBar={this.renderTabBar}
+        <Tabs renderTabBar={this.renderTabBar}
               tabBarPosition={tabBarPosition}
               page={this.store.currentTab < 0 ? undefined : this.store.currentTab}
               animated={animated}

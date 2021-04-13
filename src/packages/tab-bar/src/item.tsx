@@ -76,9 +76,8 @@ export default defineComponent({
              this.tabBar.setCurrentTab(this.index);
              this.$emit('click');
            }}
-           dataAttrs={getDataAttr(this.$props)}>
-        {this.$slots.default?.()}
-      </Tab>
+           v-slots={this.$slots}
+           dataAttrs={getDataAttr(this.$props)}/>
     );
   }
 });

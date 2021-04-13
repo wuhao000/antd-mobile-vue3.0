@@ -145,8 +145,8 @@ export default function prompt(
                     <label>
                       <input
                         type="text"
-                        defaultValue={data.text}
-                        ref={input => focusFn(input)}
+                        value={data.text}
+                        ref={input => focusFn(input as HTMLInputElement)}
                         onClick={onClick}
                         onChange={onChange}
                         placeholder={placeholders[0]}
@@ -157,7 +157,7 @@ export default function prompt(
                     <label>
                       <input
                         type="password"
-                        defaultValue={data.password}
+                        value={data.password}
                         onClick={onClick}
                         onChange={onChange}
                         placeholder={placeholders[1]}
@@ -174,8 +174,8 @@ export default function prompt(
                     <label>
                       <input
                         type="password"
-                        defaultValue={data.password}
-                        ref={input => focusFn(input)}
+                        value={data.password}
+                        ref={input => focusFn(input as HTMLInputElement)}
                         onClick={onClick}
                         onChange={onChange}
                         placeholder={placeholders[0]}
@@ -195,7 +195,7 @@ export default function prompt(
                         type="text"
                         value={data.text}
                         ref={el => {
-                          focusFn(el);
+                          focusFn(el as HTMLInputElement);
                         }}
                         onClick={onClick}
                         onChange={onChange}

@@ -51,7 +51,7 @@ export default defineComponent({
       default: 1
     },
     count: {
-      type: Number
+      type: Number as PropType<number>
     },
     autoHeight: {
       type: Boolean as PropType<boolean>,
@@ -187,7 +187,7 @@ export default defineComponent({
     }
     const slots = {
       extra: () => {
-        return <div class={`${prefixCls}-control`} slot="extra">
+        return <div class={`${prefixCls}-control`}>
           <textarea
             ref={this.setTextareaRef}
             {...lengthCtrlProps}
@@ -219,9 +219,9 @@ export default defineComponent({
             <span>{value ? characterLength : 0}</span>/{count}
           </span>
           )}
-        </div>
+        </div>;
       }
-    }
+    };
     return (
       <List.Item class={wrapCls}
                  required={this.required}

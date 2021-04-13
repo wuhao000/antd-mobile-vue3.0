@@ -104,7 +104,7 @@ export default defineComponent({
           this.disabled = true;
         }}>Click to disable</Item>
         <Item>
-          <select defaultValue="1">
+          <select value="1">
             <option value="1">Html select element</option>
             <option value="2" disabled>Unable to select</option>
             <option value="3">option 3</option>
