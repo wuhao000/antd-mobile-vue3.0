@@ -1,3 +1,4 @@
+import {unwrapFragment} from '../utils/vue';
 import {defineComponent, reactive, ref, VNode, watch} from 'vue';
 import {cloneVNodes, setListeners, setProps} from '../utils/vnode';
 import {PopupPickerProps} from './popup-picker-types';
@@ -106,7 +107,7 @@ export default function PopupMixin(getModal, newProps) {
     },
     render() {
       const props = this.$props;
-      const children = this.$slots.default();
+      const children = unwrapFragment(this.$slots.default());
       if (!children) {
         return getModal(props, this.state.visible, {
           getContent: this.getContent,

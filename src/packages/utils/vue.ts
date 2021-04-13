@@ -11,6 +11,9 @@ export function isFragment(nodeElement: VNode) {
 }
 
 export const unwrapFragment = (node: VNode[]): VNode[] => {
+  if (!node) {
+    return node;
+  }
   if (node.length === 1 && isFragment(node[0])) {
     return unwrapFragment(node[0].children as VNode[]);
   }

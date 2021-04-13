@@ -1,3 +1,4 @@
+import {unwrapFragment} from '../../utils/vue';
 import {computed, defineComponent, getCurrentInstance, inject, onMounted, PropType, ref, VNode} from 'vue';
 import {IconResProps} from '../../mixins/icon-res';
 import getDataAttr from '../../utils/get-data-attr';
@@ -43,7 +44,7 @@ export default defineComponent({
     });
     const instance = getCurrentInstance();
     onMounted(() => {
-      const children = tabBar.slots.default();
+      const children = unwrapFragment(tabBar.slots.default());
       const tabs = children.filter(it => it.props.tag === instance.props.tag);
       index.value = tabs.findIndex(it => it.key === instance.vnode.key);
     });

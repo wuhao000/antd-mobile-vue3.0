@@ -1,4 +1,4 @@
-/* tslint:disable:no-console */
+import {unwrapFragment} from '../utils/vue';
 import {cloneVNode, defineComponent, PropType, ref, Ref, VNode} from 'vue';
 import {DIRECTION_ALL, DIRECTION_HORIZONTAL, DIRECTION_VERTICAL, PRESS} from './config';
 import {
@@ -540,7 +540,7 @@ const Gesture = defineComponent({
     };
   },
   render() {
-    const children = this.$slots.default();
+    const children = unwrapFragment(this.$slots.default());
     const child: VNode = children.length >= 1 ? children[0] : null;
     const touchAction = this.getTouchAction();
 
