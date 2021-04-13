@@ -1,3 +1,3 @@
-import '/src/packages/style/';
+import '../../style/';
 import '../../badge/style/';
 import './index.less';

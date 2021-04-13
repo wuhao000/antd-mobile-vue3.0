@@ -1,10 +1,9 @@
+import {App} from 'vue';
 import MFlex from './src';
 
-const Plugin: any = MFlex;
-
-Plugin.install = Vue => {
-  Vue.component('MFlex', MFlex);
-  Vue.component('MFlexItem', MFlex.Item);
+MFlex.install = (app: App) => {
+  app.component('MFlex', MFlex);
+  app.component('MFlexItem', MFlex.Item);
 };
 
-export default Plugin;
+export default MFlex;

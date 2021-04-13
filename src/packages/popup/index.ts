@@ -1,8 +1,9 @@
 import './style';
+import {App} from 'vue';
 import MPopup from './src';
 
-MPopup.install = Vue => {
-  Vue.component('MPopup', MPopup);
+MPopup.install = (app: App) => {
+  app.component('MPopup', MPopup);
 };
 
 export default MPopup;

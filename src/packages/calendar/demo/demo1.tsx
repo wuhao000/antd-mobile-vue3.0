@@ -49,9 +49,6 @@ export default defineComponent({
         </m-calendar-item>
       );
     };
-    const changeLanguage = () => {
-      state.en = !state.en;
-    };
     const onSelectHasDisableDate = (dates) => {
       console.warn('onSelectHasDisableDate', dates);
     };

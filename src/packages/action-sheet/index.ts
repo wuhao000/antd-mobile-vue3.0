@@ -1,8 +1,9 @@
+import {App} from 'vue';
 import MActionSheet from './src';
 import './style';
 
-MActionSheet.install = Vue => {
-  Vue.component('MActionSheet', MActionSheet);
+MActionSheet.install = (app: App) => {
+  app.component('MActionSheet', MActionSheet);
 };
 
 export default MActionSheet;

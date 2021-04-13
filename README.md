@@ -1,5 +1,9 @@
 > 本项目是在本人之前移植的antd-mobile-vue的基础上使用vue3+vite2进行了改造，目前绝大部分组件都可以正常使用
 
+#### v0.0.1-9
+* 修复GridItem点击的bug
+
+
 如有问题可添加个人微信（wuhao1200），欢迎共同交流
 ![](http://chuantu.xyz/t6/740/1595927552x-633054266.jpg)
 
@@ -27,7 +31,6 @@ Button | √ | √ | √
 Calendar | √ | √ | √
 Card | √ | √ | √
 Carousel | √ | √ | √
-Chart | [无] |
 Checkbox | √ | √ | √
 DatePicker | √ | √ | √
 DatePickerView | √ | √ | √

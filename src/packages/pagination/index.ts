@@ -1,8 +1,9 @@
+import {App} from 'vue';
 import MPagination from './src';
 import './style';
 
-MPagination.install = Vue => {
-  Vue.component('MPagination', MPagination);
+MPagination.install = (app: App) => {
+  app.component('MPagination', MPagination);
 };
 
 export default MPagination;

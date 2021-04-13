@@ -1,7 +1,4 @@
-import {AxiosRequestConfig} from 'axios';
-import {DefaultComputed, DefaultData, DefaultMethods, DefaultProps, PropsDefinition} from 'vue/types/options';
-import {Vue} from 'vue/types/vue';
-import {API, ApiDef, ApiObject, AppConfig} from '../../types';
+import moment from 'moment';
 
 
 export interface MessageOptions {
@@ -39,11 +36,17 @@ export interface MessageOptions {
 
 export declare class Message {
   public success(content: any, duration?: number, onClose?: () => void): Promise<any>;
+
   public warning(content: any, duration?: number, onClose?: () => void): Promise<any>;
+
   public warn(content: any, duration?: number, onClose?: () => void): Promise<any>;
+
   public info(content: any, duration?: number, onClose?: () => void): Promise<any>;
+
   public error(content: any, duration?: number, onClose?: () => void): Promise<any>;
+
   public loading(content: any, duration?: number, onClose?: () => void): Promise<any>;
+
   public open: (config: MessageOptions) => Promise<any>;
   public config: (options: MessageConfigOptions) => void;
   public destroy: () => void;
@@ -79,30 +82,8 @@ export interface MessageConfigOptions {
   top?: string;
 }
 
-export class Global {
-  public static proxyAPI: (obj: ApiObject<ApiDef>, config: AppConfig, axiosConfig?: AxiosRequestConfig) => ApiObject<API>;
-}
-
-declare module 'vue/types/vue' {
-
-  interface Vue {
-    $api: ApiObject<API>;
-    $message: Message;
-  }
-}
-
-declare module 'vue/types/options' {
-  interface ComponentOptions<V extends Vue,
-    Data = DefaultData<V>,
-    Methods = DefaultMethods<V>,
-    Computed = DefaultComputed,
-    PropsDef = PropsDefinition<DefaultProps>,
-    Props = DefaultProps> {
-    componentName?: string;
-  }
-}
 declare global {
-  export const moment: any;
+  export const moment: typeof moment;
   export const axios: any;
   export const hljs: any;
   export const aegis: any;

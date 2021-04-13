@@ -55,7 +55,7 @@ export default defineComponent({
       });
       if (props.type === 'range') {
         if (valueStrs[0] || valueStrs[1]) {
-          return valueStrs[0] ?? '' + ' ~ ' + (valueStrs[1] ?? '');
+          return (valueStrs[0] ?? '') + ' ~ ' + (valueStrs[1] ?? '');
         }
         return '';
       } else {
@@ -115,8 +115,6 @@ export default defineComponent({
                       arrow="horizontal"
                       v-slots={slots}
                       title={this.title}
-                      onClick={this.onClick}>
-
-    </List.Item>;
+                      onClick={this.onClick}/>;
   }
 });

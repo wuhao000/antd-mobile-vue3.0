@@ -1,13 +1,18 @@
+import {App} from 'vue';
 import MCard from './src';
+import Body from './src/body';
+import Footer from './src/footer';
+import Header from './src/header';
 import './style';
 
-const Plugin: any = MCard;
-
-Plugin.install = Vue => {
-  Vue.component('MCard', MCard);
-  Vue.component('MCardBody', MCard.Body);
-  Vue.component('MCardHeader', MCard.Header);
-  Vue.component('MCardFooter', MCard.Footer);
+MCard.Body = Body;
+MCard.Header = Header;
+MCard.Footer = Footer;
+MCard.install = (app: App) => {
+  app.component('MCard', MCard);
+  app.component('MCardBody', MCard.Body);
+  app.component('MCardHeader', MCard.Header);
+  app.component('MCardFooter', MCard.Footer);
 };
 
-export default Plugin;
+export default MCard;

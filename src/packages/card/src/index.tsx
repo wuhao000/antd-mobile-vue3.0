@@ -1,15 +1,9 @@
 import classnames from 'classnames';
 import {defineComponent} from 'vue';
-import Body from './body';
-import Header from './header';
-import Footer from './footer';
 
 
 export default defineComponent({
   name: 'MCard',
-  Body,
-  Header,
-  Footer,
   props: {
     prefixCls: {default: 'am-card'},
     full: {type: Boolean, default: false}

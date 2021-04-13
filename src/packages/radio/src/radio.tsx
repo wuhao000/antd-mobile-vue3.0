@@ -3,11 +3,10 @@ import classnames from 'classnames';
 import {defineComponent, PropType, ref} from 'vue';
 
 
-const Radio = defineComponent({
-  RadioItem: null,
-  install: null,
+export default defineComponent({
   name: 'MRadio',
   props: {
+    onChange: {},
     prefixCls: {
       type: String as PropType<string>,
       default: 'am-radio'
@@ -50,13 +49,13 @@ const Radio = defineComponent({
       delete (restProps as any)['class'];
     }
     const mark = (
-      <label class={wrapCls}
-             onClick={this.onClick}>
-        <RcCheckbox {...this.$props}
-                    checked={this.value}
-                    type="radio"/>
-        {this.$slots.default?.()}
-      </label>
+        <label class={wrapCls}
+               onClick={this.onClick}>
+          <RcCheckbox {...this.$props}
+                      checked={this.value}
+                      type="radio"/>
+          {this.$slots.default?.()}
+        </label>
     );
     if (this.wrapLabel) {
       return mark;
@@ -64,5 +63,3 @@ const Radio = defineComponent({
     return <RcCheckbox type="radio" checked={this.value} {...this.$props}>{this.$slots.default?.()}</RcCheckbox>;
   }
 });
-
-export default Radio as any;

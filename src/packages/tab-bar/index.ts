@@ -1,11 +1,13 @@
+import {App} from 'vue';
 import MTabBar from './src';
+import Item from './src/item';
 import './style';
 
-const Plugin: any = MTabBar;
+MTabBar.Item = Item;
 
-Plugin.install = Vue => {
-  Vue.component('MTabBar', MTabBar);
-  Vue.component('MTabBarItem', MTabBar.Item);
+MTabBar.install = (app: App) => {
+  app.component('MTabBar', MTabBar);
+  app.component('MTabBarItem', MTabBar.Item);
 };
 
-export default Plugin;
+export default MTabBar;

@@ -1,8 +1,9 @@
 import './style';
+import {App} from 'vue';
 import Menu from './src';
 
-Menu.install = Vue => {
-  Vue.component('MMenu', Menu);
+Menu.install = (app: App) => {
+  app.component('MMenu', Menu);
 };
 
 export default Menu;

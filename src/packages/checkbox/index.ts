@@ -1,3 +1,4 @@
+import {App} from 'vue';
 import '../list/style';
 import MCheckbox from './src';
 import AgreeItem from './src/agree-item';
@@ -6,15 +7,17 @@ import MCheckboxList from './src/checkbox-list';
 import MCheckboxPopupList from './src/checkbox-popup-list';
 import './style';
 
-const Plugin: any = MCheckbox;
-Plugin.AgreeItem = AgreeItem;
-Plugin.CheckboxItem = CheckboxItem;
-Plugin.install = Vue => {
-  Vue.component('MCheckbox', MCheckbox);
-  Vue.component('MCheckboxList', MCheckboxList);
-  Vue.component('MCheckboxItem', MCheckbox.CheckboxItem);
-  Vue.component('MAgreeItem', MCheckbox.AgreeItem);
-  Vue.component('MCheckboxPopupList', MCheckboxPopupList);
+MCheckbox.AgreeItem = AgreeItem;
+MCheckbox.Item = CheckboxItem;
+MCheckbox.List = MCheckboxList;
+MCheckbox.PopupList = MCheckboxPopupList;
+
+MCheckbox.install = (app: App) => {
+  app.component('MCheckbox', MCheckbox);
+  app.component('MCheckboxList', MCheckboxList);
+  app.component('MCheckboxItem', MCheckbox.CheckboxItem);
+  app.component('MAgreeItem', MCheckbox.AgreeItem);
+  app.component('MCheckboxPopupList', MCheckboxPopupList);
 };
 
-export default Plugin;
+export default MCheckbox;

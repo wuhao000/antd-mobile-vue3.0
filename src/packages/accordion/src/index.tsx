@@ -1,8 +1,7 @@
 import RcCollapse from 'ant-design-vue/lib/vc-collapse';
-import {defineComponent, Ref, ref} from 'vue';
+import {defineComponent} from 'vue';
 
 export default defineComponent({
-  Panel: RcCollapse.Panel,
   install: null,
   name: 'Accordion',
   props: {

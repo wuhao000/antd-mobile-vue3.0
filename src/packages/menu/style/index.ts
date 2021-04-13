@@ -3,5 +3,5 @@ import '../../checkbox/style';
 import '../../flex/style';
 import '../../list/style';
 import '../../radio/style';
-import '/src/packages/style/';
+import '../../style/';
 import './index.less';

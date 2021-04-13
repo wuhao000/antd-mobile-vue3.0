@@ -1,7 +1,7 @@
 import LoadingDirective from './src';
 
 export default {
-  install(Vue) {
-    Vue.directive('loading', LoadingDirective);
+  install(app) {
+    app.directive('loading', LoadingDirective);
   }
 };

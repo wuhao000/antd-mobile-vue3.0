@@ -1,8 +1,9 @@
 import './style';
+import {App} from 'vue';
 import DatePickerView from './src';
 
-DatePickerView.install = Vue => {
-  Vue.component('MDatePickerView', DatePickerView);
+DatePickerView.install = (app: App) => {
+  app.component('MDatePickerView', DatePickerView);
 };
 
 export default DatePickerView;

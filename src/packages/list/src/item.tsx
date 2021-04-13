@@ -1,4 +1,3 @@
-/* tslint:disable:jsx-no-multiline-js */
 import classNames from 'classnames';
 import {computed, defineComponent, getCurrentInstance, inject, onBeforeUnmount, PropType, ref, VNode} from 'vue';
 import Popover from '../../popover';
@@ -6,7 +5,7 @@ import toast from '../../toast';
 import {isEmptySlot} from '../../utils/vnode';
 import TouchFeedback from '../../vmc-feedback';
 
-const Brief = defineComponent({
+export const Brief = defineComponent({
   name: 'Brief',
   props: {
     prefixCls: {},
@@ -111,7 +110,6 @@ const Item = defineComponent({
       default: 'text'
     }
   },
-  Brief,
   setup(props, {emit, slots, attrs}) {
     const debounceTimeout = ref(null);
     const coverRippleStyle: any = ref({display: 'none'});

@@ -1,8 +1,9 @@
+import {App} from 'vue';
 import MWingBlank from './src';
 import './style';
 
-MWingBlank.install = Vue => {
-  Vue.component('MWingBlank', MWingBlank);
+MWingBlank.install = (app: App) => {
+  app.component('MWingBlank', MWingBlank);
 };
 
 export default MWingBlank;

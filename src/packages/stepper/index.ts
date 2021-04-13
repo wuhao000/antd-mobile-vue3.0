@@ -1,8 +1,9 @@
+import {App} from 'vue';
 import MStepper from './src';
 import './style';
 
-MStepper.install = Vue => {
-  Vue.component('MStepper', MStepper);
+MStepper.install = (app: App) => {
+  app.component('MStepper', MStepper);
 };
 
 export default MStepper;

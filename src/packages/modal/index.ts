@@ -1,9 +1,9 @@
+import {App} from 'vue';
 import MModal from './src';
 import './style';
-import Vue from 'vue';
 
-MModal.install = Vue => {
-  Vue.component('MModal', MModal);
+MModal.install = (app: App) => {
+  app.component('MModal', MModal);
 };
 
 export default MModal;

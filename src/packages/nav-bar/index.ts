@@ -1,8 +1,9 @@
-import './style';
+import {App} from 'vue';
 import MNavBar from './src';
+import './style';
 
-MNavBar.install = Vue => {
-  Vue.component('MNavBar', MNavBar);
+MNavBar.install = (app: App) => {
+  app.component('MNavBar', MNavBar);
 };
 
 export default MNavBar;

@@ -1,10 +1,8 @@
 import {defineComponent, getCurrentInstance, onMounted, PropType, provide, reactive, ref, Ref, VNode, watch} from 'vue';
 import Tabs from '../../tabs';
-import Item from './item';
 
 
 const TabBar = defineComponent({
-  Item: Item,
   name: 'MTabBar',
   props: {
     prefixCls: {

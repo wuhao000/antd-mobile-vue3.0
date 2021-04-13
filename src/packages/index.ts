@@ -112,10 +112,6 @@ const install = function(Vue) {
   components.map(component => Vue.use(component));
 };
 
-// 判断是否是直接引入文件
-if (typeof window !== 'undefined' && window.Vue) {
-   install(window.Vue);
-}
 export {
   // 以下是具体的组件列表
   HttpMethod,

@@ -1,9 +1,7 @@
 import classNames from 'classnames';
 import {defineComponent, PropType, Ref, ref, VNode} from 'vue';
-import Item from './item';
 
 export default defineComponent({
-  Item: Item,
   install: null,
   inheritAttrs: false,
   name: 'MList',

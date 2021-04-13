@@ -1,10 +1,9 @@
+import {App} from 'vue';
 import MSearchBar from './src';
 import './style';
 
-const Plugin: any = MSearchBar;
-
-Plugin.install = Vue => {
-  Vue.component('MSearchBar', MSearchBar);
+MSearchBar.install = (app: App) => {
+  app.component('MSearchBar', MSearchBar);
 };
 
-export default Plugin;
+export default MSearchBar;
