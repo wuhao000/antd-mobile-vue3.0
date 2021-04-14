@@ -1,6 +1,6 @@
 {
   "name": "antd-mobile-vue-next",
-  "version": "0.0.1-17",
+  "version": "0.0.2",
   "description": "基于Vue 3.0、vite2.0 移植的ant-design-mobile组件库",
   "main": "es/index.js",
   "keyword": "antd antd-mobile vue vue3 vite antd-mobile-vue",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "github",
-    "url": "https://github.com/wuhao000/antd-mobile-vue3"
+    "url": "https://github.com/wuhao000/antd-mobile-vue3.0"
   },
   "license": "Apache-2.0",
   "directories": {

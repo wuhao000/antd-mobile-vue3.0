@@ -1,8 +1,5 @@
-> 本项目是在本人之前移植的antd-mobile-vue的基础上使用vue3+vite2进行了改造，目前绝大部分组件都可以正常使用
-
-#### v0.0.1-9
-* 修复GridItem点击的bug
-
+> 在此前发布的[Antd Mobile Vue](https://github.com/wuhao000/antd-mobile-vue)的基础上进行了vue3.0的升级
+> 这是目前为止Ant Design Mobile移植到Vue最完整的组件库
 
 如有问题可添加个人微信（wuhao1200），欢迎共同交流
 ![](http://chuantu.xyz/t6/740/1595927552x-633054266.jpg)
@@ -17,7 +14,7 @@
 
 **与antd-mobile的组件对比**
 
-antd-mobile 共有 <code>47</code>个组件，本项目截至现在移植了<code>42</code>个, 组件完成度达到95%
+antd-mobile 共有 <code>47</code>个组件，本项目截至现在移植了<code>44</code>个, 组件完成度达到95%
 
 ## 与ant design mobile的组件比较
 
@@ -49,7 +46,7 @@ NoticeBar | √ | √ | √
 Pagination | √ | √ | √
 Picker | √ | √ | √
 PickerView | √ | √
-Popover | √ |  | √
+Popover | √ | √ | √
 Progress | √ | √ | √
 Radio | √ | √ | √
 PullToRefresh | √ | √ | √
@@ -62,7 +59,7 @@ Stepper | √ | √ | √
 Steps | √ | √ | √
 SwipeAction | √ |  [无]
 Switch | √ | √
-TabBar | √ |  | √
+TabBar | √ | √ | √
 Tabs | √ | √ | √
 Tag | √ | √ | √
 TextareaItem | √ | √ | √
@@ -74,7 +71,7 @@ LocaleProvider | √ | [无]
 ## 安装
 
 ```bash
- npm i antd-mobile-vue3 -S
+ npm i antd-mobile-vue-next -S
 ```
 ## 使用
 
