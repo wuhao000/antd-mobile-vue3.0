@@ -78,7 +78,7 @@ LocaleProvider | √ | [无]
 ### 完整引入
 
 ```javascript
-import AntdMobile from 'antd-mobile-vue'
+import AntdMobile from 'antd-mobile-vue-next'
 Vue.use(AntdMobile)
 ```
 
@@ -100,11 +100,11 @@ module.exports = {
     [
       'import',
       {
-        libraryName: 'antd-mobile-vue',
+        libraryName: 'antd-mobile-vue-next',
         libraryDirectory: 'es',
         style: true
       },
-      'antd-mobile-vue'
+      'antd-mobile-vue-next'
     ]
   ]
 };
@@ -113,73 +113,23 @@ module.exports = {
 引入组件
 
 ```html
-import { Alert } from "antd-mobile-vue";
-@Component({
+import { Alert } from "antd-mobile-vue-next";
+defineComponent({
   components: {
-    Alert
+    [Alert.name]: Alert
   }
-})
+});
 ```
-
-### cdn引入 ###
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
-<link rel="stylesheet" href="https://public-file.aegis-info.com/antd-mobile-vue/0.3.0/antdm.css.gz">
-<script src="https://public-file.aegis-info.com/antd-mobile-vue/<version>/antdm.umd.min.js.gz"></script>
-```
-
-> cdn没有打包vue，因此需要独立引入vue的cdn资源
 
 ### 开发环境启动
 ```bash
 npm run dev 
 ```
-
-### 创建组件
-```bash
-npm run create <name> <cn-name> <type> 
-```
-
-* name为组件名称，格式要求如下：
-    * 命名统一使用小写单词，多个单词之间以-分隔
-    * vue指令或工具类组件按实际作用命名
-* cn-name为组件的中文名称
-* type 可选ui（ui组件）、directive（vue指令）、tool（工具）
-
-### 自动生成文档
-
- ```bash
-npm run docs
-```
-
-### 代码检查
-```bash
-npm run lint
-``` 
-
-### 生成库文件
-```bash
-npm run lib
-``` 
-打包后的文件可以在html中直接引用
-
-### 生产环境打包
+### 打包
 
 ```bash
 npm run build
 ```
-
-> 用于部署，如果发布到npm仓库则不需要执行
-
-
-### 删除组件
-``` bash
-npm run remove <name>
-```
-
-* name：要删除的组件名称
-
 
 ### 发布到npm仓库
 
