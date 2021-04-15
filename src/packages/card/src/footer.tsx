@@ -9,7 +9,7 @@ export default defineComponent({
     content: {type: String}
   },
   render() {
-    const {prefixCls, content, extra} = this;
+    const {prefixCls, content, extra} = this.$props;
     const wrapCls = `${prefixCls}-footer`;
     return (
       <div class={wrapCls}>

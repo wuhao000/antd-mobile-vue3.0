@@ -15,17 +15,16 @@ export default defineComponent({
   },
   render() {
     let {
-      overflowCount,
       text
     } = this.$props;
     const {
+      overflowCount,
       prefixCls,
       size,
       dot,
       corner,
       hot
     } = this.$props;
-    overflowCount = overflowCount as number;
     text =
         typeof text === 'number' && text > overflowCount
             ? `${overflowCount}+`
@@ -54,7 +53,6 @@ export default defineComponent({
         <span class={badgeCls}>
           {this.$slots.default?.()}
           {(text || dot) && (
-              // tslint:disable-next-line:jsx-no-multiline-js
               <sup class={scrollNumberCls}
                    style={this.textStyle}>
                 {text}

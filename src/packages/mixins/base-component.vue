@@ -1,7 +1,6 @@
 <template>
   <component :is="getInputComponent()"
-             v-bind="props"
-             v-on="listeners"
+             v-bind="p"
              :class="cssClass"
              :style="cssStyle">
     <slot v-for="slot in slotNames"
@@ -15,22 +14,17 @@
   import { computed, inject, provide, ref, Ref, reactive, nextTick, PropType, defineComponent } from 'vue';import { Options, Vue } from 'vue-class-component';
   export default defineComponent({
     name: 'BaseComponent',
-    setup(props, {emit, slots}) {
-
-
+    setup(props, {emit, attrs, slots}) {
       const cssClass = computed(() => {
         return {};
       });
       const cssStyle = computed(() => {
         return {};
       });
-      const listeners = computed(() => {
-        return {};
-      });
-      const props = computed(() => {
+      const p = computed(() => {
         return {
           ...getSlotProps(),
-          ...this.$attrs,
+          ...attrs,
           ...props,
           ...getProps()
         };
@@ -58,8 +52,7 @@
       return {
         cssClass,
         cssStyle,
-        listeners,
-        props,
+        p,
         slotNames,
         getInputComponent,
         getProps,

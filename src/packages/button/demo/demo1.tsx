@@ -1,7 +1,10 @@
 export default {
   render() {
     return <m-wing-blank>
-      <m-button>default</m-button>
+      <m-button onClick={() => {
+        console.log('on btn click');
+      }}>default
+      </m-button>
       <m-white-space/>
       <m-button disabled>default disabled</m-button>
       <m-white-space/>
@@ -22,18 +25,25 @@ export default {
         icon
       </m-button>
       <m-white-space/>
-      <m-button icon="check-circle-o" inline size="small" style={{marginRight: '4px'}}>with icon and inline</m-button>
+      <m-button icon="check-circle-o"
+                inline={true} size="small" style={{marginRight: '4px'}}>with icon and inline
+      </m-button>
       <m-button icon="check-circle-o" inline size="small">with icon and inline</m-button>
       <m-white-space/>
       {/* <m-button activeStyle={false}>无点击反馈</m-button><m-white-space/> */}
       {/* <m-button activeStyle={{ backgroundColor: 'red' }}>custom feedback style</m-button><m-white-space/> */}
       <m-white-space/>
-      <m-button type="primary" inline style={{marginRight: '4px'}}>inline primary</m-button>
+      <m-button type="primary" inline={true} style={{marginRight: '4px'}}>inline primary</m-button>
       {/* use `am-button-borderfix`. because Multiple buttons inline arranged, the last one border-right may not display */}
       <m-button type="ghost" inline style={{marginRight: '4px'}} class="am-button-borderfix">inline ghost</m-button>
       <m-white-space/>
       <m-button type="primary" inline size="small" style={{marginRight: '4px'}}>primary</m-button>
-      <m-button type="primary" inline size="small" disabled>primary disabled</m-button>
+      <m-button type="primary" inline size="small"
+                onClick={() => {
+                  console.error('disabled button clicked');
+                }}
+                disabled={true}>primary disabled
+      </m-button>
       <m-white-space/>
       <m-button type="ghost" inline size="small" style={{marginRight: '4px'}}>ghost</m-button>
       {/* use `am-button-borderfix`. because Multiple buttons inline arranged, the last one border-right may not display */}

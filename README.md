@@ -75,16 +75,14 @@ LocaleProvider | √ | [无]
 ```
 ## 使用
 
-### 完整引入
-
 ```javascript
 import AntdMobile from 'antd-mobile-vue-next'
-Vue.use(AntdMobile)
+
+app.use(AntdMobile)
 ```
 
 
 ### 按需引入
-
 按需加载需要借助<code>babel-plugin-import</code>, 这样就可以只引入需要的组件，以减小项目体积
 
 ```shell

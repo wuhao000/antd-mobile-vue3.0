@@ -1,4 +1,5 @@
-import {defineComponent, getCurrentInstance, onMounted, PropType, provide, reactive, ref, Ref, VNode, watch} from 'vue';
+import {unwrapFragment} from '../../utils/vue';
+import {defineComponent, PropType, provide, reactive, watch} from 'vue';
 import Tabs from '../../tabs';
 
 
@@ -61,8 +62,10 @@ const TabBar = defineComponent({
       emit('update:value', value);
     });
 
-    const setCurrentTab = (tab: number | string) => {
+    const setCurrentTab = (tab: number) => {
+      const children = unwrapFragment(slots.default());
       store.currentTab = tab;
+      emit('click', children[tab].key, children[tab]);
     };
     const renderTabBar = () => {
       let cls = `${props.prefixCls}-bar`;
@@ -73,7 +76,6 @@ const TabBar = defineComponent({
         {slots.default()}
       </div>;
     };
-    const instance = getCurrentInstance();
     provide('tabBar', {
       setCurrentTab,
       slots,
@@ -96,6 +98,9 @@ const TabBar = defineComponent({
     return (
       <div class={prefixCls}>
         <Tabs renderTabBar={this.renderTabBar}
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
               tabBarPosition={tabBarPosition}
               page={this.store.currentTab < 0 ? undefined : this.store.currentTab}
               animated={animated}

@@ -1,6 +1,6 @@
-import {unwrapFragment} from '../../utils/vue';
 import {computed, defineComponent, onBeforeUpdate, onUpdated, PropType, reactive, Ref, ref, watch} from 'vue';
 import {Models} from '../../../types/models';
+import {unwrapFragment} from '../../utils/vue';
 import Gesture, {IGestureStatus} from '../../vmc-gesture';
 import {DIRECTION_DOWN, DIRECTION_LEFT, DIRECTION_RIGHT, DIRECTION_UP} from '../../vmc-gesture/config';
 import DefaultTabBar from './default-tab-bar';
@@ -457,7 +457,8 @@ const Tabs = defineComponent({
                             role="tabpanel"
                             aria-hidden={currentTab.value !== index}
                             aria-labelledby={`m-tabs-${instanceId}-${index}`}
-                            fixX={isTabVertical} fixY={!isTabVertical}>
+                            fixX={isTabVertical()}
+                            fixY={!isTabVertical()}>
               {
                 tabCache[index]
               }
