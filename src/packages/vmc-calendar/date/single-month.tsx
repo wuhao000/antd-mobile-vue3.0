@@ -176,7 +176,7 @@ const SingleMonth = defineComponent({
   },
   render() {
     const {title} = this.monthData;
-    const {renderWeeks} = this;
+    const renderWeeks = this.renderWeeks;
     return (
       <div class="single-month">
         <div class="month-title">

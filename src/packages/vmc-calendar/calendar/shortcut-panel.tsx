@@ -44,7 +44,7 @@ export default defineComponent({
     return {onClick};
   },
   render() {
-    const {locale} = this;
+    const {locale} = this.$props;
 
     return (
       <div class="shortcut-panel">

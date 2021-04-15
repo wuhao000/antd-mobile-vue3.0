@@ -27,7 +27,7 @@ const Header = defineComponent({
       showClear,
       closeIcon,
       clearIcon
-    } = this;
+    } = this.$props;
 
     return (
       <div class="header">

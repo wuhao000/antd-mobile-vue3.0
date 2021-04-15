@@ -58,7 +58,10 @@ const TimePicker = defineComponent({
     };
   },
   render() {
-    const {locale, title, value, defaultValue, prefixCls, pickerPrefixCls, clientHeight} = this;
+    const {
+      locale, title, value, defaultValue,
+      prefixCls, pickerPrefixCls, clientHeight
+    } = this.$props;
     const date: Date = value || defaultValue || undefined;
     const height = (clientHeight && clientHeight * 3 / 8 - 52) || Number.POSITIVE_INFINITY;
 

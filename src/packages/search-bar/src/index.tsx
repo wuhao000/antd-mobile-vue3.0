@@ -195,7 +195,7 @@ export default defineComponent({
       disabled,
       placeholder,
       maxLength
-    } = this;
+    } = this.$props;
 
     // tslint:disable-next-line:variable-name
     const cancelText = '取消';

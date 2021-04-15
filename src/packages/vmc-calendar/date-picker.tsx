@@ -138,7 +138,7 @@ const DatePicker = defineComponent({
     };
   },
   render() {
-    const {prefixCls = '', locale = {} as Locale} = this;
+    const {prefixCls = '', locale = {} as Locale} = this.$props;
     const style: any = {
       transform: this.transform
     };

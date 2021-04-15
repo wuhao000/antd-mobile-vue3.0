@@ -50,9 +50,8 @@ export default defineComponent({
   render() {
     const {
       prefixCls, direction,
-      labelPlacement, iconPrefix, status, size, current, progressDot,
-      ...restProps
-    } = this;
+      labelPlacement, iconPrefix, status, size, current, progressDot
+    } = this.$props;
     const adjustedlabelPlacement = !!progressDot ? 'vertical' : labelPlacement;
     const classString = classNames(prefixCls, `${prefixCls}-${direction}`, {
       [`${prefixCls}-${size}`]: size,
@@ -84,7 +83,7 @@ export default defineComponent({
           childProps.class = 'ellipsis-item';
         }
         if ((status === 'error' && index === current)
-          || child.props.status === 'error') {
+            || child.props.status === 'error') {
           icon = 'cross-circle-o';
         }
       }
@@ -110,9 +109,9 @@ export default defineComponent({
       return child;
     });
     return (
-      <div class={classString} {...filterHTMLAttrs(restProps)}>
-        {content}
-      </div>
+        <div class={classString} {...filterHTMLAttrs(this.$attrs)}>
+          {content}
+        </div>
     );
   }
 });

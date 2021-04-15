@@ -65,7 +65,7 @@ export default defineComponent({
     };
   },
   render() {
-    const {disabled, activeClassName, activeStyle} = this;
+    const {disabled, activeClassName, activeStyle} = this.$props;
     const events = disabled ? undefined : {
       onTouchstart: this.onTouchStart,
       onTouchmove: this.onTouchMove,

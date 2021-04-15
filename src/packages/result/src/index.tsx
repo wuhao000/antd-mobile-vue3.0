@@ -41,7 +41,7 @@ export default defineComponent({
       imgUrl,
       buttonText,
       buttonType
-    } = this;
+    } = this.$props;
 
     let imgContent: any = null;
     const img = this.$slots.img || this.img;

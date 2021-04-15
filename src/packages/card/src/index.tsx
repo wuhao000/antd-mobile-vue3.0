@@ -9,7 +9,7 @@ export default defineComponent({
     full: {type: Boolean, default: false}
   },
   render() {
-    const {prefixCls, full} = this;
+    const {prefixCls, full} = this.$props;
     const wrapCls = classnames(prefixCls, {
       [`${prefixCls}-full`]: full
     });

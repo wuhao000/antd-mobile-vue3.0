@@ -92,7 +92,10 @@ const InputNumber = defineComponent({
     };
   },
   render() {
-    const {prefixCls = '', disabled, readOnly, max, step, valueEditable, autoFocus, tabIndex, min} = this;
+    const {
+      prefixCls = '', disabled, readOnly,
+      max, step, valueEditable, autoFocus, tabIndex, min
+    } = this.$props;
     const classes = classNames({
       [prefixCls]: true,
       [`${prefixCls}-disabled`]: disabled,

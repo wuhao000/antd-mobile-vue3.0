@@ -14,7 +14,7 @@ const WingBlank = defineComponent({
   },
   install: null,
   render() {
-    const {prefixCls, size} = this;
+    const {prefixCls, size} = this.$props;
     const wrapCls = classnames(prefixCls, `${prefixCls}-${size}`);
     return (
       <div class={wrapCls}>

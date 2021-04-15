@@ -84,7 +84,7 @@ const Tab = defineComponent({
       selected,
       unselectedTintColor,
       tintColor
-    } = this;
+    } = this.$props;
     const iconColor = selected ? tintColor : unselectedTintColor;
     return (
       <div

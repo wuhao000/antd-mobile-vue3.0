@@ -106,7 +106,7 @@ const TabBar = defineComponent({
       noRenderContent,
       prerenderingSiblingsNumber,
       tabBarPosition
-    } = this;
+    } = this.$props;
     const tabs = this.getTabs();
     return (
       <div class={prefixCls}>

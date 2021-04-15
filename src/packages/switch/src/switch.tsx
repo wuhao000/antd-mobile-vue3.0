@@ -48,7 +48,7 @@ const Switch = defineComponent({
       platform,
       color,
       ...restProps
-    } = this;
+    } = this.$props;
     const wrapCls = classnames(prefixCls, {
       [`${prefixCls}-android`]: platform === 'android'
     });
@@ -57,7 +57,7 @@ const Switch = defineComponent({
       [`checkbox-disabled`]: disabled
     });
 
-    const globalProps = Object.keys(restProps).reduce<{
+    const globalProps = Object.keys({...restProps, ...this.$attrs}).reduce<{
       [key: string]: any;
     }>((prev, key) => {
       if (

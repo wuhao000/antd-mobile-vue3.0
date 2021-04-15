@@ -7,7 +7,7 @@ export default defineComponent({
     prefixCls: {default: 'am-card'}
   },
   render() {
-    const {prefixCls} = this;
+    const {prefixCls} = this.$props;
     const wrapCls = classnames(`${prefixCls}-body`);
     return <div class={wrapCls}>{this.$slots.default?.()}</div>;
   }

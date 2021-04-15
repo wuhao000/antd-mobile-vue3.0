@@ -82,9 +82,9 @@ export default defineComponent({
       if (progressDot) {
         if (typeof progressDot === 'function') {
           iconNode = (
-            <span class={`${prefixCls}-icon`}>
-                    {progressDot(iconDot, {index: stepNumber! - 1, status, title, description})}
-                  </span>
+              <span class={`${prefixCls}-icon`}>
+                {progressDot(iconDot, {index: stepNumber! - 1, status, title, description})}
+              </span>
           );
         } else {
           iconNode = <span class={`${prefixCls}-icon`}>{iconDot}</span>;
@@ -111,15 +111,15 @@ export default defineComponent({
   render() {
     const {
       prefixCls, itemWidth,
-      status = 'wait', iconPrefix, icon, wrapperStyle,
-      adjustMarginRight, stepNumber,
-      description, title, progressDot, ...restProps
-    } = this;
+      status = 'wait', icon,
+      adjustMarginRight,
+      description, title
+    } = this.$props;
 
     const classString = classNames(
-      `${prefixCls}-item`,
-      `${prefixCls}-item-${status}`,
-      {[`${prefixCls}-item-custom`]: icon}
+        `${prefixCls}-item`,
+        `${prefixCls}-item-${status}`,
+        {[`${prefixCls}-item-custom`]: icon}
     );
     const stepItemStyle: any = {};
     if (itemWidth) {
@@ -129,26 +129,26 @@ export default defineComponent({
       stepItemStyle.marginRight = adjustMarginRight;
     }
     return (
-      <div
-        {...restProps}
-        class={classString}
-        style={stepItemStyle}
-      >
-        <div class={`${prefixCls}-item-tail`}/>
-        <div class={`${prefixCls}-item-icon`}>
-          {this.renderIconNode()}
-        </div>
-        <div class={`${prefixCls}-item-content`}>
-          <div class={`${prefixCls}-item-title`}>
-            {
-              this.$slots?.title?.() ?? title
-            }
+        <div
+            {...this.$attrs}
+            class={classString}
+            style={stepItemStyle}
+        >
+          <div class={`${prefixCls}-item-tail`}/>
+          <div class={`${prefixCls}-item-icon`}>
+            {this.renderIconNode()}
           </div>
-          {(description || this.$slots.description) && <div class={`${prefixCls}-item-description`}>{
-            this.$slots?.description?.() ?? description
-          }</div>}
+          <div class={`${prefixCls}-item-content`}>
+            <div class={`${prefixCls}-item-title`}>
+              {
+                this.$slots?.title?.() ?? title
+              }
+            </div>
+            {(description || this.$slots.description) && <div class={`${prefixCls}-item-description`}>{
+              this.$slots?.description?.() ?? description
+            }</div>}
+          </div>
         </div>
-      </div>
     );
   }
 });

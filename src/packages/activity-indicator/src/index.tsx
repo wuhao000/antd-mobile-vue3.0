@@ -22,7 +22,7 @@ export default defineComponent({
     text: {type: String}
   },
   render() {
-    const {prefixCls, className, animating, toast, size, text} = this;
+    const {prefixCls, className, animating, toast, size, text} = this.$props;
     const wrapClass = classnames(prefixCls, className, {
       [`${prefixCls}-lg`]: size === 'large',
       [`${prefixCls}-sm`]: size === 'small',

@@ -1,4 +1,3 @@
-import {filterHTMLAttrs} from '../../utils/dom';
 import classNames from 'classnames';
 import {
   computed,
@@ -13,6 +12,7 @@ import {
 } from 'vue';
 
 import Icon from '../../icon';
+import {filterHTMLAttrs} from '../../utils/dom';
 import {getScrollEventTarget, getScrollTop} from './util';
 
 function setTransform(nodeStyle: any, value: any) {
@@ -22,7 +22,7 @@ function setTransform(nodeStyle: any, value: any) {
 }
 
 const isWebView = typeof navigator !== 'undefined' &&
-  /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(navigator.userAgent);
+    /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(navigator.userAgent);
 const DOWN = 'down';
 const UP = 'up';
 const INDICATOR = {
@@ -198,7 +198,7 @@ export default defineComponent({
 
       // 拖动方向不符合的不处理
       if (props.direction === UP && _startScreenY.value < _screenY ||
-        props.direction === DOWN && _startScreenY.value > _screenY) {
+          props.direction === DOWN && _startScreenY.value > _screenY) {
         return;
       }
 
@@ -301,22 +301,23 @@ export default defineComponent({
   render() {
     const {
       prefixCls, getScrollContainer,
-      direction, value, indicator, distanceToRefresh, ...restProps
+      direction, value, indicator,
+      distanceToRefresh, ...restProps
     } = this;
 
     const renderChildren = <div>{this.$slots.default()}</div>;
     const renderRefresh = (cls: string) => {
       const cla = classNames(cls, !this.dragOnEdge && `${prefixCls}-transition`);
       return (
-        <div class={`${prefixCls}-content-wrapper`}>
-          <div class={cla} ref={this.setContentRef}>
-            {direction === UP ? renderChildren : null}
-            <div class={`${prefixCls}-indicator`}>
-              {indicator[this.currSt] || INDICATOR[this.currSt]}
+          <div class={`${prefixCls}-content-wrapper`}>
+            <div class={cla} ref={this.setContentRef}>
+              {direction === UP ? renderChildren : null}
+              <div class={`${prefixCls}-indicator`}>
+                {indicator[this.currSt] || INDICATOR[this.currSt]}
+              </div>
+              {direction === DOWN ? renderChildren : null}
             </div>
-            {direction === DOWN ? renderChildren : null}
           </div>
-        </div>
       );
     };
 
@@ -324,13 +325,13 @@ export default defineComponent({
       return renderRefresh(`${prefixCls}-content ${prefixCls}-${direction}`);
     }
     return (
-      <div
-        ref={this.setContainerRef}
-        class={classNames(this.className, prefixCls, `${prefixCls}-${direction}`)}
-        {...filterHTMLAttrs(restProps)}
-      >
-        {renderRefresh(`${prefixCls}-content`)}
-      </div>
+        <div
+            ref={this.setContainerRef}
+            class={classNames(this.className, prefixCls, `${prefixCls}-${direction}`)}
+            {...filterHTMLAttrs(restProps)}
+        >
+          {renderRefresh(`${prefixCls}-content`)}
+        </div>
     );
   }
 });

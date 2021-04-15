@@ -35,7 +35,7 @@ export default defineComponent({
     return {onValueChange, stateValue, onScrollChange};
   },
   render() {
-    const {prefixCls, value} = this;
+    const {prefixCls, value} = this.$props;
     const colElements = this.$slots.default();
     unwrapFragment(colElements).forEach((col: any, i) => {
       setProps(col, {

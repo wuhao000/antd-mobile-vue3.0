@@ -16,11 +16,9 @@ const KeyboardItem = defineComponent({
   render() {
     const {
       prefixCls,
-      disabled,
       label,
-      iconOnly,
-      ...restProps
-    } = this;
+      iconOnly
+    } = this.$props;
     let value: any = this.$slots.default?.();
     const type = this.type;
     if (type === 'keyboard-delete') {
@@ -36,15 +34,12 @@ const KeyboardItem = defineComponent({
         <TouchFeedback
             class={type}
             activeClassName={`${prefixCls}-item-active`}>
-          <td
-              ref="td"
-              // tslint:disable-next-line:jsx-no-multiline-js
+          <td ref="td"
               onClick={e => {
                 this.$emit('click', e, this.value);
               }}
               class={wrapCls}
-              {...restProps}
-          >
+              {...this.$attrs}>
             {this.$slots.default?.()}
             {iconOnly && <i class="sr-only">{label}</i>}
           </td>

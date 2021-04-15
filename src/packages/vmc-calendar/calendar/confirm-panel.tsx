@@ -26,8 +26,8 @@ const ConfirmPanel = defineComponent({
     return {onConfirm, formatDate};
   },
   render() {
-    const {type, locale, disableBtn} = this;
-    let {startDateTime, endDateTime} = this;
+    const {type, locale, disableBtn} = this.$props;
+    let {startDateTime, endDateTime} = this.$props;
     if (startDateTime && endDateTime && +startDateTime > +endDateTime) {
       const tmp = startDateTime;
       startDateTime = endDateTime;

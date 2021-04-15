@@ -62,7 +62,7 @@ const Tag = defineComponent({
       disabled,
       closable,
       small
-    } = this;
+    } = this.$props;
     const wrapCls = classnames(prefixCls, {
       [`${prefixCls}-normal`]:
       !disabled && (!this.state.selected || small || closable),
