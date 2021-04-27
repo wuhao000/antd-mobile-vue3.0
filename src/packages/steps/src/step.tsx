@@ -129,26 +129,25 @@ export default defineComponent({
       stepItemStyle.marginRight = adjustMarginRight;
     }
     return (
-        <div
-            {...this.$attrs}
-            class={classString}
-            style={stepItemStyle}
-        >
-          <div class={`${prefixCls}-item-tail`}/>
-          <div class={`${prefixCls}-item-icon`}>
-            {this.renderIconNode()}
-          </div>
-          <div class={`${prefixCls}-item-content`}>
-            <div class={`${prefixCls}-item-title`}>
-              {
-                this.$slots?.title?.() ?? title
-              }
-            </div>
-            {(description || this.$slots.description) && <div class={`${prefixCls}-item-description`}>{
-              this.$slots?.description?.() ?? description
-            }</div>}
-          </div>
+      <div
+        {...this.$attrs}
+        class={classString}
+        style={stepItemStyle}>
+        <div class={`${prefixCls}-item-tail`}/>
+        <div class={`${prefixCls}-item-icon`}>
+          {this.renderIconNode()}
         </div>
+        <div class={`${prefixCls}-item-content`}>
+          <div class={`${prefixCls}-item-title`}>
+            {
+              this.$slots?.title?.() ?? title
+            }
+          </div>
+          {(description || this.$slots.description) && <div class={`${prefixCls}-item-description`}>{
+            this.$slots?.description?.() ?? description
+          }</div>}
+        </div>
+      </div>
     );
   }
 });

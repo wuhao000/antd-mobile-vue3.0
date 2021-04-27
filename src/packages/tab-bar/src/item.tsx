@@ -7,6 +7,7 @@ import Tab from './tab';
 let _uid = 100;
 
 export default defineComponent({
+  inheritAttrs: false,
   name: 'MTabBarItem',
   props: {
     badge: {
@@ -73,13 +74,11 @@ export default defineComponent({
     return (
       <Tab {...props}
            onClick={(e) => {
-             console.log(this.tabBar);
              this.tabBar.setCurrentTab(this.index);
-             this.$emit('click');
+             this.$emit('click', e);
            }}
-           dataAttrs={getDataAttr(this.$props)}>
-        {this.$slots.default?.()}
-      </Tab>
+           v-slots={this.$slots}
+           dataAttrs={getDataAttr(this.$props)}/>
     );
   }
 });

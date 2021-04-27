@@ -1,5 +1,5 @@
-import {filterHTMLAttrs} from '../../utils/dom';
 import {defineComponent, onBeforeUpdate, PropType, ref, Ref} from 'vue';
+import {filterHTMLAttrs} from '../../utils/dom';
 import {getPxStyle, getTransformPropValue} from './utils';
 
 const TabPane = defineComponent({
@@ -49,8 +49,8 @@ const TabPane = defineComponent({
   render() {
     const {fixX, fixY} = this.$props;
     const style = {
-      ...fixX && this.offsetX ? getTransformPropValue(getPxStyle(-this.offsetX, 'px', false)) : {},
-      ...fixY && this.offsetY ? getTransformPropValue(getPxStyle(-this.offsetY, 'px', true)) : {}
+      ...(fixX && this.offsetX ? getTransformPropValue(getPxStyle(-this.offsetX, 'px', false)) : {}),
+      ...(fixY && this.offsetY ? getTransformPropValue(getPxStyle(-this.offsetY, 'px', true)) : {})
     };
     return <div style={style}
                 {...filterHTMLAttrs(this.$attrs)}

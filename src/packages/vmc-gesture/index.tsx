@@ -278,7 +278,7 @@ const Gesture = defineComponent({
         props[cbName](e);
       }
     };
-    const _handleTouchStart = (e) => {
+    const handleTouchStart = (e) => {
       triggerUserCb('start', e);
       event.value = e;
       if (e.touches.length > 1) {
@@ -330,7 +330,7 @@ const Gesture = defineComponent({
         }
       }
     };
-    const _handleTouchMove = (e) => {
+    const handleTouchMove = (e) => {
       triggerUserCb('move', e);
       event.value = e;
       if (!gesture.value) {
@@ -450,7 +450,7 @@ const Gesture = defineComponent({
 
       });
     };
-    const _handleTouchEnd = (e) => {
+    const handleTouchEnd = (e) => {
       triggerUserCb('end', e);
       event.value = e;
       if (!gesture.value) {
@@ -461,7 +461,7 @@ const Gesture = defineComponent({
       doSingleTouchEnd('end');
       checkIfMultiTouchEnd('end');
     };
-    const _handleTouchCancel = (e) => {
+    const handleTouchCancel = (e) => {
       triggerUserCb('cancel', e);
       event.value = e;
       // Todo: wait to test cancel case
@@ -533,10 +533,10 @@ const Gesture = defineComponent({
 
     return {
       getTouchAction,
-      _handleTouchStart,
-      _handleTouchMove,
-      _handleTouchCancel,
-      _handleTouchEnd
+      handleTouchStart,
+      handleTouchMove,
+      handleTouchCancel,
+      handleTouchEnd
     };
   },
   render() {
@@ -545,10 +545,10 @@ const Gesture = defineComponent({
     const touchAction = this.getTouchAction();
 
     child.props = Object.assign({
-      onTouchstart: this._handleTouchStart,
-      onTouchmove: this._handleTouchMove,
-      onTouchcancel: this._handleTouchCancel,
-      onTouchend: this._handleTouchEnd
+      onTouchstart: this.handleTouchStart,
+      onTouchmove: this.handleTouchMove,
+      onTouchcancel: this.handleTouchCancel,
+      onTouchend: this.handleTouchEnd
     }, child.props || {});
     return cloneVNode(child, {
       style: {

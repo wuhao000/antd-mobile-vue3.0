@@ -43,7 +43,7 @@ export default defineComponent({
       alignContent,
       prefixCls,
       ...restProps
-    } = this;
+    } = this.$props;
     const wrapCls = classnames(prefixCls, {
       [`${prefixCls}-dir-row`]: direction === 'row',
       [`${prefixCls}-dir-row-reverse`]: direction === 'row-reverse',

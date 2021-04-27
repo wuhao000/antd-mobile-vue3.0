@@ -17,7 +17,7 @@ const Icon = defineComponent({
     return {};
   },
   render() {
-    const {type, size, ...restProps} = this;
+    const {type, size, ...restProps} = this.$props;
     const cls = classnames(
       'am-icon',
       `am-icon-${type}`,
@@ -33,7 +33,7 @@ const Icon = defineComponent({
     }
     return (
       <svg class={cls} style={style}
-           {...{props: restProps}}>
+           {...{...restProps, ...this.$attrs}}>
         <use xlinkHref={`#${type}`}/>
       </svg>
     );

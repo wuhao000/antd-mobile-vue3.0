@@ -301,9 +301,10 @@ export default defineComponent({
   render() {
     const {
       prefixCls, getScrollContainer,
-      direction, value, indicator,
-      distanceToRefresh, ...restProps
-    } = this;
+      direction, value, distanceToRefresh,
+      ...restProps
+    } = this.$props;
+    const indicator = this.indicator;
 
     const renderChildren = <div>{this.$slots.default()}</div>;
     const renderRefresh = (cls: string) => {
@@ -325,13 +326,11 @@ export default defineComponent({
       return renderRefresh(`${prefixCls}-content ${prefixCls}-${direction}`);
     }
     return (
-        <div
-            ref={this.setContainerRef}
-            class={classNames(this.className, prefixCls, `${prefixCls}-${direction}`)}
-            {...filterHTMLAttrs(restProps)}
-        >
-          {renderRefresh(`${prefixCls}-content`)}
-        </div>
+      <div ref={this.setContainerRef}
+           class={classNames(this.className, prefixCls, `${prefixCls}-${direction}`)}
+           {...filterHTMLAttrs({...restProps, ...this.$attrs})}>
+        {renderRefresh(`${prefixCls}-content`)}
+      </div>
     );
   }
 });

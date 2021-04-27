@@ -56,7 +56,7 @@ export default defineComponent({
       loading,
       activeStyle,
       activeClassName
-    } = this;
+    } = this.$props;
 
     const iconType: any = loading ? 'loading' : icon;
     const wrapCls = classnames(prefixCls, {

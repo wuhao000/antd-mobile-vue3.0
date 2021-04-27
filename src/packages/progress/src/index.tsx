@@ -28,7 +28,7 @@ const Progress = defineComponent({
       default: false
     }
   },
-  setup(props, {emit, slots}) {
+  setup(props) {
     const barRef: Ref<HTMLDivElement | null> = ref(null);
     const noAppearTransition: Ref<boolean> = ref(true);
 
@@ -44,7 +44,10 @@ const Progress = defineComponent({
     });
 
     return {
-      noAppearTransition, barRef
+      noAppearTransition,
+      setBarRef(el) {
+        barRef.value = el
+      }
     };
   },
   render() {
@@ -71,12 +74,11 @@ const Progress = defineComponent({
       <div
         class={wrapCls}
         role="progressbar"
-        aria-valuenow={this.percent}
         aria-valuemin={0}
         aria-valuemax={100}
       >
         <div
-          ref={el => (this.barRef = el)}
+          ref={this.setBarRef}
           class={`${prefixCls}-bar`}
           style={{...barStyle, ...percentStyle}}
         />

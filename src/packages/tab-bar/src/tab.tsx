@@ -1,8 +1,10 @@
+import classNames from 'classnames';
 import {defineComponent, isVNode, PropType} from 'vue';
 import Badge from '../../badge';
 import IconRes from '../../mixins/icon-res';
 
 const Tab = defineComponent({
+  inheritAttrs: false,
   name: 'Tab',
   props: {
     dot: {
@@ -70,11 +72,8 @@ const Tab = defineComponent({
       }
       return iconDom;
     };
-    const onClick = () => {
-      emit('click');
-    };
     return {
-      onClick, renderIcon
+      renderIcon
     };
   },
   render() {
@@ -89,14 +88,13 @@ const Tab = defineComponent({
     return (
       <div
         {...this.dataAttrs}
-        onClick={this.onClick}
-        class={`${prefixCls}`}>
+        {...this.$attrs}
+        class={classNames(prefixCls)}>
         <div class={`${prefixCls}-icon`} style={{color: iconColor}}>
           {this.renderIcon()}
         </div>
-        <p
-          class={`${prefixCls}-title`}
-          style={{color: selected ? tintColor : unselectedTintColor}}
+        <p class={`${prefixCls}-title`}
+           style={{color: selected ? tintColor : unselectedTintColor}}
         >
           {title}
         </p>
