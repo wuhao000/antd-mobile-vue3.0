@@ -20,53 +20,53 @@ antd-mobile 共有 <code>47</code>个组件，本项目截至现在移植了<cod
 
 组件名称 | antd-mobile | antd-mobile-vue | 示例移植 |说明
 --- | :---: | :---: | :---: | ---
-Accordion | √ | √ | √
-ActionSheet | √ | √ | √
-ActivityIndicator | √ | √ | √
-Badge | √ | √ | √
-Button | √ | √ | √
-Calendar | √ | √ | √
-Card | √ | √ | √
-Carousel | √ | √ | √
-Checkbox | √ | √ | √
-DatePicker | √ | √ | √
-DatePickerView | √ | √ | √
-Drawer | √ | √ | √
-Flex | √ | √ | √
-Grid | √ | √
-Icon | √ | √ | √
-ImagePicker | √ | √ | √
-InputItem | √ | v | √
-List | √ | √ | √
-ListView | √ | [无]
-Menu | √ | √ | √
-Modal | √ | √ | √
-NavBar | √ | √ | √
-NoticeBar | √ | √ | √
-Pagination | √ | √ | √
-Picker | √ | √ | √
-PickerView | √ | √
-Popover | √ | √ | √
-Progress | √ | √ | √
-Radio | √ | √ | √
-PullToRefresh | √ | √ | √
-Result | √ | √ | √
-SearchBar | √ | √
-SegmentedControl | √ | √ | √
-Slider | √ | √ | √
-Range | √ | √ | √
-Stepper | √ | √ | √
-Steps | √ | √ | √
-SwipeAction | √ |  [无]
-Switch | √ | √
-TabBar | √ | √ | √
-Tabs | √ | √ | √
-Tag | √ | √ | √
-TextareaItem | √ | √ | √
-Toast | √ | √ | √
-WhiteSpace | √ | √ | √
-WingBlank | √ | √ | √
-LocaleProvider | √ | [无]
+Accordion | √ | √ | √ |
+ActionSheet | √ | √ | √  |
+ActivityIndicator | √ | √ | √  |
+Badge | √ | √ | √  |
+Button | √ | √ | √  |
+Calendar | √ | √ | √ |
+Card | √ | √ | √ |
+Carousel | √ | √ | √ |
+Checkbox | √ | √ | √ |
+DatePicker | √ | √ | √ |
+DatePickerView | √ | √ | √ |
+Drawer | √ | √ | √ |
+Flex | √ | √ | √ |
+Grid | √ | √ | |
+Icon | √ | √ | √ |
+ImagePicker | √ | √ | √ |
+InputItem | √ | v | √ |
+List | √ | √ | √ |
+ListView | √ | [无] |
+Menu | √ | √ | √ |
+Modal | √ | √ | √ |
+NavBar | √ | √ | √ |
+NoticeBar | √ | √ | √ |
+Pagination | √ | √ | √ |
+Picker | √ | √ | √ |
+PickerView | √ | √ |
+Popover | √ | √ | √ |
+Progress | √ | √ | √ |
+Radio | √ | √ | √ |
+PullToRefresh | √ | √ | √ |
+Result | √ | √ | √ |
+SearchBar | √ | √ | |
+SegmentedControl | √ | √ | √ |
+Slider | √ | √ | √ |
+Range | √ | √ | √ |
+Stepper | √ | √ | √ |
+Steps | √ | √ | √ |
+SwipeAction | √ | [无] | |
+Switch | √ | √ | |
+TabBar | √ | √ | √ |
+Tabs | √ | √ | √ |
+Tag | √ | √ | √ |
+TextareaItem | √ | √ | √ |
+Toast | √ | √ | √ |
+WhiteSpace | √ | √ | √ |
+WingBlank | √ | √ | √ |
+LocaleProvider | √ | [无] | |
 
 ## 安装
 

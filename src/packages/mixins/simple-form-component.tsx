@@ -2,6 +2,7 @@ import {computed, inject} from 'vue';
 
 
 export const simpleFormComponentProps = {
+  value: {},
   size: {type: String},
   required: {type: Boolean, default: false},
   disabled: {type: Boolean},
