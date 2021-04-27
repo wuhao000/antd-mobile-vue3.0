@@ -41,7 +41,6 @@ export const formComponentProps = {
     type: Array as PropType<ValidateRule[]>
   },
   value: {
-    type: Object as PropType<Date>
   },
   errorDisplayType: {
     type: String as PropType<'toast' | 'popover' | 'text' | undefined>
