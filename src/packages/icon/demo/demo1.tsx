@@ -1,6 +1,7 @@
 import {defineComponent} from 'vue';
 import Icon from '../index';
 import Grid from '../../grid';
+import {PlusOutlined} from '@ant-design/icons-vue';
 
 const list = [
   'check-circle', 'check', 'check-circle-o',
@@ -17,7 +18,9 @@ export default defineComponent({
       text: item
     }));
     return (
-      <Grid data={data}></Grid>
+      <>
+        <Grid data={data}/>
+      </>
     );
   }
 });

@@ -1,5 +1,5 @@
-import classnames from 'classnames';
-import {defineComponent, onMounted} from 'vue';
+import classNames from 'classnames';
+import {defineComponent, isVNode, onMounted} from 'vue';
 import loadSprite from './load-sprite';
 
 const Icon = defineComponent({
@@ -21,10 +21,10 @@ const Icon = defineComponent({
   },
   render() {
     const {type, prefixCls, size, ...restProps} = this.$props;
-    const cls = classnames(
+    const cls = classNames(
       'am-icon',
-      typeof type === 'string' ? `am-icon-${type}` : undefined
-        `am-icon-${size}`,
+      (typeof type === 'string') ? `am-icon-${type}` : undefined,
+      `am-icon-${size}`,
       this.$attrs.class
     );
     const style: any = {};
@@ -35,9 +35,10 @@ const Icon = defineComponent({
       style.width = this.size + 'px';
       style.height = this.size + 'px';
     }
-    if (typeof type === 'object') {
+    console.log(typeof type);
+    if (typeof type === 'function' || isVNode(type)) {
       const IconComponent = type as any;
-      return <IconComponent class={cls} style={style}/>
+      return <IconComponent class={cls} style={style}/>;
     }
     return (
       <svg class={cls} style={style}

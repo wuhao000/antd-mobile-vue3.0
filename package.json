@@ -1,6 +1,6 @@
 {
   "name": "antd-mobile-vue-next",
-  "version": "0.0.1-32",
+  "version": "0.0.1-33",
   "description": "基于Vue 3.0、vite2.0 移植的ant-design-mobile组件库",
   "main": "es/index.js",
   "keyword": "antd antd-mobile vue vue3 vite antd-mobile-vue",
@@ -72,6 +72,7 @@
     "warning": "^4.0.3"
   },
   "devDependencies": {
+    "@ant-design/icons-vue": "^6.0.1",
     "@babel/plugin-transform-object-assign": "^7.12.13",
     "@babel/plugin-transform-runtime": "^7.13.10",
     "@babel/preset-env": "^7.13.12",
