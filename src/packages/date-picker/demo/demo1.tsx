@@ -48,6 +48,7 @@ export default defineComponent({
   name: 'Demo',
   setup(props, {emit, slots}) {
     const state = reactive({
+      empty: null,
       date: now,
       time: now,
       timestamp: Date.now(),
@@ -69,6 +70,10 @@ export default defineComponent({
   render() {
     return (
         <m-list class="date-picker-list" style={{backgroundColor: 'white'}}>
+          <DatePicker.Item title="空"
+                           v-model={[this.state.empty, 'value']}/>
+          <DatePicker.Item title="输入字符串"
+                           value="2021-12-28T07:29:49.968Z"/>
           <DatePicker.Item
               title="日期时间"
               v-model={[this.state.date, 'value']}>

@@ -65,7 +65,7 @@ const TabBar = defineComponent({
     const setCurrentTab = (tab: string) => {
       const children = unwrapFragment(slots.default());
       store.currentTab = tab;
-      emit('click', tab, children.find(it => it.el.key === tab));
+      emit('click', tab, children.find(it => it.key === tab));
     };
     const renderTabBar = () => {
       let cls = `${props.prefixCls}-bar`;

@@ -15,7 +15,7 @@
 
   export default defineComponent({
     name: 'Demo1',
-    setup(props, {emit, slots}) {
+    setup() {
       const data = ref([
         {icon: {mobile: true, type: 'check-circle', size: 'md'}, text: ''},
         {icon: 'check-circle', text: 'abc'},
@@ -44,5 +44,3 @@
     }
   });
 </script>
-<style lang="less" scoped>
-</style>

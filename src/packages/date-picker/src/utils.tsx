@@ -19,7 +19,7 @@ function formatIt(date: Date, form: string) {
   return `${dateStr} ${timeStr}`;
 }
 
-export function formatFn(instance: any, value: Date | number) {
+export function formatFn(value: Date | number | string, format: string | ((arg) => any), mode: string) {
   const formatsEnum = {
     date: 'YYYY-MM-DD',
     time: 'HH:mm',
@@ -27,21 +27,18 @@ export function formatFn(instance: any, value: Date | number) {
     year: 'YYYY',
     month: 'YYYY-MM'
   };
-  const {format} = instance.$props;
-  const type = typeof format;
-  if (type === 'string') {
-    if (typeof value === 'number') {
+  if (typeof format === 'string') {
+    if (typeof value === 'number' || typeof value === 'string') {
       return formatIt(new Date(value), format);
     } else {
       return formatIt(value, format);
     }
-  }
-  if (type === 'function') {
+  } else if (typeof format === 'function') {
     return format(value);
   }
-  if (typeof value === 'number') {
-    return formatIt(new Date(value), (formatsEnum as any)[instance.$props.mode]);
+  if (typeof value === 'number' || typeof value === 'string') {
+    return formatIt(new Date(value), formatsEnum[mode]);
   } else {
-    return formatIt(value, (formatsEnum as any)[instance.$props.mode]);
+    return formatIt(value, formatsEnum[mode]);
   }
 }

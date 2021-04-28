@@ -36,7 +36,16 @@ export const getDatePicker = (isView: boolean) => {
       }
     },
     setup(props, {emit}) {
-      const scrollValue: Ref<Date> = ref(typeof props.value === 'number' ? new Date(props.value) : props.value);
+      const getDate = (): Date => {
+        if (typeof props.value === 'number') {
+          return new Date(props.value);
+        } else if (typeof props.value === 'string') {
+          return new Date(props.value);
+        } else {
+          return props.value || new Date();
+        }
+      };
+      const scrollValue: Ref<Date> = ref(getDate());
       const localVisible = ref(props.visible);
       watch(() => props.visible, visible => {
         localVisible.value = visible;
@@ -51,7 +60,6 @@ export const getDatePicker = (isView: boolean) => {
         emit('ok', value);
       };
       const onVisibleChange = (visible: boolean) => {
-        scrollValue.value = undefined;
         localVisible.value = visible;
         emit('update:visible', visible);
       };
@@ -65,13 +73,6 @@ export const getDatePicker = (isView: boolean) => {
         if (isView) {
           emit('update:value', v);
           emit('change', v);
-        }
-      };
-      const getDate = (): Date => {
-        if (typeof props.value === 'number') {
-          return new Date(props.value);
-        } else {
-          return props.value || new Date();
         }
       };
       provide('store', {
@@ -90,7 +91,7 @@ export const getDatePicker = (isView: boolean) => {
     render() {
       const {value, popupPrefixCls} = this.$props;
       const locale = getComponentLocale(this.$props, null, 'DatePicker', () =>
-          defaultLocale
+        defaultLocale
       );
       const {okText, cancelText, extra, DatePickerLocale} = locale;
 
@@ -124,35 +125,35 @@ export const getDatePicker = (isView: boolean) => {
       if (isView) {
         return datePicker;
       }
-      const textValue = value ? formatFn(this, value) : null;
+      const textValue = value ? formatFn(value, this.format, this.mode) : null;
       const childExtra = textValue ? textValue : (this.extra || extra || this.placeholder);
       const visible = (this.disabled || !this.editable) ? false : this.localVisible;
       return (
-          <PopupDatePicker onVisibleChange={this.onVisibleChange}
-                           datePicker={datePicker}
-                           {...this.$props}
-                           title={this.title}
-                           disabled={this.disabled}
-                           editable={this.editable}
-                           visible={visible}
-                           prefixCls={popupPrefixCls}
-                           date={this.getDate()}
-                           cancelText={this.cancelText || cancelText}
-                           okText={this.okText || okText}
-                           ref={this.fixOnOk}>
-            {this.$slots.default && this.$slots.default().map(it => {
-              setProps(it, {
-                touchFeedback: true,
-                onClick: () => {
-                  this.onVisibleChange(true);
-                },
-                text: !!textValue,
-                extra: childExtra,
-                arrow: 'horizontal'
-              });
-              return it;
-            })}
-          </PopupDatePicker>
+        <PopupDatePicker onVisibleChange={this.onVisibleChange}
+                         datePicker={datePicker}
+                         {...this.$props}
+                         title={this.title}
+                         disabled={this.disabled}
+                         editable={this.editable}
+                         visible={visible}
+                         prefixCls={popupPrefixCls}
+                         date={this.getDate()}
+                         cancelText={this.cancelText || cancelText}
+                         okText={this.okText || okText}
+                         ref={this.fixOnOk}>
+          {this.$slots.default && this.$slots.default().map(it => {
+            setProps(it, {
+              touchFeedback: true,
+              onClick: () => {
+                this.onVisibleChange(true);
+              },
+              text: !!textValue,
+              extra: childExtra,
+              arrow: 'horizontal'
+            });
+            return it;
+          })}
+        </PopupDatePicker>
       );
     }
   });

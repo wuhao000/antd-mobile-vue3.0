@@ -1,5 +1,5 @@
-import {DatePickerMode} from '../../vmc-date-picker/date-picker-props';
 import {PropType} from 'vue';
+import {DatePickerMode} from '../../vmc-date-picker/date-picker-props';
 import locale from './locale/zh_CN';
 
 export const datePickerProps = {
@@ -14,7 +14,9 @@ export const datePickerProps = {
   extra: {
     type: String as PropType<string>
   },
-  format: {},
+  format: {
+    type: [String, Function] as PropType<string | ((arg) => any)>
+  },
   locale: {type: Object, default: () => locale},
   maxDate: {
     type: Date as PropType<Date>

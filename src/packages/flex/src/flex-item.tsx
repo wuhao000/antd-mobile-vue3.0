@@ -6,6 +6,7 @@ export default defineComponent({
   inheritAttrs: false,
   name: 'FlexItem',
   props: {
+    onClick: {},
     disabled: {
       type: Boolean as PropType<boolean>,
       default: false
@@ -28,6 +29,9 @@ export default defineComponent({
     };
     return (
       <div class={wrapCls}
+           onClick={(e) => {
+             this.$emit('click', e);
+           }}
            {...filterHTMLAttrs(props)}>
         {this.$slots.default?.()}
       </div>

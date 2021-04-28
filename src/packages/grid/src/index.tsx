@@ -16,6 +16,7 @@ interface DataItem {
 export default defineComponent({
   name: 'Grid',
   props: {
+    onClick: {},
     /**
      * 宫格数据列表
      */
