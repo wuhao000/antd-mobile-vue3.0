@@ -2,9 +2,10 @@ import {defineComponent, PropType, provide, ref, Ref, watch} from 'vue';
 import {getComponentLocale} from '../../utils/getLocale';
 import {setProps} from '../../utils/vnode';
 import RCDatePicker from '../../vmc-date-picker/date-picker';
+import {DatePickerMode} from '../../vmc-date-picker/date-picker-props';
 import PopupDatePicker from '../../vmc-date-picker/popup';
+import locale from './locale/zh_CN';
 import defaultLocale from './locale/zh_CN';
-import {datePickerProps} from './props-type';
 import {formatFn} from './utils';
 
 export const getDatePicker = (isView: boolean) => {
@@ -13,7 +14,41 @@ export const getDatePicker = (isView: boolean) => {
     Item: null,
     name: 'MDatePicker',
     props: {
-      ...datePickerProps,
+      disabled: {
+        type: Boolean as PropType<boolean>
+      },
+      cancelText: {},
+      editable: {
+        type: Boolean as PropType<boolean>,
+        default: true
+      },
+      extra: {
+        type: String as PropType<string>
+      },
+      format: {
+        type: [String, Function] as PropType<string | ((arg) => any)>
+      },
+      locale: {type: Object, default: () => locale},
+      maxDate: {
+        type: Date as PropType<Date>
+      },
+      minDate: {
+        type: Date as PropType<Date>
+      },
+      minuteStep: {
+        type: Number as PropType<number>,
+        default: 1
+      },
+      mode: {
+        type: String as PropType<DatePickerMode>,
+        default: 'datetime'
+      },
+      okText: {},
+      title: {},
+      value: {
+        type: [Object, Number, String] as PropType<Date | number | string>
+      },
+      visible: {type: Boolean, default: false},
       placeholder: {
         type: String as PropType<string>,
         default: ''

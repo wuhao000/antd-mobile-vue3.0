@@ -1,27 +1,30 @@
 import classnames from 'classnames';
-import {defineComponent, onMounted, Ref, ref} from 'vue';
+import {defineComponent, onMounted} from 'vue';
 import loadSprite from './load-sprite';
 
 const Icon = defineComponent({
   inheritAttrs: false,
   name: 'MIcon',
   props: {
+    prefixCls: {
+      type: String, default: 'am-icon'
+    },
     size: {type: [String, Number], default: 'md'},
-    type: {type: String, required: true},
+    type: {type: [String, Object], required: true},
     color: String
   },
-  setup(props, {emit, attrs}) {
+  setup() {
     onMounted(() => {
       loadSprite();
     });
     return {};
   },
   render() {
-    const {type, size, ...restProps} = this.$props;
+    const {type, prefixCls, size, ...restProps} = this.$props;
     const cls = classnames(
       'am-icon',
-      `am-icon-${type}`,
-      `am-icon-${size}`,
+      typeof type === 'string' ? `am-icon-${type}` : undefined
+        `am-icon-${size}`,
       this.$attrs.class
     );
     const style: any = {};
@@ -31,6 +34,10 @@ const Icon = defineComponent({
     if (typeof this.size === 'number') {
       style.width = this.size + 'px';
       style.height = this.size + 'px';
+    }
+    if (typeof type === 'object') {
+      const IconComponent = type as any;
+      return <IconComponent class={cls} style={style}/>
     }
     return (
       <svg class={cls} style={style}
