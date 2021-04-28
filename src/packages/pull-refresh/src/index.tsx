@@ -22,7 +22,7 @@ function setTransform(nodeStyle: any, value: any) {
 }
 
 const isWebView = typeof navigator !== 'undefined' &&
-  /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(navigator.userAgent);
+    /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(navigator.userAgent);
 const DOWN = 'down';
 const UP = 'up';
 const INDICATOR = {
@@ -198,7 +198,7 @@ export default defineComponent({
 
       // 拖动方向不符合的不处理
       if (props.direction === UP && _startScreenY.value < _screenY ||
-        props.direction === DOWN && _startScreenY.value > _screenY) {
+          props.direction === DOWN && _startScreenY.value > _screenY) {
         return;
       }
 
@@ -310,15 +310,15 @@ export default defineComponent({
     const renderRefresh = (cls: string) => {
       const cla = classNames(cls, !this.dragOnEdge && `${prefixCls}-transition`);
       return (
-        <div class={`${prefixCls}-content-wrapper`}>
-          <div class={cla} ref={this.setContentRef}>
-            {direction === UP ? renderChildren : null}
-            <div class={`${prefixCls}-indicator`}>
-              {indicator[this.currSt] || INDICATOR[this.currSt]}
+          <div class={`${prefixCls}-content-wrapper`}>
+            <div class={cla} ref={this.setContentRef}>
+              {direction === UP ? renderChildren : null}
+              <div class={`${prefixCls}-indicator`}>
+                {indicator[this.currSt] || INDICATOR[this.currSt]}
+              </div>
+              {direction === DOWN ? renderChildren : null}
             </div>
-            {direction === DOWN ? renderChildren : null}
           </div>
-        </div>
       );
     };
 

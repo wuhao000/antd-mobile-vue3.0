@@ -16,10 +16,8 @@ const KeyboardItem = defineComponent({
   render() {
     const {
       prefixCls,
-      disabled,
       label,
-      iconOnly,
-      ...restProps
+      iconOnly
     } = this.$props;
     let value: any = this.$slots.default?.();
     const type = this.type;
@@ -36,17 +34,12 @@ const KeyboardItem = defineComponent({
         <TouchFeedback
             class={type}
             activeClassName={`${prefixCls}-item-active`}>
-          <td
-              ref="td"
+          <td ref="td"
               onClick={e => {
                 this.$emit('click', e, this.value);
               }}
               class={wrapCls}
-              {...{
-                ...restProps,
-                ...this.$attrs
-              }}
-          >
+              {...this.$attrs}>
             {this.$slots.default?.()}
             {iconOnly && <i class="sr-only">{label}</i>}
           </td>

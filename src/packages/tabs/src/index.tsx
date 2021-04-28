@@ -21,7 +21,7 @@ export const getPanDirection = (direction: number | undefined) => {
 };
 
 const Tabs = defineComponent({
-  DefaultTabBar: DefaultTabBar,
+  DefaultTabBar,
   name: 'Tabs',
   props: {
     /**

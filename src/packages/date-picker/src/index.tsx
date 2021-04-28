@@ -88,7 +88,7 @@ export const getDatePicker = (isView: boolean) => {
       };
     },
     render() {
-      const {value, popupPrefixCls} = this;
+      const {value, popupPrefixCls} = this.$props;
       const locale = getComponentLocale(this.$props, null, 'DatePicker', () =>
           defaultLocale
       );

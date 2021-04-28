@@ -92,7 +92,7 @@ const SegmentedControl = defineComponent({
     };
   },
   render() {
-    const {prefixCls, disabled, values = []} = this;
+    const {prefixCls, disabled, values = []} = this.$props;
 
     const wrapCls = classnames(prefixCls, {
       [`${prefixCls}-disabled`]: disabled
