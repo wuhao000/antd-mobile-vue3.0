@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import {defineComponent, isVNode, PropType} from 'vue';
 import Badge from '../../badge';
-import IconRes from '../../mixins/icon-res';
+import Icon from '../../icon';
 
 const Tab = defineComponent({
   inheritAttrs: false,
@@ -50,7 +50,7 @@ const Tab = defineComponent({
       } = props;
       const realIcon: any = selected ? selectedIcon : icon;
       const iconDom = realIcon ? (
-        isVNode(realIcon) ? realIcon : <IconRes
+        isVNode(realIcon) ? realIcon : <Icon
           class={`${prefixCls}-image`}
           type={realIcon}
         />

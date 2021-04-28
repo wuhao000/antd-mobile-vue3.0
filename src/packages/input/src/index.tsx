@@ -22,6 +22,9 @@ export default defineComponent({
   name: 'InputItem',
   props: {
     ...formComponentProps,
+    onChange: {},
+    onBlur: {},
+    onConfirm: {},
     defaultValue: {
       type: [String, Number] as PropType<string | number>
     },

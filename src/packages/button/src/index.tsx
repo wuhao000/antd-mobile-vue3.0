@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import {defineComponent} from 'vue';
-import IconRes from '../../mixins/icon-res';
+import Icon from '../../icon';
 import {filterHTMLAttrs} from '../../utils/dom';
 import TouchFeedback from '../../vmc-feedback';
 
@@ -72,51 +72,27 @@ export default defineComponent({
     }, this.$attrs.class);
     const kids = this.$slots.default ? this.$slots.default().map(this.insertSpace) : '';
 
-    let iconEl;
-
-    if (typeof iconType === 'string') {
-      iconEl = (
-          <IconRes
-              class={`${prefixCls}-icon`}
-              // @ts-ignore
-              {...{
-                type: httpReg.test(iconType) ? iconType : {
-                  mobile: true,
-                  iconType: 'icon',
-                  type: iconType,
-                  size: size === 'small' ? 'xxs' : 'md'
-                }
-              }}/>
-      );
-    } else if (iconType) {
-      const cls = classnames(
-          'am-icon',
-          `${prefixCls}-icon`,
-          size === 'small' ? 'am-icon-xxs' : 'am-icon-md'
-      );
-      iconEl = (
-          // @ts-ignore
-          <IconRes class={cls} props={{type: iconType}}/>
-      );
-    }
+    const iconEl = iconType ? <Icon type={iconType}
+                                    class={`${prefixCls}-icon`}
+                                    size={'small' ? 'xxs' : 'md'}/> : null;
     return (
-        <TouchFeedback
-            activeClassName={activeClassName || (activeStyle ? `${prefixCls}-active` : undefined)}
-            disabled={disabled}
-            activeStyle={activeStyle}>
-          <a role="button"
-             {...filterHTMLAttrs(this.$attrs)}
-             class={wrapCls}
-             onClick={(e) => {
-               if (!this.disabled) {
-                 this.$emit('click', e);
-               }
-             }}
-             aria-disabled={disabled}>
-            {iconEl}
-            {kids}
-          </a>
-        </TouchFeedback>
+      <TouchFeedback
+        activeClassName={activeClassName || (activeStyle ? `${prefixCls}-active` : undefined)}
+        disabled={disabled}
+        activeStyle={activeStyle}>
+        <a role="button"
+           {...filterHTMLAttrs(this.$attrs)}
+           class={wrapCls}
+           onClick={(e) => {
+             if (!this.disabled) {
+               this.$emit('click', e);
+             }
+           }}
+           aria-disabled={disabled}>
+          {iconEl}
+          {kids}
+        </a>
+      </TouchFeedback>
     );
   }
 });

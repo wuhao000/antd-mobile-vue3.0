@@ -15,9 +15,9 @@ if (isIPhone) {
 
 export default defineComponent({
   name: 'H5NumberInputExample',
-  setup(props, {emit, slots}) {
+  setup() {
     const state = reactive({
-      type: 'money'
+      type: 'money' as any
     });
     return {
       state
@@ -32,14 +32,14 @@ export default defineComponent({
                 type={type}
                 value={100}
                 placeholder="start from left"
-                clear
+                clearable
                 moneyKeyboardAlign="left"
                 moneyKeyboardWrapProps={moneyKeyboardWrapProps}
             >光标在左</InputItem>
             <InputItem
                 type={type}
                 placeholder="start from right"
-                clear
+                clearable
                 onChange={(v) => {
                   console.log('onChange', v);
                 }}
@@ -53,7 +53,7 @@ export default defineComponent({
                 placeholder="money format"
                 ref="input"
                 onConfirm={v => console.log('onVirtualKeyboardConfirm:', v)}
-                clear
+                clearable
                 moneyKeyboardWrapProps={moneyKeyboardWrapProps}
             >数字键盘</InputItem>
             <List.Item>

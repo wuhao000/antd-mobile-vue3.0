@@ -1,6 +1,5 @@
 import {unwrapFragment} from '../../utils/vue';
 import {computed, defineComponent, getCurrentInstance, inject, onMounted, PropType, ref, VNode} from 'vue';
-import {IconResProps} from '../../mixins/icon-res';
 import getDataAttr from '../../utils/get-data-attr';
 import Tab from './tab';
 
@@ -18,7 +17,7 @@ export default defineComponent({
       default: undefined
     },
     icon: {
-      type: [String, Object] as PropType<string | IconResProps | VNode>
+      type: [String, Object] as PropType<string | VNode>
     },
     selectedIcon: {
       type: [String, Object] as PropType<any>
