@@ -4,8 +4,6 @@ import Icon from '../../icon';
 import {filterHTMLAttrs} from '../../utils/dom';
 import TouchFeedback from '../../vmc-feedback';
 
-const httpReg = /^http(s)?:\/\//;
-
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
 const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar);
 
@@ -22,7 +20,7 @@ export default defineComponent({
     prefixCls: {type: String, default: 'am-button'},
     role: {type: String},
     inline: {type: Boolean, default: false},
-    icon: {type: [String, Object]},
+    icon: {type: [String, Object, Function]},
     activeClassName: {type: String},
     activeStyle: {
       type: [Boolean, Object],

@@ -4,7 +4,7 @@ activeClassName||string|
 activeStyle||boolean \| object|
 block|宽度占满整行|boolean|true
 disabled||boolean|false
-icon||IconResProps \| string \| VNode|
+icon|| string \| VNode|
 inline||boolean|false
 loading||boolean|false
 prefixCls||string|

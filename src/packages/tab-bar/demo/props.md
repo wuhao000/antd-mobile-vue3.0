@@ -6,7 +6,7 @@ barTintColor||string|
 className||string|
 dot||boolean|
 hidden||boolean|false
-icon||string \| IconResProps \| VNode|
+icon||string \| VNode|
 noRenderContent||boolean|
 onPress||() => void|
 placeholder||string|
