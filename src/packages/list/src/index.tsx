@@ -1,3 +1,4 @@
+import {filterHTMLAttrs} from '../../utils/dom';
 import classNames from 'classnames';
 import {defineComponent, PropType, Ref, ref, VNode} from 'vue';
 
@@ -27,10 +28,10 @@ export default defineComponent({
     const fields: Ref<any[]> = ref([]);
     const clearValidate = (props = []) => {
       const localFields = props.length
-          ? (typeof props === 'string'
-                  ? fields.value.filter(field => props === (field as any).prop)
-                  : fields.value.filter(field => props.indexOf((field as any).prop) > -1)
-          ) : fields.value;
+        ? (typeof props === 'string'
+            ? fields.value.filter(field => props === (field as any).prop)
+            : fields.value.filter(field => props.indexOf((field as any).prop) > -1)
+        ) : fields.value;
       localFields.forEach(field => {
         (field as any).clearValidate();
       });
@@ -110,7 +111,7 @@ export default defineComponent({
     const {prefixCls} = this;
     const wrapCls = classNames(prefixCls, {
       [prefixCls + '-section']: this.section
-    });
+    }, this.$attrs.class);
     const children = [];
     if (this.$slots.default) {
       this.$slots.default().forEach((it: VNode, index) => {
@@ -127,17 +128,18 @@ export default defineComponent({
       });
     }
     return (
-        <div class={wrapCls}>
-          {this.$slots.title || this.title ? <div class={classNames(`${prefixCls}-header`, {
-            [`${prefixCls}-required`]: this.required
-          })}>
-            {this.$slots.title?.() ?? this.title}
-          </div> : ''}
-          {children.length ? (
-              <div class={`${prefixCls}-body`}>{children}</div>
-          ) : null}
-          {this.$slots.footer ? this.$slots.footer() : null}
-        </div>
+      <div {...filterHTMLAttrs(this.$attrs)}
+           class={wrapCls}>
+        {this.$slots.title || this.title ? <div class={classNames(`${prefixCls}-header`, {
+          [`${prefixCls}-required`]: this.required
+        })}>
+          {this.$slots.title?.() ?? this.title}
+        </div> : ''}
+        {children.length ? (
+          <div class={`${prefixCls}-body`}>{children}</div>
+        ) : null}
+        {this.$slots.footer ? this.$slots.footer() : null}
+      </div>
     );
   }
 });

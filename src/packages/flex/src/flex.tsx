@@ -71,7 +71,7 @@ export default defineComponent({
       [`${prefixCls}-align-content-between`]: alignContent === 'between',
       [`${prefixCls}-align-content-around`]: alignContent === 'around',
       [`${prefixCls}-align-content-stretch`]: alignContent === 'stretch'
-    });
+    }, this.$attrs.class);
     const props = filterHTMLAttrs({
       ...restProps,
       ...this.$attrs

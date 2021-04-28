@@ -36,7 +36,7 @@ export const getDatePicker = (isView: boolean) => {
       }
     },
     setup(props, {emit}) {
-      const scrollValue: Ref<Date> = ref(props.value);
+      const scrollValue: Ref<Date> = ref(typeof props.value === 'number' ? new Date(props.value) : props.value);
       const localVisible = ref(props.visible);
       watch(() => props.visible, visible => {
         localVisible.value = visible;

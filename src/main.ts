@@ -17,7 +17,9 @@ moment.updateLocale('zh-cn', zhCn);
 import DemoPreview from './views/preview.vue';
 const app = createApp(App);
 
-app.config.warnHandler = () => {};
+app.config.warnHandler = (e) => {
+  console.warn(e);
+};
 app.use(Antd);
 app.use(router);
 app.component('demoPreview', DemoPreview);

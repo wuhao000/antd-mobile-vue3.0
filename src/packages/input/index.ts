@@ -6,4 +6,4 @@ MInput.install = (app: App) => {
   app.component('MInput', MInput);
 };
 
-export default MInput as any;
+export default MInput;

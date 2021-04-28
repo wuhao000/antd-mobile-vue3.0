@@ -6,11 +6,10 @@ export default defineComponent({
   props: {},
   setup(props, {emit, slots}) {
     const state = reactive({
-      selectedTab: 0,
+      selectedTab: 'Life',
       hidden: false,
       fullScreen: false
     });
-
 
     const renderContent = (pageText) => {
       return (
@@ -36,7 +35,7 @@ export default defineComponent({
               unselectedTintColor="#949494"
               tintColor="#33A3F4"
               tabBarPosition="top"
-              vModel={this.state.selectedTab}
+              v-model={[this.state.selectedTab, 'value']}
               barTintColor="white"
               hidden={this.state.hidden}>
             <m-tab-bar-item

@@ -1,6 +1,6 @@
-import {useEmitter} from './emitter';
 import AsyncValidator, {ValidateRule} from 'async-validator';
 import {computed, getCurrentInstance, inject, nextTick, PropType, Ref, ref, watch} from 'vue';
+import {useEmitter} from './emitter';
 import {getPropByPath} from './utils';
 
 const noop = function noop(a?, b?) {
@@ -40,8 +40,7 @@ export const formComponentProps = {
   rules: {
     type: Array as PropType<ValidateRule[]>
   },
-  value: {
-  },
+  value: {},
   errorDisplayType: {
     type: String as PropType<'toast' | 'popover' | 'text' | undefined>
   }
@@ -49,7 +48,7 @@ export const formComponentProps = {
 export const useFormComponent = (props, {emit}) => {
   const {dispatch} = useEmitter(getCurrentInstance());
   const currentErrorMessage = ref(props.errorMessage);
-  const list: any = inject('list');
+  const list: any = inject('list', undefined);
   const validateStatus: Ref<'' | 'success' | 'warning' | 'error' | 'validating'> = ref('');
   const currentValue = ref(props.value);
   const validateDisabled: Ref<boolean> = ref(true);

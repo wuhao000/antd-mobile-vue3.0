@@ -13,7 +13,7 @@ export const simpleFormComponentProps = {
 };
 
 export const useSimpleFormComponent = props => {
-  const form = inject('list') as any;
+  const form = inject('list', undefined) as any;
 
   const isDisabled = computed(() => {
     let disabled = props.disabled;

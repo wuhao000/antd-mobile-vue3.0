@@ -6,7 +6,7 @@ export default defineComponent({
   props: {},
   setup() {
     const state = reactive({
-      selectedTab: 0,
+      selectedTab: 'Life',
       hidden: false,
       fullScreen: false
     });

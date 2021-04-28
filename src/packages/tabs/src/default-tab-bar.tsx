@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import {computed, defineComponent, PropType, ref, Ref, watch} from 'vue';
 import {Models} from '../../../types/models';
 import Gesture, {IGestureStatus} from '../../vmc-gesture';
@@ -247,8 +248,7 @@ const DefaultTabBar = defineComponent({
       },
       class: `${prefixCls}-underline`
     };
-
-    return <div class={`${cls} ${prefixCls}-${tabBarPosition}`} style={style}>
+    return <div class={classNames(cls, `${prefixCls}-${tabBarPosition}`, this.$attrs.class)} style={style}>
       {showPrev && <div class={`${prefixCls}-prevpage`}/>}
       <Gesture {...onPan}
                direction={isTabBarVertical ? 'vertical' : 'horizontal'}>

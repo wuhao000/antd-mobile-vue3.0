@@ -75,18 +75,18 @@ export default defineComponent({
         moneyKeyboardHeader
       } = props;
       return (
-          <CustomKeyboard
-              ref={(el) => {
-                keyboardRef.value = el;
-              }}
-              onClick={onKeyboardClick}
-              prefixCls={keyboardPrefixCls}
-              confirmLabel={confirmLabel}
-              backspaceLabel={backspaceLabel}
-              cancelKeyboardLabel={cancelKeyboardLabel}
-              wrapProps={moneyKeyboardWrapProps}
-              header={moneyKeyboardHeader}
-          />
+        <CustomKeyboard
+          ref={(el) => {
+            keyboardRef.value = el;
+          }}
+          onClick={onKeyboardClick}
+          prefixCls={keyboardPrefixCls}
+          confirmLabel={confirmLabel}
+          backspaceLabel={backspaceLabel}
+          cancelKeyboardLabel={cancelKeyboardLabel}
+          wrapProps={moneyKeyboardWrapProps}
+          header={moneyKeyboardHeader}
+        />
       );
     };
     const getContainer = () => {
@@ -115,15 +115,15 @@ export default defineComponent({
     };
     const unLinkInput = () => {
       if (
-          customNumberKeyboard &&
-          customNumberKeyboard.antmKeyboard &&
-          customNumberKeyboard.linkedInput &&
-          customNumberKeyboard.linkedInput === this
+        customNumberKeyboard &&
+        customNumberKeyboard.antmKeyboard &&
+        customNumberKeyboard.linkedInput &&
+        customNumberKeyboard.linkedInput === this
       ) {
         customNumberKeyboard.linkedInput = null;
         addClass(
-            customNumberKeyboard.antmKeyboard,
-            `${props.keyboardPrefixCls}-wrapper-hide`
+          customNumberKeyboard.antmKeyboard,
+          `${props.keyboardPrefixCls}-wrapper-hide`
         );
       }
       // for unmount
@@ -146,21 +146,21 @@ export default defineComponent({
         customNumberKeyboard.linkedInput = this;
         if (customNumberKeyboard.antmKeyboard) {
           removeClass(
-              customNumberKeyboard.antmKeyboard,
-              `${props.keyboardPrefixCls}-wrapper-hide`
+            customNumberKeyboard.antmKeyboard,
+            `${props.keyboardPrefixCls}-wrapper-hide`
           );
         }
         customNumberKeyboard.confirmDisabled = props.value === '';
         if (customNumberKeyboard.confirmKeyboardItem) {
           if (props.value === '') {
             addClass(
-                customNumberKeyboard.confirmKeyboardItem,
-                `${props.keyboardPrefixCls}-item-disabled`
+              customNumberKeyboard.confirmKeyboardItem,
+              `${props.keyboardPrefixCls}-item-disabled`
             );
           } else {
             removeClass(
-                customNumberKeyboard.confirmKeyboardItem,
-                `${props.keyboardPrefixCls}-item-disabled`
+              customNumberKeyboard.confirmKeyboardItem,
+              `${props.keyboardPrefixCls}-item-disabled`
             );
           }
         }
@@ -187,8 +187,8 @@ export default defineComponent({
         onInputBlur(valueAfterChange);
       } else {
         if (maxLength !== undefined &&
-            +maxLength >= 0 &&
-            (value + keyboardItemValue).length > maxLength
+          +maxLength >= 0 &&
+          (value + keyboardItemValue).length > maxLength
         ) {
           valueAfterChange = (value + keyboardItemValue).substr(0, maxLength);
           onChange({target: {value: valueAfterChange}});
@@ -202,13 +202,13 @@ export default defineComponent({
         if (customNumberKeyboard.confirmKeyboardItem) {
           if (valueAfterChange === '') {
             addClass(
-                customNumberKeyboard.confirmKeyboardItem,
-                `${props.keyboardPrefixCls}-item-disabled`
+              customNumberKeyboard.confirmKeyboardItem,
+              `${props.keyboardPrefixCls}-item-disabled`
             );
           } else {
             removeClass(
-                customNumberKeyboard.confirmKeyboardItem,
-                `${props.keyboardPrefixCls}-item-disabled`
+              customNumberKeyboard.confirmKeyboardItem,
+              `${props.keyboardPrefixCls}-item-disabled`
             );
           }
         }
@@ -232,15 +232,15 @@ export default defineComponent({
         disabled: false,
         to: getContainer()
       };
-      return (
+      if (props.to) {
+        return (
           <Teleport {...props}>
             {getComponent()}
           </Teleport>
-      );
+        );
+      }
     };
-    {
-      currentValue.value = props.value?.toString() || '';
-    }
+    currentValue.value = props.value?.toString() || '';
     onBeforeUnmount(() => {
       // focus:true unmount 不能触发 blur
       if (!focus.value) {
@@ -288,21 +288,21 @@ export default defineComponent({
       'fake-input-container-left': moneyKeyboardAlign === 'left'
     });
     return (
-        <div class={fakeInputContainerCls}>
-          {value === '' && (
-              <div class="fake-input-placeholder">{placeholder}</div>
-          )}
-          <div
-              role="textbox"
-              class={fakeInputCls}
-              ref="input"
-              onClick={preventKeyboard ? () => {
-              } : this.onFakeInputClick}
-          >
-            {value}
-          </div>
-          {this.renderPortal()}
+      <div class={fakeInputContainerCls}>
+        {value === '' && (
+          <div class="fake-input-placeholder">{placeholder}</div>
+        )}
+        <div
+          role="textbox"
+          class={fakeInputCls}
+          ref="input"
+          onClick={preventKeyboard ? () => {
+          } : this.onFakeInputClick}
+        >
+          {value}
         </div>
+        {this.renderPortal()}
+      </div>
     );
   }
 });

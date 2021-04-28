@@ -17,7 +17,7 @@ export default defineComponent({
   },
   render() {
     const {prefixCls, ...restProps} = this.$props;
-    const wrapCls = classnames(`${prefixCls}-item`);
+    const wrapCls = classnames(`${prefixCls}-item`, this.$attrs.class);
     const props = {
       ...restProps,
       ...this.$attrs,
@@ -28,7 +28,7 @@ export default defineComponent({
     };
     return (
       <div class={wrapCls}
-           {...props}>
+           {...filterHTMLAttrs(props)}>
         {this.$slots.default?.()}
       </div>
     );

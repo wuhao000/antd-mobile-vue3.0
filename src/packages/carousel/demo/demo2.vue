@@ -17,18 +17,25 @@
   </m-wing-blank>
 </template>
 <script lang="ts">
-  import {defineComponent} from 'vue';
-  import {useBaseDemo} from './base';
+import {defineComponent} from 'vue';
+import {useBaseDemo} from './base';
 
-  export default defineComponent({
-    name: 'CarouselDemo2',
-    setup(props, {emit, slots}) {
-      const {state, onLoad} = useBaseDemo();
-      const onClick = () => {
-        state.data = state.data.concat(['AiyWuByWklrrUDlFignR']);
-        console.log(state.data);
-      };
-      return {onClick, onLoad, state};
-    }
-  });
+export default defineComponent({
+  name: 'CarouselDemo2',
+  setup() {
+    const {state, onLoad} = useBaseDemo();
+    const onClick = () => {
+      state.data = state.data.concat(['AiyWuByWklrrUDlFignR']);
+      console.log(state.data);
+    };
+    return {
+      onClick,
+      beforeChange() {
+      },
+      afterChange() {
+      },
+      onLoad, state
+    };
+  }
+});
 </script>

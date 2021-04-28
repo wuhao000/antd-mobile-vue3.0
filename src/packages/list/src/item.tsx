@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import {computed, defineComponent, getCurrentInstance, inject, onBeforeUnmount, PropType, ref, VNode} from 'vue';
 import Popover from '../../popover';
 import toast from '../../toast';
+import {filterHTMLAttrs} from '../../utils/dom';
 import {isEmptySlot} from '../../utils/vnode';
 import TouchFeedback from '../../vmc-feedback';
 
@@ -13,9 +14,9 @@ export const Brief = defineComponent({
   },
   render() {
     return (
-        <div class="am-list-brief">
-          {this.$slots.default()}
-        </div>
+      <div class="am-list-brief">
+        {this.$slots.default()}
+      </div>
     );
   }
 });
@@ -24,6 +25,7 @@ const Item = defineComponent({
   inheritAttrs: false,
   name: 'ListItem',
   props: {
+    onClick: {},
     text: {
       type: Boolean as PropType<boolean>,
       default: false
@@ -114,7 +116,7 @@ const Item = defineComponent({
     const debounceTimeout = ref(null);
     const coverRippleStyle: any = ref({display: 'none'});
     const rippleClicked = ref(false);
-    const list: any = inject('list');
+    const list: any = inject('list', undefined);
     const showErrorPopover = false;
     const instance = getCurrentInstance();
     const actualError = computed(() => props.error ?? instance.parent['error'] ?? false);
@@ -150,17 +152,17 @@ const Item = defineComponent({
     };
     const renderExtra = () => {
       return (!isEmptySlot(slots.extra) || props.extra) ? (
-          <div style={props.extraStyle}
-               class={classNames(`${props.prefixCls}-extra`, {
-                 [`${props.prefixCls}-extra-text`]: props.text
-               })}>{slots.extra?.() || props.extra}
-            {
-              props.errorDisplayType === 'text' && actualError.value && actualErrorMessage.value ?
-                  <div>
-                    {actualErrorMessage.value}
-                  </div> : null
-            }
-          </div>
+        <div style={props.extraStyle}
+             class={classNames(`${props.prefixCls}-extra`, {
+               [`${props.prefixCls}-extra-text`]: props.text
+             })}>{slots.extra?.() || props.extra}
+          {
+            props.errorDisplayType === 'text' && actualError.value && actualErrorMessage.value ?
+              <div>
+                {actualErrorMessage.value}
+              </div> : null
+          }
+        </div>
       ) : null;
     };
     const renderThumb = () => {
@@ -180,20 +182,20 @@ const Item = defineComponent({
     const renderLabel = () => {
       if (!isEmptySlot(slots.default)) {
         return (
-            <div class={`${props.prefixCls}-content`}
-                 style={props.contentStyle}>{slots.default()}</div>
+          <div class={`${props.prefixCls}-content`}
+               style={props.contentStyle}>{slots.default()}</div>
         );
       } else if (props.title) {
         return (
-            <div class={`${props.prefixCls}-content`}
-                 style={props.contentStyle}>{props.title}</div>
+          <div class={`${props.prefixCls}-content`}
+               style={props.contentStyle}>{props.title}</div>
         );
       } else {
         return null;
       }
     };
     const renderControl = () => slots.control ?
-        <div class={props.prefixCls + '-control'}>{slots.control()}</div> : null;
+      <div class={props.prefixCls + '-control'}>{slots.control()}</div> : null;
     onBeforeUnmount(() => {
       if (debounceTimeout.value) {
         clearTimeout(debounceTimeout.value);
@@ -224,20 +226,20 @@ const Item = defineComponent({
     const {coverRippleStyle, rippleClicked} = this;
     const section = this.$parent['section'];
     const wrapCls = classNames(`${prefixCls}-item`,
-        `${prefixCls}-item-label-` + this.labelPosition,
-        this.$attrs.class ?? '',
-        {
-          [`${prefixCls}-item-disabled`]: this.actualDisabled,
-          [`${prefixCls}-item-error`]: actualError,
-          [`${prefixCls}-item-error-text`]: actualError && this.actualErrorDisplayType === 'text',
-          [`${prefixCls}-item-top`]: align === 'top',
-          [`${prefixCls}-item-middle`]: align === 'middle',
-          [`${prefixCls}-item-bottom`]: align === 'bottom',
-          [`${prefixCls}-item-section`]: section,
-          [`${prefixCls}-item-extra-left`]: this.extraPosition === 'left',
-          [`${prefixCls}-item-extra-center`]: this.extraPosition === 'center',
-          [`${prefixCls}-item-extra-right`]: this.extraPosition === 'right'
-        });
+      `${prefixCls}-item-label-` + this.labelPosition,
+      this.$attrs.class ?? '',
+      {
+        [`${prefixCls}-item-disabled`]: this.actualDisabled,
+        [`${prefixCls}-item-error`]: actualError,
+        [`${prefixCls}-item-error-text`]: actualError && this.actualErrorDisplayType === 'text',
+        [`${prefixCls}-item-top`]: align === 'top',
+        [`${prefixCls}-item-middle`]: align === 'middle',
+        [`${prefixCls}-item-bottom`]: align === 'bottom',
+        [`${prefixCls}-item-section`]: section,
+        [`${prefixCls}-item-extra-left`]: this.extraPosition === 'left',
+        [`${prefixCls}-item-extra-center`]: this.extraPosition === 'center',
+        [`${prefixCls}-item-extra-right`]: this.extraPosition === 'right'
+      });
 
     const rippleCls = classNames(`${prefixCls}-ripple`, {
       [`${prefixCls}-ripple-animate`]: rippleClicked
@@ -254,55 +256,56 @@ const Item = defineComponent({
       [`${prefixCls}-arrow-vertical-up`]: arrow === 'up'
     });
     const content = (
-        <div onClick={this.onClick} class={wrapCls}>
-          {this.renderThumb()}
-          <div class={lineCls}>
-            {this.renderLabel()}
-            {this.renderControl()}
-            {this.renderExtra()}
-            {arrow && <div class={arrowCls}
-                           aria-hidden="true"/>}
-            {this.actualError && this.errorDisplayType !== 'text' ? (
-                <div
-                    class={`${prefixCls}-error-extra`}
-                    onClick={(e) => {
-                      if (this.actualErrorMessage) {
-                        if (this.actualErrorDisplayType === 'toast') {
-                          toast.fail(this.actualErrorMessage);
-                        }
-                        if (this.actualErrorDisplayType === 'popover' && !this.showErrorPopover) {
-                          this.showErrorPopover = true;
-                        }
-                      }
-                      this.$emit('error-click', e);
-                      this.$emit('errorClick', e);
-                    }}>
-                  {
-                    this.errorDisplayType === 'popover' ? <Popover v-model={[this.showErrorPopover, 'value']}
-                                                                   mask={false}>
-                      <Popover.Item slot="content">
-                        {this.errorMessage}
-                      </Popover.Item>
-                    </Popover> : null
+      <div {...filterHTMLAttrs(this.$attrs)}
+           onClick={this.onClick}
+           class={wrapCls}>
+        {this.renderThumb()}
+        <div class={lineCls}>
+          {this.renderLabel()}
+          {this.renderControl()}
+          {this.renderExtra()}
+          {arrow && <div class={arrowCls}
+                         aria-hidden="true"/>}
+          {this.actualError && this.errorDisplayType !== 'text' ? (
+            <div
+              class={`${prefixCls}-error-extra`}
+              onClick={(e) => {
+                if (this.actualErrorMessage) {
+                  if (this.actualErrorDisplayType === 'toast') {
+                    toast.fail(this.actualErrorMessage);
                   }
-                </div>
+                  if (this.actualErrorDisplayType === 'popover' && !this.showErrorPopover) {
+                    this.showErrorPopover = true;
+                  }
+                }
+                this.$emit('error-click', e);
+                this.$emit('errorClick', e);
+              }}>
+              {
+                this.errorDisplayType === 'popover' ? <Popover v-model={[this.showErrorPopover, 'value']}
+                                                               mask={false}>
+                  <Popover.Item slot="content">
+                    {this.errorMessage}
+                  </Popover.Item>
+                </Popover> : null
+              }
+            </div>
 
-            ) : null}
-            {this.$slots.suffix || this.suffix ? <div class={this.prefixCls + '-suffix'}>
-              {this.$slots.suffix?.() || this.suffix}
-            </div> : null}
-          </div>
-          <div style={coverRippleStyle} class={rippleCls}/>
+          ) : null}
+          {this.$slots.suffix || this.suffix ? <div class={this.prefixCls + '-suffix'}>
+            {this.$slots.suffix?.() || this.suffix}
+          </div> : null}
         </div>
+        <div style={coverRippleStyle} class={rippleCls}/>
+      </div>
     );
     return (
-        // @ts-ignore
-        <TouchFeedback
-            disabled={disabled || !this.onClick || !this.touchFeedback || (this.list && !this.list.touchFeedback)}
-            activeStyle={activeStyle}
-            activeClassName={`${prefixCls}-item-active`}>
-          {content}
-        </TouchFeedback>
+      <TouchFeedback
+        disabled={disabled || !this.onClick || !this.touchFeedback || (this.list && !this.list.touchFeedback)}
+        activeStyle={activeStyle}
+        activeClassName={`${prefixCls}-item-active`}>
+        {content}
+      </TouchFeedback>
     );
   }
 });

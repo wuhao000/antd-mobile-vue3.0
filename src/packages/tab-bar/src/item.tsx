@@ -38,20 +38,18 @@ export default defineComponent({
   setup(props, {emit, slots}) {
     const store: { currentTab: string | number } = inject('store');
     const tabBar: any = inject('tabBar');
-    const index = ref(-1);
-
-    const sSelected = computed(() => {
-      return props.selected !== undefined ? props.selected : (index.value === store.currentTab);
-    });
     const instance = getCurrentInstance();
-    onMounted(() => {
-      const children = unwrapFragment(tabBar.slots.default());
-      const tabs = children.filter(it => it.props.tag === instance.props.tag);
-      index.value = tabs.findIndex(it => it.key === instance.vnode.key);
-    });
 
+    const localSelected = computed(() => {
+      return props.selected !== undefined ? props.selected : (instance.vnode.key === store.currentTab);
+    });
+    const onClick = (e) => {
+      tabBar.setCurrentTab(instance.vnode.key);
+      emit('click', e);
+    }
     return {
-      tabBar, sSelected, index,
+      tabBar, localSelected,
+      onClick,
       _uid: _uid++
     };
   },
@@ -69,14 +67,11 @@ export default defineComponent({
       unselectedTintColor,
       icon,
       selectedIcon,
-      selected: this.sSelected
+      selected: this.localSelected
     };
     return (
       <Tab {...props}
-           onClick={(e) => {
-             this.tabBar.setCurrentTab(this.index);
-             this.$emit('click', e);
-           }}
+           onClick={this.onClick}
            v-slots={this.$slots}
            dataAttrs={getDataAttr(this.$props)}/>
     );

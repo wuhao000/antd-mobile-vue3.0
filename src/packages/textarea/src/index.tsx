@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import {defineComponent, onBeforeUnmount, onMounted, onUpdated, PropType, reactive, ref, Ref, watch} from 'vue';
+import {defineComponent, onBeforeUnmount, onMounted, onUpdated, PropType, reactive, ref, Ref, VNode, watch} from 'vue';
 import List from '../../list';
 import {formComponentProps, useFormComponent} from '../../mixins/form-component';
 import {IS_IOS} from '../../utils/exenv';
@@ -31,7 +31,7 @@ export default defineComponent({
       default: 'am-list'
     },
     title: {
-      type: String as PropType<string>
+      type: [String, Object] as PropType<string | VNode>
     },
     maxLength: {
       type: Number as PropType<number>

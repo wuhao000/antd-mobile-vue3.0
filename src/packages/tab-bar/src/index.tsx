@@ -53,7 +53,7 @@ const TabBar = defineComponent({
   },
   setup(props, {emit, slots}) {
     const store = reactive({
-      currentTab: -10000 as number | string
+      currentTab: undefined
     });
     watch(() => props.value, (value: number | string) => {
       store.currentTab = value;
@@ -62,10 +62,10 @@ const TabBar = defineComponent({
       emit('update:value', value);
     });
 
-    const setCurrentTab = (tab: number) => {
+    const setCurrentTab = (tab: string) => {
       const children = unwrapFragment(slots.default());
       store.currentTab = tab;
-      emit('click', children[tab].key, children[tab]);
+      emit('click', tab, children.find(it => it.el.key === tab));
     };
     const renderTabBar = () => {
       let cls = `${props.prefixCls}-bar`;
@@ -102,7 +102,6 @@ const TabBar = defineComponent({
                 e.stopPropagation();
               }}
               tabBarPosition={tabBarPosition}
-              page={this.store.currentTab < 0 ? undefined : this.store.currentTab}
               animated={animated}
               swipeable={swipeable}
               noRenderContent={noRenderContent}

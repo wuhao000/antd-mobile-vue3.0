@@ -1,11 +1,11 @@
-import {computed, defineComponent, reactive, ref} from 'vue';
+import {defineComponent, reactive, ref} from 'vue';
 import {Button, Input, List, Range, Switch} from '../../index';
 
 const Item = List.Item;
 
 export default defineComponent({
   name: 'BasicInput',
-  setup(props, {emit, slots}) {
+  setup() {
     const data2 = reactive({
       account: null,
       password: null
@@ -51,7 +51,7 @@ export default defineComponent({
       <List ref={this.setFormRef}
             {...{model: this.data2}}
             title="Form Validation">
-        <Input clear v-modewl={[this.data2.account, 'value']}
+        <Input clearable v-model={[this.data2.account, 'value']}
                placeholder="please input account"
         >Account</Input>
         <Input v-model={[this.data2.password, 'value']}
@@ -59,7 +59,7 @@ export default defineComponent({
           Password
         </Input>
         <Item
-            extra={<Switch/>}
+          extra={<Switch/>}
         >Confirm Infomation</Item>
         <Item>
           <div style={{padding: '15px'}}><Range v-model={[this.state.range, 'value']}/></div>

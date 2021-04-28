@@ -108,7 +108,7 @@ const Carousel = defineComponent({
       type: Number as PropType<number>
     }
   },
-  setup(props, {emit, slots}) {
+  setup(props) {
     const selectedIndex: Ref<number> = ref(0);
 
     const onChange = (index: number) => {
@@ -126,11 +126,8 @@ const Carousel = defineComponent({
       infinite,
       selectedIndex,
       beforeChange,
-      afterChange,
       dots,
       prefixCls,
-      dotActiveStyle,
-      dotStyle,
       vertical
     } = this;
 
@@ -151,7 +148,7 @@ const Carousel = defineComponent({
     }
     const wrapCls = classnames(prefixCls, {
       [`${prefixCls}-vertical`]: vertical
-    });
+    }, this.$attrs.class);
     return (
       <CarouselBase
         {

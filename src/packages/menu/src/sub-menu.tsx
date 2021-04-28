@@ -55,7 +55,7 @@ const SubMenu = defineComponent({
 
     return (
       <List style={{paddingTop: 0}}
-            class={subMenuPrefixCls}>
+            class={classnames(subMenuPrefixCls, this.$attrs.class)}>
         {subMenuData.map((dataItem, idx) => (
           <List.Item
             class={classnames(`${radioPrefixCls}-item`, {

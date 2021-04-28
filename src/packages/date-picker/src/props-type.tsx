@@ -33,7 +33,7 @@ export const datePickerProps = {
   okText: {},
   title: {},
   value: {
-    type: Object as PropType<Date>
+    type: [Object, Number] as PropType<Date | number>
   },
   visible: {type: Boolean, default: false}
 };

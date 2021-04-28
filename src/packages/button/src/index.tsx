@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import {defineComponent} from 'vue';
 import IconRes from '../../mixins/icon-res';
+import {filterHTMLAttrs} from '../../utils/dom';
 import TouchFeedback from '../../vmc-feedback';
 
 const httpReg = /^http(s)?:\/\//;
@@ -104,6 +105,7 @@ export default defineComponent({
             disabled={disabled}
             activeStyle={activeStyle}>
           <a role="button"
+             {...filterHTMLAttrs(this.$attrs)}
              class={wrapCls}
              onClick={(e) => {
                if (!this.disabled) {

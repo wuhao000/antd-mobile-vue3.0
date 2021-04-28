@@ -5,17 +5,14 @@ export default defineComponent({
   install: null,
   name: 'Accordion',
   props: {
+    onChange: {},
     prefixCls: {default: 'am-accordion'},
     openAnimation: {},
     accordion: {type: Boolean, default: false},
     activeKey: {type: [String, Array]}
   },
   render() {
-    return this.$slots.default ? <RcCollapse
-        {...this.$props}
-        onChange={(...args) => {
-          this.$emit('change', ...args);
-        }}
-    >{this.$slots.default()}</RcCollapse> : null;
+    return this.$slots.default ?
+      <RcCollapse {...this.$props}>{this.$slots.default()}</RcCollapse> : null;
   }
 });

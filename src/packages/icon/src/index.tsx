@@ -21,7 +21,8 @@ const Icon = defineComponent({
     const cls = classnames(
       'am-icon',
       `am-icon-${type}`,
-      `am-icon-${size}`
+      `am-icon-${size}`,
+      this.$attrs.class
     );
     const style: any = {};
     if (this.color) {

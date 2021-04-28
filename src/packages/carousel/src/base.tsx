@@ -1,4 +1,3 @@
-import {unwrapFragment} from '../../utils/vue';
 import ExecutionEnvironment from 'exenv';
 import requestAnimationFrame from 'raf';
 import {
@@ -13,6 +12,7 @@ import {
   VNode,
   watch
 } from 'vue';
+import {unwrapFragment} from '../../utils/vue';
 import decorators from './decorators';
 
 'use strict';
@@ -32,11 +32,13 @@ function linear(t, b, _c, d) {
 
 function filterNotEmpty(nodes: NodeListOf<ChildNode>) {
   const n = [];
-  nodes.forEach(it => {
-    if (!(it instanceof Text) || (it as Text).textContent) {
-      n.push(it);
-    }
-  });
+  if (nodes) {
+    nodes.forEach(it => {
+      if (!(it instanceof Text) || (it as Text).textContent) {
+        n.push(it);
+      }
+    });
+  }
   return n;
 }
 
