@@ -180,7 +180,7 @@ export default defineComponent({
         if (isVNode(icon)) {
           return icon;
         }
-        return <Icon {...{icon}}/>;
+        return <Icon {...icon}/>;
       }
     };
     onMounted(() => {
