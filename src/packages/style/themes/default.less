@@ -1,3 +1,5 @@
+@import '../color/colors';
+
 @hd: 1px; // 基本单位
 
 // 支付宝钱包默认主题
@@ -14,6 +16,48 @@
 @color-text-caption: #888;               // 辅助描述
 @color-text-paragraph: #333;             // 段落
 @color-link: @brand-primary;             // 链接
+
+@primary-color: @blue-6;
+@info-color: @primary-color;
+@success-color: @green-6;
+@processing-color: @blue-6;
+@error-color: @red-5;
+@highlight-color: @red-5;
+@warning-color: @gold-6;
+@normal-color: #d9d9d9;
+@white: #fff;
+@black: #000;
+@heading-color: fade(@black, 85%);
+@text-color: fade(@black, 85%);
+@text-color-secondary: fade(@black, 45%);
+@text-color-inverse: @white;
+@text-color-dark: fade(@white, 85%);
+@text-color-secondary-dark: fade(@white, 65%);
+@text-selection-bg: @primary-color;
+@font-variant-base: tabular-nums;
+@font-feature-settings-base: 'tnum';
+@font-size-base: 14px;
+@font-size-lg: @font-size-base + 2px;
+@font-size-sm: 12px;
+
+// Border color
+@border-color-base: hsv(0, 0, 85%); // base border outline a component
+@border-color-split: hsv(0, 0, 94%); // split border inside a component
+@border-color-inverse: @white;
+@border-width-base: 1px; // width of the border for a component
+@border-style-base: solid; // style of a components border
+
+// Background color for `<body>`
+@body-background: #fff;
+// Base background color for most components
+@component-background: #fff;
+// Popover background color
+@popover-background: @component-background;
+@popover-customize-border-color: @border-color-split;
+@font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+'Noto Color Emoji';
+@code-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 
 // 背景色
 @fill-base: #fff;                           // 组件默认背景
@@ -90,8 +134,20 @@
 @icon-size-lg: 36 * @hd;
 
 // 动画缓动
-// ---
-@ease-in-out-quint: cubic-bezier(.86, 0, .07, 1);
+@ease-base-out: cubic-bezier(0.7, 0.3, 0.1, 1);
+@ease-base-in: cubic-bezier(0.9, 0, 0.3, 0.7);
+@ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+@ease-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+@ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+@ease-out-back: cubic-bezier(0.12, 0.4, 0.29, 1.46);
+@ease-in-back: cubic-bezier(0.71, -0.46, 0.88, 0.6);
+@ease-in-out-back: cubic-bezier(0.71, -0.46, 0.29, 1.46);
+@ease-out-circ: cubic-bezier(0.08, 0.82, 0.17, 1);
+@ease-in-circ: cubic-bezier(0.6, 0.04, 0.98, 0.34);
+@ease-in-out-circ: cubic-bezier(0.78, 0.14, 0.15, 0.86);
+@ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
+@ease-in-quint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+@ease-in-out-quint: cubic-bezier(0.86, 0, 0.07, 1);
 
 // 组件变量
 // ---
@@ -125,6 +181,16 @@
 @modal-font-size-heading: 18 * @hd;
 @modal-button-font-size: 18 * @hd; // 按钮字号
 @modal-button-height: 50 * @hd; // 按钮高度
+// Modal
+// --
+@modal-body-padding: 24px;
+@modal-header-bg: @component-background;
+@modal-header-border-color-split: @border-color-split;
+@modal-content-bg: @component-background;
+@modal-heading-color: @heading-color;
+@modal-footer-bg: transparent;
+@modal-footer-border-color-split: @border-color-split;
+@modal-mask-bg: fade(@black, 45%);
 
 // list
 @list-title-height: 30 * @hd;
@@ -136,6 +202,11 @@
 @input-font-size: 17 * @hd;
 @input-color-icon: #ccc; // input clear icon 的背景色
 @input-color-icon-tap: @brand-primary;
+
+// Animation
+@animation-duration-slow: 0.3s; // Modal
+@animation-duration-base: 0.2s;
+@animation-duration-fast: 0.1s; // Tooltip
 
 // tabs
 @tabs-color: @brand-primary;

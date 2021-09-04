@@ -3,8 +3,7 @@ import {defineComponent, onBeforeUnmount, onMounted, provide, Ref, ref} from 'vu
 
 export default defineComponent({
   name: 'Container',
-  props: {},
-  setup(props, {emit, slots}) {
+  setup() {
     const framePending: Ref<boolean> = ref(false);
     const events = ref([
       'resize',

@@ -1,4 +1,4 @@
-import Dialog from 'ant-design-vue/lib/vc-dialog';
+import Dialog from 'ant-design-vue/es/vc-dialog';
 import classnames from 'classnames';
 import {defineComponent, PropType, reactive, ref, Ref, watch} from 'vue';
 import TouchFeedback from '../../vmc-feedback';

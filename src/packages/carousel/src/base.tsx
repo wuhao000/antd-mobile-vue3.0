@@ -1,4 +1,3 @@
-import ExecutionEnvironment from 'exenv';
 import requestAnimationFrame from 'raf';
 import {
   defineComponent,
@@ -14,8 +13,6 @@ import {
 } from 'vue';
 import {unwrapFragment} from '../../utils/vue';
 import decorators from './decorators';
-
-'use strict';
 
 // from https://github.com/chenglou/tween-functions
 function easeOutCirc(t, b, _c, d) {
@@ -684,10 +681,8 @@ const CarouselBase = defineComponent({
       return (left - offset) * -1;
     };
     const bindEvents = () => {
-      if (ExecutionEnvironment.canUseDOM) {
-        addEvent(window, 'resize', onResize.bind(this));
-        addEvent(document, 'readystatechange', onReadyStateChange.bind(this));
-      }
+      addEvent(window, 'resize', onResize.bind(this));
+      addEvent(document, 'readystatechange', onReadyStateChange.bind(this));
     };
     const onResize = () => {
       setDimensions();
@@ -696,10 +691,8 @@ const CarouselBase = defineComponent({
       setDimensions();
     };
     const unbindEvents = () => {
-      if (ExecutionEnvironment.canUseDOM) {
-        removeEvent(window, 'resize', onResize.bind(this));
-        removeEvent(document, 'readystatechange', onReadyStateChange.bind(this));
-      }
+      removeEvent(window, 'resize', onResize.bind(this));
+      removeEvent(document, 'readystatechange', onReadyStateChange.bind(this));
     };
     const formatChildren = (children: VNode[]) => {
       const realChildren = unwrapFragment(children);

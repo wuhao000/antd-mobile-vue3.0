@@ -1,4 +1,4 @@
-import RcCollapse from 'ant-design-vue/lib/vc-collapse';
+import RcCollapse from 'ant-design-vue/es/vc-collapse';
 import {defineComponent} from 'vue';
 
 export default defineComponent({

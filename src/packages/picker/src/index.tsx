@@ -1,4 +1,4 @@
-import treeFilter from 'array-tree-filter';
+import {arrayTreeFilter} from '../../utils/array';
 import {cloneVNode, defineComponent, PropType, provide, reactive, ref, Ref, VNode, watch} from 'vue';
 import {setProps} from '../../utils/vnode';
 import RMCCascader from '../../vmc-cascader/cascader';
@@ -97,7 +97,7 @@ export const PickerMixin = (isView) => {
         let treeChildren: PickerData[];
         const data = props.data;
         if (props.cascade) {
-          treeChildren = treeFilter(data as PickerData[], (c: any, level: any) =>
+          treeChildren = arrayTreeFilter(data as PickerData[], (c: any, level: any) =>
               c.value === value[level]);
         } else {
           treeChildren = value.map((v, i) => (data as PickerData[][])[i].filter(d => d.value === v)[0]);

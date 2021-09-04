@@ -1,4 +1,4 @@
-import RcCheckbox from 'ant-design-vue/lib/vc-checkbox';
+import RcCheckbox from 'ant-design-vue/es/vc-checkbox';
 import classnames from 'classnames';
 import {defineComponent, PropType, ref} from 'vue';
 

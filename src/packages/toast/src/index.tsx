@@ -1,4 +1,4 @@
-import Notification from 'ant-design-vue/lib/vc-notification';
+import Notification from 'ant-design-vue/es/vc-notification';
 import classnames from 'classnames';
 import {VNode} from 'vue';
 import Icon from '../../icon';

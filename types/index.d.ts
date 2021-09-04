@@ -1,7 +1,7 @@
 export * from './aegis-ui';
 
-export * from '../src/types/global';
+import {App} from 'vue';
 
-import * as AegisUI from './aegis-ui';
-
-export default AegisUI;
+export default class AntdMobile {
+  public static install: (app: App) => void;
+}

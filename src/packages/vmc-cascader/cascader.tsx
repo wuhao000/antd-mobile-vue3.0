@@ -1,4 +1,4 @@
-import arrayTreeFilter from 'array-tree-filter';
+import {arrayTreeFilter} from '../utils/array';
 import {defineComponent, inject, onBeforeUpdate, PropType, reactive} from 'vue';
 import MultiPicker from '../vmc-picker/multi-picker';
 import RmcPicker from '../vmc-picker/picker';
