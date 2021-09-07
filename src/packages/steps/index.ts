@@ -6,8 +6,8 @@ import './style';
 Steps.Step = Step;
 
 Steps.install = (app: App) => {
-  app.component('MSteps', Steps);
-  app.component('MStep', Step);
+  app.component(Steps.name, Steps);
+  app.component(Step.name, Step);
 };
 
 export default Steps;

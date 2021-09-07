@@ -8,9 +8,9 @@ MCalendar.Item = Item;
 MCalendar.View = View;
 
 MCalendar.install = (app: App) => {
-  app.component('MCalendar', MCalendar);
-  app.component('MCalendarItem', MCalendar.Item);
-  app.component('MCalendarView', MCalendar.View);
+  app.component(MCalendar.name, MCalendar);
+  app.component(Item.name, MCalendar.Item);
+  app.component(View.name, MCalendar.View);
 };
 
 export default MCalendar;

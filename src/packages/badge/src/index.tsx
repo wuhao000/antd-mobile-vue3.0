@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import {defineComponent} from 'vue';
 
 export default defineComponent({
-  name: 'Badge',
+  name: 'MBadge',
   props: {
     prefixCls: {default: 'am-badge'},
     hot: {type: Boolean, default: false},

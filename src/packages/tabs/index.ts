@@ -5,7 +5,7 @@ import './style';
 const Plugin: any = MTabs;
 
 Plugin.install = (app: App) => {
-  app.component('MTabs', MTabs);
+  app.component(MTabs.name, MTabs);
 };
 
 export default Plugin;

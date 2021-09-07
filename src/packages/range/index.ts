@@ -6,8 +6,8 @@ import './style';
 MRange.Item = Item;
 
 MRange.install = (app: App) => {
-  app.component('MRange', MRange);
-  app.component('MRangeItem', Item);
+  app.component(MRange.name, MRange);
+  app.component(Item.name, Item);
 };
 
 export default MRange;

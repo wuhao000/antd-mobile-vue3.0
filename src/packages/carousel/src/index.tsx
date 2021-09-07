@@ -51,7 +51,7 @@ const DotDecorator = defineComponent({
 });
 
 const Carousel = defineComponent({
-  name: 'Carousel',
+  name: 'MCarousel',
   props: {
     prefixCls: {
       type: String as PropType<string>,

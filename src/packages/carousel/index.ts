@@ -3,7 +3,7 @@ import MCarousel from './src';
 import './style';
 
 MCarousel.install = (app: App) => {
-  app.component('MCarousel', MCarousel);
+  app.component(MCarousel.name, MCarousel);
 };
 
 export default MCarousel;

@@ -5,7 +5,7 @@ import {defineComponent, PropType} from 'vue';
 export default defineComponent({
   inheritAttrs: false,
   Item: null,
-  name: 'Flex',
+  name: 'MFlex',
   props: {
     alignContent: {
       type: String as PropType<'start' | 'end' | 'center' | 'between' | 'around' | 'stretch'>

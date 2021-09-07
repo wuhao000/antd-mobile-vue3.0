@@ -3,7 +3,7 @@ import {defineComponent, PropType} from 'vue';
 import Icon from '../../icon';
 import RMCInputNumber from '../../vmc-input-number';
 
-const MStepper = defineComponent({
+export default defineComponent({
   install: null,
   name: 'MStepper',
   props: {
@@ -96,5 +96,3 @@ const MStepper = defineComponent({
     );
   }
 });
-
-export default MStepper as any;

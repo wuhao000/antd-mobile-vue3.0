@@ -3,7 +3,7 @@ import List from '../../list';
 import {optionsBasedComponentProps, useOptionsBaseComponent} from '../../mixins/options-based-component';
 import CheckboxItem from './checkbox-item';
 
-const MCheckboxList = defineComponent({
+export default defineComponent({
   name: 'MCheckboxList',
   props: {
     ...optionsBasedComponentProps,
@@ -64,5 +64,3 @@ const MCheckboxList = defineComponent({
     </List>;
   }
 });
-
-export default MCheckboxList as any;

@@ -3,7 +3,7 @@ import MSearchBar from './src';
 import './style';
 
 MSearchBar.install = (app: App) => {
-  app.component('MSearchBar', MSearchBar);
+  app.component(MSearchBar.name, MSearchBar);
 };
 
 export default MSearchBar;

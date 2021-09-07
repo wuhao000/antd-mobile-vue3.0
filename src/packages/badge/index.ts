@@ -5,7 +5,7 @@ import './style';
 const Plugin: any = MBadge;
 
 Plugin.install = (app: App) => {
-  app.component('MBadge', MBadge);
+  app.component(MBadge.name, MBadge);
 };
 
 export default Plugin;

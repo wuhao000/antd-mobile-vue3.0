@@ -10,10 +10,10 @@ MRadio.List = MRadioList;
 MRadio.PopupList = MRadioPopupList;
 
 MRadio.install = (app: App) => {
-  app.component('MRadio', MRadio);
-  app.component('MRadioItem', MRadioItem);
-  app.component('MRadioPopupList', MRadioPopupList);
-  app.component('MRadioList', MRadioList);
+  app.component(MRadio.name, MRadio);
+  app.component(MRadioItem.name, MRadioItem);
+  app.component(MRadioPopupList.name, MRadioPopupList);
+  app.component(MRadioList.name, MRadioList);
 };
 
 export default MRadio;

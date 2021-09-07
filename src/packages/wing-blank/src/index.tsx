@@ -1,8 +1,8 @@
 import classnames from 'classnames';
 import {defineComponent, PropType} from 'vue';
 
-const WingBlank = defineComponent({
-  name: 'WingBlank',
+export default defineComponent({
+  name: 'MWingBlank',
   props: {
     prefixCls: {
       type: String as PropType<string>,
@@ -23,5 +23,3 @@ const WingBlank = defineComponent({
     );
   }
 });
-
-export default WingBlank as any;

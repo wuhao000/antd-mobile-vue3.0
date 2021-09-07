@@ -3,6 +3,6 @@ import MButton from './src';
 import './style';
 
 MButton.install = (app: App) => {
-  app.component('MButton', MButton);
+  app.component(MButton.name, MButton);
 };
 export default MButton;

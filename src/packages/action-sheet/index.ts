@@ -3,7 +3,7 @@ import MActionSheet from './src';
 import './style';
 
 MActionSheet.install = (app: App) => {
-  app.component('MActionSheet', MActionSheet);
+  app.component(MActionSheet.name, MActionSheet);
 };
 
 export default MActionSheet;

@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import {defineComponent} from 'vue';
 
 export default defineComponent({
-  name: 'WhiteSpace',
+  name: 'MWhiteSpace',
   props: {
     size: {type: String, default: 'md'},
     prefixCls: {type: String, default: 'am-whitespace'}

@@ -2,7 +2,7 @@ import RcCheckbox from 'ant-design-vue/es/vc-checkbox';
 import classnames from 'classnames';
 import {defineComponent, PropType, ref, watch} from 'vue';
 
-const Checkbox = defineComponent({
+export default defineComponent({
   name: 'MCheckbox',
   props: {
     prefixCls: {
@@ -62,5 +62,3 @@ const Checkbox = defineComponent({
       {...this.$props}>{this.$slots.default()}</RcCheckbox>;
   }
 });
-
-export default Checkbox as any;

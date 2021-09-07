@@ -35,7 +35,7 @@ export default defineComponent({
     }
   },
   setup(props, {emit, slots}) {
-    const store: { currentTab: string | number } = inject('store');
+    const store: { currentTab: string | number } = inject('tabBarStore');
     const tabBar: any = inject('tabBar');
     const instance = getCurrentInstance();
 

@@ -15,9 +15,9 @@ export interface StateType {
   height?: number;
 }
 
-const Menu = defineComponent({
+export default defineComponent({
   install: null,
-  name: 'Menu',
+  name: 'MMenu',
   props: {
     prefixCls: {
       type: String as PropType<string>,
@@ -288,5 +288,3 @@ const Menu = defineComponent({
     );
   }
 });
-
-export default Menu as any;

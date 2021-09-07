@@ -81,7 +81,7 @@ const TabBar = defineComponent({
       slots,
       props
     });
-    provide('store', store);
+    provide('tabBarStore', store);
     return {
       store, renderTabBar
     };

@@ -6,8 +6,8 @@ import './style';
 MTabBar.Item = Item;
 
 MTabBar.install = (app: App) => {
-  app.component('MTabBar', MTabBar);
-  app.component('MTabBarItem', MTabBar.Item);
+  app.component(MTabBar.name, MTabBar);
+  app.component(Item.name, MTabBar.Item);
 };
 
 export default MTabBar;

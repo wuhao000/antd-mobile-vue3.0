@@ -20,9 +20,9 @@ export const getPanDirection = (direction: number | undefined) => {
   }
 };
 
-const Tabs = defineComponent({
+export default defineComponent({
   DefaultTabBar,
-  name: 'Tabs',
+  name: 'MTabs',
   props: {
     /**
      * 使用卡片样式
@@ -526,5 +526,3 @@ const Tabs = defineComponent({
     </div>;
   }
 });
-
-export default Tabs;

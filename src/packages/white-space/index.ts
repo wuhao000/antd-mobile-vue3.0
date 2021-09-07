@@ -5,7 +5,7 @@ import './style';
 const Plugin: any = MWhiteSpace;
 
 Plugin.install = (app: App) => {
-  app.component('MWhiteSpace', MWhiteSpace);
+  app.component(MWhiteSpace.name, MWhiteSpace);
 };
 
 export default Plugin;

@@ -12,7 +12,7 @@ const statusIcon = {
   wait: 'ellipsis'
 };
 export default defineComponent({
-  name: 'Step',
+  name: 'MStep',
   props: {
     prefixCls: {
       type: String as PropType<string>,
@@ -49,7 +49,7 @@ export default defineComponent({
     },
     progressDot: {}
   },
-  setup(props, {emit, slots}) {
+  setup(props, {slots}) {
     const steps: any = inject('steps');
 
     const iconSize = computed(() => {

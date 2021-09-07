@@ -8,7 +8,7 @@ import defaultLocale from './locale/zh_CN';
 export default defineComponent({
   install: null,
   Item: null,
-  name: 'Calendar',
+  name: 'MCalendar',
   props: {
     ...CalendarProps,
     prefixCls: {type: String, default: 'am-calendar'},

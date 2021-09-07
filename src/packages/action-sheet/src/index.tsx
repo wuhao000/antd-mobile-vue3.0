@@ -21,9 +21,9 @@ export interface ActionSheetMenu {
   label: string | VNode;
 }
 
-const ActionSheet = defineComponent({
+export default defineComponent({
   install: null,
-  name: 'ActionSheet',
+  name: 'MActionSheet',
   props: {
     prefixCls: {
       type: String as PropType<string>,
@@ -262,5 +262,3 @@ const ActionSheet = defineComponent({
     </Popup>;
   }
 });
-
-export default ActionSheet;

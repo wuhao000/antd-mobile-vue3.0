@@ -16,6 +16,7 @@ const beginOfMonth = () => {
 };
 
 export default defineComponent({
+  name: 'MCalendarView',
   props: {
     ...CalendarProps,
     prefixCls: {type: String, default: 'am-calendar'},

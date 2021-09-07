@@ -5,7 +5,7 @@ import './style';
 const Plugin: any = MTextarea;
 
 Plugin.install = (app: App) => {
-  app.component('MTextarea', MTextarea);
+  app.component(MTextarea.name, MTextarea);
 };
 
 export default Plugin;

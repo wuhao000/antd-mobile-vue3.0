@@ -5,7 +5,7 @@ import {formComponentProps} from '../../mixins/form-component';
 import DatePicker from './index';
 
 export default defineComponent({
-  name: 'DatePickerItem',
+  name: 'MDatePickerItem',
   props: {
     ...formComponentProps,
     title: {

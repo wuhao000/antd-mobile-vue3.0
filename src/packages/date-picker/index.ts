@@ -6,8 +6,8 @@ import './style';
 MDatePicker.Item = Item;
 
 MDatePicker.install = (app: App) => {
-  app.component('MDatePicker', MDatePicker);
-  app.component('MDatePickerItem', MDatePicker.Item);
+  app.component(MDatePicker.name, MDatePicker);
+  app.component(Item.name, Item);
 };
 
 export default MDatePicker;

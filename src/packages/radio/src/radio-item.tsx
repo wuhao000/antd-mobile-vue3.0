@@ -3,7 +3,7 @@ import {defineComponent, PropType} from 'vue';
 import List from '../../list';
 import Radio from './radio';
 
-const RadioItem = defineComponent({
+export default defineComponent({
   name: 'MRadioItem',
   props: {
     prefixCls: {
@@ -83,5 +83,3 @@ const RadioItem = defineComponent({
     );
   }
 });
-
-export default RadioItem as any;

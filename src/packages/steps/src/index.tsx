@@ -1,10 +1,10 @@
 import classNames from 'classnames';
-import {defineComponent, getCurrentInstance, PropType, provide, VNode} from 'vue';
+import {defineComponent, getCurrentInstance, PropType, provide, reactive, VNode, watch} from 'vue';
 import {filterHTMLAttrs} from '../../utils/dom';
 import {unwrapFragment} from '../../utils/vue';
 
 export default defineComponent({
-  name: 'Step',
+  name: 'MSteps',
   props: {
     icon: {
       type: String as PropType<string>
@@ -42,9 +42,14 @@ export default defineComponent({
       default: 0
     }
   },
-  setup() {
-    const instance = getCurrentInstance();
-    provide('steps', instance);
+  setup(props) {
+    const store = reactive({
+      size: props.size
+    })
+    provide('steps', store);
+    watch(() => props.size, size => {
+      store.size = size;
+    })
     return {};
   },
   render() {

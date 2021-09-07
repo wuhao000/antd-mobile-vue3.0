@@ -4,7 +4,7 @@ import {defineComponent, PropType} from 'vue';
 
 export default defineComponent({
   inheritAttrs: false,
-  name: 'FlexItem',
+  name: 'MFlexItem',
   props: {
     onClick: {},
     disabled: {
