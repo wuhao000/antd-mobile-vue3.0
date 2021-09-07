@@ -9,8 +9,8 @@
     "name": "wuhao"
   },
   "repository": {
-    "type": "github",
-    "url": "https://github.com/wuhao000/antd-mobile-vue3.0"
+    "type": "gitee",
+    "url": "https://gitee.com/wuhao000/antd-mobile-vue3.0.git"
   },
   "license": "Apache-2.0",
   "directories": {
