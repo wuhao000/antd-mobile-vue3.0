@@ -5,7 +5,7 @@ export const MIN_DATE = new Date(0, 0, 0, 0, 0);
 export const MAX_DATE = new Date(9999, 11, 31, 23, 59, 59);
 
 const TimePicker = defineComponent({
-  name: 'TimePicker',
+  name: 'MTimePicker',
   props: {
     locale: {type: Object as PropType<any>},
     prefixCls: String,

@@ -4,7 +4,7 @@ import {formComponentProps, useFormComponent} from '../../mixins/form-component'
 import Range from './index';
 
 const RangeItem = defineComponent({
-  name: 'MRangeItem',
+  name: 'RangeItem',
   props: {
     ...formComponentProps,
     title: {

@@ -4,7 +4,7 @@ import {IS_IOS} from '../../utils/exenv';
 import TouchFeedback from '../../vmc-feedback';
 
 const KeyboardItem = defineComponent({
-  name: 'KeyboardItem',
+  name: 'MKeyboardItem',
   props: {
     value: {type: [String, Number]},
     label: String,

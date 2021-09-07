@@ -3,7 +3,7 @@ import MProgress from './src';
 import './style';
 
 MProgress.install = (app: App) => {
-  app.component('MProgress', MProgress);
+  app.component(MProgress.name, MProgress);
 };
 
 export default MProgress;

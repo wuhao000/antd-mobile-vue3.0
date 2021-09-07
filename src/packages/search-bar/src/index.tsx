@@ -18,7 +18,7 @@ function clearNextFrameAction(nextFrameId: number) {
 }
 
 export default defineComponent({
-  name: 'MSearchBar',
+  name: 'SearchBar',
   props: {
     prefixCls: {
       type: String as PropType<string>,

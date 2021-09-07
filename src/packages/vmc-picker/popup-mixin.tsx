@@ -1,11 +1,13 @@
-import {unwrapFragment} from '../utils/vue';
 import {defineComponent, reactive, ref, VNode, watch} from 'vue';
+import {filterHTMLAttrs} from '../utils/dom';
 import {cloneVNodes, setListeners, setProps} from '../utils/vnode';
+import {unwrapFragment} from '../utils/vue';
 import {PopupPickerProps} from './popup-picker-types';
 
 export default function PopupMixin(getModal, newProps) {
   return defineComponent({
     name: 'PopupMixin',
+    inheritAttrs: false,
     props: {
       ...PopupPickerProps
     },
@@ -130,12 +132,10 @@ export default function PopupMixin(getModal, newProps) {
         hide: this.hide,
         onCancel: this.onCancel
       });
-      return (
-        <div style={props.wrapStyle}>
-          {children}
-          {modal}
-        </div>
-      );
+      return <>
+        {children}
+        {modal}
+      </>;
     }
   });
 }

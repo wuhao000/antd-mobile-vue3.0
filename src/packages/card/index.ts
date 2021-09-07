@@ -9,10 +9,10 @@ MCard.Body = Body;
 MCard.Header = Header;
 MCard.Footer = Footer;
 MCard.install = (app: App) => {
-  app.component('MCard', MCard);
-  app.component('MCardBody', MCard.Body);
-  app.component('MCardHeader', MCard.Header);
-  app.component('MCardFooter', MCard.Footer);
+  app.component(MCard.name, MCard);
+  app.component(Body.name, MCard.Body);
+  app.component(Header.name, MCard.Header);
+  app.component(Footer.name, MCard.Footer);
 };
 
 export default MCard;

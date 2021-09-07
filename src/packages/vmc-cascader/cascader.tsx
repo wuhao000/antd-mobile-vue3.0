@@ -4,7 +4,7 @@ import MultiPicker from '../vmc-picker/multi-picker';
 import RmcPicker from '../vmc-picker/picker';
 
 export default defineComponent({
-  name: 'Cascader',
+  name: 'MCascader',
   props: {
     onChange: {},
     onScrollChange: {},

@@ -5,7 +5,7 @@ import './style';
 const Plugin: any = MPullRefresh;
 
 Plugin.install = (app: App) => {
-  app.component('MPullRefresh', MPullRefresh);
+  app.component(MPullRefresh.name, MPullRefresh);
 };
 
 export default Plugin;

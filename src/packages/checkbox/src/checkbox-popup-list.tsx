@@ -116,6 +116,8 @@ export default defineComponent({
       }
     };
     return [<List.Item onClick={this.onClick}
+                       style={this.$attrs.style}
+                       class={this.$attrs.class}
                        touchFeedback={!this.isReadonly && !this.isDisabled}
                        required={this.required}
                        text={!!this.optionText}

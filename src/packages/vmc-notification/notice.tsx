@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import {defineComponent, PropType, ref, Ref} from 'vue';
 
 export default defineComponent({
-  name: 'Notice',
+  name: 'MNotice',
   props: {
     duration: {
       type: Number as PropType<number>

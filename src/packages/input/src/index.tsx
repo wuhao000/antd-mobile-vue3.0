@@ -1,4 +1,4 @@
-/* tslint:disable:jsx-no-multiline-js */
+import {renderLabel} from './utils';
 import classnames from 'classnames';
 import {defineComponent, getCurrentInstance, onBeforeUnmount, PropType, reactive, ref, watch} from 'vue';
 import List from '../../list';
@@ -19,7 +19,7 @@ function normalizeValue(value?: string) {
 }
 
 export default defineComponent({
-  name: 'InputItem',
+  name: 'MInputItem',
   props: {
     ...formComponentProps,
     onChange: {},
@@ -164,7 +164,7 @@ export default defineComponent({
             ctrlValue = `${ctrlValue.substr(0, 3)} ${ctrlValue.substr(3)}`;
           } else if (valueLen >= 8) {
             ctrlValue = `${ctrlValue.substr(0, 3)} ${ctrlValue.substr(3, 4)} ${ctrlValue.substr(
-              7
+                7
             )}`;
           }
           break;
@@ -296,8 +296,7 @@ export default defineComponent({
       isDisabled,
       currentValue,
       focus,
-      state,
-      renderLabel
+      state
     };
   },
   render() {
@@ -331,14 +330,14 @@ export default defineComponent({
     } = this;
 
     const wrapCls = classnames(
-      `${prefixListCls}-item`,
-      `${prefixCls}-item`,
-      `${prefixListCls}-item-middle`,
-      {
-        [`${prefixCls}-disabled`]: isDisabled,
-        [`${prefixCls}-focus`]: focus,
-        [`${prefixCls}-android`]: this.android
-      }
+        `${prefixListCls}-item`,
+        `${prefixCls}-item`,
+        `${prefixListCls}-item-middle`,
+        {
+          [`${prefixCls}-disabled`]: isDisabled,
+          [`${prefixCls}-focus`]: focus,
+          [`${prefixCls}-android`]: this.android
+        }
     );
 
     const controlCls = `${prefixCls}-control`;
@@ -369,54 +368,54 @@ export default defineComponent({
       control: () => {
         return <div class={controlCls}>
           {type === 'money' ? (
-            <CustomInput
-              {
-                ...{
-                  value: normalizeValue(currentValue),
-                  type,
-                  maxLength,
-                  placeholder,
-                  disabled: isDisabled,
-                  editable: !isReadonly,
-                  prefixCls,
-                  confirmLabel,
-                  backspaceLabel,
-                  cancelKeyboardLabel,
-                  moneyKeyboardAlign,
-                  moneyKeyboardWrapProps,
-                  moneyKeyboardHeader
-                }
-              }
-              onChange={this.onInputChange}
-              onFocus={this.onInputFocus}
-              onBlur={this.onInputBlur}
-              onConfirm={(v) => {
-                this.$emit('confirm', v);
-              }}
-              ref={this.setInputRef}
-            />
+              <CustomInput
+                  {
+                    ...{
+                      value: normalizeValue(currentValue),
+                      type,
+                      maxLength,
+                      placeholder,
+                      disabled: isDisabled,
+                      editable: !isReadonly,
+                      prefixCls,
+                      confirmLabel,
+                      backspaceLabel,
+                      cancelKeyboardLabel,
+                      moneyKeyboardAlign,
+                      moneyKeyboardWrapProps,
+                      moneyKeyboardHeader
+                    }
+                  }
+                  onChange={this.onInputChange}
+                  onFocus={this.onInputFocus}
+                  onBlur={this.onInputBlur}
+                  onConfirm={(v) => {
+                    this.$emit('confirm', v);
+                  }}
+                  ref={this.setInputRef}
+              />
           ) : (
-            <Input
-              {
-                ...{
-                  ...patternProps,
-                  value: normalizeValue(currentValue),
-                  defaultValue: this.defaultValue,
-                  textAlign: this.textAlign,
-                  type: inputType,
-                  maxLength,
-                  name,
-                  placeholder,
-                  readonly: isReadonly,
-                  disabled: isDisabled,
-                  onChange: this.onInputChange,
-                  onFocus: this.onInputFocus,
-                  onBlur: this.onInputBlur,
-                  class: classNameProp,
-                  ref: this.setInputRef
-                }
-              }
-            />
+              <Input
+                  {
+                    ...{
+                      ...patternProps,
+                      value: normalizeValue(currentValue),
+                      defaultValue: this.defaultValue,
+                      textAlign: this.textAlign,
+                      type: inputType,
+                      maxLength,
+                      name,
+                      placeholder,
+                      readonly: isReadonly,
+                      disabled: isDisabled,
+                      onChange: this.onInputChange,
+                      onFocus: this.onInputFocus,
+                      onBlur: this.onInputBlur,
+                      class: classNameProp,
+                      ref: this.setInputRef
+                    }
+                  }
+              />
           )}
         </div>;
       },
@@ -425,33 +424,32 @@ export default defineComponent({
         !isReadonly &&
         !isDisabled &&
         (currentValue && `${currentValue}`.length > 0) ? (
-          // @ts-ignore
-          <TouchFeedback activeClassName={`${prefixCls}-clear-active`}>
-            <div class={`${prefixCls}-clear`}
-                 onClick={this.clearInput}/>
-          </TouchFeedback>
+            // @ts-ignore
+            <TouchFeedback activeClassName={`${prefixCls}-clear-active`}>
+              <div class={`${prefixCls}-clear`}
+                   onClick={this.clearInput}/>
+            </TouchFeedback>
         ) : null;
       },
       extra: extra !== '' ? () => {
         return (
-          <div class={`${prefixCls}-extra`}
-               onClick={(e) => {
-                 this.$emit('extra-click', e);
-               }}>
-            {extra}
-          </div>
+            <div class={`${prefixCls}-extra`}
+                 onClick={(e) => {
+                   this.$emit('extra-click', e);
+                 }}>
+              {extra}
+            </div>
         );
       } : null
     };
     return (
-      <List.Item title={this.renderLabel()}
-                 required={this.required}
-                 error={this.error}
-                 errorMessage={this.errorMessage}
-                 errorDisplayType={this.errorDisplayType}
-                 v-slots={slots}
-                 class={wrapCls}>
-      </List.Item>
+        <List.Item title={renderLabel(this.$props, this.$slots)}
+                   required={this.required}
+                   error={this.error}
+                   errorMessage={this.errorMessage}
+                   errorDisplayType={this.errorDisplayType}
+                   v-slots={slots}
+                   class={wrapCls}/>
     );
   }
 });

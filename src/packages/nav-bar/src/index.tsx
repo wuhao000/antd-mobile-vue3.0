@@ -2,9 +2,9 @@ import classnames from 'classnames';
 import {defineComponent, PropType, VNode} from 'vue';
 import Icon from '../../icon';
 
-const NavBar = defineComponent({
+export default defineComponent({
   install: null,
-  name: 'NavBar',
+  name: 'MNavBar',
   props: {
     onLeftClick: {},
     prefixCls: {
@@ -60,5 +60,3 @@ const NavBar = defineComponent({
     );
   }
 });
-
-export default NavBar as any;

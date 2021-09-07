@@ -3,7 +3,7 @@ import {defineComponent, PropType} from 'vue';
 import TouchFeedback from '../../vmc-feedback';
 
 export default defineComponent({
-  name: 'PopoverItem',
+  name: 'MPopoverItem',
   props: {
     prefixCls: {
       type: String as PropType<string>,

@@ -6,8 +6,8 @@ import './style';
 Popover.Item = Item;
 
 Popover.install = (app: App) => {
-  app.component('MPopover', Popover);
-  app.component('MPopoverItem', Popover.Item);
+  app.component(Popover.name, Popover);
+  app.component(Item.name, Popover.Item);
 };
 
 export default Popover;

@@ -45,9 +45,9 @@ const DatePicker = defineComponent({
       let delta = initDelta;
       const onFinish = () => {
         if (delta > 40 && canLoadPrev()) {
-          genMonthData(state.months[0].firstDate, -1);
+          genMonthData(state.months[0].firstDate as any, -1);
 
-          visibleMonth.value = state.months.slice(0, props.initialMonths);
+          visibleMonth.value = state.months.slice(0, props.initialMonths) as any;
 
           state.months.forEach((m) => {
             m.updateLayout && m.updateLayout();

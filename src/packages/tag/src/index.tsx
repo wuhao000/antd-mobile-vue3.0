@@ -4,8 +4,8 @@ import Icon from '../../icon';
 import getDataAttr from '../../utils/get-data-attr';
 import TouchFeedback from '../../vmc-feedback';
 
-const Tag = defineComponent({
-  name: 'Tag',
+export default defineComponent({
+  name: 'MTag',
   props: {
     prefixCls: {
       type: String as PropType<string>,
@@ -99,5 +99,3 @@ const Tag = defineComponent({
     ) : null;
   }
 });
-
-export default Tag as any;

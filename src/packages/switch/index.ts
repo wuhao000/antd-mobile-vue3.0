@@ -5,8 +5,8 @@ import './style';
 
 MSwitch.Item = MSwitchItem;
 MSwitch.install = (app: App) => {
-  app.component('MSwitch', MSwitch);
-  app.component('MSwitchItem', MSwitchItem);
+  app.component(MSwitch.name, MSwitch);
+  app.component(MSwitchItem.name, MSwitchItem);
 };
 
 export default MSwitch;

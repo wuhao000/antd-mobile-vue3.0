@@ -12,26 +12,20 @@
     display: flex;
     min-height: @list-item-height;
     padding-left: @h-spacing-lg;
-    padding-right: @h-spacing-lg;
     .hairline('bottom');
     .@{listPrefixCls}-required {
-      min-height: 44px;
-      line-height: 44px;
-      &:before {
-        margin-top: 10px;
-      }
+      line-height: 34px;
     }
     .@{listPrefixCls}-content {
+      flex: initial;
       align-self: flex-start;
       color: #000;
-      text-align: left;
-      min-height: 44px;
       font-size: 17px;
-      line-height: 44px;
       margin-left: 0;
       margin-right: 5px;
-      white-space: nowrap;
       overflow: hidden;
+      text-align: left;
+      white-space: nowrap;
     }
 
     &.@{textareaPrefixCls}-item-single-line {
@@ -61,43 +55,41 @@
         }
       }
     }
-  }
-}
 
-.@{textareaPrefixCls}-label {
-  align-self: flex-start;
-  color: @color-text-base;
-  font-size: @font-size-heading;
-  line-height: @list-item-height;
-  margin-left: 0;
-  margin-right: @h-spacing-sm;
-  min-height: @list-item-height;
-  overflow: hidden;
-  text-align: left;
-  white-space: nowrap;
+    .@{textareaPrefixCls}-label {
+      color: @color-text-base;
+      font-size: @font-size-heading;
+      margin-left: 0;
+      margin-right: @h-spacing-sm;
+      overflow: hidden;
+      padding: 2 * @hd 0;
+      text-align: left;
+      white-space: nowrap;
 
-  &.@{textareaPrefixCls}-label-2 {
-    width: 2 * @input-label-width;
-  }
+      &.@{textareaPrefixCls}-label-2 {
+        width: 2 * @input-label-width;
+      }
 
-  &.@{textareaPrefixCls}-label-3 {
-    width: 3 * @input-label-width;
-  }
+      &.@{textareaPrefixCls}-label-3 {
+        width: 3 * @input-label-width;
+      }
 
-  &.@{textareaPrefixCls}-label-4 {
-    width: 4 * @input-label-width;
-  }
+      &.@{textareaPrefixCls}-label-4 {
+        width: 4 * @input-label-width;
+      }
 
-  &.@{textareaPrefixCls}-label-5 {
-    width: 5 * @input-label-width;
-  }
+      &.@{textareaPrefixCls}-label-5 {
+        width: 5 * @input-label-width;
+      }
 
-  &.@{textareaPrefixCls}-label-6 {
-    width: 6 * @input-label-width;
-  }
+      &.@{textareaPrefixCls}-label-6 {
+        width: 6 * @input-label-width;
+      }
 
-  &.@{textareaPrefixCls}-label-7 {
-    width: 7 * @input-label-width;
+      &.@{textareaPrefixCls}-label-7 {
+        width: 7 * @input-label-width;
+      }
+    }
   }
 }
 

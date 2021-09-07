@@ -6,7 +6,7 @@ import Marquee, {MarqueeProps} from './marquee';
 export default defineComponent({
   inheritAttrs: false,
   install: null,
-  name: 'NoticeBar',
+  name: 'MNoticeBar',
   props: {
     marqueeProps: {
       type: Object as PropType<MarqueeProps>

@@ -1,7 +1,7 @@
 import {defineComponent, PropType, ref, Ref, watch} from 'vue';
 
 const Input = defineComponent({
-  name: 'Input',
+  name: 'MInput',
   props: {
     value: {type: [String, Number] as PropType<string | number>},
     disabled: Boolean,

@@ -2,6 +2,7 @@
  * Created by wuhao on 2016/11/22.
  */
 import {DirectiveBinding, ObjectDirective, VNode} from 'vue';
+import moment from 'moment';
 
 const createContent = (el: HTMLElement, binding: DirectiveBinding, vnode: VNode) => {
   const bindValue = binding.value;

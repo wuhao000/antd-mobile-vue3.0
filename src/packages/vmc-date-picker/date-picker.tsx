@@ -90,7 +90,7 @@ export default defineComponent({
       }
       return date;
     };
-    const getDate = () => clipDate(state.value || getDefaultMinDate());
+    const getDate = () => clipDate(state.value || getDefaultMinDate() as any);
     const getDateData = (): DateDataCol[] => {
       const {locale, formatMonth, formatDay, mode} = props;
       const date = getDate();

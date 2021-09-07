@@ -3,7 +3,7 @@ import {defineComponent} from 'vue';
 
 export default defineComponent({
   install: null,
-  name: 'Accordion',
+  name: 'MAccordion',
   props: {
     onChange: {},
     prefixCls: {default: 'am-accordion'},

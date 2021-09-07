@@ -1,6 +1,6 @@
-import {filterHTMLAttrs} from '../../utils/dom';
 import classNames from 'classnames';
 import {defineComponent, PropType, Ref, ref, VNode} from 'vue';
+import {filterHTMLAttrs} from '../../utils/dom';
 
 export default defineComponent({
   install: null,
@@ -8,6 +8,7 @@ export default defineComponent({
   name: 'MList',
   props: {
     section: {type: Boolean, default: false},
+    sectionSize: {type: String, default: 'default'},
     prefixCls: {default: 'am-list'},
     role: {type: String},
     title: {type: [String, Object] as PropType<string | VNode>},
@@ -28,10 +29,10 @@ export default defineComponent({
     const fields: Ref<any[]> = ref([]);
     const clearValidate = (props = []) => {
       const localFields = props.length
-        ? (typeof props === 'string'
-            ? fields.value.filter(field => props === (field as any).prop)
-            : fields.value.filter(field => props.indexOf((field as any).prop) > -1)
-        ) : fields.value;
+          ? (typeof props === 'string'
+                  ? fields.value.filter(field => props === (field as any).prop)
+                  : fields.value.filter(field => props.indexOf((field as any).prop) > -1)
+          ) : fields.value;
       localFields.forEach(field => {
         (field as any).clearValidate();
       });
@@ -97,8 +98,6 @@ export default defineComponent({
         (field as any).validate('', cb);
       });
     };
-
-
     return {
       fields,
       clearValidate,
@@ -110,36 +109,22 @@ export default defineComponent({
   render() {
     const {prefixCls} = this;
     const wrapCls = classNames(prefixCls, {
-      [prefixCls + '-section']: this.section
+      [prefixCls + '-section']: this.section,
+      [`${prefixCls}-section-${this.sectionSize}`]: this.section
     }, this.$attrs.class);
-    const children = [];
-    if (this.$slots.default) {
-      this.$slots.default().forEach((it: VNode, index) => {
-        if (index < this.$slots.default().length - 1) {
-          if (this.section && it.props) {
-            if (it.props.style) {
-              it.props.style.marginBottom = `${this.spaceBetweenSection}px`;
-            } else {
-              it.props.style = {marginBottom: `${this.spaceBetweenSection}px`};
-            }
-          }
-        }
-        children.push(it);
-      });
-    }
     return (
-      <div {...filterHTMLAttrs(this.$attrs)}
-           class={wrapCls}>
-        {this.$slots.title || this.title ? <div class={classNames(`${prefixCls}-header`, {
-          [`${prefixCls}-required`]: this.required
-        })}>
-          {this.$slots.title?.() ?? this.title}
-        </div> : ''}
-        {children.length ? (
-          <div class={`${prefixCls}-body`}>{children}</div>
-        ) : null}
-        {this.$slots.footer ? this.$slots.footer() : null}
-      </div>
+        <div {...filterHTMLAttrs(this.$attrs)}
+             class={wrapCls}>
+          {this.$slots.title || this.title ? <div class={classNames(`${prefixCls}-header`, {
+            [`${prefixCls}-required`]: this.required
+          })}>
+            {this.$slots.title?.() ?? this.title}
+          </div> : ''}
+          {this.$slots.default ? (
+              <div class={`${prefixCls}-body`}>{this.$slots.default()}</div>
+          ) : null}
+          {this.$slots.footer ? this.$slots.footer() : null}
+        </div>
     );
   }
 });

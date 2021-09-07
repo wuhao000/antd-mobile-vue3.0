@@ -4,9 +4,9 @@ import RcSlider from 'ant-design-vue/es/vc-slider/src/Slider';
 import {defineComponent, PropType} from 'vue';
 import {formComponentProps, useFormComponent} from '../../mixins/form-component';
 
-const Slider = defineComponent({
+export default defineComponent({
   install: null,
-  name: 'Slider',
+  name: 'MSlider',
   props: {
     ...formComponentProps,
     prefixCls: {
@@ -58,4 +58,3 @@ const Slider = defineComponent({
   }
 });
 
-export default Slider as any;

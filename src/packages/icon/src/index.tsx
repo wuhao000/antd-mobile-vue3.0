@@ -35,7 +35,6 @@ const Icon = defineComponent({
       style.width = this.size + 'px';
       style.height = this.size + 'px';
     }
-    console.log(typeof type);
     if (typeof type === 'function' || isVNode(type)) {
       const IconComponent = type as any;
       return <IconComponent class={cls} style={style}/>;

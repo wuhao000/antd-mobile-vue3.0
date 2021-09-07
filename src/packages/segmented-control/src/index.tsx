@@ -2,9 +2,9 @@ import classnames from 'classnames';
 import {defineComponent, PropType, reactive, watch} from 'vue';
 import TouchFeedback from '../../vmc-feedback';
 
-const SegmentedControl = defineComponent({
+export default defineComponent({
   install: null,
-  name: 'SegmentedControl',
+  name: 'MSegmentedControl',
   props: {
     prefixCls: {
       type: String as PropType<string>,
@@ -108,5 +108,3 @@ const SegmentedControl = defineComponent({
     );
   }
 });
-
-export default SegmentedControl as any;

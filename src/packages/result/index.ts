@@ -3,7 +3,7 @@ import MResult from './src';
 import './style';
 
 MResult.install = (app: App) => {
-  app.component('MResult', MResult);
+  app.component(MResult.name, MResult);
 };
 
 export default MResult;

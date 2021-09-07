@@ -4,6 +4,7 @@ import {useBaseInputComponent} from '../../mixins/base-input-component';
 import {pureInputComponentProps} from '../../mixins/pure-input-component';
 import {simpleFormComponentProps} from '../../mixins/simple-form-component';
 import Calendar from './index';
+import moment from 'moment';
 
 const MIN_DATE = new Date(2000, 1, 1, 0, 0, 0);
 const MAX_DATE = new Date(new Date().getFullYear() + 10, 12, 31, 23, 59, 59);

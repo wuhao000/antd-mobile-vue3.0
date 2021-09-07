@@ -7,7 +7,7 @@ import Switch from './switch';
 const ListItem = List.Item as any;
 
 const switchItem = defineComponent({
-  name: 'SwitchItem',
+  name: 'MSwitchItem',
   props: {
     ...formComponentProps,
     prefixCls: {

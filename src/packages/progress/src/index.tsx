@@ -1,9 +1,9 @@
 import classnames from 'classnames';
 import {defineComponent, onMounted, PropType, ref, Ref} from 'vue';
 
-const Progress = defineComponent({
+export default defineComponent({
   install: null,
-  name: 'Progress',
+  name: 'MProgress',
   props: {
     prefixCls: {
       type: String as PropType<string>,
@@ -86,5 +86,3 @@ const Progress = defineComponent({
     );
   }
 });
-
-export default Progress;

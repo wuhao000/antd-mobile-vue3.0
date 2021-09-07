@@ -1,6 +1,6 @@
 {
   "name": "antd-mobile-vue-next",
-  "version": "0.0.1-48",
+  "version": "0.0.1-52",
   "description": "基于Vue 3.0、vite2.0 移植的ant-design-mobile组件库",
   "main": "es/index.js",
   "keyword": "antd antd-mobile vue vue3 vite antd-mobile-vue",
@@ -9,8 +9,8 @@
     "name": "wuhao"
   },
   "repository": {
-    "type": "gitee",
-    "url": "https://gitee.com/wuhao000/antd-mobile-vue3.0.git"
+    "type": "github",
+    "url": "https://github.com/wuhao000/antd-mobile-vue3.0"
   },
   "license": "Apache-2.0",
   "directories": {
@@ -25,9 +25,9 @@
     "lint": "vue-cli-service lint",
     "lib": "npm run docs && vue-cli-service build --target lib --name antdm --dest lib src/packages/index.ts",
     "remove": "tsc -p build && node build/remove.js && npm run docs",
-    "publish": "npm run docs",
     "cdn": "tsc -p build && npm run lib && node build/cdn.js",
-    "build:components": "npm run docs && node compile/build-components.js"
+    "compile": "npm run docs && node compile/build-components.js",
+    "release": "npm run compile && npm publish"
   },
   "files": [
     "README.md",
@@ -45,7 +45,7 @@
   "dependencies": {
     "@antv/f2": "^3.7.7",
     "@vant/use": "^0.0.2",
-    "ant-design-vue": "2.2.1",
+    "ant-design-vue": "2.2.6",
     "async-validator": "^4.0.1",
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
@@ -65,7 +65,7 @@
     "rollup-plugin-typescript2": "^0.30.0",
     "shallowequal": "^1.1.0",
     "uuid": "^3.3.2",
-    "vue": "^3.2.1",
+    "vue": "^3.2.8",
     "vue-clipboard2": "^0.3.1",
     "vue-router": "^4.0.5",
     "vuex": "^4.0.0",
@@ -92,7 +92,7 @@
     "@vue/cli-plugin-typescript": "^4.5.4",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.2.1",
+    "@vue/compiler-sfc": "^3.2.8",
     "add-dom-event-listener": "^1.1.0",
     "antd-mobile-demo-data": "^0.3.0",
     "array-tree-filter": "^2.1.0",

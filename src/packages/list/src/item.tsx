@@ -7,7 +7,7 @@ import {isEmptySlot} from '../../utils/vnode';
 import TouchFeedback from '../../vmc-feedback';
 
 export const Brief = defineComponent({
-  name: 'Brief',
+  name: 'MListItemBrief',
   props: {
     prefixCls: {},
     role: {}
@@ -23,7 +23,7 @@ export const Brief = defineComponent({
 
 const Item = defineComponent({
   inheritAttrs: false,
-  name: 'ListItem',
+  name: 'MListItem',
   props: {
     onClick: {},
     text: {

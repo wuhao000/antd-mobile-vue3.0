@@ -1,3 +1,4 @@
+import {renderLabel} from '../../input/src/utils';
 import classnames from 'classnames';
 import {defineComponent, onBeforeUnmount, onMounted, onUpdated, PropType, reactive, ref, Ref, VNode, watch} from 'vue';
 import List from '../../list';
@@ -55,7 +56,7 @@ export default defineComponent({
     },
     autoHeight: {
       type: Boolean as PropType<boolean>,
-      default: false
+      default: true
     },
     labelNumber: {
       type: Number as PropType<number>,
@@ -138,9 +139,7 @@ export default defineComponent({
       }
     });
     return {
-      setTextareaRef(el) {
-        textareaRef.value = el;
-      }, state, isDisabled, isReadonly,
+      textareaRef, state, isDisabled, isReadonly,
       onInput, onChange, onBlur, onFocus, clearInput,
       focus
     };
@@ -186,10 +185,10 @@ export default defineComponent({
       }
     }
     const slots = {
-      extra: () => {
+      control: () => {
         return <div class={`${prefixCls}-control`}>
           <textarea
-            ref={this.setTextareaRef}
+            ref="textareaRef"
             {...lengthCtrlProps}
             rows={this.rows}
             disabled={this.isDisabled}
@@ -227,7 +226,9 @@ export default defineComponent({
                  required={this.required}
                  disabled={this.isDisabled}
                  v-slots={slots}
-                 title={title}/>
+                 title={
+                   renderLabel(this.$props, this.$slots)
+                 }/>
     );
   }
 });

@@ -3,7 +3,7 @@ import {useBaseCalendar} from './calendar-base';
 import CalendarProps from './calendar-props';
 
 const CalendarView = defineComponent({
-  name: 'CalendarView',
+  name: 'MCalendarView',
   props: {
     ...CalendarProps
   },

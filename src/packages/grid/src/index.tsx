@@ -14,7 +14,7 @@ interface DataItem {
 }
 
 export default defineComponent({
-  name: 'Grid',
+  name: 'MGrid',
   props: {
     onClick: {},
     /**

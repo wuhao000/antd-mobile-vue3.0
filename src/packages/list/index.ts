@@ -6,9 +6,9 @@ import './style';
 Item.Brief = Brief;
 MList.Item = Item;
 MList.install = (app: App) => {
-  app.component('MList', MList);
-  app.component('MListItem', MList.Item);
-  app.component('MListItemBrief', MList.Item.Brief);
+  app.component(MList.name, MList);
+  app.component(MList.Item.name, MList.Item);
+  app.component(MList.Item.Brief.name, MList.Item.Brief);
 };
 
 export default MList;

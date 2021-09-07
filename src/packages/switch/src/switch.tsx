@@ -2,7 +2,7 @@ import {formComponentProps, useFormComponent} from '../../mixins/form-component'
 import classnames from 'classnames';
 import {defineComponent, PropType} from 'vue';
 
-const Switch = defineComponent({
+export default defineComponent({
   name: 'MSwitch',
   props: {
     ...formComponentProps,
@@ -97,5 +97,3 @@ const Switch = defineComponent({
     );
   }
 });
-
-export default Switch as any;

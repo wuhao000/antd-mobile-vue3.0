@@ -3,7 +3,7 @@ import MSegmentedControl from './src';
 import './style';
 
 MSegmentedControl.install = (app: App) => {
-  app.component('MSegmentedControl', MSegmentedControl);
+  app.component(MSegmentedControl.name, MSegmentedControl);
 };
 
 export default MSegmentedControl;

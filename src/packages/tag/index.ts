@@ -3,7 +3,7 @@ import MTag from './src';
 import './style';
 
 MTag.install = (app: App) => {
-  app.component('MTag', MTag);
+  app.component(MTag.name, MTag);
 };
 
 export default MTag;

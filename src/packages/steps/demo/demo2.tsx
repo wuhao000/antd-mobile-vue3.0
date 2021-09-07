@@ -27,8 +27,7 @@ const customIcon = () => (
 export default defineComponent({
   render() {
     return (
-      <WingBlank
-        class="stepsExample">
+      <WingBlank mode={20} class="stepsExample">
         <div class="sub-title">Horizontal small size</div>
         <WhiteSpace />
         <Steps current={1} direction="horizontal" size="small">{

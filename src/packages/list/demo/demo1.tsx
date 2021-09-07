@@ -2,8 +2,6 @@ import {defineComponent, reactive, ref, Ref} from 'vue';
 import {List} from '../../index';
 import './index1.less';
 
-const Item = List.Item;
-
 const options = [{
   label: '选项1', value: 1
 }, {
@@ -46,10 +44,21 @@ export default defineComponent({
         <m-switch-item title="只读" v-model={this.state.readonly}/>
         <m-switch-item title="错误状态" v-model={this.state.error}/>
       </List>
-      <List title="表单" disabled={this.state.disabled}
+      <List title="表单"
+            section
+            disabled={this.state.disabled}
             editable={!this.state.readonly}>
         <m-input required title="输入框" error={this.state.error} errorDisplayType={this.state.errorDisplayType}
                  errorMessage={this.state.errorMessage}/>
+        <m-textarea required title="长文本"
+                    error={this.state.error}
+                    errorDisplayType={this.state.errorDisplayType}
+                    errorMessage={this.state.errorMessage}/>
+        <m-textarea required title="长文本"
+                    value="这是一大段文字，这是一大段文字，这是一大段文字，这是一大段文字，这是一大段文字，这是一大段文字，这是一大段文字, 这是结束的地方"
+                    error={this.state.error}
+                    errorDisplayType={this.state.errorDisplayType}
+                    errorMessage={this.state.errorMessage}/>
         <m-input title="数字"
                  type="number" error={this.state.error} errorDisplayType={this.state.errorDisplayType}
                  errorMessage={this.state.errorMessage}/>
@@ -76,11 +85,6 @@ export default defineComponent({
                                errorDisplayType={this.state.errorDisplayType} errorMessage={this.state.errorMessage}/>
         <m-switch-item title="开关" v-model={this.state.switch} error={this.state.error}
                        errorDisplayType={this.state.errorDisplayType} errorMessage={this.state.errorMessage}/>
-        <m-textarea required rows={5} title="长文本"
-                    value="这是一大段文字，这是一大段文字，这是一大段文字，这是一大段文字，这是一大段文字，这是一大段文字，这是一大段文字"
-                    error={this.state.error}
-                    errorDisplayType={this.state.errorDisplayType}
-                    errorMessage={this.state.errorMessage}/>
         <m-slider-item title="滑动输入条" v-model={this.state.slider} error={this.state.error}
                        errorDisplayType={this.state.errorDisplayType} errorMessage={this.state.errorMessage}/>
         <m-radio-list required title="单选" options={options} error={this.state.error}

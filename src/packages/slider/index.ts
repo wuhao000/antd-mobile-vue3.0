@@ -5,7 +5,7 @@ import './style';
 
 Slider.Item = Item;
 Slider.install = (app: App) => {
-  app.component('MSlider', Slider);
-  app.component('MSliderItem', Slider.Item);
+  app.component(Slider.name, Slider);
+  app.component(Item.name, Slider.Item);
 };
 export default Slider;

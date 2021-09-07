@@ -5,7 +5,7 @@ import Slider from './index';
 
 export default defineComponent({
   install: null,
-  name: 'SliderItem',
+  name: 'MSliderItem',
   props: {
     ...formComponentProps,
     prefixCls: {

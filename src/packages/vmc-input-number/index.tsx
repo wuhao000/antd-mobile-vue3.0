@@ -11,7 +11,7 @@ function preventDefault(e: any) {
 }
 
 const InputNumber = defineComponent({
-  name: 'InputNumber',
+  name: 'MInputNumber',
   props: {
     ...baseComponentProps,
     valueEditable: {

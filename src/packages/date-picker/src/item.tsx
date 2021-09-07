@@ -6,6 +6,7 @@ import DatePicker from './index';
 
 export default defineComponent({
   name: 'MDatePickerItem',
+  inheritAttrs: false,
   props: {
     ...formComponentProps,
     title: {

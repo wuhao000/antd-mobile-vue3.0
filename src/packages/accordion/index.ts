@@ -6,7 +6,7 @@ import './style';
 MAccordion.Panel = RcCollapse.Panel;
 
 MAccordion.install = (app: App) => {
-  app.component('MAccordion', MAccordion);
+  app.component(MAccordion.name, MAccordion);
   app.component('MAccordionPanel', MAccordion.Panel);
 };
 

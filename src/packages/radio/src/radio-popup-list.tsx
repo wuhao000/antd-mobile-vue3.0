@@ -81,12 +81,14 @@ export default defineComponent({
       default: () => <span>{title}</span>
     };
     return <>
-    <List.Item onClick={onClick}
-               text={!!optionText}
-               required={this.required}
-               touchFeedback={!readOnly && !disabled}
-               disabled={isDisabled}
-               v-slots={slots}/>
+      <List.Item onClick={onClick}
+                 text={!!optionText}
+                 style={this.$attrs.style}
+                 class={this.$attrs.class}
+                 required={this.required}
+                 touchFeedback={!readOnly && !disabled}
+                 disabled={isDisabled}
+                 v-slots={slots}/>
       <Popup visible={isDisabled ? false : this.popupVisible}
              showCancel={clearable}
              cancelButton={cancelButton}

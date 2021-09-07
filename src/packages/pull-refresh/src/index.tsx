@@ -50,7 +50,7 @@ type ICurrSt = 'activate' | 'deactivate' | 'release' | 'finish';
 
 export default defineComponent({
   inheritAttrs: false,
-  name: 'PullToRefresh',
+  name: 'MPullRefresh',
   props: {
     activateText: {
       type: String as PropType<string>,
