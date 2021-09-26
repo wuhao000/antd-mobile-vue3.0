@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import {defineComponent, getCurrentInstance, PropType, provide, reactive, VNode, watch} from 'vue';
+import {defineComponent, onMounted, PropType, provide, reactive, VNode, watch} from 'vue';
 import {filterHTMLAttrs} from '../../utils/dom';
 import {unwrapFragment} from '../../utils/vue';
 
@@ -7,7 +7,7 @@ export default defineComponent({
   name: 'MSteps',
   props: {
     icon: {
-      type: String as PropType<string>
+      type: [String, Object] as PropType<string | object>
     },
     prefixCls: {
       type: String as PropType<string>,
@@ -30,8 +30,8 @@ export default defineComponent({
       default: 'process'
     },
     size: {
-      type: String as PropType<string>,
-      default: ''
+      type: String as PropType<'small' | 'default'>,
+      default: 'small'
     },
     progressDot: {
       type: Boolean as PropType<boolean | any>,
@@ -42,28 +42,24 @@ export default defineComponent({
       default: 0
     }
   },
-  setup(props) {
-    const store = reactive({
-      size: props.size
-    })
-    provide('steps', store);
-    watch(() => props.size, size => {
-      store.size = size;
-    })
-    return {};
-  },
   render() {
     const {
       prefixCls, direction,
       labelPlacement, iconPrefix, status, size, current, progressDot
     } = this.$props;
-    const adjustedlabelPlacement = !!progressDot ? 'vertical' : labelPlacement;
+    const adjustedLabelPlacement = !!progressDot ? 'vertical' : labelPlacement;
     const classString = classNames(prefixCls, `${prefixCls}-${direction}`, {
       [`${prefixCls}-${size}`]: size,
-      [`${prefixCls}-label-${adjustedlabelPlacement}`]: direction === 'horizontal',
+      [`${prefixCls}-label-${adjustedLabelPlacement}`]: direction === 'horizontal',
       [`${prefixCls}-dot`]: !!progressDot
     });
-    const content = unwrapFragment(this.$slots.default()).map((child: VNode, index) => {
+    const children = unwrapFragment(this.$slots.default?.())
+    if (!children) {
+      return (
+        <div class={classString} {...filterHTMLAttrs(this.$attrs)}/>
+      );
+    }
+    const content = children.map((child: VNode, index) => {
       if (!child) {
         return null;
       }
@@ -71,10 +67,10 @@ export default defineComponent({
         stepNumber: index + 1,
         prefixCls,
         iconPrefix,
-        icon: child.props.icon || '',
+        icon: child.props?.icon || '',
         wrapperStyle: {},
         progressDot,
-        status: child.props.status || '',
+        status: child.props?.status || '',
         class: ''
       };
       let icon: any = childProps.icon;
@@ -87,8 +83,7 @@ export default defineComponent({
           icon = 'ellipsis';
           childProps.class = 'ellipsis-item';
         }
-        if ((status === 'error' && index === current)
-            || child.props.status === 'error') {
+        if ((status === 'error' && index === current) || child.props?.status === 'error') {
           icon = 'cross-circle-o';
         }
       }
@@ -99,7 +94,7 @@ export default defineComponent({
       if (status === 'error' && index === current! - 1) {
         childProps.class = `${prefixCls}-next-error`;
       }
-      if (!child.props.status) {
+      if (!child.props?.status) {
         if (index === current) {
           childProps.status = status;
         } else if (index < current!) {
@@ -108,15 +103,19 @@ export default defineComponent({
           childProps.status = 'wait';
         }
       }
-      Object.keys(childProps).forEach(key => {
-        child.props[key] = childProps[key];
-      });
+      if (child.props) {
+        Object.keys(childProps).forEach(key => {
+          child.props[key] = childProps[key];
+        });
+      } else {
+        child.props = childProps;
+      }
       return child;
     });
     return (
-        <div class={classString} {...filterHTMLAttrs(this.$attrs)}>
-          {content}
-        </div>
+      <div class={classString} {...filterHTMLAttrs(this.$attrs)}>
+        {content}
+      </div>
     );
   }
 });

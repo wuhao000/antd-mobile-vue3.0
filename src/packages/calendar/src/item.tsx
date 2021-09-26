@@ -1,4 +1,4 @@
-import {computed, defineComponent, PropType, Ref, ref, watch} from 'vue';
+import {computed, defineComponent, inject, PropType, Ref, ref, watch} from 'vue';
 import List from '../../list';
 import {useBaseInputComponent} from '../../mixins/base-input-component';
 import {pureInputComponentProps} from '../../mixins/pure-input-component';
@@ -29,11 +29,12 @@ export default defineComponent({
     placeholder: {type: String}
   },
   setup(props, {emit, attrs, slots}) {
+    const form = inject('list', undefined);
     const {getDefaultSlot, slots: inputSlots, cssStyle, listeners, props: inputProps} = useBaseInputComponent(props, {
       emit,
       attrs,
       slots
-    });
+    }, form);
     const currentValue: Ref<Date[]> = ref([]);
     const visible: Ref<boolean> = ref(false);
     watch(() => props.value, (value: any) => {

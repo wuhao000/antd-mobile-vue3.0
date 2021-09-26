@@ -27,17 +27,13 @@ const customIcon = () => (
 export default defineComponent({
   render() {
     return (
-      <WingBlank mode={20} class="stepsExample">
+      <WingBlank class="stepsExample">
         <div class="sub-title">Horizontal small size</div>
         <WhiteSpace />
-        <Steps current={1} direction="horizontal" size="small">{
-          steps.map(it => <Step {...it}/>)
-        }</Steps>
+        <Steps current={1} direction="horizontal" size="small">{steps}</Steps>
         <div class="sub-title">Horizontal default size</div>
         <WhiteSpace />
-        <Steps current={1} direction="horizontal">{
-          steps.map(it => <Step {...it}/>)
-        }</Steps>
+        <Steps current={1} direction="horizontal">{steps}</Steps>
         <div class="sub-title">Horizontal customized icon</div>
         <WhiteSpace />
         <Steps direction="horizontal">

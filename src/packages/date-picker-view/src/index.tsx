@@ -1,3 +1,3 @@
 import {getDatePicker} from '../../date-picker/src';
 
-export default getDatePicker(true);
+export default getDatePicker(true, 'MDatePickerView');

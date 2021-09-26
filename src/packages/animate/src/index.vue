@@ -8,8 +8,6 @@
   export default defineComponent({
     name: 'MAnimate',
     setup(props, {emit, slots}) {
-
-
       return {};
     }
   });

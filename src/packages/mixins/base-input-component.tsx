@@ -2,14 +2,14 @@ import {useSimpleFormComponent} from './simple-form-component';
 import {computed} from 'vue';
 import {usePureInputComponent} from './pure-input-component';
 
-export const useBaseInputComponent = (props, {emit, attrs, slots}, options: {
+export const useBaseInputComponent = (props, {emit, attrs, slots}, form, options: {
   defaultValue: any,
   propName: string
 } = {
   defaultValue: undefined,
   propName: 'value'
 }) => {
-  const {isReadonly, componentSize, isDisabled} = useSimpleFormComponent(props);
+  const {isReadonly, componentSize, isDisabled} = useSimpleFormComponent(props, form);
   const {getSlotProps, cssStyle, listeners, getDefaultSlot, getProps, stateValue} = usePureInputComponent(props, {
     emit,
     attrs

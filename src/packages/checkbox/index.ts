@@ -15,9 +15,9 @@ MCheckbox.PopupList = MCheckboxPopupList;
 MCheckbox.install = (app: App) => {
   app.component(MCheckbox.name, MCheckbox);
   app.component(MCheckboxList.name, MCheckboxList);
-  app.component('MCheckboxItem', MCheckbox.CheckboxItem);
-  app.component('MAgreeItem', MCheckbox.AgreeItem);
-  app.component('MCheckboxPopupList', MCheckboxPopupList);
+  app.component(CheckboxItem.name, MCheckbox.CheckboxItem);
+  app.component(AgreeItem.name, MCheckbox.AgreeItem);
+  app.component(MCheckboxPopupList.name, MCheckboxPopupList);
 };
 
 export default MCheckbox;

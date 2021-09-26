@@ -3,6 +3,6 @@ import ImagePicker from './src';
 import './style';
 
 ImagePicker.install = (app: App) => {
-  app.component('MImagePicker', ImagePicker);
+  app.component(ImagePicker.name, ImagePicker);
 };
 export default ImagePicker;

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import {computed, defineComponent, inject, isVNode, PropType} from 'vue';
+import {computed, defineComponent, getCurrentInstance, inject, isVNode, PropType} from 'vue';
 import Icon from '../../icon';
 
 function isString(str) {
@@ -33,7 +33,7 @@ export default defineComponent({
      * 图标类型，仅支持的图标名称
      */
     icon: {
-      type: String as PropType<string>
+      type: [String, Object] as PropType<string | object>
     },
     adjustMarginRight: {
       type: [Number, String] as PropType<number | string>
@@ -50,10 +50,9 @@ export default defineComponent({
     progressDot: {}
   },
   setup(props, {slots}) {
-    const steps: any = inject('steps');
-
+    const instance = getCurrentInstance();
     const iconSize = computed(() => {
-      if (steps.size === 'small') {
+      if (instance.parent.props.size === 'small') {
         return 18;
       } else {
         return 22;
@@ -82,7 +81,7 @@ export default defineComponent({
       if (progressDot) {
         if (typeof progressDot === 'function') {
           iconNode = (
-              <span class={`${prefixCls}-icon`}>
+            <span class={`${prefixCls}-icon`}>
                 {progressDot(iconDot, {index: stepNumber! - 1, status, title, description})}
               </span>
           );
@@ -117,9 +116,9 @@ export default defineComponent({
     } = this.$props;
 
     const classString = classNames(
-        `${prefixCls}-item`,
-        `${prefixCls}-item-${status}`,
-        {[`${prefixCls}-item-custom`]: icon}
+      `${prefixCls}-item`,
+      `${prefixCls}-item-${status}`,
+      {[`${prefixCls}-item-custom`]: icon}
     );
     const stepItemStyle: any = {};
     if (itemWidth) {

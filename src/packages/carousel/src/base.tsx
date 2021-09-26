@@ -545,11 +545,7 @@ const CarouselBase = defineComponent({
       }
     };
     const startAutoplay = () => {
-      if (childrenCount() <= 1) {
-        return;
-      }
-      autoplayID.value = setInterval(autoplayIterator,
-        props.autoplayInterval);
+      autoplayID.value = setInterval(autoplayIterator, props.autoplayInterval);
     };
     const resetAutoplayFun = () => {
       if (props.resetAutoplay && props.autoplay && !autoplayPaused.value) {  // by warmhug
@@ -970,9 +966,6 @@ const CarouselBase = defineComponent({
         }
       }
     };
-    {
-      setInitialDimensions();
-    }
     onMounted(() => {
       setDimensions();
       bindEvents();

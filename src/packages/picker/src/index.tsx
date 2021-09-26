@@ -9,7 +9,7 @@ import {PickerData} from './props-type';
 
 export const PickerMixin = (isView) => {
   return defineComponent({
-    name: 'Picker',
+    name: 'MPicker',
     props: {
       placeholder: {
         type: String as PropType<string>,

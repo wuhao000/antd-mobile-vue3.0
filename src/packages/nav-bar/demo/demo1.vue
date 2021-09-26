@@ -37,7 +37,9 @@ export default defineComponent({
     const onLeftClick = () => {
       console.log('left click');
     };
-    return {};
+    return {
+      onLeftClick
+    };
   }
 });
 

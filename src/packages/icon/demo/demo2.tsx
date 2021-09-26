@@ -10,7 +10,7 @@ export default defineComponent({
       text: item
     }));
     return (
-      <Grid data={data} cols={5} activeStyle={false} />
+      <Grid data={data} cols={5} />
     );
   }
 });

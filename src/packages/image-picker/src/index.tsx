@@ -54,7 +54,7 @@ function isImage(image: any) {
 
 export default defineComponent({
   install: null,
-  name: 'ImagePicker',
+  name: 'MImagePicker',
   props: {
     onChange: {},
     onImageClick: {},

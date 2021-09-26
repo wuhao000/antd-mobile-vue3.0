@@ -1,4 +1,4 @@
-import {defineComponent, PropType, ref} from 'vue';
+import {defineComponent, inject, PropType, ref} from 'vue';
 import List from '../../list';
 import {useBaseInputComponent} from '../../mixins/base-input-component';
 import {formComponentProps} from '../../mixins/form-component';
@@ -14,7 +14,8 @@ export default defineComponent({
     }
   },
   setup(props, {emit, slots, attrs}) {
-    const {stateValue, isDisabled, cssStyle, isReadonly} = useBaseInputComponent(props, {emit, slots, attrs});
+    const form = inject('list', undefined);
+    const {stateValue, isDisabled, cssStyle, isReadonly} = useBaseInputComponent(props, {emit, slots, attrs}, form);
     const localVisible = ref(false);
     return {stateValue, localVisible, isDisabled, isReadonly, cssStyle};
   },

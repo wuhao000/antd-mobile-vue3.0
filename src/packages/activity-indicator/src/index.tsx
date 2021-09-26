@@ -3,7 +3,7 @@ import {defineComponent} from 'vue';
 
 export default defineComponent({
   install: null,
-  name: 'ActivityIndicator',
+  name: 'MActivityIndicator',
   props: {
     prefixCls: {
       type: String,

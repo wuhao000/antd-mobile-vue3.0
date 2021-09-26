@@ -20,7 +20,7 @@ export const optionsBasedComponentProps = {
    */
   options: {type: Array}
 };
-export const useOptionsBaseComponent = (props, {emit, attrs, slots}, options: {
+export const useOptionsBaseComponent = (props, {emit, attrs, slots}, form, options: {
   defaultValue: any,
   propName: string
 } = {
@@ -28,7 +28,7 @@ export const useOptionsBaseComponent = (props, {emit, attrs, slots}, options: {
   propName: 'value'
 }) => {
   const {isDisabled, stateValue, isReadonly} =
-    useBaseInputComponent(props, {emit, attrs, slots}, options);
+    useBaseInputComponent(props, {emit, attrs, slots}, form, options);
   const searchKeyword: Ref<string> = ref('');
   const getOptions = () => {
     return getResolvedOptions(props.options);

@@ -6,9 +6,13 @@
 </template>
 <script lang="ts">
   import {defineComponent, Ref, ref} from 'vue';
+  import SearchBar from '../index';
 
   export default defineComponent({
     name: 'Demo1',
+    components: {
+      MSearchBar: SearchBar
+    },
     setup(props, {emit, slots}) {
       const value: Ref<string> = ref('');
       return {

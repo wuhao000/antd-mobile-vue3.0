@@ -3,7 +3,7 @@ import RmcDrawer from '../../vmc-drawer';
 
 const Drawer = defineComponent({
   install: null,
-  name: 'Drawer',
+  name: 'MDrawer',
   props: {
     /**
      * 抽屉内容容器样式

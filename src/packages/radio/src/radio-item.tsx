@@ -26,6 +26,7 @@ export default defineComponent({
       default: false
     }
   },
+  emits: ['change', 'click'],
   setup(props, {emit}) {
     const onChange = (value: boolean) => {
       emit('change', value);

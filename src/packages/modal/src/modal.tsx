@@ -4,13 +4,13 @@ import {defineComponent, PropType, reactive, ref, Ref, watch} from 'vue';
 import TouchFeedback from '../../vmc-feedback';
 import {Action} from './props-type';
 
-const Modal = defineComponent({
+export default defineComponent({
   alert: null,
   confirm: null,
   prompt: null,
   operation: null,
   install: null,
-  name: 'Modal',
+  name: 'MModal',
   props: {
     prefixCls: {
       default: 'am-modal'
@@ -194,5 +194,3 @@ const Modal = defineComponent({
     );
   }
 });
-
-export default Modal as any;

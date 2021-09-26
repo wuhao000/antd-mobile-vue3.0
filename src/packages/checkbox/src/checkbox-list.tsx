@@ -1,4 +1,4 @@
-import {defineComponent, getCurrentInstance, onMounted, PropType, watch} from 'vue';
+import {defineComponent, getCurrentInstance, inject, onMounted, PropType, watch} from 'vue';
 import List from '../../list';
 import {optionsBasedComponentProps, useOptionsBaseComponent} from '../../mixins/options-based-component';
 import CheckboxItem from './checkbox-item';
@@ -18,7 +18,8 @@ export default defineComponent({
     }
   },
   setup(props, {emit, slots, attrs}) {
-    const {getOptions, stateValue, isDisabled} = useOptionsBaseComponent(props, {emit, attrs, slots}, {
+    const form = inject('list', undefined);
+    const {getOptions, stateValue, isDisabled} = useOptionsBaseComponent(props, {emit, attrs, slots}, form, {
       defaultValue: [],
       propName: 'value'
     });

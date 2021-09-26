@@ -1,7 +1,8 @@
-import {computed, defineComponent, PropType, ref, Ref, VNode, watch} from 'vue';
+import {computed, defineComponent, inject, PropType, ref, Ref, VNode, watch} from 'vue';
 import List from '../../list';
 import {optionsBasedComponentProps, useOptionsBaseComponent} from '../../mixins/options-based-component';
 import Popup from '../../popup';
+import SearchBar from '../../search-bar/src/index';
 import CheckboxList from './checkbox-list';
 
 export default defineComponent({
@@ -32,11 +33,12 @@ export default defineComponent({
     }
   },
   setup(props, {emit, slots, attrs}) {
+    const form = inject('list', undefined);
     const {getOptions, searchKeyword, isReadonly, stateValue, isDisabled} = useOptionsBaseComponent(props, {
       emit,
       slots,
       attrs
-    });
+    }, form);
     const popupVisible: Ref<boolean> = ref(props.visible);
     watch(() => props.visible, (visible: boolean) => {
       popupVisible.value = visible;
@@ -83,11 +85,13 @@ export default defineComponent({
       popupVisible.value = false;
     };
     const renderSearch = () => {
-      return props.searchable ? <m-search-bar
-          value={searchKeyword.value}
-          onInput={(v) => {
+      return props.searchable ? <SearchBar
+        value={searchKeyword.value}
+        {...{
+          ['onUpdate:value']: (v) => {
             searchKeyword.value = v;
-          }}/> : null;
+          }
+        }}/> : null;
     };
 
 
@@ -132,9 +136,9 @@ export default defineComponent({
              onCancel={this.closePopup}>
         {this.renderSearch()}
         <CheckboxList
-            {...listProps}
-            maxHeightPercentage={0.7}
-            onChange={this.onChange}
+          {...listProps}
+          maxHeightPercentage={0.7}
+          onChange={this.onChange}
         />
       </Popup>];
   }

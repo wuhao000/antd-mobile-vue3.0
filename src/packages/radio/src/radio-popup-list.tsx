@@ -1,4 +1,4 @@
-import {computed, defineComponent, PropType, ref, Ref, VNode} from 'vue';
+import {computed, defineComponent, inject, PropType, ref, Ref, VNode} from 'vue';
 import List from '../../list';
 import {optionsBasedComponentProps, useOptionsBaseComponent} from '../../mixins/options-based-component';
 import Popup from '../../popup';
@@ -21,7 +21,8 @@ export default defineComponent({
   },
   setup(props, {emit, slots, attrs}) {
     const popupVisible: Ref<boolean> = ref(false);
-    const {getOptions, isDisabled, isReadonly, stateValue} = useOptionsBaseComponent(props, {emit, slots, attrs});
+    const form = inject('list', undefined);
+    const {getOptions, isDisabled, isReadonly, stateValue} = useOptionsBaseComponent(props, {emit, slots, attrs}, form);
     const optionText = computed(() => {
       const options = getOptions();
       const value = stateValue.value;

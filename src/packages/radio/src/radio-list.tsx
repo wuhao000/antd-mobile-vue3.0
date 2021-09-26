@@ -1,4 +1,4 @@
-import {defineComponent, getCurrentInstance, onMounted, PropType, ref, watch} from 'vue';
+import {defineComponent, getCurrentInstance, inject, onMounted, PropType, ref, watch} from 'vue';
 import List from '../../list';
 import {optionsBasedComponentProps, useOptionsBaseComponent} from '../../mixins/options-based-component';
 import RadioItem from './radio-item';
@@ -17,7 +17,8 @@ export default defineComponent({
   },
   setup(props, {emit, slots, attrs}) {
     const instance = getCurrentInstance();
-    const {getOptions, isDisabled} = useOptionsBaseComponent(props, {emit, slots, attrs});
+    const form = inject('list', undefined);
+    const {getOptions, isDisabled} = useOptionsBaseComponent(props, {emit, slots, attrs}, form);
     const stateValue = ref(props.value !== undefined ? props.value : null);
     watch(() => props.value, (value: any) => {
       stateValue.value = value;

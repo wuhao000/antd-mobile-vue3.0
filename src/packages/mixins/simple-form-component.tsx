@@ -12,9 +12,7 @@ export const simpleFormComponentProps = {
   errorDisplayType: {type: String}
 };
 
-export const useSimpleFormComponent = props => {
-  const form = inject('list', undefined) as any;
-
+export const useSimpleFormComponent = (props, form) => {
   const isDisabled = computed(() => {
     let disabled = props.disabled;
     if (form && !disabled) {

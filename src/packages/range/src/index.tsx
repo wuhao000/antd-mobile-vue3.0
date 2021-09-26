@@ -12,7 +12,7 @@ export interface HandleGeneratorInfo {
   [key: string]: any;
 }
 
-const Range = defineComponent({
+export default defineComponent({
   name: 'Range',
   props: {
     ...formComponentProps,
@@ -59,4 +59,3 @@ const Range = defineComponent({
   }
 });
 
-export default Range as any;

@@ -3,7 +3,7 @@ import {defineComponent, PropType, reactive, watch} from 'vue';
 import List from '../../list';
 import Checkbox from './checkbox';
 
-const CheckboxItem = defineComponent({
+export default defineComponent({
   name: 'MCheckboxItem',
   props: {
     thumbStyle: {
@@ -43,6 +43,7 @@ const CheckboxItem = defineComponent({
       default: false
     }
   },
+  emits: ['change', 'update:value'],
   setup(props, {emit}) {
     const state = reactive({
       value: props.value
@@ -105,6 +106,3 @@ const CheckboxItem = defineComponent({
     );
   }
 });
-
-
-export default CheckboxItem as any;

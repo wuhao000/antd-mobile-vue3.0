@@ -8,11 +8,11 @@ import locale from './locale/zh_CN';
 import defaultLocale from './locale/zh_CN';
 import {formatFn} from './utils';
 
-export const getDatePicker = (isView: boolean) => {
+export const getDatePicker = (isView: boolean, name: string) => {
   return defineComponent({
     install: null,
     Item: null,
-    name: 'MDatePicker',
+    name,
     props: {
       disabled: {
         type: Boolean as PropType<boolean>
@@ -194,4 +194,4 @@ export const getDatePicker = (isView: boolean) => {
   });
 };
 
-export default getDatePicker(false);
+export default getDatePicker(false, 'MDatePicker');

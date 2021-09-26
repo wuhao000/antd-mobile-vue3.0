@@ -18,7 +18,7 @@
     name: 'CodeBox',
     props: {
       code: String,
-      markdown: String
+      markdown: [String, Object]
     },
     setup(props) {
       const showCode = ref(false);

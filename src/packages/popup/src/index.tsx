@@ -1,5 +1,5 @@
 import {Drawer} from 'ant-design-vue';
-import {defineComponent, PropType, VNode} from 'vue';
+import {defineComponent, inject, PropType, VNode} from 'vue';
 import {useBaseInputComponent} from '../../mixins/base-input-component';
 import {pureInputComponentProps} from '../../mixins/pure-input-component';
 import Touchable from '../../vmc-feedback/feedback';
@@ -60,11 +60,12 @@ export default defineComponent({
   },
   install: null,
   setup(props, {emit, attrs, slots}) {
+    const form = inject('list', undefined);
     const {stateValue, cssStyle, getDefaultSlot, isDisabled, isReadonly} = useBaseInputComponent(props, {
       emit,
       attrs,
       slots
-    }, {propName: 'visible', defaultValue: props.visible});
+    }, form, {propName: 'visible', defaultValue: props.visible});
     const onCancel = () => {
       stateValue.value = false;
       emit('cancel');

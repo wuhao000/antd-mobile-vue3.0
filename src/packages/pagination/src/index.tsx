@@ -7,7 +7,7 @@ import {getComponentLocale} from '../../utils/getLocale';
 
 export default defineComponent({
   install: null,
-  name: 'Pagination',
+  name: 'MPagination',
   props: {
     prefixCls: {
       type: String as PropType<string>,

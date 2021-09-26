@@ -18,19 +18,21 @@
   </div>
 </template>
 <script lang="ts">
-  import {Slider} from 'ant-design-vue';
-  import {defineComponent, ref} from 'vue';
+import {Slider} from 'ant-design-vue';
+import {defineComponent, ref} from 'vue';
+import Range from '../index';
 
-  export default defineComponent({
-    name: 'Demo1',
-    components: {ASlider: Slider},
-    setup(props, {emit, slots}) {
-      const value = ref([1, 2]);
-
-
-      return {
-        value
-      };
-    }
-  });
+export default defineComponent({
+  name: 'Demo1',
+  components: {
+    ASlider: Slider,
+    [Range.Item.name]: Range.Item
+  },
+  setup(props, {emit, slots}) {
+    const value = ref([1, 2]);
+    return {
+      value
+    };
+  }
+});
 </script>
