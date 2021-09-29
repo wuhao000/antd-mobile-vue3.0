@@ -68,7 +68,7 @@ export default defineComponent({
       [`${prefixCls}-loading`]: loading,
       [`${prefixCls}-icon`]: !!iconType
     }, this.$attrs.class);
-    const kids = this.$slots.default ? this.$slots.default().map(this.insertSpace) : '';
+    const kids = this.$slots.default?.()?.map(this.insertSpace)?? '';
 
     const iconEl = iconType ? <Icon type={iconType}
                                     class={`${prefixCls}-icon`}
@@ -77,7 +77,7 @@ export default defineComponent({
       <TouchFeedback
         activeClassName={activeClassName || (activeStyle ? `${prefixCls}-active` : undefined)}
         disabled={disabled}
-        activeStyle={activeStyle}>
+        activeStyle={activeStyle as any}>
         <a role="button"
            {...filterHTMLAttrs(this.$attrs)}
            class={wrapCls}

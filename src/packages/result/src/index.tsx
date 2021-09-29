@@ -44,9 +44,9 @@ export default defineComponent({
     } = this.$props;
 
     let imgContent: any = null;
-    const img = this.$slots.img || this.img;
-    const title = this.$slots.title || this.title;
-    const message = this.$slots.message || this.message;
+    const img = this.$slots.img?.() || this.img;
+    const title = this.$slots.title?.() || this.title;
+    const message = this.$slots.message?.() || this.message;
     if (img) {
       imgContent = <div class={`${prefixCls}-pic`}>{img}</div>;
     } else if (imgUrl) {

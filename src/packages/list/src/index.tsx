@@ -123,7 +123,7 @@ export default defineComponent({
           {this.$slots.default ? (
               <div class={`${prefixCls}-body`}>{this.$slots.default()}</div>
           ) : null}
-          {this.$slots.footer ? this.$slots.footer() : null}
+          {this.$slots.footer?.()}
         </div>
     );
   }
