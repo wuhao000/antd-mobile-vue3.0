@@ -25,8 +25,6 @@ const TabPane = defineComponent({
     const layout: Ref<HTMLDivElement> = ref(null);
     const offsetX = ref(0);
     const offsetY = ref(0);
-
-
     const setLayout = (div: any) => {
       layout.value = div;
     };
@@ -52,9 +50,10 @@ const TabPane = defineComponent({
       ...(fixX && this.offsetX ? getTransformPropValue(getPxStyle(-this.offsetX, 'px', false)) : {}),
       ...(fixY && this.offsetY ? getTransformPropValue(getPxStyle(-this.offsetY, 'px', true)) : {})
     };
-    return <div style={style}
-                {...filterHTMLAttrs(this.$attrs)}
-                ref={this.setLayout}>
+    return <div
+      {...filterHTMLAttrs(this.$attrs)}
+      style={style}
+      ref={this.setLayout}>
       {this.$slots.default()}
     </div>;
   }

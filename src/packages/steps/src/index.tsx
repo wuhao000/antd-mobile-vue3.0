@@ -56,7 +56,9 @@ export default defineComponent({
     const children = unwrapFragment(this.$slots.default?.())
     if (!children) {
       return (
-        <div class={classString} {...filterHTMLAttrs(this.$attrs)}/>
+        <div
+          {...filterHTMLAttrs(this.$attrs)}
+          class={classString}/>
       );
     }
     const content = children.map((child: VNode, index) => {
@@ -113,7 +115,9 @@ export default defineComponent({
       return child;
     });
     return (
-      <div class={classString} {...filterHTMLAttrs(this.$attrs)}>
+      <div
+        {...filterHTMLAttrs(this.$attrs)}
+        class={classString}>
         {content}
       </div>
     );

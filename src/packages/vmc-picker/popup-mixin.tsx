@@ -1,5 +1,4 @@
 import {defineComponent, reactive, ref, VNode, watch} from 'vue';
-import {filterHTMLAttrs} from '../utils/dom';
 import {cloneVNodes, setListeners, setProps} from '../utils/vnode';
 import {unwrapFragment} from '../utils/vue';
 import {PopupPickerProps} from './popup-picker-types';

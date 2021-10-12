@@ -40,6 +40,8 @@ function upload() {
     }).then((res) => {
       if (res.CommonMsg.Status === 200) {
         console.log('上传文件【' + name + '】成功, 发布的地址为:\nhttps://public-file.aegis-info.com/' + Key);
+      } else {
+        console.error('上传文件【' + name + '】失败', res);
       }
     });
   });

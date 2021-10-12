@@ -1,6 +1,6 @@
-import {filterHTMLAttrs} from '../../utils/dom';
 import classnames from 'classnames';
 import {defineComponent, PropType} from 'vue';
+import {filterHTMLAttrs} from '../../utils/dom';
 
 export default defineComponent({
   inheritAttrs: false,
@@ -28,11 +28,12 @@ export default defineComponent({
       }
     };
     return (
-      <div class={wrapCls}
-           onClick={(e) => {
-             this.$emit('click', e);
-           }}
-           {...filterHTMLAttrs(props)}>
+      <div
+        {...filterHTMLAttrs(props)}
+        class={wrapCls}
+        onClick={(e) => {
+          this.$emit('click', e);
+        }}>
         {this.$slots.default?.()}
       </div>
     );

@@ -29,10 +29,10 @@ export default defineComponent({
     const fields: Ref<any[]> = ref([]);
     const clearValidate = (props = []) => {
       const localFields = props.length
-          ? (typeof props === 'string'
-                  ? fields.value.filter(field => props === (field as any).prop)
-                  : fields.value.filter(field => props.indexOf((field as any).prop) > -1)
-          ) : fields.value;
+        ? (typeof props === 'string'
+            ? fields.value.filter(field => props === (field as any).prop)
+            : fields.value.filter(field => props.indexOf((field as any).prop) > -1)
+        ) : fields.value;
       localFields.forEach(field => {
         (field as any).clearValidate();
       });
@@ -113,18 +113,19 @@ export default defineComponent({
       [`${prefixCls}-section-${this.sectionSize}`]: this.section
     }, this.$attrs.class);
     return (
-        <div {...filterHTMLAttrs(this.$attrs)}
-             class={wrapCls}>
-          {this.$slots.title || this.title ? <div class={classNames(`${prefixCls}-header`, {
-            [`${prefixCls}-required`]: this.required
-          })}>
-            {this.$slots.title?.() ?? this.title}
-          </div> : ''}
-          {this.$slots.default ? (
-              <div class={`${prefixCls}-body`}>{this.$slots.default()}</div>
-          ) : null}
-          {this.$slots.footer?.()}
-        </div>
+      <div
+        {...filterHTMLAttrs(this.$attrs)}
+        class={wrapCls}>
+        {this.$slots.title || this.title ? <div class={classNames(`${prefixCls}-header`, {
+          [`${prefixCls}-required`]: this.required
+        })}>
+          {this.$slots.title?.() ?? this.title}
+        </div> : ''}
+        {this.$slots.default ? (
+          <div class={`${prefixCls}-body`}>{this.$slots.default()}</div>
+        ) : null}
+        {this.$slots.footer?.()}
+      </div>
     );
   }
 });
