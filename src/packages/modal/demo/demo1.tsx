@@ -16,7 +16,7 @@ function closest(el, selector) {
 export default defineComponent({
   name: 'ModalExample',
   props: {},
-  setup(props, {emit, slots}) {
+  setup() {
     const state = reactive({
       modal1: false,
       modal2: false
@@ -68,9 +68,6 @@ export default defineComponent({
             }
           }]}
           wrapProps={{onTouchStart: this.onWrapTouchStart}}
-          afterClose={() => {
-            alert('afterClose');
-          }}
         >
           <div style={{height: 100, overflow: 'scroll'}}>
             scoll content...<br/>
@@ -85,14 +82,12 @@ export default defineComponent({
         <WhiteSpace/>
         <Modal
           popup
+          title={<div>委托买入</div> as VNode}
           visible={this.state.modal2}
           onClose={this.onClose('modal2')}
           animationType="slide-up"
-          afterClose={() => {
-            alert('afterClose');
-          }}
         >
-          <List title={<div>委托买入</div> as VNode} class="popup-list">
+          <List class="popup-list">
             {['股票名称', '股票代码', '买入价格'].map((i, index) => (
               <List.Item key={index}>{i}</List.Item>
             ))}

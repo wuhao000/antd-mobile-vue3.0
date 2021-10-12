@@ -33,7 +33,8 @@ export default defineComponent({
     step: {
       type: Number as PropType<number>
     },
-    handle: {}
+    handle: {},
+    onChange: Function
   },
   setup(props, {emit}) {
     const {isDisabled, currentValue} = useFormComponent(props, {emit});

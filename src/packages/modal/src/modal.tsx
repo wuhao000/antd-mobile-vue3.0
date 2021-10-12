@@ -1,6 +1,7 @@
 import Dialog from 'ant-design-vue/es/vc-dialog';
 import classnames from 'classnames';
-import {defineComponent, PropType, reactive, ref, Ref, watch} from 'vue';
+import {defineComponent, PropType} from 'vue';
+import Popup from '../../popup';
 import TouchFeedback from '../../vmc-feedback';
 import {Action} from './props-type';
 
@@ -30,7 +31,9 @@ export default defineComponent({
       default: 'ios'
     },
     bodyStyle: {},
-    title: {},
+    title: {
+      type: [String, Object]
+    },
     maskClosable: {
       type: Boolean as PropType<boolean>,
       default: true
@@ -53,7 +56,7 @@ export default defineComponent({
       default: false
     },
     popup: {
-      type: Boolean as PropType<boolean>,
+      type: [Boolean, String],
       default: false
     },
     animated: {
@@ -71,9 +74,10 @@ export default defineComponent({
     operation: {
       type: Boolean as PropType<boolean>,
       default: false
-    }
+    },
+    visible: Boolean
   },
-  setup(props, {emit, slots}) {
+  setup() {
     const renderFooterButton = (button: Action<any>, prefixCls: string | undefined, i: number) => {
       let buttonStyle = {};
       if (button.style) {
@@ -172,12 +176,36 @@ export default defineComponent({
       [`${prefixCls}-popup-${animationType}`]: popup && animationType,
       [`${prefixCls}-android`]: platform === 'android'
     });
+      console.log(this.visible);
+    if (this.popup) {
+      const placement = typeof this.popup === 'string' ? this.popup : 'bottom';
+      return (
+        <Popup
+          placement={placement}
+          showOk={false}
+          visible={this.visible}
+          title={this.title as any}
+          closable={this.closable}
+          class={cls}
+          onOk={(e) => {
+            console.log('ok');
+            this.$emit('change', false);
+            this.$emit('close', e);
+          }}
+          onCancel={this.onClose || ((e) => {
+            console.log('cancel');
+            this.$emit('change', false);
+            this.$emit('close', e);
+          })}>
+          {this.$slots.default?.()}
+        </Popup>
+      );
+    }
     return (
-      // @ts-ignore
       <Dialog
         {...restProps}
         maskClosable={this.maskClosable}
-        visible={this.popup}
+        visible={this.visible}
         prefixCls={prefixCls}
         title={this.title}
         closable={this.closable}

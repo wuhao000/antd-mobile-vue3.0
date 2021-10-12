@@ -80,7 +80,6 @@ export default function alert(
 
     modal = createApp({
       render() {
-        // @ts-ignore
         return <Modal
           visible
           transparent
