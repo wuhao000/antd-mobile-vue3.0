@@ -176,7 +176,6 @@ export default defineComponent({
       [`${prefixCls}-popup-${animationType}`]: popup && animationType,
       [`${prefixCls}-android`]: platform === 'android'
     });
-      console.log(this.visible);
     if (this.popup) {
       const placement = typeof this.popup === 'string' ? this.popup : 'bottom';
       return (

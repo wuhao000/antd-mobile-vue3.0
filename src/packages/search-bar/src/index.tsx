@@ -125,10 +125,8 @@ export default defineComponent({
     };
     const onBlur = () => {
       onBlurTimeout.value = onNextFrame(() => {
-        if (!blurFromOnClear.value) {
-          if (document.activeElement !== inputRef.value) {
-            state.focus = false;
-          }
+        if (!blurFromOnClear.value && document.activeElement !== inputRef.value) {
+          state.focus = false;
         }
         blurFromOnClear.value = false;
       });
@@ -151,8 +149,10 @@ export default defineComponent({
       state.value = '';
       emit('clear');
       emit('change');
-      if (blurFromOnClear) {
+      if (!blurFromOnClear.value) {
         focus();
+      } else {
+        onBlur();
       }
     };
     const onCancel = () => {
@@ -218,7 +218,6 @@ export default defineComponent({
       ),
       [`${prefixCls}-cancel-anim`]: this.firstFocus
     });
-    const TouchFeedback2 = TouchFeedback as any;
     return (
       <form onSubmit={this.onSubmit}
             class={wrapCls}
@@ -258,16 +257,18 @@ export default defineComponent({
             ref={this.inputRef}
             maxlength={maxLength}
           />
-          <TouchFeedback2 activeclass={`${prefixCls}-clear-active`}>
+          <TouchFeedback activeClassName={`${prefixCls}-clear-active`}>
             <a onClick={this.onClear} class={clearCls}/>
-          </TouchFeedback2>
+          </TouchFeedback>
         </div>
-        <div
-          class={cancelCls}
-          onClick={this.onCancel}
-          ref={this.rightBtnRef}>
-          {this.cancelText || cancelText}
-        </div>
+        {
+          this.showCancelButton && (this.state.focus) ? <div
+            class={cancelCls}
+            onClick={this.onCancel}
+            ref={this.rightBtnRef}>
+            {this.cancelText || cancelText}
+          </div> : null
+        }
       </form>
     );
   }
