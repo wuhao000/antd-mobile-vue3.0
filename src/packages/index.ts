@@ -45,7 +45,6 @@ import TabBar from './tab-bar';
 import Tabs from './tabs';
 import Tag from './tag';
 import Textarea from './textarea';
-import TimeDirective from './time-directive';
 import Toast from './toast';
 import WhiteSpace from './white-space';
 import WingBlank from './wing-blank';
@@ -98,7 +97,6 @@ const components = [
 	Tabs,
 	Tag,
 	Textarea,
-	TimeDirective,
 	Toast,
 	WhiteSpace,
 	WingBlank
@@ -158,7 +156,6 @@ export {
 	Tabs,
 	Tag,
 	Textarea,
-	TimeDirective,
 	Toast,
 	WhiteSpace,
 	WingBlank
@@ -210,7 +207,6 @@ export default {
 	Tabs,
 	Tag,
 	Textarea,
-	TimeDirective,
 	Toast,
 	WhiteSpace,
 	WingBlank

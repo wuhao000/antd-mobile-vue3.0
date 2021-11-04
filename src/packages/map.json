@@ -292,11 +292,6 @@
     "chineseName": "文本框",
     "tag": "数据入口"
   },
-  "time-directive": {
-    "name": "time",
-    "chineseName": "时间展示",
-    "type": "directive"
-  },
   "toast": {
     "type": "component",
     "componentType": "mobile",

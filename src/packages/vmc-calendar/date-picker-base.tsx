@@ -42,7 +42,7 @@ export const useDatePickerBase = (props, {emit}, {
     for (let i = 0; i < initialMonths; i++) {
       canLoadNext() && genMonthData(begin, i);
     }
-    visibleMonth.value = [...state.months];
+    visibleMonth.value = [...state.months] as MonthData[];
   });
   const canLoadPrev = () => {
     const {minDate} = props;
@@ -54,9 +54,9 @@ export const useDatePickerBase = (props, {emit}, {
       || +getMonthDate(maxDate).firstDate > +state.months[state.months.length - 1].firstDate;
   };
   const genMonthData = (date?: Date, addMonth: number = 0) => {
-    let copyDate = date;
+    let copyDate: Date = date;
     if (!copyDate) {
-      copyDate = addMonth >= 0 ? state.months[state.months.length - 1].firstDate : state.months[0].firstDate;
+      copyDate = (addMonth >= 0 ? state.months[state.months.length - 1].firstDate : state.months[0].firstDate) as Date;
     }
     if (!copyDate) {
       copyDate = new Date();
@@ -170,8 +170,8 @@ export const useDatePickerBase = (props, {emit}, {
         const lastIndex = state.months.indexOf(last);
         for (let i = 1; i <= 2; i++) {
           const index = lastIndex + i;
-          if (index < state.months.length && visibleMonth.value.indexOf(state.months[index]) < 0) {
-            visibleMonth.value.push(state.months[index]);
+          if (index < state.months.length && visibleMonth.value.indexOf(state.months[index] as MonthData) < 0) {
+            visibleMonth.value.push(state.months[index] as MonthData);
           } else {
             canLoadNext() && genMonthData(undefined, 1);
           }
@@ -184,14 +184,14 @@ export const useDatePickerBase = (props, {emit}, {
         const firstIndex = state.months.indexOf(first);
         for (let i = 1; i <= 2; i++) {
           const index = firstIndex - i;
-          if (index >= 0 && visibleMonth.value.indexOf(state.months[index]) < 0) {
-            visibleMonth.value.unshift(state.months[index]);
+          if (index >= 0 && visibleMonth.value.indexOf(state.months[index] as MonthData) < 0) {
+            visibleMonth.value.unshift(state.months[index] as MonthData);
             needUpdate = true;
           }
         }
       }
     } else if (state.months.length > 0) {
-      visibleMonth.value = state.months.filter(filterFunc);
+      visibleMonth.value = state.months.filter(filterFunc as any);
       needUpdate = true;
     }
 

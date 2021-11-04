@@ -165,7 +165,7 @@ const DatePicker = defineComponent({
             <div class="months">
               {
                 this.state.months.map((m) => {
-                  const hidden = m.height && this.visibleMonth.indexOf(m) < 0;
+                  const hidden = m.height && this.visibleMonth.indexOf(m as any) < 0;
                   if (hidden) {
                     return <div key={m.title + '_shallow'} style={{height: m.height}}/>;
                   }

@@ -39,7 +39,7 @@ export default defineComponent({
         <WingBlank>
           <SegmentedControl
               values={['切换到单选', '切换到多选']}
-              selectedIndex={this.state.multiple ? 1 : 0}
+              value={this.state.multiple ? 1 : 0}
               onChange={this.onSegChange}
           />
           <ImagePicker

@@ -17,7 +17,7 @@ const customIcon = () => (
 
 export default defineComponent({
   setup() {
-    const size = ref('small');
+    const size = ref<'small' | 'default'>('small');
     return {
       size
     };

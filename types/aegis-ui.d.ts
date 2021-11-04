@@ -41,7 +41,6 @@ import {TabBarComponent} from './components/tab-bar';
 import {TabsComponent} from './components/tabs';
 import {TagComponent} from './components/tag';
 import {TextareaComponent} from './components/textarea';
-import {TimeDirectiveComponent} from './components/time-directive';
 import {ToastComponent} from './components/toast';
 import {WhiteSpaceComponent} from './components/white-space';
 import {WingBlankComponent} from './components/wing-blank';
@@ -131,8 +130,6 @@ export class Tabs extends TabsComponent {
 export class Tag extends TagComponent {
 }
 export class Textarea extends TextareaComponent {
-}
-export class TimeDirective extends TimeDirectiveComponent {
 }
 export class Toast extends ToastComponent {
 }

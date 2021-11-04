@@ -40,8 +40,7 @@ export default defineComponent({
             multipleLine
             onClick={() => {
             }}
-            platform="android"
-        >
+            platform="android">
           ListItem （Android）<Brief>There may have water ripple effect of <br/> material if you set the click
           event.</Brief>
         </Item>

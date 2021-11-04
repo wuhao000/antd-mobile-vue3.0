@@ -1,4 +1,4 @@
-import {defineComponent, PropType, provide, ref, Ref, watch} from 'vue';
+import {defineComponent, PropType, provide, ref, watch} from 'vue';
 import {getComponentLocale} from '../../utils/getLocale';
 import {setProps} from '../../utils/vnode';
 import RCDatePicker from '../../vmc-date-picker/date-picker';
@@ -80,7 +80,7 @@ export const getDatePicker = (isView: boolean, name: string) => {
           return props.value || new Date();
         }
       };
-      const scrollValue: Ref<Date> = ref(getDate());
+      const scrollValue = ref<Date>(getDate());
       const localVisible = ref(props.visible);
       watch(() => props.visible, visible => {
         localVisible.value = visible;
@@ -88,7 +88,7 @@ export const getDatePicker = (isView: boolean, name: string) => {
       const onOk = () => {
         let value = props.value;
         if (scrollValue.value !== undefined) {
-          value = scrollValue.value;
+          value = scrollValue.value as Date;
         }
         emit('update:value', value);
         emit('change', value);

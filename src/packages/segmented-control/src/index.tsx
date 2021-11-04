@@ -26,7 +26,8 @@ export default defineComponent({
       default: () => {
         return [];
       }
-    }
+    },
+    onChange: Function
   },
   setup(props, {emit}) {
     const state = reactive({
