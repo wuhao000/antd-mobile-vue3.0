@@ -20,8 +20,8 @@ const CANCEL_DISTANCE_ON_SCROLL = 20;
 
 
 const Drawer = defineComponent({
-  inheritAttrs: false,
   name: 'Drawer',
+  inheritAttrs: false,
   props: {
     prefixCls: {
       type: String as PropType<string>,
@@ -83,7 +83,7 @@ const Drawer = defineComponent({
       default: 30
     }
   },
-  setup(props, {emit, slots}) {
+  setup(props, {emit}) {
     const state = reactive({
       // the detected width of the sidebar in pixels
       sidebarWidth: 0,

@@ -6,8 +6,8 @@ import Touchable from '../../vmc-feedback/feedback';
 
 
 export default defineComponent({
-  inheritAttrs: false,
   name: 'MPopup',
+  inheritAttrs: false,
   props: {
     ...pureInputComponentProps,
     onCancel: {},
@@ -129,13 +129,12 @@ export default defineComponent({
     };
   },
   render() {
-    const props = {
+    const props: any = {
       ...this.getListeners(),
       ...this.getProps(),
       style: this.cssStyle,
       visible: this.stateValue
     };
-    // @ts-ignore
     return <Drawer {...props}
                    v-slots={this.slots}>
       {this.getDefaultSlot()}

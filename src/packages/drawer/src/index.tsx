@@ -37,7 +37,9 @@ const Drawer = defineComponent({
       type: String as PropType<string>,
       default: 'am-drawer'
     },
-    sidebar: {},
+    sidebar: {
+      type: Object
+    },
     visible: {
       type: Boolean as PropType<boolean>,
       default: false

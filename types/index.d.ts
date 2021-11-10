@@ -1,7 +1,8 @@
 export * from './aegis-ui';
 
-import {App} from 'vue';
-
-export default class AntdMobile {
-  public static install: (app: App) => void;
+declare const AntdMobileVue: {
+  install: any;
 }
+
+export default AntdMobileVue;
+

@@ -4,12 +4,15 @@ import {filterHTMLAttrs} from '../../utils/dom';
 
 export default defineComponent({
   install: null,
-  inheritAttrs: false,
   name: 'MList',
+  inheritAttrs: false,
   props: {
     section: {type: Boolean, default: false},
     sectionSize: {type: String, default: 'default'},
-    prefixCls: {default: 'am-list'},
+    prefixCls: {
+      type: String,
+      default: 'am-list'
+    },
     role: {type: String},
     title: {type: [String, Object] as PropType<string | VNode>},
     spaceBetweenSection: {type: Number, default: 8},
@@ -25,7 +28,7 @@ export default defineComponent({
       list: this
     };
   },
-  setup(props, {emit, slots}) {
+  setup(props) {
     const fields: Ref<any[]> = ref([]);
     const clearValidate = (props = []) => {
       const localFields = props.length
