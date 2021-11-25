@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "commonjs",
+    "target": "es2015",
+    "module": "CommonJS",
     "strict": true,
     "jsx": "preserve",
     "jsxFactory": "h",
@@ -12,7 +12,7 @@
     "noImplicitAny": false,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
-    "sourceMap": false,
+    "sourceMap": true,
     "baseUrl": ".",
     "types": [
       "node"
@@ -38,7 +38,10 @@
     ]
   },
   "include": [
-    "*.ts",
-    "../types/api-generate.d.ts"
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "tests/**/*.ts",
+    "tests/**/*.tsx"
   ]
 }

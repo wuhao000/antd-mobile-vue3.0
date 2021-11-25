@@ -59,6 +59,8 @@ export default defineComponent({
           options={options2}/>
       <m-checkbox-popup-list
           v-model={[this.value3, 'value']}
+          error={true}
+          errorMessage={'错误信息'}
           title="自定义选项"
           labelProperty="name"
           valueProperty="id"

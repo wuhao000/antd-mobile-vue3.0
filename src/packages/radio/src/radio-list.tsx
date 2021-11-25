@@ -27,13 +27,22 @@ export default defineComponent({
     const renderOptions = () => {
       const options = getOptions();
       if (options) {
-        return options.map(option => {
+        return options.map((option, index) => {
+          const optionProps = {};
+          if (index === 0) {
+            Object.assign(optionProps, {
+              error: props.error,
+              errorDisplayType: props.errorDisplayType,
+              errorMessage: props.errorMessage
+            });
+          }
           return <RadioItem
-              disabled={option.disabled || isDisabled.value}
-              value={stateValue.value === option.value}
-              onChange={(checkState) => {
-                onChange(checkState, option.value);
-              }}>{option.label}</RadioItem>;
+            {...optionProps}
+            disabled={option.disabled || isDisabled.value}
+            value={stateValue.value === option.value}
+            onChange={(checkState) => {
+              onChange(checkState, option.value);
+            }}>{option.label}</RadioItem>;
         });
       } else {
         return [];

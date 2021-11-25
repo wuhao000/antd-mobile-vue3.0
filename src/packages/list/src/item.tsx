@@ -64,6 +64,10 @@ const Item = defineComponent({
     errorMessage: {
       type: String as PropType<string>
     },
+    errorDisplayType: {
+      type: String as PropType<'toast' | 'popover' | 'text'>,
+      default: 'text'
+    },
     disabled: {
       type: Boolean as PropType<false>,
       default: false
@@ -106,11 +110,7 @@ const Item = defineComponent({
       type: Boolean as PropType<boolean>,
       default: false
     },
-    suffix: {},
-    errorDisplayType: {
-      type: String as PropType<'toast' | 'popover' | 'text'>,
-      default: 'text'
-    }
+    suffix: {}
   },
   setup(props, {emit, slots, attrs}) {
     const debounceTimeout = ref(null);
@@ -270,6 +270,7 @@ const Item = defineComponent({
             <div
               class={`${prefixCls}-error-extra`}
               onClick={(e) => {
+                e.stopPropagation();
                 if (this.actualErrorMessage) {
                   if (this.actualErrorDisplayType === 'toast') {
                     toast.fail(this.actualErrorMessage);

@@ -1,13 +1,13 @@
-const env = process.env;
-const args = JSON.parse(env.npm_config_argv).remain;
-const fs = require('fs');
-
-const path = require('path');
-
-const renderTemplate = require('./tmpl').render;
-
+import fs from "fs";
 import {js_beautify as jsBeautify} from 'js-beautify';
 
+
+import path from "path";
+
+import {render as renderTemplate} from "./tmpl";
+
+const env = process.env;
+const args = JSON.parse(env.npm_config_argv).remain;
 
 const componentList = require('./components');
 let componentListName: string[] = [];

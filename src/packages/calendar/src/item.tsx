@@ -114,6 +114,9 @@ export default defineComponent({
                       required={this.required}
                       touchFeedback={true}
                       disabled={this.disabled}
+                      error={this.error}
+                      errorMessage={this.errorMessage}
+                      errorDisplayType={this.errorDisplayType}
                       arrow="horizontal"
                       v-slots={slots}
                       title={this.title}

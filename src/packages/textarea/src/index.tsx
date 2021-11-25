@@ -225,6 +225,9 @@ export default defineComponent({
       <List.Item class={wrapCls}
                  required={this.required}
                  disabled={this.isDisabled}
+                 error={this.error}
+                 errorMessage={this.errorMessage}
+                 errorDisplayType={this.errorDisplayType}
                  v-slots={slots}
                  title={
                    renderLabel(this.$props, this.$slots)

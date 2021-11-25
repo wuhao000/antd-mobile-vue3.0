@@ -1,9 +1,10 @@
 import fs from 'fs';
 import {Component} from './components';
+import componentList from "./components";
 
-const componentList = require('./components');
+import {render as renderTemplate} from "./tmpl";
+
 const basePath = 'src/packages';
-const renderTemplate = require('./tmpl').render;
 
 interface DemoDescriptor {
   fileName: string;
@@ -195,7 +196,6 @@ generateMainFile();
  * 生成入口文件src/packages/index.ts
  */
 export default function generateMainFile() {
-  const componentList = require('./components');
   const res = renderTemplate('src/templates/index.ts.tmpl', {
     imports: componentList.map(it => {
       return `import ${it.upperCase} from './${it.dir}';`;

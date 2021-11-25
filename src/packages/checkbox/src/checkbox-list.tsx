@@ -25,8 +25,17 @@ export default defineComponent({
     });
     const renderOptions = () => {
       const options = getOptions();
-      return options.map(option => {
+      return options.map((option, index) => {
+        const optionProps = {};
+        if (index === 0) {
+          Object.assign(optionProps, {
+            error: props.error,
+            errorDisplayType: props.errorDisplayType,
+            errorMessage: props.errorMessage
+          });
+        }
         return <CheckboxItem
+            {...optionProps}
             value={stateValue.value.includes(option.value)}
             disabled={option.disabled || isDisabled.value}
             onChange={(checkState) => {

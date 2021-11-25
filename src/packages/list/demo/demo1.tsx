@@ -19,9 +19,9 @@ export default defineComponent({
       switch: false,
       range: [0, 100],
       readonly: false,
-      error: false,
-      errorMessage: '',
-      errorDisplayType: 'text'
+      error: true,
+      errorMessage: '出错了',
+      errorDisplayType: 'toast'
     });
     const disabled: Ref<boolean> = ref(false);
 
@@ -48,13 +48,13 @@ export default defineComponent({
             section
             disabled={this.state.disabled}
             editable={!this.state.readonly}>
-        <m-input required title="输入框" error={this.state.error} errorDisplayType={this.state.errorDisplayType}
+        <m-input required={true} title="输入框" error={this.state.error} errorDisplayType={this.state.errorDisplayType}
                  errorMessage={this.state.errorMessage}/>
-        <m-textarea required title="长文本"
+        <m-textarea required={true} title="长文本"
                     error={this.state.error}
                     errorDisplayType={this.state.errorDisplayType}
                     errorMessage={this.state.errorMessage}/>
-        <m-textarea required title="长文本"
+        <m-textarea required={true} title="长文本"
                     value="这是一大段文字，这是一大段文字，这是一大段文字，这是一大段文字，这是一大段文字，这是一大段文字，这是一大段文字, 这是结束的地方"
                     error={this.state.error}
                     errorDisplayType={this.state.errorDisplayType}
@@ -62,35 +62,59 @@ export default defineComponent({
         <m-input title="数字"
                  type="number" error={this.state.error} errorDisplayType={this.state.errorDisplayType}
                  errorMessage={this.state.errorMessage}/>
-        <m-date-picker-item required title="日期时间选择" value={new Date()} error={this.state.error}
+        <m-date-picker-item required={true} title="日期时间选择" value={new Date()} error={this.state.error}
                             errorDisplayType={this.state.errorDisplayType} errorMessage={this.state.errorMessage}/>
-        <m-date-picker-item required title="日期选择" mode="date" value={new Date()} error={this.state.error}
+        <m-date-picker-item required={true} title="日期选择" mode="date" value={new Date()} error={this.state.error}
                             errorDisplayType={this.state.errorDisplayType} errorMessage={this.state.errorMessage}/>
-        <m-date-picker-item required title="年份选择" mode="year" value={new Date()} error={this.state.error}
+        <m-date-picker-item required={true} title="年份选择" mode="year" value={new Date()} error={this.state.error}
                             errorDisplayType={this.state.errorDisplayType} errorMessage={this.state.errorMessage}/>
-        <m-date-picker-item required title="月份选择" mode="month" value={new Date()} error={this.state.error}
+        <m-date-picker-item required={true} title="月份选择" mode="month" value={new Date()} error={this.state.error}
                             errorDisplayType={this.state.errorDisplayType} errorMessage={this.state.errorMessage}/>
-        <m-date-picker-item required title="时间选择" mode="time" value={new Date()} error={this.state.error}
+        <m-date-picker-item required={true} title="时间选择" mode="time" value={new Date()} error={this.state.error}
                             errorDisplayType={this.state.errorDisplayType} errorMessage={this.state.errorMessage}/>
-        <m-calendar-item required title="日期范围" value={[new Date(), new Date()]}/>
-        <m-range-item title="范围选择" value={this.state.range} error={this.state.error}
-                      errorDisplayType={this.state.errorDisplayType} errorMessage={this.state.errorMessage}/>
-        <m-radio-popup-list required title="弹出单选"
+        <m-calendar-item required={true} title="日期范围"
+                         error={this.state.error}
+                         errorDisplayType={this.state.errorDisplayType}
+                         errorMessage={this.state.errorMessage}
+                         value={[new Date(), new Date()]}/>
+        <m-range-item title="范围选择"
+                      value={this.state.range}
+                      error={this.state.error}
+                      errorDisplayType={this.state.errorDisplayType}
+                      errorMessage={this.state.errorMessage}/>
+        <m-radio-popup-list required={true} title="弹出单选"
                             value={1}
                             options={options}
                             error={this.state.error}
-                            errorDisplayType={this.state.errorDisplayType} errorMessage={this.state.errorMessage}/>
-        <m-checkbox-popup-list required title="弹出多选" options={options} error={this.state.error}
+                            errorDisplayType={this.state.errorDisplayType}
+                            errorMessage={this.state.errorMessage}/>
+        <m-checkbox-popup-list required={true} title="弹出多选" options={options}
+                               error={this.state.error}
                                value={[1, 2]}
-                               errorDisplayType={this.state.errorDisplayType} errorMessage={this.state.errorMessage}/>
-        <m-switch-item title="开关" v-model={this.state.switch} error={this.state.error}
-                       errorDisplayType={this.state.errorDisplayType} errorMessage={this.state.errorMessage}/>
-        <m-slider-item title="滑动输入条" v-model={this.state.slider} error={this.state.error}
-                       errorDisplayType={this.state.errorDisplayType} errorMessage={this.state.errorMessage}/>
-        <m-radio-list required title="单选" options={options} error={this.state.error}
-                      errorDisplayType={this.state.errorDisplayType} errorMessage={this.state.errorMessage}/>
-        <m-checkbox-list required title="多选" options={options} error={this.state.error}
-                         errorDisplayType={this.state.errorDisplayType} errorMessage={this.state.errorMessage}/>
+                               errorDisplayType={this.state.errorDisplayType}
+                               errorMessage={this.state.errorMessage}/>
+        <m-switch-item title="开关"
+                       v-model={this.state.switch}
+                       error={this.state.error}
+                       errorDisplayType={this.state.errorDisplayType}
+                       errorMessage={this.state.errorMessage}/>
+        <m-slider-item title="滑动输入条" v-model={this.state.slider}
+                       error={this.state.error}
+                       errorDisplayType={this.state.errorDisplayType}
+                       errorMessage={this.state.errorMessage}/>
+        <m-radio-list required={true}
+                      title="单选"
+                      options={options}
+                      error={this.state.error}
+                      errorDisplayType={this.state.errorDisplayType}
+                      errorMessage={this.state.errorMessage}/>
+        <m-checkbox-list
+          required={true}
+          title="多选"
+          options={options}
+          error={this.state.error}
+          errorDisplayType={this.state.errorDisplayType}
+          errorMessage={this.state.errorMessage}/>
       </List>
     </div>);
   }

@@ -1,5 +1,5 @@
-const componentList = require('./components');
-const fs = require('fs');
+import componentList from './components';
+import fs from 'fs';
 const componentTypesDir = 'types/components';
 console.log('生成typescript定义文件中……');
 

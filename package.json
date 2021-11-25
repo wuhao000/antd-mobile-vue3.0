@@ -1,6 +1,6 @@
 {
   "name": "antd-mobile-vue-next",
-  "version": "0.0.1-62",
+  "version": "0.0.1-63",
   "description": "基于Vue 3.0、vite2.0 移植的ant-design-mobile组件库",
   "main": "es/index.js",
   "keyword": "antd antd-mobile vue vue3 vite antd-mobile-vue",
@@ -18,15 +18,15 @@
   },
   "private": false,
   "scripts": {
-    "dev": "tsc -p build && npm run docs && vite",
-    "create": "tsc -p build && node build/create.js && npm run docs",
-    "docs": "tsc -p build && node build/check.js && node build/def.js && node build/docs.js",
-    "build": "tsc -p build && npm run docs && node compile/build-components.js && vue-cli-service build",
+    "dev": "npm run docs && vite",
+    "create": "ts-node build/create.ts && npm run docs",
+    "docs": "ts-node build/check.ts && ts-node build/def.ts && ts-node build/docs.ts",
+    "build": "npm run docs && ts-node compile/build-components.ts && vue-cli-service build",
     "lint": "vue-cli-service lint",
     "lib": "npm run docs && vue-cli-service build --target lib --name antdm --dest lib src/packages/index.ts",
-    "remove": "tsc -p build && node build/remove.js && npm run docs",
-    "cdn": "tsc -p build && npm run lib && node build/cdn.js",
-    "compile": "npm run docs && node compile/build-components.js",
+    "remove": "ts-node build/remove.ts && npm run docs",
+    "cdn": "npm run lib && ts-node build/cdn.ts",
+    "compile": "npm run docs && ts-node compile/build-components.ts",
     "release": "npm run compile && npm publish"
   },
   "files": [
@@ -35,7 +35,7 @@
     "es"
   ],
   "publishConfig": {
-    "registry": "https://registry.npmjs.org"
+    "registry": "https://nexus.aegis-info.com/repository/npm-aegis/"
   },
   "postcss": {
     "plugins": {
@@ -63,6 +63,7 @@
     "shallowequal": "^1.1.0"
   },
   "devDependencies": {
+    "node-ts": "^5.1.2",
     "@ant-design/icons-vue": "^6.0.1",
     "@babel/plugin-proposal-export-default-from": "^7.14.5",
     "@babel/plugin-transform-object-assign": "^7.12.13",

@@ -9,7 +9,7 @@ const RangeItem = defineComponent({
     ...formComponentProps,
     title: {
       type: [String, Object] as PropType<string | VNode>
-    }
+    },
   },
   setup(props, {emit}) {
     const {isDisabled, currentValue} = useFormComponent(props, {emit});
@@ -17,6 +17,9 @@ const RangeItem = defineComponent({
   },
   render() {
     return <List.Item multipleLine
+                      error={this.error}
+                      errorMessage={this.errorMessage}
+                      errorDisplayType={this.errorDisplayType}
                       disabled={this.isDisabled}>
       {this.title}
       <List.Item.Brief style={{padding: '15px', flex: 1}}>

@@ -120,6 +120,9 @@ export default defineComponent({
       }
     };
     return [<List.Item onClick={this.onClick}
+                       error={this.error}
+                       errorMessage={this.errorMessage}
+                       errorDisplayType={this.errorDisplayType}
                        style={this.$attrs.style}
                        class={this.$attrs.class}
                        touchFeedback={!this.isReadonly && !this.isDisabled}

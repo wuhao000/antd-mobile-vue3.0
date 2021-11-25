@@ -1,5 +1,5 @@
-const components = require('./components');
 import fs from 'fs';
+import components from './components';
 
 const checkSuffix = ['.ts', '.tsx', '.vue', '.jsx', '.js'];
 const checkDirs = ['mixins'];

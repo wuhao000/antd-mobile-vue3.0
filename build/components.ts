@@ -31,4 +31,5 @@ const resolveComponents = () => {
   });
   return componentList;
 };
-module.exports = resolveComponents();
+
+export default resolveComponents();

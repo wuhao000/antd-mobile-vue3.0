@@ -23,6 +23,9 @@ export const formComponentProps = {
   errorMessage: {
     type: String as PropType<string>
   },
+  errorDisplayType: {
+    type: String as PropType<'toast' | 'popover' | 'text' | undefined>
+  },
   prop: {
     type: String as PropType<string>
   },
@@ -40,10 +43,7 @@ export const formComponentProps = {
   rules: {
     type: Array as PropType<ValidateRule[]>
   },
-  value: {},
-  errorDisplayType: {
-    type: String as PropType<'toast' | 'popover' | 'text' | undefined>
-  }
+  value: {}
 };
 export const useFormComponent = (props, {emit}) => {
   const {dispatch} = useEmitter(getCurrentInstance());

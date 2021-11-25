@@ -1,9 +1,6 @@
-import {unwrapFragment} from '../../utils/vue';
 import {computed, defineComponent, getCurrentInstance, inject, onMounted, PropType, ref, VNode} from 'vue';
 import getDataAttr from '../../utils/get-data-attr';
 import Tab from './tab';
-
-let _uid = 100;
 
 export default defineComponent({
   inheritAttrs: false,
@@ -47,9 +44,9 @@ export default defineComponent({
       emit('click', e);
     }
     return {
-      tabBar, localSelected,
-      onClick,
-      _uid: _uid++
+      tabBar,
+      localSelected,
+      onClick
     };
   },
   render() {

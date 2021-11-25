@@ -84,6 +84,9 @@ export default defineComponent({
     return <>
       <List.Item onClick={onClick}
                  text={!!optionText}
+                 error={this.error}
+                 errorMessage={this.errorMessage}
+                 errorDisplayType={this.errorDisplayType}
                  style={this.$attrs.style}
                  class={this.$attrs.class}
                  required={this.required}

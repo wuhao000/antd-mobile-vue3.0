@@ -4,7 +4,8 @@
  * @since 2019/04/06
  */
 
-const fs = require('fs');
+import fs from "fs";
+
 const reg = '((/\\*\\*\\s(.*?)\\s\\*/\\s+)|(/\\*\\*\\s+(\\*\\s+.*\\s+)*\\*/\\s+))?(@Prop\\(([\\s\\S]*?)\\))\\s+public\\s(.*?):\\s(.*?);';
 const resolvePath = require('./utils').resolvePath;
 

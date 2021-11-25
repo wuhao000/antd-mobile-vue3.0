@@ -1,9 +1,11 @@
 import fs from 'fs';
 import {Component} from './components';
 
+import {render as renderTemplate} from "./tmpl";
+
+import components from "./components";
+
 console.log('生成路由中...');
-const renderTemplate = require('./tmpl').render;
-const components: Component[] = require('./components');
 const types = distinct(components.map(it => it.type));
 
 function distinct(strings: string[]) {
