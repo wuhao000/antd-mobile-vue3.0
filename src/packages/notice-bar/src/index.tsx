@@ -98,7 +98,7 @@ export default defineComponent({
           <Marquee
             {...marqueeProps}
             prefixCls={prefixCls}
-            text={this.$slots.default ? this.$slots.default()[0] : null}
+            text={this.$slots.default?.()?.[0]}
           />
         </div>
         {operationDom}

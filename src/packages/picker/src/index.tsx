@@ -229,7 +229,7 @@ export const PickerMixin = (isView) => {
               v-slots={{
                 cascader: () => cascader,
                 default: () => {
-                  return this.$slots.default && this.$slots.default().map(child => {
+                  return this.$slots.default?.()?.map(child => {
                     const node = cloneVNode(child);
                     setProps(node, {
                       touchFeedback: true,

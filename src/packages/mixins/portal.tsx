@@ -25,8 +25,9 @@ export default defineComponent({
     };
   },
   render() {
-    if (this.$slots.default && this.$slots.default.length) {
-      return this.$slots.default[0];
+    const children = this.$slots.default?.();
+    if (children?.length) {
+      return children[0];
     } else {
       return <div/>;
     }

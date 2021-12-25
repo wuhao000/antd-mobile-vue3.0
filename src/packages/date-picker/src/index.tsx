@@ -176,7 +176,7 @@ export const getDatePicker = (isView: boolean, name: string) => {
                          cancelText={this.cancelText || cancelText}
                          okText={this.okText || okText}
                          ref={this.fixOnOk}>
-          {this.$slots.default && this.$slots.default().map(it => {
+          {this.$slots.default?.()?.map(it => {
             setProps(it, {
               touchFeedback: true,
               onClick: () => {

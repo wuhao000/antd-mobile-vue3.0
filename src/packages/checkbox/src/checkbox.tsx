@@ -34,10 +34,10 @@ export default defineComponent({
     });
 
     const onClick = e => {
-      // e.stopPropagation();
+      e.stopPropagation();
+      emit('click', e);
       // e.preventDefault();
       checked.value = !checked.value;
-      emit('update:value', checked.value);
     };
     return {onClick};
   },
