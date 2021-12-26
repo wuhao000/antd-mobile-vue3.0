@@ -184,7 +184,7 @@ export default defineComponent({
           showOk={false}
           visible={this.visible}
           title={this.title as any}
-          closable={this.closable}
+          maskClosable={this.closable}
           class={cls}
           onOk={(e) => {
             console.log('ok');
@@ -207,7 +207,6 @@ export default defineComponent({
         visible={this.visible}
         prefixCls={prefixCls}
         title={this.title}
-        closable={this.closable}
         class={cls}
         onClose={this.onClose || ((e) => {
           this.$emit('change', false);

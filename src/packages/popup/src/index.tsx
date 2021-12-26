@@ -1,9 +1,10 @@
 import {Drawer} from 'ant-design-vue';
+import classNames from 'classnames';
 import {defineComponent, inject, PropType, VNode} from 'vue';
+import Icon from '../../icon';
 import {useBaseInputComponent} from '../../mixins/base-input-component';
 import {pureInputComponentProps} from '../../mixins/pure-input-component';
 import Touchable from '../../vmc-feedback/feedback';
-
 
 export default defineComponent({
   name: 'MPopup',
@@ -53,9 +54,19 @@ export default defineComponent({
       type: Boolean as PropType<boolean>,
       default: true
     },
-    closable: {
+    confirmLoading: {
+      type: Boolean
+    },
+    loadingText: {
+      type: String
+    },
+    maskClosable: {
       type: Boolean as PropType<boolean>,
       default: true
+    },
+    okText: {
+      type: String,
+      default: '确定'
     }
   },
   install: null,
@@ -66,13 +77,19 @@ export default defineComponent({
       attrs,
       slots
     }, form, {propName: 'visible', defaultValue: props.visible});
-    const onCancel = () => {
-      stateValue.value = false;
-      emit('cancel');
+    const onCancel = (e) => {
+      if (props.onCancel) {
+        emit('cancel', e);
+      } else {
+        stateValue.value = false;
+      }
     };
-    const onOk = () => {
-      stateValue.value = false;
-      emit('ok');
+    const onOk = (e) => {
+      if (props.onOk) {
+        emit('ok', e);
+      } else {
+        stateValue.value = false;
+      }
     };
     const getProps = () => {
       return {
@@ -96,25 +113,37 @@ export default defineComponent({
     const renderHeader = () => {
       return props.showTitle ? <div class={`${props.prefixCls}-title-wrap`}>
         {renderCancel()}
-        <div class={`${props.prefixCls}-item ${props.prefixCls}-title`}>{props.title}</div>
+        <div class={`${props.prefixCls}-item ${props.prefixCls}-title`}>
+          {props.title}</div>
         {renderOk()}
       </div> : null;
     };
     const renderCancel = () => {
-      const cancelButton = props.cancelButton ? props.cancelButton
-          : <div onClick={onCancel}
-                 class={`${props.prefixCls}-item ${props.prefixCls}-header-left`}>
-            {props.cancelText}
-          </div>;
-      return props.showCancel ?
-          <Touchable activeClassName={`${props.prefixCls}-item-active`}>
-            {cancelButton}
+      return (props.showCancel && !props.confirmLoading) ?
+          <Touchable
+              disabled={props.confirmLoading}
+              activeClassName={`${props.prefixCls}-item-active`}>
+            <div
+                onClick={(e) => {
+                  onCancel(e);
+                }}
+                class={classNames(`${props.prefixCls}-item ${props.prefixCls}-header-left`)}>{props.cancelText}</div>
           </Touchable> : null;
     };
     const renderOk = () => {
       return props.showOk ?
-          <Touchable activeClassName={`${props.prefixCls}-item-active`}>
-            <div onClick={onOk} class={`${props.prefixCls}-item ${props.prefixCls}-header-right`}>确定</div>
+          <Touchable
+              disabled={props.confirmLoading}
+              activeClassName={`${props.prefixCls}-item-active`}>
+            <div onClick={(e) => {
+              if (!props.confirmLoading) {
+                onOk(e);
+              }
+            }} class={classNames(`${props.prefixCls}-item ${props.prefixCls}-header-right`, {
+              [`${props.prefixCls}-item-disabled`]: props.confirmLoading
+            })}>
+              {props.confirmLoading ? <Icon type={'loading'}/> : undefined}
+              {props.confirmLoading ? props.loadingText : props.okText}</div>
           </Touchable> : null;
     };
     return {
@@ -133,7 +162,8 @@ export default defineComponent({
       ...this.getListeners(),
       ...this.getProps(),
       style: this.cssStyle,
-      visible: this.stateValue
+      visible: this.stateValue,
+      maskClosable: this.confirmLoading ? false : this.maskClosable
     };
     return <Drawer {...props}
                    v-slots={this.slots}>

@@ -16,7 +16,13 @@ export default defineComponent({
       <m-button
           onClick={this.onClick}>显示
       </m-button>
-      <Popup v-model={[this.show, 'visible']}>
+      <Popup
+          confirmLoading={true}
+          loadingText={'保存中'}
+          title={'这是标题'}
+          height={'80%'}
+          showCancel={true}
+          v-model={[this.show, 'visible']}>
         <div>22222222</div>
       </Popup>
     </div>;
