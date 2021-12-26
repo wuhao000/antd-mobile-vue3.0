@@ -38,7 +38,7 @@ export const usePureInputComponent = <T extends any>(props, {emit, attrs}, optio
     }
   });
   const cssStyle = computed(() => {
-    const style: any = {};
+    const style: any = props.style || attrs.style || {};
     if (props.block) {
       style.display = 'block';
     }

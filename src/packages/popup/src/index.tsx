@@ -57,6 +57,7 @@ export default defineComponent({
     confirmLoading: {
       type: Boolean
     },
+    getContainer: [Object, String, Boolean],
     loadingText: {
       type: String
     },
@@ -95,6 +96,7 @@ export default defineComponent({
       return {
         ...props,
         title: renderHeader(),
+        getContainer: props.getContainer,
         height: props.height || 'auto',
         width: props.width || 'auto',
         disabled: isDisabled.value,
@@ -165,6 +167,8 @@ export default defineComponent({
       visible: this.stateValue,
       maskClosable: this.confirmLoading ? false : this.maskClosable
     };
+    console.log(this.cssStyle);
+    console.log(this.$attrs.style);
     return <Drawer {...props}
                    v-slots={this.slots}>
       {this.getDefaultSlot()}
