@@ -49,8 +49,6 @@ export default defineComponent({
     const closePopup = () => {
       popupVisible.value = false;
     };
-
-
     return {
       onClick, onChange, onCancel, onClear, getOptions, stateValue, closePopup,
       optionText, popupVisible, isDisabled

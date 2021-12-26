@@ -58,7 +58,11 @@ export default defineComponent({
                     options={[{label: '选项1', value: 1}, {label: '选项2', value: 2, disabled: true}]}/>
       <List title="弹出单选">
         <m-radio-popup-list title="请选择"
+                            searchable={true}
                             v-model={[this.state.value4, 'value']}
+                            onSearch={(t) => {
+                              console.log('search text: ' + t);
+                            }}
                             options={[{label: '选项1', value: 1}, {label: '选项2', value: 2}]}/>
         <m-radio-popup-list title="部分选项禁用"
                             placeholder="请选择"

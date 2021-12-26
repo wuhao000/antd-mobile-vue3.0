@@ -26,10 +26,6 @@ export default defineComponent({
     visible: {
       type: Boolean as PropType<boolean>,
       default: false
-    },
-    searchable: {
-      type: Boolean as PropType<boolean>,
-      default: false
     }
   },
   setup(props, {emit, slots, attrs}) {
@@ -84,21 +80,10 @@ export default defineComponent({
     const closePopup = () => {
       popupVisible.value = false;
     };
-    const renderSearch = () => {
-      return props.searchable ? <SearchBar
-        value={searchKeyword.value}
-        {...{
-          ['onUpdate:value']: (v) => {
-            searchKeyword.value = v;
-          }
-        }}/> : null;
-    };
-
-
     return {
       onChange, stateValue, getOptions,
       onClick, isDisabled, isReadonly, closePopup,
-      onClear, renderSearch, popupVisible, optionText
+      onClear, popupVisible, optionText
     };
   },
   render() {
@@ -137,7 +122,6 @@ export default defineComponent({
              title={this.title}
              onOk={this.closePopup}
              onCancel={this.closePopup}>
-        {this.renderSearch()}
         <CheckboxList
           {...listProps}
           maxHeightPercentage={0.7}

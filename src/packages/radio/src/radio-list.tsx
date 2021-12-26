@@ -1,6 +1,7 @@
 import {defineComponent, getCurrentInstance, inject, onMounted, PropType, ref, watch} from 'vue';
 import List from '../../list';
 import {optionsBasedComponentProps, useOptionsBaseComponent} from '../../mixins/options-based-component';
+import SearchBar from '../../search-bar/src';
 import RadioItem from './radio-item';
 
 export default defineComponent({
@@ -18,7 +19,7 @@ export default defineComponent({
   setup(props, {emit, slots, attrs}) {
     const instance = getCurrentInstance();
     const form = inject('list', undefined);
-    const {getOptions, isDisabled} = useOptionsBaseComponent(props, {emit, slots, attrs}, form);
+    const {getOptions, searchKeyword, isDisabled} = useOptionsBaseComponent(props, {emit, slots, attrs}, form);
     const stateValue = ref(props.value !== undefined ? props.value : null);
     watch(() => props.value, (value: any) => {
       stateValue.value = value;
@@ -37,12 +38,12 @@ export default defineComponent({
             });
           }
           return <RadioItem
-            {...optionProps}
-            disabled={option.disabled || isDisabled.value}
-            value={stateValue.value === option.value}
-            onChange={(checkState) => {
-              onChange(checkState, option.value);
-            }}>{option.label}</RadioItem>;
+              {...optionProps}
+              disabled={option.disabled || isDisabled.value}
+              value={stateValue.value === option.value}
+              onChange={(checkState) => {
+                onChange(checkState, option.value);
+              }}>{option.label}</RadioItem>;
         });
       } else {
         return [];
@@ -55,6 +56,15 @@ export default defineComponent({
       emit('update:value', value);
       emit('change', value);
     };
+    const renderSearch = () => {
+      return props.searchable ? <SearchBar
+          value={searchKeyword.value}
+          {...{
+            ['onUpdate:value']: (v) => {
+              searchKeyword.value = v;
+            }
+          }}/> : null;
+    };
     onMounted(() => {
       if (props.maxHeightPercentage) {
         const windowHeight = document.body.clientHeight;
@@ -65,11 +75,12 @@ export default defineComponent({
       }
     });
     return {
-      renderOptions
+      renderOptions, renderSearch
     };
   },
   render() {
     return <List required={this.required} title={this.title}>
+      {this.renderSearch()}
       {this.renderOptions()}
     </List>;
   }

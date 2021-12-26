@@ -1,6 +1,7 @@
 import {defineComponent, getCurrentInstance, inject, onMounted, PropType, watch} from 'vue';
 import List from '../../list';
 import {optionsBasedComponentProps, useOptionsBaseComponent} from '../../mixins/options-based-component';
+import SearchBar from '../../search-bar/src';
 import CheckboxItem from './checkbox-item';
 
 export default defineComponent({
@@ -19,7 +20,7 @@ export default defineComponent({
   },
   setup(props, {emit, slots, attrs}) {
     const form = inject('list', undefined);
-    const {getOptions, stateValue, isDisabled} = useOptionsBaseComponent(props, {emit, attrs, slots}, form, {
+    const {getOptions, stateValue, searchKeyword, isDisabled} = useOptionsBaseComponent(props, {emit, attrs, slots}, form, {
       defaultValue: [],
       propName: 'value'
     });
@@ -55,6 +56,16 @@ export default defineComponent({
         stateValue.value = stateValue.value.filter(it => it !== value);
       }
     };
+    const renderSearch = () => {
+      return props.searchable ? <SearchBar
+          value={searchKeyword.value}
+          {...{
+            ['onUpdate:value']: (v) => {
+              searchKeyword.value = v;
+            }
+          }}/> : null;
+    };
+
     const instance = getCurrentInstance();
     onMounted(() => {
       if (props.maxHeightPercentage) {
@@ -65,11 +76,12 @@ export default defineComponent({
         }
       }
     });
-    return {renderOptions};
+    return {renderOptions, renderSearch};
   },
   render() {
     return <List required={this.required}
                  title={this.title}>
+      {this.renderSearch()}
       {this.renderOptions()}
     </List>;
   }
