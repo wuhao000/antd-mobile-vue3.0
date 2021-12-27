@@ -33,7 +33,8 @@ export default defineComponent({
     },
     placement: {
       type: String
-    }
+    },
+    destroyOnHide: Boolean
   },
   item: null,
   install: null,
@@ -70,8 +71,10 @@ export default defineComponent({
       ...this.$attrs,
       prefixCls: this.prefixCls,
       'v-model': [this.currentValue, 'visible'],
-      trigger: ['click']
+      trigger: ['click'],
+      destroyTooltipOnHide: this.destroyOnHide
     };
+    console.log(popoverProps);
     return <Popover {...popoverProps}
                     v-slots={slots}/>;
   }

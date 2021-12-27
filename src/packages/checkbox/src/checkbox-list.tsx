@@ -20,7 +20,7 @@ export default defineComponent({
   },
   setup(props, {emit, slots, attrs}) {
     const form = inject('list', undefined);
-    const {getOptions, stateValue, searchKeyword, isDisabled} = useOptionsBaseComponent(props, {emit, attrs, slots}, form, {
+    const {getOptions, setStateValue, stateValue, searchKeyword, isDisabled} = useOptionsBaseComponent(props, {emit, attrs, slots}, form, {
       defaultValue: [],
       propName: 'value'
     });
@@ -38,22 +38,20 @@ export default defineComponent({
         return <CheckboxItem
             {...optionProps}
             value={stateValue.value.includes(option.value)}
+            key={option.value}
             disabled={option.disabled || isDisabled.value}
             onChange={(checkState) => {
               onChange(checkState, option.value);
             }}>{option.label}</CheckboxItem>;
       });
     };
-    watch(() => props.value, (v) => {
-      stateValue.value = v;
-    });
     const onChange = (checkState: any, value: any) => {
       if (checkState) {
         if (!stateValue.value.includes(value)) {
-          stateValue.value = [...stateValue.value, value];
+            setStateValue([...stateValue.value, value]);
         }
       } else {
-        stateValue.value = stateValue.value.filter(it => it !== value);
+        setStateValue(stateValue.value.filter(it => it !== value))
       }
     };
     const renderSearch = () => {

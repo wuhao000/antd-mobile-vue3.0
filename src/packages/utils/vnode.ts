@@ -76,8 +76,7 @@ export function setProps(vnode: VNode, nodeProps: any = {}) {
 }
 
 export function getNodeText(node: VNode): string | undefined {
-  if (node) {
-
+  if (node && node.children) {
     if (typeof node.children === 'string') {
       return node.children;
     } else if (Array.isArray(node.children)) {

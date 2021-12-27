@@ -53,6 +53,11 @@ export default defineComponent({
     return (<div>
       <m-radio-list v-model={[this.state.value6, 'value']}
                     options={[{label: '选项1', value: 1}, {label: '选项2', value: 2}]}/>
+      <m-radio-list value={this.state.value6}
+                    onChange={(value) => {
+                      this.state.value6 = value;
+                    }}
+                    options={[{label: '选项1', value: 1}, {label: '选项2', value: 2}]}/>
       <m-radio-list title="选项列表（部分选项禁用）"
                     v-model={[this.state.value5, 'value']}
                     options={[{label: '选项1', value: 1}, {label: '选项2', value: 2, disabled: true}]}/>
@@ -64,6 +69,11 @@ export default defineComponent({
                               console.log('search text: ' + t);
                             }}
                             options={[{label: '选项1', value: 1}, {label: '选项2', value: 2}]}/>
+        <m-radio-popup-list title="自定义选项"
+                            options={[
+                              {label: <span style={{color: 'blue'}}>选项1</span>, value: 1},
+                              {label: <span style={{color: 'orange'}}>选项1</span>, value: 2}
+                            ]}/>
         <m-radio-popup-list title="部分选项禁用"
                             placeholder="请选择"
                             v-model={[this.state.value7, 'value']}
@@ -71,36 +81,36 @@ export default defineComponent({
       </List>
       <List title="RadioItem demo">
         {data.map(i => (
-            <RadioItem key={i.value}
-                       value={value === i.value}
-                       onChange={() => this.onChange(i.value)}>
-              {i.label}
-            </RadioItem>
+          <RadioItem key={i.value}
+                     value={value === i.value}
+                     onChange={() => this.onChange(i.value)}>
+            {i.label}
+          </RadioItem>
         ))}
       </List>
       <WhiteSpace size="lg"/>
       <List>
         {data2.map(i => (
-            <RadioItem key={i.value} value={value2 === i.value} onChange={() => this.onChange2(i.value)}>
-              {i.label}<List.Item.Brief>{i.extra}</List.Item.Brief>
-            </RadioItem>
+          <RadioItem key={i.value} value={value2 === i.value} onChange={() => this.onChange2(i.value)}>
+            {i.label}<List.Item.Brief>{i.extra}</List.Item.Brief>
+          </RadioItem>
         ))}
       </List>
       <List title="Disabled">
         {data.map(i => (
-            <RadioItem key={i.value} value={value3 === i.value}
-                       onChange={() => this.onChange3(i.value)} disabled>
-              {i.label}
-            </RadioItem>
+          <RadioItem key={i.value} value={value3 === i.value}
+                     onChange={() => this.onChange3(i.value)} disabled>
+            {i.label}
+          </RadioItem>
         ))}
       </List>
       <WhiteSpace size="lg"/>
       <List>
         {data2.map(i => (
-            <RadioItem key={i.value} value={value4 === i.value}
-                       onChange={() => this.onChange4(i.value)} disabled>
-              {i.label}<List.Item.Brief>{i.extra}</List.Item.Brief>
-            </RadioItem>
+          <RadioItem key={i.value} value={value4 === i.value}
+                     onChange={() => this.onChange4(i.value)} disabled>
+            {i.label}<List.Item.Brief>{i.extra}</List.Item.Brief>
+          </RadioItem>
         ))}
       </List>
       <Flex style={{padding: '15px'}}>

@@ -35,9 +35,10 @@ export const useOptionsBaseComponent = (props, {emit, attrs, slots}, form, optio
   defaultValue: undefined,
   propName: 'value'
 }) => {
-  const {isDisabled, stateValue, isReadonly} =
+  const {isDisabled, setStateValue, stateValue, isReadonly} =
       useBaseInputComponent(props, {emit, attrs, slots}, form, options);
   const searchKeyword: Ref<string> = ref('');
+
   watch(() => props.searchText, searchText => {
     searchKeyword.value = searchText;
   });
@@ -85,10 +86,8 @@ export const useOptionsBaseComponent = (props, {emit, attrs, slots}, form, optio
   onBeforeUpdate(() => {
     setProps();
   });
-  {
-    setProps();
-  }
+  setProps();
   return {
-    getOptions, isReadonly, isDisabled, searchKeyword, stateValue
+    getOptions, isReadonly, isDisabled, searchKeyword, stateValue, setStateValue
   };
 };

@@ -49,7 +49,7 @@ export default defineComponent({
   render() {
     return <div>
       <m-checkbox-popup-list
-          visible={true}
+          visible={false}
           v-model={[this.value2, 'value']}
           searchable={true}
           title="点击选择"

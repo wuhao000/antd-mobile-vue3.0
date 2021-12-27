@@ -3,7 +3,7 @@ import {defineComponent} from 'vue';
 export default defineComponent({
   name: 'Test',
   props: {},
-  setup(props, {emit, slots}) {
+  setup() {
     const onChange = (val) => {
       console.log(val);
     };
@@ -18,11 +18,13 @@ export default defineComponent({
     return (<div>
       <m-list title="CheckboxItem demo">
         {data.map(i => (
-          <m-checkbox-item key={i.value} onChange={() => this.onChange(i.value)}>
+          <m-checkbox-item key={i.value} onChange={checked => this.onChange(checked)}>
             {i.label}
           </m-checkbox-item>
         ))}
-        <m-checkbox-item key="disabled" disabled defaultChecked multipleLine>
+        <m-checkbox-item key="disabled"
+                         disabled={true}
+                         multipleLine>
           Undergraduate
           <m-list-item-brief>Auxiliary text</m-list-item-brief>
         </m-checkbox-item>

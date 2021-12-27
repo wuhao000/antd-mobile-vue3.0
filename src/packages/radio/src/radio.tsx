@@ -33,7 +33,7 @@ export default defineComponent({
     const checked = ref(props.value || false);
     const onClick = () => {
       checked.value = !checked.value;
-      emit('change', checked.value);
+      emit('click', checked.value);
     };
     return {
       onClick

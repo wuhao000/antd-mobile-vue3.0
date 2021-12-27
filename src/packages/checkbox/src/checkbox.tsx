@@ -1,6 +1,7 @@
 import RcCheckbox from 'ant-design-vue/es/vc-checkbox';
 import classnames from 'classnames';
-import {defineComponent, PropType, ref, watch} from 'vue';
+import {defineComponent, PropType} from 'vue';
+import {usePureInput} from "../../mixins/pure-input-component";
 
 export default defineComponent({
   name: 'MCheckbox',
@@ -24,20 +25,12 @@ export default defineComponent({
       default: false
     }
   },
-  setup(props, {emit, slots}) {
-    const checked = ref(props.value || false);
-    watch(() => props.value, (value: boolean) => {
-      checked.value = value;
-    });
-    watch(() => checked.value, (checked: boolean) => {
-      emit('update:value', checked);
-    });
-
+  setup(props, {emit, attrs, slots}) {
+    const {stateValue, setStateValue} = usePureInput(props, {emit, attrs})
     const onClick = e => {
       e.stopPropagation();
       emit('click', e);
-      // e.preventDefault();
-      checked.value = !checked.value;
+      setStateValue(!stateValue.value);
     };
     return {onClick};
   },

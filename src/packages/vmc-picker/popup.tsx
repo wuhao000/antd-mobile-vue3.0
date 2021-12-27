@@ -13,6 +13,7 @@ const getModal = (props, visible: boolean, {getContent, hide, onCancel, onOk}) =
         transitionName: props.transitionName || props.popupTransitionName,
         maskTransitionName: props.maskTransitionName
       }}
+      getContainer={'body'}
       onCancel={onCancel}
       onOk={onOk}
       style={props.style}>

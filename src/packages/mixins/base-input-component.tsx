@@ -1,6 +1,6 @@
 import {useSimpleFormComponent} from './simple-form-component';
 import {computed} from 'vue';
-import {usePureInputComponent} from './pure-input-component';
+import {usePureInput} from './pure-input-component';
 
 export const useBaseInputComponent = (props, {emit, attrs, slots}, form, options: {
   defaultValue: any,
@@ -10,7 +10,7 @@ export const useBaseInputComponent = (props, {emit, attrs, slots}, form, options
   propName: 'value'
 }) => {
   const {isReadonly, componentSize, isDisabled} = useSimpleFormComponent(props, form);
-  const {getSlotProps, cssStyle, listeners, getDefaultSlot, getProps, stateValue} = usePureInputComponent(props, {
+  const {getSlotProps, setStateValue, cssStyle, listeners, getDefaultSlot, getProps, stateValue} = usePureInput(props, {
     emit,
     attrs
   }, options);
@@ -21,7 +21,9 @@ export const useBaseInputComponent = (props, {emit, attrs, slots}, form, options
     getDefaultSlot,
     slots,
     stateValue,
-    listeners, cssStyle,
+    setStateValue,
+    listeners,
+    cssStyle,
     props: computed(() => {
       return {
         ...getSlotProps(),

@@ -2,9 +2,11 @@ import classnames from 'classnames';
 import {defineComponent, PropType} from 'vue';
 import List from '../../list';
 import Radio from './radio';
+import {filterHTMLAttrs} from "../../utils/dom";
 
 export default defineComponent({
   name: 'MRadioItem',
+  inheritAttrs: false,
   props: {
     prefixCls: {
       default: 'am-radio'
@@ -34,7 +36,6 @@ export default defineComponent({
     const onClick = (e) => {
       if (!props.disabled) {
         emit('click', e);
-        emit('change', !props.value);
       }
     };
     return {
@@ -50,7 +51,8 @@ export default defineComponent({
     } = this.$props;
     const {prefixCls} = otherProps;
     const wrapCls = classnames(`${prefixCls}-item`, {
-      [`${prefixCls}-item-disabled`]: disabled === true
+      [`${prefixCls}-item-disabled`]: disabled === true,
+      [`${prefixCls}-item-selected`]: this.value === true
     });
 
     const extraProps: any = {};
@@ -59,28 +61,27 @@ export default defineComponent({
         extraProps[i] = (this.$props as any)[i];
       }
     });
-    // @ts-ignore
     const extra = <Radio
-        {
-          ...{
-            ...radioProps,
-            ...extraProps
-          }
+      {
+        ...{
+          ...radioProps,
+          ...extraProps
         }
-        value={this.value}
-        onChange={this.onChange}
+      }
+      value={this.value}
+      onChange={this.onChange}
     />;
     return (
-        <List.Item
-            {
-              ...otherProps
-            }
-            onClick={this.onClick}
-            prefixCls={listPrefixCls}
-            class={wrapCls}
-            extra={extra}>
-          {this.$slots.default?.()}
-        </List.Item>
+      <List.Item
+        {
+          ...{...otherProps, ...filterHTMLAttrs(this.$attrs)}
+        }
+        onClick={this.onClick}
+        prefixCls={listPrefixCls}
+        class={wrapCls}
+        extra={extra}>
+        {this.$slots.default?.()}
+      </List.Item>
     );
   }
 });

@@ -68,6 +68,7 @@ export default defineComponent({
                 placement={this.state.placement}
                 maskClosable={this.state.maskClosable}
                 v-slots={slots}
+                destroyOnHide={true}
                 v-model={[this.state.visible, 'visible']}>
             </Popover>
           }

@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import {defineComponent, PropType, reactive, watch} from 'vue';
 import List from '../../list';
 import Checkbox from './checkbox';
+import {usePureInput} from "../../mixins/pure-input-component";
 
 export default defineComponent({
   name: 'MCheckboxItem',
@@ -44,26 +45,16 @@ export default defineComponent({
     }
   },
   emits: ['change', 'update:value'],
-  setup(props, {emit}) {
-    const state = reactive({
-      value: props.value
-    });
-    watch(() => props.value, (value: any) => {
-      state.value = value;
-    });
-    watch(() => state.value, (value: any) => {
-      emit('update:value', value);
-      emit('change', value);
-    });
-
+  setup(props, {emit, attrs}) {
+    const {stateValue, setStateValue} = usePureInput(props, {emit, attrs})
     const onChange = (value: boolean) => {
     };
     const onClick = (e) => {
       if (!props.disabled) {
-        state.value = !state.value;
+        setStateValue(!stateValue.value);
       }
     };
-    return {state, onChange, onClick};
+    return {stateValue, onChange, onClick};
   },
   render() {
     const {
@@ -88,7 +79,7 @@ export default defineComponent({
       {...{
         ...checkboxProps,
         ...extraProps,
-        value: this.state.value
+        value: this.stateValue
       }}
       style={this.thumbStyle}
       onChange={this.onChange}/>;

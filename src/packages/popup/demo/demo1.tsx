@@ -20,33 +20,38 @@ export default defineComponent({
     return <div>
       <div>
         <m-button
-            onClick={this.onClick}>显示
+          onClick={this.onClick}>显示
         </m-button>
         <Popup
-            loadingText={'保存中'}
-            title={'这是标题'}
-            height={'80%'}
-            showCancel={true}
-            v-model={[this.show, 'visible']}>
-          <div>22222222</div>
+          loadingText={'保存中'}
+          title={'这是标题'}
+          height={'80%'}
+          showCancel={true}
+          v-model={[this.show, 'visible']}>
+          <m-date-picker-item/>
+          <m-checkbox-popup-list
+            title={'复选'}
+            options={[
+            {label: 'a', value: 'a'}
+          ]}/>
         </Popup>
       </div>
       <div style={{
         position: 'relative'
       }}>
         <m-button
-            onClick={this.onClick2}>显示
+          onClick={this.onClick2}>显示
         </m-button>
         <Popup
-            style={{
-              marginTop: '47px',
-              zIndex: -1
-            }}
-            showTitle={false}
-            getContainer={false}
-            height={'30%'}
-            placement={'top'}
-            v-model={[this.show2, 'visible']}>
+          style={{
+            marginTop: '47px',
+            zIndex: -1
+          }}
+          showTitle={false}
+          getContainer={false}
+          height={'30%'}
+          placement={'top'}
+          v-model={[this.show2, 'visible']}>
           <div>22222222</div>
         </Popup>
       </div>

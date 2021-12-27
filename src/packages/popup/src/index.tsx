@@ -5,6 +5,7 @@ import Icon from '../../icon';
 import {useBaseInputComponent} from '../../mixins/base-input-component';
 import {pureInputComponentProps} from '../../mixins/pure-input-component';
 import Touchable from '../../vmc-feedback/feedback';
+import omit from "omit.js";
 
 export default defineComponent({
   name: 'MPopup',
@@ -57,7 +58,10 @@ export default defineComponent({
     confirmLoading: {
       type: Boolean
     },
-    getContainer: [Object, String, Boolean],
+    getContainer: {
+      type: [Object, String, Boolean],
+      default: 'body'
+    },
     loadingText: {
       type: String
     },
@@ -122,31 +126,31 @@ export default defineComponent({
     };
     const renderCancel = () => {
       return (props.showCancel && !props.confirmLoading) ?
-          <Touchable
-              disabled={props.confirmLoading}
-              activeClassName={`${props.prefixCls}-item-active`}>
-            <div
-                onClick={(e) => {
-                  onCancel(e);
-                }}
-                class={classNames(`${props.prefixCls}-item ${props.prefixCls}-header-left`)}>{props.cancelText}</div>
-          </Touchable> : null;
+        <Touchable
+          disabled={props.confirmLoading}
+          activeClassName={`${props.prefixCls}-item-active`}>
+          <div
+            onClick={(e) => {
+              onCancel(e);
+            }}
+            class={classNames(`${props.prefixCls}-item ${props.prefixCls}-header-left`)}>{props.cancelText}</div>
+        </Touchable> : null;
     };
     const renderOk = () => {
       return props.showOk ?
-          <Touchable
-              disabled={props.confirmLoading}
-              activeClassName={`${props.prefixCls}-item-active`}>
-            <div onClick={(e) => {
-              if (!props.confirmLoading) {
-                onOk(e);
-              }
-            }} class={classNames(`${props.prefixCls}-item ${props.prefixCls}-header-right`, {
-              [`${props.prefixCls}-item-disabled`]: props.confirmLoading
-            })}>
-              {props.confirmLoading ? <Icon type={'loading'}/> : undefined}
-              {props.confirmLoading ? props.loadingText : props.okText}</div>
-          </Touchable> : null;
+        <Touchable
+          disabled={props.confirmLoading}
+          activeClassName={`${props.prefixCls}-item-active`}>
+          <div onClick={(e) => {
+            if (!props.confirmLoading) {
+              onOk(e);
+            }
+          }} class={classNames(`${props.prefixCls}-item ${props.prefixCls}-header-right`, {
+            [`${props.prefixCls}-item-disabled`]: props.confirmLoading
+          })}>
+            {props.confirmLoading ? <Icon type={'loading'}/> : undefined}
+            {props.confirmLoading ? props.loadingText : props.okText}</div>
+        </Touchable> : null;
     };
     return {
       getProps,
@@ -160,15 +164,14 @@ export default defineComponent({
     };
   },
   render() {
-    const props: any = {
+    const props: any = omit({
       ...this.getListeners(),
       ...this.getProps(),
       style: this.cssStyle,
       visible: this.stateValue,
       maskClosable: this.confirmLoading ? false : this.maskClosable
-    };
-    console.log(this.cssStyle);
-    console.log(this.$attrs.style);
+    }, ['cancelText', 'loadingText', 'okText', "position", 'showOk', 'showTitle',
+      'block', 'confirmLoading', 'showCancel']);
     return <Drawer {...props}
                    v-slots={this.slots}>
       {this.getDefaultSlot()}

@@ -24,8 +24,18 @@ export default defineComponent({
   },
   render() {
     return <div>
-      <m-checkbox-list v-model={[this.state.value, 'value']}
-                       options={this.options}></m-checkbox-list>
+      <div>
+        <m-checkbox-list v-model={[this.state.value, 'value']}
+                         options={this.options}></m-checkbox-list>
+      </div>
+      <div>
+        <m-checkbox-list value={this.state.value}
+                         onChange={value => {
+                           this.state.value = value;
+                         }}
+                         title={'选项列表'}
+                         options={this.options}></m-checkbox-list>
+      </div>
     </div>;
   }
 });
