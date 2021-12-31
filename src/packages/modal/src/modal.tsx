@@ -1,4 +1,5 @@
 import Dialog from 'ant-design-vue/es/vc-dialog';
+import Button from '../../button';
 import classnames from 'classnames';
 import {defineComponent, PropType} from 'vue';
 import Popup from '../../popup';
@@ -25,6 +26,12 @@ export default defineComponent({
     wrapClassName: {
       type: String as PropType<string>
     },
+    onText: {
+      type: String
+    },
+    closeText: {
+      type: String
+    },
     wrapProps: {},
     platform: {
       type: String as PropType<string>,
@@ -43,17 +50,20 @@ export default defineComponent({
       default: false
     },
     footer: {
+      type: Array,
       default: () => {
         return [];
       }
     },
-    className: {
-      type: [String, Object] as PropType<string | object>
+    onClose: {
+      type: Function
     },
-    onClose: {},
+    onOk: {
+      type: Function,
+    },
     transparent: {
       type: Boolean as PropType<boolean>,
-      default: false
+      default: true
     },
     popup: {
       type: [Boolean, String],
@@ -108,8 +118,7 @@ export default defineComponent({
             class={`${prefixCls}-button`}
             role="button"
             style={buttonStyle}
-            onClick={onClickFn}
-          >
+            onClick={onClickFn}>
             {button.text || `Button`}
           </a>
         </TouchFeedback>
@@ -141,12 +150,22 @@ export default defineComponent({
       }`,
       `${prefixCls}-button-group-${operation ? 'operation' : 'normal'}`
     );
-    const footerDom = footer.length ? (
+    const footerDom = (footer.length || this.onOk || this.onClose) ? (
       <div class={btnGroupClass} role="group">
         {footer.map((button, i) =>
           // tslint:disable-next-line:jsx-no-multiline-js
-          this.renderFooterButton(button, prefixCls, i)
+          this.renderFooterButton(button as Action<any>, prefixCls, i)
         )}
+        {
+          this.onClose ? <Button onClick={(e) => {
+            this.$emit('close', e)
+          }}>{this.closeText ?? '关闭'}</Button> : undefined
+        }
+        {
+          this.onOk ? <Button onClick={(e) => {
+            this.$emit('ok', e)
+          }}>{this.onText ?? '确定'}</Button> : undefined
+        }
       </div>
     ) : null;
 
@@ -169,7 +188,7 @@ export default defineComponent({
     const wrapCls = classnames(wrapClassName, {
       [`${prefixCls}-wrap-popup`]: popup
     });
-    const cls = classnames(this.className, {
+    const cls = classnames(this.$attrs.class, {
       [`${prefixCls}-transparent`]: transparent,
       [`${prefixCls}-popup`]: popup,
       [`${prefixCls}-operation`]: operation,
@@ -187,19 +206,18 @@ export default defineComponent({
           maskClosable={this.closable}
           class={cls}
           onOk={(e) => {
-            console.log('ok');
-            this.$emit('change', false);
-            this.$emit('close', e);
+            this.$emit('ok', e);
           }}
           onCancel={this.onClose || ((e) => {
-            console.log('cancel');
-            this.$emit('change', false);
             this.$emit('close', e);
           })}>
           {this.$slots.default?.()}
         </Popup>
       );
     }
+    restProps['onUpdate:visible'] = (v) => {
+      this.$emit('update:visible', v);
+    };
     return (
       <Dialog
         {...restProps}
@@ -209,14 +227,20 @@ export default defineComponent({
         title={this.title}
         class={cls}
         onClose={this.onClose || ((e) => {
-          this.$emit('change', false);
+          this.$emit('update:visible', false);
           this.$emit('close', e);
+        })}
+        onOk={this.onOk || (e => {
+          this.$emit('ok', e);
         })}
         wrapClassName={wrapCls}
         transitionName={transitionName || transName}
         maskTransitionName={maskTransitionName || maskTransName}
         footer={footerDom}
-      >{this.$slots.default?.()}</Dialog>
+        v-slots={{
+          default: this.$slots.default
+        }}
+      />
     );
   }
 });

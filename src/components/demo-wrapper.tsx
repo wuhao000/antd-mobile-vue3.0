@@ -6,7 +6,9 @@ export default defineComponent({
     title: {}
   },
   render() {
-    return <div class="demo-preview-item">
+    return <div class="demo-preview-item" style={{
+      padding: '12px',
+    }}>
       <div class="demo-title">
         {this.title}
       </div>

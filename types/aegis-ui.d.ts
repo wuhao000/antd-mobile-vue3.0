@@ -43,6 +43,7 @@ import {TagComponent} from './components/tag';
 import {TextareaComponent} from './components/textarea';
 import {ToastComponent} from './components/toast';
 import {WhiteSpaceComponent} from './components/white-space';
+import {SpaceComponent} from './components/space';
 import {WingBlankComponent} from './components/wing-blank';
 
 export class Accordion extends AccordionComponent {
@@ -134,6 +135,8 @@ export class Textarea extends TextareaComponent {
 export class Toast extends ToastComponent {
 }
 export class WhiteSpace extends WhiteSpaceComponent {
+}
+export class Space extends SpaceComponent {
 }
 export class WingBlank extends WingBlankComponent {
 }

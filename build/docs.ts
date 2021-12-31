@@ -23,6 +23,9 @@ function createDemoFile(component: Component, componentDemoRootPath, demoName, f
     name, demoName, dir: component.dir, fileName
   });
   const componentGeneratedFilePath = 'src/generated/' + component.dir;
+  if (!fs.existsSync('src/generated')) {
+    fs.mkdirSync('src/generated');
+  }
   if (!fs.existsSync(componentGeneratedFilePath)) {
     fs.mkdirSync(componentGeneratedFilePath);
   }

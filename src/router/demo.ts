@@ -180,6 +180,10 @@ export default [{
   name: 'm-white-space',
   component: () => import('../generated/white-space/demo.vue')
 }, {
+  path: 'm-space',
+  name: 'm-space',
+  component: () => import('../generated/space/demo.vue')
+}, {
   path: 'm-wing-blank',
   name: 'm-wing-blank',
   component: () => import('../generated/wing-blank/demo.vue')

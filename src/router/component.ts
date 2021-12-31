@@ -309,6 +309,13 @@ export default [{
   },
   component: () => import('../generated/white-space/index.vue')
 }, {
+  path: 'space',
+  name: 'Space 间距',
+  meta: {
+    tag: '布局'
+  },
+  component: () => import('../generated/space/index.vue')
+}, {
   path: 'wing-blank',
   name: 'WingBlank 两翼留白',
   meta: {

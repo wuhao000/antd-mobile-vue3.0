@@ -47,6 +47,7 @@ import Tag from './tag';
 import Textarea from './textarea';
 import Toast from './toast';
 import WhiteSpace from './white-space';
+import Space from './space';
 import WingBlank from './wing-blank';
 // 注册moment中文国际化文案
 if (window.moment) {
@@ -99,6 +100,7 @@ const components = [
 	Textarea,
 	Toast,
 	WhiteSpace,
+	Space,
 	WingBlank
 ];
 
@@ -158,6 +160,7 @@ export {
 	Textarea,
 	Toast,
 	WhiteSpace,
+	Space,
 	WingBlank
 };
 export default {
@@ -209,5 +212,6 @@ export default {
 	Textarea,
 	Toast,
 	WhiteSpace,
+	Space,
 	WingBlank
 };

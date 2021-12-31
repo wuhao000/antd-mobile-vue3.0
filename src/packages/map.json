@@ -306,6 +306,13 @@
     "chineseName": "上下留白",
     "tag": "布局"
   },
+  "space": {
+    "type": "component",
+    "componentType": "mobile",
+    "name": "space",
+    "chineseName": "间距",
+    "tag": "布局"
+  },
   "wing-blank": {
     "type": "component",
     "componentType": "mobile",

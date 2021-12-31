@@ -21,7 +21,6 @@ const DELAY = 600;
  * Max Safe Integer -- on IE this is not available, so manually set the number in that case.
  * The reason this is used, instead of Infinity is because numbers above the MSI are unstable
  */
-const MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER || Math.pow(2, 53) - 1;
 export const baseComponentProps = {
   step: {
     type: [String, Number] as PropType<number | string>
@@ -59,7 +58,7 @@ export const baseComponentProps = {
   }
 };
 export const useBaseComponent = (props, {emit}) => {
-  const autoStepTimer: Ref<any> = ref(null);
+  const autoStepTimer: Ref = ref(null);
   const state = reactive({
     inputValue: null,
     focused: props.autoFocus
