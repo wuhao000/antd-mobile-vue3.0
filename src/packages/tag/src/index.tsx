@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import {CSSProperties, defineComponent, PropType, reactive, watch} from 'vue';
 import getDataAttr from '../../utils/get-data-attr';
+import {usePureInput} from "../../mixins/pure-input-component";
 
 const colorRecord: Record<string, string> = {
   default: '#000000d9',
@@ -45,23 +46,18 @@ export default defineComponent({
       default: false
     }
   },
-  setup(props, {emit, slots}) {
-    const state = reactive({
-      selected: props.selected
-    });
-    watch(() => props.selected, (selected: boolean) => {
-      state.selected = selected;
-    });
+  setup(props, {emit, attrs}) {
+    const {} = usePureInput(props, {emit, attrs})
 
     const onClick = () => {
       const {disabled} = props;
       if (disabled) {
         return;
       }
-      emit('select', !state.selected);
+      emit('select', !props.selected);
     };
     return {
-      onClick, state
+      onClick
     };
   },
   render() {
@@ -71,16 +67,15 @@ export default defineComponent({
       small
     } = this.$props;
     const wrapCls = classnames(prefixCls, {
-      [`${prefixCls}-normal`]: !disabled && (!this.state.selected || small),
+      [`${prefixCls}-normal`]: !disabled && !this.selected,
       [`${prefixCls}-small`]: small,
-      [`${prefixCls}-selected`]: this.state.selected && !disabled && !small,
+      [`${prefixCls}-selected`]: this.selected && !disabled,
       [`${prefixCls}-disabled`]: disabled,
       [`${prefixCls}-round`]: this.round,
     });
     const color = colorRecord[this.color] ?? this.color
     const borderColor = this.color === 'default' ? '#d9d9d9' : (color ?? '#ddd')
     const bgColor = this.fill === 'outline' || this.color === 'default' ? 'white' : (color ?? 'white')
-    console.log(color, this.fill);
     const style: CSSProperties & {
       '--border-color': string
       '--text-color': string

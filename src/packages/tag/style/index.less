@@ -1,7 +1,9 @@
 @class-prefix-tag: ~'am-tag';
 
 @corner-height: 16px;
+@corner-height-half: 8px;
 @corner-width: 20px;
+@corner-width-half: 10px;
 
 .@{class-prefix-tag} {
   font-weight: normal;
@@ -51,10 +53,10 @@
     }
     &:after {
       content: '';
-      border-bottom: @corner-height/2 solid #108ee9;
-      border-right: @corner-width/2 solid #108ee9;
-      border-left: @corner-width/2 solid transparent;
-      border-top: @corner-height/2 solid transparent;
+      border-bottom: @corner-height-half solid #108ee9;
+      border-right: @corner-width-half solid #108ee9;
+      border-left: @corner-width-half solid transparent;
+      border-top: @corner-height-half solid transparent;
       position: absolute;
       height: @corner-height;
       width: @corner-width;

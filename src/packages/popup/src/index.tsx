@@ -97,15 +97,16 @@ export default defineComponent({
       }
     };
     const getProps = () => {
+      const open = isDisabled.value ? false : stateValue.value
       return {
         ...props,
         title: renderHeader(),
         getContainer: props.getContainer,
         height: props.height || 'auto',
-        width: props.width || 'auto',
+        width: open ? (props.width || 'auto') : '0px',
         disabled: isDisabled.value,
         position: props.placement,
-        open: isDisabled.value ? false : stateValue.value
+        open
       };
     };
     const getListeners = () => {
@@ -172,6 +173,9 @@ export default defineComponent({
       maskClosable: this.confirmLoading ? false : this.maskClosable
     }, ['cancelText', 'loadingText', 'okText', "position", 'showOk', 'showTitle',
       'block', 'confirmLoading', 'showCancel']);
+    if (!props.visible) {
+      props.style.width = '0px';
+    }
     return <Drawer {...props}
                    v-slots={this.slots}>
       {this.getDefaultSlot()}
