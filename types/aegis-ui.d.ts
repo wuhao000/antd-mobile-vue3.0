@@ -15,6 +15,7 @@ import {GridComponent} from './components/grid';
 import {IconComponent} from './components/icon';
 import {ImagePickerComponent} from './components/image-picker';
 import {InputComponent} from './components/input';
+import {CascaderViewComponent} from './components/cascader-view';
 import {ListComponent} from './components/list';
 import {LoadingDirectiveComponent} from './components/loading-directive';
 import {MenuComponent} from './components/menu';
@@ -31,17 +32,21 @@ import {PullRefreshComponent} from './components/pull-refresh';
 import {RadioComponent} from './components/radio';
 import {RangeComponent} from './components/range';
 import {ResultComponent} from './components/result';
+import {EmptyComponent} from './components/empty';
+import {LoadingComponent} from './components/loading';
 import {SearchBarComponent} from './components/search-bar';
 import {SegmentedControlComponent} from './components/segmented-control';
 import {SliderComponent} from './components/slider';
 import {StepperComponent} from './components/stepper';
 import {StepsComponent} from './components/steps';
+import {InfiniteScrollComponent} from './components/infinite-scroll';
 import {SwitchComponent} from './components/switch';
 import {TabBarComponent} from './components/tab-bar';
 import {TabsComponent} from './components/tabs';
 import {TagComponent} from './components/tag';
 import {TextareaComponent} from './components/textarea';
 import {ToastComponent} from './components/toast';
+import {MaskComponent} from './components/mask';
 import {WhiteSpaceComponent} from './components/white-space';
 import {SpaceComponent} from './components/space';
 import {WingBlankComponent} from './components/wing-blank';
@@ -80,6 +85,8 @@ export class ImagePicker extends ImagePickerComponent {
 }
 export class Input extends InputComponent {
 }
+export class CascaderView extends CascaderViewComponent {
+}
 export class List extends ListComponent {
 }
 export class LoadingDirective extends LoadingDirectiveComponent {
@@ -112,6 +119,10 @@ export class Range extends RangeComponent {
 }
 export class Result extends ResultComponent {
 }
+export class Empty extends EmptyComponent {
+}
+export class Loading extends LoadingComponent {
+}
 export class SearchBar extends SearchBarComponent {
 }
 export class SegmentedControl extends SegmentedControlComponent {
@@ -121,6 +132,8 @@ export class Slider extends SliderComponent {
 export class Stepper extends StepperComponent {
 }
 export class Steps extends StepsComponent {
+}
+export class InfiniteScroll extends InfiniteScrollComponent {
 }
 export class Switch extends SwitchComponent {
 }
@@ -133,6 +146,8 @@ export class Tag extends TagComponent {
 export class Textarea extends TextareaComponent {
 }
 export class Toast extends ToastComponent {
+}
+export class Mask extends MaskComponent {
 }
 export class WhiteSpace extends WhiteSpaceComponent {
 }

@@ -4,7 +4,7 @@ import {Models} from '../../../types/models';
 import Gesture, {IGestureStatus} from '../../vmc-gesture';
 import {getPxStyle, getTransformPropValue, setPxStyle} from './utils';
 
-const DefaultTabBar = defineComponent({
+export default defineComponent({
   inheritAttrs: false,
   name: 'DefaultTabBar',
   props: {
@@ -124,7 +124,6 @@ const DefaultTabBar = defineComponent({
           isMoving.value = false;
           transform.value = getPxStyle(finalOffset, 'px', isVertical);
         },
-
         setCurrentOffset: (offset: number | string) => lastOffset = offset
       };
     });
@@ -197,7 +196,6 @@ const DefaultTabBar = defineComponent({
       getTransformByIndex();
       instanceId.value = instanceId.value++;
     }
-
     return {
       setLayout(el) {
         layoutRef.value = el;
@@ -265,5 +263,3 @@ const DefaultTabBar = defineComponent({
     </div>;
   }
 });
-
-export default DefaultTabBar as any;

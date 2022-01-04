@@ -19,6 +19,7 @@ import Grid from './grid';
 import Icon from './icon';
 import ImagePicker from './image-picker';
 import Input from './input';
+import CascaderView from './cascader-view';
 import List from './list';
 import LoadingDirective from './loading-directive';
 import Menu from './menu';
@@ -35,17 +36,21 @@ import PullRefresh from './pull-refresh';
 import Radio from './radio';
 import Range from './range';
 import Result from './result';
+import Empty from './empty';
+import Loading from './loading';
 import SearchBar from './search-bar';
 import SegmentedControl from './segmented-control';
 import Slider from './slider';
 import Stepper from './stepper';
 import Steps from './steps';
+import InfiniteScroll from './infinite-scroll';
 import Switch from './switch';
 import TabBar from './tab-bar';
 import Tabs from './tabs';
 import Tag from './tag';
 import Textarea from './textarea';
 import Toast from './toast';
+import Mask from './mask';
 import WhiteSpace from './white-space';
 import Space from './space';
 import WingBlank from './wing-blank';
@@ -72,6 +77,7 @@ const components = [
 	Icon,
 	ImagePicker,
 	Input,
+	CascaderView,
 	List,
 	LoadingDirective,
 	Menu,
@@ -88,17 +94,21 @@ const components = [
 	Radio,
 	Range,
 	Result,
+	Empty,
+	Loading,
 	SearchBar,
 	SegmentedControl,
 	Slider,
 	Stepper,
 	Steps,
+	InfiniteScroll,
 	Switch,
 	TabBar,
 	Tabs,
 	Tag,
 	Textarea,
 	Toast,
+	Mask,
 	WhiteSpace,
 	Space,
 	WingBlank
@@ -132,6 +142,7 @@ export {
 	Icon,
 	ImagePicker,
 	Input,
+	CascaderView,
 	List,
 	LoadingDirective,
 	Menu,
@@ -148,17 +159,21 @@ export {
 	Radio,
 	Range,
 	Result,
+	Empty,
+	Loading,
 	SearchBar,
 	SegmentedControl,
 	Slider,
 	Stepper,
 	Steps,
+	InfiniteScroll,
 	Switch,
 	TabBar,
 	Tabs,
 	Tag,
 	Textarea,
 	Toast,
+	Mask,
 	WhiteSpace,
 	Space,
 	WingBlank
@@ -184,6 +199,7 @@ export default {
 	Icon,
 	ImagePicker,
 	Input,
+	CascaderView,
 	List,
 	LoadingDirective,
 	Menu,
@@ -200,17 +216,21 @@ export default {
 	Radio,
 	Range,
 	Result,
+	Empty,
+	Loading,
 	SearchBar,
 	SegmentedControl,
 	Slider,
 	Stepper,
 	Steps,
+	InfiniteScroll,
 	Switch,
 	TabBar,
 	Tabs,
 	Tag,
 	Textarea,
 	Toast,
+	Mask,
 	WhiteSpace,
 	Space,
 	WingBlank

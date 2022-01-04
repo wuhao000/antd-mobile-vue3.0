@@ -72,6 +72,10 @@ export default [{
   name: 'm-input',
   component: () => import('../generated/input/demo.vue')
 }, {
+  path: 'm-cascader-view',
+  name: 'm-cascader-view',
+  component: () => import('../generated/cascader-view/demo.vue')
+}, {
   path: 'm-list',
   name: 'm-list',
   component: () => import('../generated/list/demo.vue')
@@ -132,6 +136,14 @@ export default [{
   name: 'm-result',
   component: () => import('../generated/result/demo.vue')
 }, {
+  path: 'm-empty',
+  name: 'm-empty',
+  component: () => import('../generated/empty/demo.vue')
+}, {
+  path: 'm-loading',
+  name: 'm-loading',
+  component: () => import('../generated/loading/demo.vue')
+}, {
   path: 'm-search-bar',
   name: 'm-search-bar',
   component: () => import('../generated/search-bar/demo.vue')
@@ -151,6 +163,10 @@ export default [{
   path: 'm-steps',
   name: 'm-steps',
   component: () => import('../generated/steps/demo.vue')
+}, {
+  path: 'm-infinite-scroll',
+  name: 'm-infinite-scroll',
+  component: () => import('../generated/infinite-scroll/demo.vue')
 }, {
   path: 'm-switch',
   name: 'm-switch',
@@ -175,6 +191,10 @@ export default [{
   path: 'm-toast',
   name: 'm-toast',
   component: () => import('../generated/toast/demo.vue')
+}, {
+  path: 'm-mask',
+  name: 'm-mask',
+  component: () => import('../generated/mask/demo.vue')
 }, {
   path: 'm-white-space',
   name: 'm-white-space',

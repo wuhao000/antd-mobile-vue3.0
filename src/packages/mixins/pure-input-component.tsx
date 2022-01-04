@@ -1,10 +1,10 @@
+import isEqual from 'lodash.isequal';
 import {computed, getCurrentInstance, onBeforeUnmount, onMounted, ref, watch} from 'vue';
 import {useEmitter} from './emitter';
-import isEqual from "lodash.isequal";
 
 export const usePureInput = <T extends any>(props, {emit, attrs}, options: {
   defaultValue: any,
-  propName: string
+  propName?: string
 } = {
   defaultValue: undefined,
   propName: 'value'
@@ -32,14 +32,12 @@ export const usePureInput = <T extends any>(props, {emit, attrs}, options: {
   const setStateValue = (value) => {
     const convertValue = convertValueBack(value);
     if (attrs[`onUpdate:${options.propName}`]) {
-      if (attrs[`onUpdate:${options.propName}`]) {
-        emit(`update:${options.propName}`, convertValue);
-      }
+      emit(`update:${options.propName}`, convertValue);
       emit('change', convertValue);
     } else {
       stateValue.value = convertValue;
     }
-  }
+  };
   watch(() => props[options.propName], value => {
     const convertedValue = convertValue.value(value);
     if (!isEqual(stateValue.value, convertedValue)) {

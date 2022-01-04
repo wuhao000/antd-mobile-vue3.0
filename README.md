@@ -1,5 +1,6 @@
 > 在此前发布的[Antd Mobile Vue](https://github.com/wuhao000/antd-mobile-vue)的基础上进行了vue3.0的升级
 > 这是目前为止Ant Design Mobile移植到Vue最完整的组件库
+> 新增部分v5组件移植
 
 如有问题可添加个人微信（wuhao1200），欢迎共同交流
 ![](http://chuantu.xyz/t6/740/1595927552x-633054266.jpg)
@@ -15,64 +16,96 @@
 **与antd-mobile的组件对比**
 
 antd-mobile 共有 <code>47</code>个组件，本项目截至现在移植了<code>44</code>个, 组件完成度达到95%
+antd-mobile V5 共有 <code>58</code>个组件(不含ConfigProvider)，本项目截至现在移植了<code>51</code>个, 组件完成度达到88%
 
 ## 与ant design mobile的组件比较
 
-组件名称 | antd-mobile | antd-mobile-vue | 示例移植 |说明
---- | :---: | :---: | :---: | ---
-Accordion | √ | √ | √ |
-ActionSheet | √ | √ | √  |
-ActivityIndicator | √ | √ | √  |
-Badge | √ | √ | √  |
-Button | √ | √ | √  |
-Calendar | √ | √ | √ |
-Card | √ | √ | √ |
-Carousel | √ | √ | √ |
-Checkbox | √ | √ | √ |
-DatePicker | √ | √ | √ |
-DatePickerView | √ | √ | √ |
-Drawer | √ | √ | √ |
-Flex | √ | √ | √ |
-Grid | √ | √ | |
-Icon | √ | √ | √ |
-ImagePicker | √ | √ | √ |
-InputItem | √ | v | √ |
-List | √ | √ | √ |
-ListView | √ | [无] |
-Menu | √ | √ | √ |
-Modal | √ | √ | √ |
-NavBar | √ | √ | √ |
-NoticeBar | √ | √ | √ |
-Pagination | √ | √ | √ |
-Picker | √ | √ | √ |
-PickerView | √ | √ |
-Popover | √ | √ | √ |
-Progress | √ | √ | √ |
-Radio | √ | √ | √ |
-PullToRefresh | √ | √ | √ |
-Result | √ | √ | √ |
-SearchBar | √ | √ | |
-SegmentedControl | √ | √ | √ |
-Slider | √ | √ | √ |
-Range | √ | √ | √ |
-Stepper | √ | √ | √ |
-Steps | √ | √ | √ |
-SwipeAction | √ | [无] | |
-Switch | √ | √ | |
-TabBar | √ | √ | √ |
-Tabs | √ | √ | √ |
-Tag | √ | √ | √ |
-TextareaItem | √ | √ | √ |
-Toast | √ | √ | √ |
-WhiteSpace | √ | √ | √ |
-WingBlank | √ | √ | √ |
-LocaleProvider | √ | [无] | |
+| 组件名称              | antd-mobile | antd-mobile-vue | 示例移植 | 说明  |
+|-------------------|:-----------:|:---------------:|:----:|-----|
+| Accordion         |      √      |        √        |  √   |
+| ActionSheet       |      √      |        √        |  √   |
+| ActivityIndicator |      √      |        √        |  √   |
+| Badge             |      √      |        √        |  √   |
+| Button            |      √      |        √        |  √   |
+| Calendar          |      √      |        √        |  √   |
+| Card              |      √      |        √        |  √   |
+| Carousel          |      √      |        √        |  √   |
+| Checkbox          |      √      |        √        |  √   |
+| DatePicker        |      √      |        √        |  √   |
+| DatePickerView    |      √      |        √        |  √   |
+| Drawer            |      √      |        √        |  √   |
+| Empty             |      √      |        √        |  √   |
+| Flex              |      √      |        √        |  √   |
+| Grid              |      √      |        √        |      |
+| Icon              |      √      |        √        |  √   |
+| ImagePicker       |      √      |                 |  √   |
+| InfiniteScroll    |      √      |        v        |  √   |
+| InputItem         |      √      |        v        |  √   |
+| List              |      √      |        √        |  √   |
+| ListView          |      √      |       [无]       |
+| Loading           |      √      |        √        |  √   |
+| Mask              |      √      |        √        |  √   |
+| Menu              |      √      |        √        |  √   |
+| Modal             |      √      |        √        |  √   |
+| NavBar            |      √      |        √        |  √   |
+| NoticeBar         |      √      |        √        |  √   |
+| Pagination        |      √      |        √        |  √   |
+| Picker            |      √      |        √        |  √   |
+| PickerView        |      √      |        √        |
+| Popover           |      √      |        √        |  √   |
+| Progress          |      √      |        √        |  √   |
+| Radio             |      √      |        √        |  √   |
+| PullToRefresh     |      √      |        √        |  √   |
+| Result            |      √      |        √        |  √   |
+| SearchBar         |      √      |        √        |      |
+| SegmentedControl  |      √      |        √        |  √   |
+| Space             |      √      |        √        |  √   |
+| Slider            |      √      |        √        |  √   |
+| Range             |      √      |        √        |  √   |
+| Stepper           |      √      |        √        |  √   |
+| Steps             |      √      |        √        |  √   |
+| SwipeAction       |      √      |        √        |      |
+| Switch            |      √      |        √        |      |
+| TabBar            |      √      |        √        |  √   |
+| Tabs              |      √      |        √        |  √   |
+| Tag               |      √      |        √        |  √   |
+| TextareaItem      |      √      |        √        |  √   |
+| Toast             |      √      |        √        |  √   |
+| WhiteSpace        |      √      |        √        |  √   |
+| WingBlank         |      √      |        √        |  √   |
+| LocaleProvider    |      √      |       [无]       |      |
+| AutoCenter        |             |        √        |      |
+| CapsuleTabs       |             |        √        |      |     |
+| Cascader          |             |        √        |      |
+| CascaderView      |             |        √        |      |
+| Dropdown          |             |        √        |      |
+| Ellipsis          |             |        √        |      |
+| FloatingBubble    |             |        √        |      |     |
+| ErrorBlock        |             |        √        |      |
+| FloatingPanel     |             |        √        |      |     |
+| Image             |             |        √        |      |
+| ImageViewer       |             |        √        |      |
+| ImageUploader     |             |        √        |      |     |
+| IndexBar          |             |        √        |      |
+| JumboTabs         |             |        √        |      |     |
+| NumberKeyboard    |             |        √        |      |     |
+| PasscodeInput     |             |        √        |      |     |
+| ProgressCircle    |             |        √        |      |
+| SafeArea          |             |        √        |      |     |
+| Selector          |             |        √        |      |
+| Skeleton          |             |        √        |      |     |
+| SideBar           |             |        √        |      |
+| Swiper            |             |        √        |      |
+| TreeSelect        |             |        √        |      |
+| VirtualInput      |             |        √        |      |
+| WaterMark         |             |        √        |      |
 
 ## 安装
 
 ```bash
  npm i antd-mobile-vue-next -S
 ```
+
 ## 使用
 
 ```javascript
@@ -81,8 +114,8 @@ import AntdMobile from 'antd-mobile-vue-next'
 app.use(AntdMobile)
 ```
 
-
 ### 按需引入
+
 按需加载需要借助<code>babel-plugin-import</code>, 这样就可以只引入需要的组件，以减小项目体积
 
 ```shell
@@ -113,16 +146,18 @@ module.exports = {
 ```html
 import { Alert } from "antd-mobile-vue-next";
 defineComponent({
-  components: {
-    [Alert.name]: Alert
-  }
+components: {
+[Alert.name]: Alert
+}
 });
 ```
 
 ### 开发环境启动
+
 ```bash
 npm run dev 
 ```
+
 ### 打包
 
 ```bash

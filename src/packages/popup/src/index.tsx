@@ -176,6 +176,7 @@ export default defineComponent({
     if (!props.visible) {
       props.style.width = '0px';
     }
+    console.log(this.getContainer);
     return <Drawer {...props}
                    v-slots={this.slots}>
       {this.getDefaultSlot()}

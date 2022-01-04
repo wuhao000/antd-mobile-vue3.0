@@ -3,16 +3,23 @@ import './demo-wrapper.less';
 
 export default defineComponent({
   props: {
-    title: {}
+    title: {
+      type: [String, Object]
+    },
+    background: String,
+    padding: String
   },
   render() {
     return <div class="demo-preview-item" style={{
-      padding: '12px',
+      padding: this.padding ?? '12px 0'
     }}>
       <div class="demo-title">
         {this.title}
       </div>
-      <div class="demo-container">
+      <div class="demo-container" style={{
+        padding: '12px',
+        background: this.background ?? 'white'
+      }}>
         {this.$slots.default?.()}
       </div>
     </div>;

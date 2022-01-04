@@ -1,7 +1,7 @@
 import Dialog from 'ant-design-vue/es/vc-dialog';
-import Button from '../../button';
 import classnames from 'classnames';
 import {defineComponent, PropType} from 'vue';
+import Button from '../../button';
 import Popup from '../../popup';
 import TouchFeedback from '../../vmc-feedback';
 import {Action} from './props-type';
@@ -59,7 +59,7 @@ export default defineComponent({
       type: Function
     },
     onOk: {
-      type: Function,
+      type: Function
     },
     transparent: {
       type: Boolean as PropType<boolean>,
@@ -112,16 +112,16 @@ export default defineComponent({
       };
 
       return (
-        // @ts-ignore
-        <TouchFeedback activeClassName={`${prefixCls}-button-active`} key={i}>
-          <a
-            class={`${prefixCls}-button`}
-            role="button"
-            style={buttonStyle}
-            onClick={onClickFn}>
-            {button.text || `Button`}
-          </a>
-        </TouchFeedback>
+          // @ts-ignore
+          <TouchFeedback activeClassName={`${prefixCls}-button-active`} key={i}>
+            <a
+                class={`${prefixCls}-button`}
+                role="button"
+                style={buttonStyle}
+                onClick={onClickFn}>
+              {button.text || `Button`}
+            </a>
+          </TouchFeedback>
       );
     };
     return {
@@ -144,29 +144,31 @@ export default defineComponent({
       ...restProps
     } = this.$props;
 
+    const buttonCount = footer.length + (this.onOk ? 1 : 0) + (this.onClose ? 1 : 0);
+
     const btnGroupClass = classnames(
-      `${prefixCls}-button-group-${
-        footer.length === 2 && !operation ? 'h' : 'v'
-      }`,
-      `${prefixCls}-button-group-${operation ? 'operation' : 'normal'}`
+        `${prefixCls}-button-group-${
+            buttonCount > 1 && !operation ? 'h' : 'v'
+        }`,
+        `${prefixCls}-button-group-${operation ? 'operation' : 'normal'}`
     );
     const footerDom = (footer.length || this.onOk || this.onClose) ? (
-      <div class={btnGroupClass} role="group">
-        {footer.map((button, i) =>
-          // tslint:disable-next-line:jsx-no-multiline-js
-          this.renderFooterButton(button as Action<any>, prefixCls, i)
-        )}
-        {
-          this.onClose ? <Button onClick={(e) => {
-            this.$emit('close', e)
-          }}>{this.closeText ?? '关闭'}</Button> : undefined
-        }
-        {
-          this.onOk ? <Button onClick={(e) => {
-            this.$emit('ok', e)
-          }}>{this.onText ?? '确定'}</Button> : undefined
-        }
-      </div>
+        <div class={btnGroupClass} role="group">
+          {footer.map((button, i) =>
+              // tslint:disable-next-line:jsx-no-multiline-js
+              this.renderFooterButton(button as Action<any>, prefixCls, i)
+          )}
+          {
+            this.onClose ? <Button prefixCls="am-modal-button" onClick={(e) => {
+              this.$emit('close', e);
+            }}>{this.closeText ?? '关闭'}</Button> : undefined
+          }
+          {
+            this.onOk ? <Button prefixCls="am-modal-button" onClick={(e) => {
+              this.$emit('ok', e);
+            }}>{this.onText ?? '确定'}</Button> : undefined
+          }
+        </div>
     ) : null;
 
     let transName;
@@ -180,7 +182,7 @@ export default defineComponent({
       }
       if (popup) {
         transName =
-          animationType === 'slide-up' ? 'am-slide-up' : 'am-slide-down';
+            animationType === 'slide-up' ? 'am-slide-up' : 'am-slide-down';
         maskTransName = 'am-fade';
       }
     }
@@ -198,49 +200,49 @@ export default defineComponent({
     if (this.popup) {
       const placement = typeof this.popup === 'string' ? this.popup : 'bottom';
       return (
-        <Popup
-          placement={placement}
-          showOk={false}
-          visible={this.visible}
-          title={this.title as any}
-          maskClosable={this.closable}
-          class={cls}
-          onOk={(e) => {
-            this.$emit('ok', e);
-          }}
-          onCancel={this.onClose || ((e) => {
-            this.$emit('close', e);
-          })}>
-          {this.$slots.default?.()}
-        </Popup>
+          <Popup
+              placement={placement}
+              showOk={false}
+              visible={this.visible}
+              title={this.title as any}
+              maskClosable={this.closable}
+              class={cls}
+              onOk={(e) => {
+                this.$emit('ok', e);
+              }}
+              onCancel={this.onClose || ((e) => {
+                this.$emit('close', e);
+              })}>
+            {this.$slots.default?.()}
+          </Popup>
       );
     }
     restProps['onUpdate:visible'] = (v) => {
       this.$emit('update:visible', v);
     };
     return (
-      <Dialog
-        {...restProps}
-        maskClosable={this.maskClosable}
-        visible={this.visible}
-        prefixCls={prefixCls}
-        title={this.title}
-        class={cls}
-        onClose={this.onClose || ((e) => {
-          this.$emit('update:visible', false);
-          this.$emit('close', e);
-        })}
-        onOk={this.onOk || (e => {
-          this.$emit('ok', e);
-        })}
-        wrapClassName={wrapCls}
-        transitionName={transitionName || transName}
-        maskTransitionName={maskTransitionName || maskTransName}
-        footer={footerDom}
-        v-slots={{
-          default: this.$slots.default
-        }}
-      />
+        <Dialog
+            {...restProps}
+            maskClosable={this.maskClosable}
+            visible={this.visible}
+            prefixCls={prefixCls}
+            title={this.title}
+            class={cls}
+            onClose={this.onClose || ((e) => {
+              this.$emit('update:visible', false);
+              this.$emit('close', e);
+            })}
+            onOk={this.onOk || (e => {
+              this.$emit('ok', e);
+            })}
+            wrapClassName={wrapCls}
+            transitionName={transitionName || transName}
+            maskTransitionName={maskTransitionName || maskTransName}
+            footer={footerDom}
+            v-slots={{
+              default: this.$slots.default
+            }}
+        />
     );
   }
 });

@@ -120,6 +120,13 @@ export default [{
   },
   component: () => import('../generated/input/index.vue')
 }, {
+  path: 'cascader-view',
+  name: 'CascaderView 级联选择',
+  meta: {
+    tag: '数据入口'
+  },
+  component: () => import('../generated/cascader-view/index.vue')
+}, {
   path: 'list',
   name: 'List 列表',
   meta: {
@@ -221,9 +228,23 @@ export default [{
   path: 'result',
   name: 'Result 结果页',
   meta: {
-    tag: '组合'
+    tag: '反馈'
   },
   component: () => import('../generated/result/index.vue')
+}, {
+  path: 'empty',
+  name: 'Empty 空状态',
+  meta: {
+    tag: '反馈'
+  },
+  component: () => import('../generated/empty/index.vue')
+}, {
+  path: 'loading',
+  name: 'Loading 加载中',
+  meta: {
+    tag: '反馈'
+  },
+  component: () => import('../generated/loading/index.vue')
 }, {
   path: 'search-bar',
   name: 'SearchBar 搜索框',
@@ -259,6 +280,13 @@ export default [{
     tag: '数据展示'
   },
   component: () => import('../generated/steps/index.vue')
+}, {
+  path: 'infinite-scroll',
+  name: 'InfiniteScroll 无限滚动',
+  meta: {
+    tag: '数据展示'
+  },
+  component: () => import('../generated/infinite-scroll/index.vue')
 }, {
   path: 'switch',
   name: 'Switch 开关',
@@ -301,6 +329,13 @@ export default [{
     tag: '反馈'
   },
   component: () => import('../generated/toast/index.vue')
+}, {
+  path: 'mask',
+  name: 'Mask 遮罩层',
+  meta: {
+    tag: '反馈'
+  },
+  component: () => import('../generated/mask/index.vue')
 }, {
   path: 'white-space',
   name: 'WhiteSpace 上下留白',

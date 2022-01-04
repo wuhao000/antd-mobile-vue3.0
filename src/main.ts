@@ -3,6 +3,7 @@ import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
 import 'highlight.js/styles/atelier-cave-dark.css';
 import 'vite-plugin-vuedoc/style.css';
+import './styles';
 import {createApp} from 'vue';
 import markdown from './components/markdown.vue';
 import Antdm from './packages';

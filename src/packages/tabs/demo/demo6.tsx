@@ -6,15 +6,18 @@ export default defineComponent({
   props: {},
   setup() {
     const renderContent = (tab) => {
-      return (<div key={tab.key} style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '150px',
-        backgroundColor: '#fff'
-      }}>
+      return (<m-tab
+          title={tab.title}
+          key={tab.key}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '150px',
+            backgroundColor: '#fff'
+          }}>
         <p>Content of {tab.title}</p>
-      </div>);
+      </m-tab>);
     };
     return {
       renderContent
@@ -34,16 +37,16 @@ export default defineComponent({
     ];
 
     return (
-      <div>
-        <m-white-space/>
-        <m-tabs tabs={tabs} renderTabBar={props => <Tabs.DefaultTabBar
-          {...props} page={3}/>}>
-          {
-            tabs.map(tab => this.renderContent(tab))
-          }
-        </m-tabs>
-        <m-white-space/>
-      </div>
+        <div>
+          <m-white-space/>
+          <m-tabs
+              renderTabBar={props => <Tabs.DefaultTabBar {...props} page={3}/>}>
+            {
+              tabs.map(tab => this.renderContent(tab))
+            }
+          </m-tabs>
+          <m-white-space/>
+        </div>
     );
   }
 });

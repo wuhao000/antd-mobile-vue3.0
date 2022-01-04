@@ -2,7 +2,7 @@ import {defineComponent, onBeforeUpdate, PropType, ref, Ref} from 'vue';
 import {filterHTMLAttrs} from '../../utils/dom';
 import {getPxStyle, getTransformPropValue} from './utils';
 
-const TabPane = defineComponent({
+export default defineComponent({
   inheritAttrs: false,
   name: 'TabPane',
   props: {
@@ -58,4 +58,3 @@ const TabPane = defineComponent({
     </div>;
   }
 });
-export default TabPane as any;

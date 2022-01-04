@@ -19,7 +19,7 @@ export default defineComponent({
     return (<>
       <m-list title="Start datetime">
       <m-list-item>
-        <span v-time={value}/>
+        <span v-text={value}/>
       </m-list-item>
       <DatePickerView
           v-model={[this.value, 'value']}
@@ -27,7 +27,7 @@ export default defineComponent({
     </m-list>
     <m-list title="End datetime">
       <m-list-item>
-        <span v-time={value2}/>
+        <span v-text={value2}/>
       </m-list-item>
       <DatePickerView
           v-model={[this.value2, 'value']}

@@ -116,6 +116,13 @@
     "chineseName": "输入框",
     "tag": "数据入口"
   },
+  "cascader-view": {
+    "type": "component",
+    "componentType": "mobile",
+    "name": "cascader-view",
+    "chineseName": "级联选择",
+    "tag": "数据入口"
+  },
   "list": {
     "type": "component",
     "componentType": "mobile",
@@ -222,7 +229,21 @@
     "componentType": "mobile",
     "name": "result",
     "chineseName": "结果页",
-    "tag": "组合"
+    "tag": "反馈"
+  },
+  "empty": {
+    "type": "component",
+    "componentType": "mobile",
+    "name": "empty",
+    "chineseName": "空状态",
+    "tag": "反馈"
+  },
+  "loading": {
+    "type": "component",
+    "componentType": "mobile",
+    "name": "loading",
+    "chineseName": "加载中",
+    "tag": "反馈"
   },
   "search-bar": {
     "type": "component",
@@ -256,6 +277,13 @@
     "componentType": "mobile",
     "name": "steps",
     "chineseName": "步骤条",
+    "tag": "数据展示"
+  },
+  "infinite-scroll": {
+    "type": "component",
+    "componentType": "mobile",
+    "name": "infinite-scroll",
+    "chineseName": "无限滚动",
     "tag": "数据展示"
   },
   "switch": {
@@ -297,6 +325,13 @@
     "componentType": "mobile",
     "name": "toast",
     "chineseName": "轻提示",
+    "tag": "反馈"
+  },
+  "mask": {
+    "type": "component",
+    "componentType": "mobile",
+    "name": "mask",
+    "chineseName": "遮罩层",
     "tag": "反馈"
   },
   "white-space": {

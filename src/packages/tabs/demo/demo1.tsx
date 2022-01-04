@@ -21,8 +21,7 @@ export default defineComponent({
   },
   render() {
     return <div>
-      <m-tabs tabs={this.tabs}
-              initialPage={1}
+      <m-tabs initialPage={1}
               onChange={(tab, index) => {
                 console.log('onChange', index, tab);
               }}
@@ -30,33 +29,42 @@ export default defineComponent({
                 console.log('onTabClick', index, tab);
               }}
       >
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '150px',
-          backgroundColor: '#fff'
-        }}>
+        <m-tab
+            title={<m-badge text="3">First Tab</m-badge>}
+            key={'tab1'}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '150px',
+              backgroundColor: '#fff'
+            }}>
           Content of first tab
-        </div>
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '150px',
-          backgroundColor: '#fff'
-        }}>
+        </m-tab>
+        <m-tab
+            title={<m-badge text="今日(20)">Second Tab</m-badge>}
+            key={'tab2'}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '150px',
+              backgroundColor: '#fff'
+            }}>
           Content of second tab
-        </div>
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '150px',
-          backgroundColor: '#fff'
-        }}>
+        </m-tab>
+        <m-tab
+            title={<m-badge dot={true}>Third Tab</m-badge>}
+            key={'tab3'}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '150px',
+              backgroundColor: '#fff'
+            }}>
           Content of third tab
-        </div>
+        </m-tab>
       </m-tabs>
       <m-white-space/>
       <m-tabs tabs={tabs2}
@@ -64,33 +72,42 @@ export default defineComponent({
               tabBarPosition="bottom"
               renderTab={tab => <span>{tab.title}</span>}
       >
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '150px',
-          backgroundColor: '#fff'
-        }}>
+        <m-tab
+            title={'First Tab'}
+            key={'tab1'}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '150px',
+              backgroundColor: '#fff'
+            }}>
           Content of first tab
-        </div>
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '150px',
-          backgroundColor: '#fff'
-        }}>
+        </m-tab>
+        <m-tab
+            title={'Second Tab'}
+            key={'tab2'}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '150px',
+              backgroundColor: '#fff'
+            }}>
           Content of second tab
-        </div>
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '150px',
-          backgroundColor: '#fff'
-        }}>
+        </m-tab>
+        <m-tab
+            title={'Third Tab'}
+            key={'tab3'}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '150px',
+              backgroundColor: '#fff'
+            }}>
           Content of third tab
-        </div>
+        </m-tab>
       </m-tabs>
       <m-white-space/>
     </div>;

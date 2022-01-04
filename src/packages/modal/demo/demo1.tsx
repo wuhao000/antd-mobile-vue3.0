@@ -52,49 +52,46 @@ export default defineComponent({
   },
   render() {
     return (
-      <WingBlank>
-        <Button onClick={this.showModal('modal1')}><Icon type="up"/>basic<Icon type="up"/></Button>
-        <WhiteSpace/>
-        <Modal
-          visible={this.state.modal1}
-          transparent
-          maskClosable={false}
-          onClose={this.onClose('modal1')}
-          title="Title"
-          footer={[{
-            text: 'Ok', onPress: () => {
-              console.log('ok');
-              this.onClose('modal1')();
-            }
-          }]}
-          wrapProps={{onTouchStart: this.onWrapTouchStart}}
-        >
-          <div style={{height: 100, overflow: 'scroll'}}>
-            scoll content...<br/>
-            scoll content...<br/>
-            scoll content...<br/>
-            scoll content...<br/>
-            scoll content...<br/>
-            scoll content...<br/>
-          </div>
-        </Modal>
-        <Button onClick={this.showModal('modal2')}>popup</Button>
-        <WhiteSpace/>
-        <Modal
-          popup
-          title={<div>委托买入</div> as VNode}
-          visible={this.state.modal2}
-          onClose={this.onClose('modal2')}
-          animationType="slide-up"
-        >
-          <List class="popup-list">
-            {['股票名称', '股票代码', '买入价格'].map((i, index) => (
-              <List.Item key={index}>{i}</List.Item>
-            ))}
-            <Button type="primary" onClick={this.onClose('modal2')}>买入</Button>
-          </List>
-        </Modal>
-      </WingBlank>
+        <WingBlank>
+          <Button onClick={this.showModal('modal1')}><Icon type="up"/>basic<Icon type="up"/></Button>
+          <WhiteSpace/>
+          <Modal
+              visible={this.state.modal1}
+              transparent
+              maskClosable={false}
+              onClose={this.onClose('modal1')}
+              title="Title"
+              onOk={() => {
+
+              }}
+              wrapProps={{onTouchStart: this.onWrapTouchStart}}
+          >
+            <div style={{height: 100, overflow: 'scroll'}}>
+              scoll content...<br/>
+              scoll content...<br/>
+              scoll content...<br/>
+              scoll content...<br/>
+              scoll content...<br/>
+              scoll content...<br/>
+            </div>
+          </Modal>
+          <Button onClick={this.showModal('modal2')}>popup</Button>
+          <WhiteSpace/>
+          <Modal
+              popup
+              title={<div>委托买入</div> as VNode}
+              visible={this.state.modal2}
+              onClose={this.onClose('modal2')}
+              animationType="slide-up"
+          >
+            <List class="popup-list">
+              {['股票名称', '股票代码', '买入价格'].map((i, index) => (
+                  <List.Item key={index}>{i}</List.Item>
+              ))}
+              <Button type="primary" onClick={this.onClose('modal2')}>买入</Button>
+            </List>
+          </Modal>
+        </WingBlank>
     );
   }
 });

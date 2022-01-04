@@ -1,4 +1,4 @@
-import {defineComponent, getCurrentInstance, inject, onMounted, PropType, watch} from 'vue';
+import {defineComponent, getCurrentInstance, inject, onMounted, PropType} from 'vue';
 import List from '../../list';
 import {optionsBasedComponentProps, useOptionsBaseComponent} from '../../mixins/options-based-component';
 import SearchBar from '../../search-bar/src';
@@ -16,11 +16,16 @@ export default defineComponent({
     },
     maxHeightPercentage: {
       type: Number as PropType<number>
-    }
+    },
+    onChange: Function
   },
   setup(props, {emit, slots, attrs}) {
     const form = inject('list', undefined);
-    const {getOptions, setStateValue, stateValue, searchKeyword, isDisabled} = useOptionsBaseComponent(props, {emit, attrs, slots}, form, {
+    const {getOptions, setStateValue, stateValue, searchKeyword, isDisabled} = useOptionsBaseComponent(props, {
+      emit,
+      attrs,
+      slots
+    }, form, {
       defaultValue: [],
       propName: 'value'
     });
@@ -48,10 +53,10 @@ export default defineComponent({
     const onChange = (checkState: any, value: any) => {
       if (checkState) {
         if (!stateValue.value.includes(value)) {
-            setStateValue([...stateValue.value, value]);
+          setStateValue([...stateValue.value, value]);
         }
       } else {
-        setStateValue(stateValue.value.filter(it => it !== value))
+        setStateValue(stateValue.value.filter(it => it !== value));
       }
     };
     const renderSearch = () => {

@@ -26,33 +26,39 @@ export default defineComponent({
         <m-tabs tabs={tabs}
                 initialPage="t2"
                 renderTabBar={this.renderTabBar}>
-          <div key="t1" style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '250px',
-            backgroundColor: '#fff'
-          }}>
+          <m-tab key="t1"
+                 title={'First Tab'}
+                 style={{
+                   display: 'flex',
+                   alignItems: 'center',
+                   justifyContent: 'center',
+                   height: '250px',
+                   backgroundColor: '#fff'
+                 }}>
             Content of first tab
-          </div>
-          <div key="t2" style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '250px',
-            backgroundColor: '#fff'
-          }}>
+          </m-tab>
+          <m-tab title={'Second Tab'}
+                 key="t2"
+                 style={{
+                   display: 'flex',
+                   alignItems: 'center',
+                   justifyContent: 'center',
+                   height: '250px',
+                   backgroundColor: '#fff'
+                 }}>
             Content of second tab
-          </div>
-          <div key="t3" style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '250px',
-            backgroundColor: '#fff'
-          }}>
+          </m-tab>
+          <m-tab title={'Third Tab'}
+                 key="t3"
+                 style={{
+                   display: 'flex',
+                   alignItems: 'center',
+                   justifyContent: 'center',
+                   height: '250px',
+                   backgroundColor: '#fff'
+                 }}>
             Content of third tab
-          </div>
+          </m-tab>
         </m-tabs>
       </StickyContainer>
       <m-white-space/>

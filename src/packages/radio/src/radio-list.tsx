@@ -1,9 +1,9 @@
-import {defineComponent, getCurrentInstance, inject, onMounted, PropType, ref, watch} from 'vue';
+import {defineComponent, getCurrentInstance, inject, onMounted, PropType} from 'vue';
 import List from '../../list';
 import {optionsBasedComponentProps, useOptionsBaseComponent} from '../../mixins/options-based-component';
 import SearchBar from '../../search-bar/src';
+import {filterHTMLAttrs} from '../../utils/dom';
 import RadioItem from './radio-item';
-import {filterHTMLAttrs} from "../../utils/dom";
 
 export default defineComponent({
   name: 'MRadioList',
@@ -14,6 +14,7 @@ export default defineComponent({
     title: {
       type: String as PropType<string>
     },
+    onChange: Function,
     maxHeightPercentage: {
       type: Number as PropType<number>
     }
@@ -21,7 +22,11 @@ export default defineComponent({
   setup(props, {emit, slots, attrs}) {
     const instance = getCurrentInstance();
     const form = inject('list', undefined);
-    const {getOptions, stateValue, setStateValue, searchKeyword, isDisabled} = useOptionsBaseComponent(props, {emit, slots, attrs}, form);
+    const {getOptions, stateValue, setStateValue, searchKeyword, isDisabled} = useOptionsBaseComponent(props, {
+      emit,
+      slots,
+      attrs
+    }, form);
     const renderOptions = () => {
       const options = getOptions();
       if (options) {
@@ -35,13 +40,13 @@ export default defineComponent({
             });
           }
           return <RadioItem
-            {...optionProps}
-            disabled={option.disabled || isDisabled.value}
-            value={stateValue.value === option.value}
-            key={option.value}
-            onChange={(checkState) => {
-              onChange(checkState, option.value);
-            }}>{option.label}</RadioItem>;
+              {...optionProps}
+              disabled={option.disabled || isDisabled.value}
+              value={stateValue.value === option.value}
+              key={option.value}
+              onChange={(checkState) => {
+                onChange(checkState, option.value);
+              }}>{option.label}</RadioItem>;
         });
       } else {
         return [];
@@ -52,12 +57,12 @@ export default defineComponent({
     };
     const renderSearch = () => {
       return props.searchable ? <SearchBar
-        value={searchKeyword.value}
-        {...{
-          ['onUpdate:value']: (v) => {
-            searchKeyword.value = v;
-          }
-        }}/> : null;
+          value={searchKeyword.value}
+          {...{
+            ['onUpdate:value']: (v) => {
+              searchKeyword.value = v;
+            }
+          }}/> : null;
     };
     onMounted(() => {
       if (props.maxHeightPercentage) {
@@ -74,10 +79,9 @@ export default defineComponent({
   },
   render() {
     return <List
-      {...filterHTMLAttrs(this.$attrs)}
-      required={this.required}
-      title={this.title}
-    >
+        {...filterHTMLAttrs(this.$attrs)}
+        required={this.required}
+        title={this.title}>
       {this.renderSearch()}
       {this.renderOptions()}
     </List>;

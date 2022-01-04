@@ -6,6 +6,8 @@ export function getTransformPropValue(v: any) {
   };
 }
 
+export const TabsStore = Symbol('Antdm_Tabs_Store');
+
 export function getPxStyle(value: number | string, unit = 'px', vertical: boolean = false) {
   const v = vertical ? `0px, ${value}${unit}, 0px` : `${value}${unit}, 0px, 0px`;
   return `translate3d(${v})`;

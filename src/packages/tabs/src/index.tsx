@@ -1,11 +1,13 @@
-import {computed, defineComponent, onBeforeUpdate, onUpdated, PropType, reactive, Ref, ref, watch} from 'vue';
+import {
+  computed, defineComponent, onBeforeUpdate, onMounted, onUpdated, PropType, provide, reactive, Ref, ref, watch
+} from 'vue';
 import {Models} from '../../../types/models';
 import {unwrapFragment} from '../../utils/vue';
 import Gesture, {IGestureStatus} from '../../vmc-gesture';
 import {DIRECTION_DOWN, DIRECTION_LEFT, DIRECTION_RIGHT, DIRECTION_UP} from '../../vmc-gesture/config';
 import DefaultTabBar from './default-tab-bar';
 import TabPane from './tab-pane';
-import {getTransformPropValue, setPxStyle, setTransform} from './utils';
+import {getTransformPropValue, setPxStyle, setTransform, TabsStore} from './utils';
 
 export const getPanDirection = (direction: number | undefined) => {
   switch (direction) {
@@ -48,14 +50,6 @@ export default defineComponent({
       default: true
     },
     renderTabBar: {type: Function},
-    /**
-     * 标签数据
-     */
-    tabs: {
-      default: () => {
-        return [];
-      }
-    },
     /** TabBar's position | default: top */
     tabBarPosition: {
       default: 'top'
@@ -64,11 +58,8 @@ export default defineComponent({
      * 当前激活的卡片的索引
      */
     value: {
-      type: [String, Number] as PropType<number | string>,
+      type: [Number] as PropType<number>,
       default: 0
-    },
-    page: {
-      type: Number as PropType<number>
     },
     /**
      * 是否支持手势
@@ -139,38 +130,24 @@ export default defineComponent({
     /** use left instead of transform | default: false */
     useLeftInsteadTransform: {
       type: Boolean as PropType<boolean>
-    }
+    },
+    onChange: Function
   },
   setup(props, {emit, slots}) {
     const contentPos: Ref<string> = ref('');
+    const tabs = ref([]);
     const isMoving = ref(false);
     const instanceId: Ref<number> = ref(null);
+    const currentTab: Ref<number> = ref(0);
+    const nextCurrentTab: Ref<number> = ref(null);
     const prevCurrentTab: Ref<number> = ref(null);
     const tabCache: { [index: number]: any } = reactive({});
-    const getTabIndex = () => {
-      const {page, value, tabs} = props;
-      const param = (page !== undefined ? page : value) || 0;
-
-      let index = 0;
-      if (typeof (param as any) === 'string') {
-        tabs.forEach((t, i) => {
-          if (t.key === param) {
-            index = i;
-          }
-        });
-      } else {
-        index = param as number || 0;
+    watch(() => props.value, tab => {
+      if (typeof tab === 'number') {
+        currentTab.value = tab;
       }
-      return index < 0 ? 0 : index;
-    };
-    const currentTab: Ref<number> = ref(getTabIndex());
-    const nextCurrentTab: Ref<number> = ref(null);
+    }, {immediate: true});
     const layoutRef = ref(null);
-    watch(() => props.page, (page: number) => {
-      if (page !== undefined && page !== null) {
-        currentTab.value = page;
-      }
-    });
     watch(() => currentTab.value, (index) => {
       emit('update:value', index);
     });
@@ -210,8 +187,8 @@ export default defineComponent({
             offset += panDirection === 'vertical' ? 0 : status.moveStatus.x;
           }
           const canScrollOffset = isVertical ?
-            -layoutRef.value.scrollHeight + layoutRef.value.clientHeight :
-            -layoutRef.value.scrollWidth + layoutRef.value.clientWidth;
+              -layoutRef.value.scrollHeight + layoutRef.value.clientHeight :
+              -layoutRef.value.scrollWidth + layoutRef.value.clientWidth;
           offset = Math.min(offset, 0);
           offset = Math.max(offset, canScrollOffset);
           setPxStyle(layoutRef.value.value, offset, 'px', isVertical, useLeftInsteadTransform);
@@ -229,12 +206,12 @@ export default defineComponent({
           if (offsetIndex === currentTab.value) {
             if (props.usePaged) {
               setTransform(
-                layoutRef.value.style,
-                getContentPosByIndex(
-                  offsetIndex,
-                  isTabVertical(),
-                  props.useLeftInsteadTransform
-                )
+                  layoutRef.value.style,
+                  getContentPosByIndex(
+                      offsetIndex,
+                      isTabVertical(),
+                      props.useLeftInsteadTransform
+                  )
               );
             }
           } else {
@@ -255,9 +232,9 @@ export default defineComponent({
       const {prerenderingSiblingsNumber = 0} = props;
       return currentTab.value - prerenderingSiblingsNumber <= idx && idx <= currentTab.value + prerenderingSiblingsNumber;
     };
-    const componentDidMount = () => {
+    onMounted(() => {
       prevCurrentTab.value = currentTab.value;
-    };
+    });
     const getOffsetIndex = (current: number, width: number, threshold = props.distanceToChangeTab || 0) => {
       const ratio = Math.abs(current / width);
       const direction = ratio > currentTab.value ? '<' : '>';
@@ -276,11 +253,10 @@ export default defineComponent({
         return false;
       }
       nextCurrentTab.value = index;
-      const {tabs} = props;
-      if (index >= 0 && index < tabs.length) {
+      if (index >= 0 && index < tabs.value.length) {
         if (!force) {
-          emit('change', tabs[index], index);
-          if (props.page !== undefined) {
+          emit('change', tabs.value[index], index);
+          if (props.value !== undefined) {
             return false;
           }
         }
@@ -299,8 +275,7 @@ export default defineComponent({
         tabBarInactiveTextColor,
         tabBarPosition,
         tabBarTextStyle,
-        tabBarUnderlineStyle,
-        tabs
+        tabBarUnderlineStyle
       } = props;
       return {
         activeTab: currentTab.value,
@@ -314,13 +289,11 @@ export default defineComponent({
         tabBarPosition,
         tabBarTextStyle,
         tabBarUnderlineStyle,
-        tabs,
         instanceId: instanceId.value
       };
     };
     const getSubElements = () => {
       const children = unwrapFragment(slots.default());
-
       const subElements: { [key: string]: any } = {};
       return (defaultPrefix: string = '$i$-', allPrefix: string = '$ALL$') => {
         if (Array.isArray(children)) {
@@ -336,7 +309,7 @@ export default defineComponent({
         return subElements;
       };
     };
-    const getSubElement = (tab: Models.TabData,
+    const getSubElement = (tab: JSX.Element,
                            index: number,
                            defaultPrefix: string = '$i$-',
                            allPrefix: string = '$ALL$') => {
@@ -344,7 +317,7 @@ export default defineComponent({
       const key = (tab.key !== null && tab.key !== undefined && tab.key !== '') ? tab.key : `${defaultPrefix}${index}`;
       const getSubElementsFn = getSubElements();
       const elements = getSubElementsFn(defaultPrefix, allPrefix);
-      let component = elements[key] || elements[allPrefix];
+      let component = elements[key as string] || elements[allPrefix];
       if (component instanceof Function) {
         component = component(tab, index);
       }
@@ -357,9 +330,9 @@ export default defineComponent({
       if (usePaged) {
         setState = () => {
           contentPos.value = getContentPosByIndex(
-            index,
-            isTabVertical(tabDirection),
-            useLeftInsteadTransform
+              index,
+              isTabVertical(tabDirection),
+              useLeftInsteadTransform
           );
         };
       }
@@ -368,6 +341,9 @@ export default defineComponent({
     const tabClickGoToTab = (index: number) => {
       goToTab(index, false, true);
     };
+    watch(() => props.value, (value: number) => {
+      tabClickGoToTab(value);
+    });
     const getContentPosByIndex = (index: number, isVertical: boolean, useLeft = false) => {
       const value = `${-index * 100}%`;
       onPan.value.setCurrentOffset(value);
@@ -413,18 +389,17 @@ export default defineComponent({
           break;
       }
     };
-    const renderContent = () => {
-      const {prefixCls, tabs, animated, destroyInactiveTab, useLeftInsteadTransform} = props;
-
+    const renderContent = (children: JSX.Element[]) => {
+      const {prefixCls, animated, destroyInactiveTab, useLeftInsteadTransform} = props;
       let contentCls = `${prefixCls}-content-wrap`;
       if (animated && !isMoving.value) {
         contentCls += ` ${contentCls}-animated`;
       }
       const contentStyle: any = animated ? (
-        useLeftInsteadTransform ? {
-          position: 'relative',
-          ...isTabVertical() ? {top: contentPos.value} : {left: contentPos}
-        } : getTransformPropValue(contentPos.value)
+          useLeftInsteadTransform ? {
+            position: 'relative',
+            ...isTabVertical() ? {top: contentPos.value} : {left: contentPos}
+          } : getTransformPropValue(contentPos.value)
       ) : {
         position: 'relative',
         ...isTabVertical() ? {top: `${-currentTab.value * 100}%`} : {left: `${-currentTab * 100}%`}
@@ -436,22 +411,20 @@ export default defineComponent({
                     layoutRef.value = el;
                   }}>
         {
-          tabs && tabs.map((tab, index) => {
+          children.map((tab, index) => {
             let cls = `${prefixCls}-pane-wrap`;
             if (currentTab.value === index) {
               cls += ` ${cls}-active`;
             } else {
               cls += ` ${cls}-inactive`;
             }
-
-            const key = tab.key || `tab_${index}`;
             // update tab cache
-            if (shouldRenderTab(index)) {
-              tabCache[index] = getSubElement(tab, index);
+            if (tab.props.forceRender || index === currentTab.value) {
+              tabCache[index] = tab;
             } else if (destroyInactiveTab) {
               tabCache[index] = undefined;
             }
-            return <TabPane key={key}
+            return <TabPane key={tab.key}
                             class={cls}
                             active={currentTab.value === index}
                             role="tabpanel"
@@ -459,64 +432,74 @@ export default defineComponent({
                             aria-labelledby={`m-tabs-${instanceId}-${index}`}
                             fixX={isTabVertical()}
                             fixY={!isTabVertical()}>
-              {
-                tabCache[index]
-              }
+              {tabCache[index]}
             </TabPane>;
           })
         }
       </div>;
     };
-    {
+    const onCreated = () => {
       nextCurrentTab.value = currentTab.value;
       instanceId.value = instanceId.value++;
       contentPos.value = getContentPosByIndex(
-        getTabIndex(),
-        isTabVertical(props.tabDirection),
-        props.useLeftInsteadTransform
+          currentTab.value,
+          isTabVertical(props.tabDirection),
+          props.useLeftInsteadTransform
       );
-    }
+    };
+    onCreated();
     onBeforeUpdate(() => {
-      if (props.page !== props.page && props.page !== undefined) {
-        baseGoToTab(getTabIndex(), true);
-      }
+      baseGoToTab(currentTab.value, true);
     });
     onUpdated(() => {
       prevCurrentTab.value = currentTab.value;
     });
-
+    provide(TabsStore, {
+      registerTab: (tab) => {
+      }
+    });
     return {
       isTabVertical,
       getTabBarBaseProps,
       onPan,
       onTabClick,
       onSwipe,
-      renderContent
+      currentTab,
+      renderContent,
+      setTabs: (v) => {
+        tabs.value = v;
+      }
     };
   },
   render() {
-    const {prefixCls, tabBarPosition, tabDirection, useOnPan} = this.$props;
+    const {prefixCls, tabBarPosition, tabDirection, useOnPan} = this;
     const isTabVertical = this.isTabVertical(tabDirection);
+    const children = unwrapFragment(this.$slots.default());
+    const tabs = children.map((it, index) => ({
+      key: it.key ?? `tab_${index}`,
+      title: it.props.title,
+      forceRender: it.props.forceRender
+    }));
+    this.setTabs(tabs);
     const tabBarProps: any = {
-      ...this.getTabBarBaseProps()
+      ...this.getTabBarBaseProps(),
+      tabs
     };
     const onPan = !isTabVertical && useOnPan ? this.onPan : {};
     const content = [
       <div key="tabBar" class={`${prefixCls}-tab-bar-wrap`}>
-        {
-          this.renderTabBar ? this.renderTabBar(tabBarProps)
-            : <DefaultTabBar {...tabBarProps}
-                             onTabClick={
-                               (tab, index) => {
-                                 this.onTabClick(tab, index);
-                               }
-                             }/>
+        {this.renderTabBar?.(tabBarProps)
+            ?? <DefaultTabBar
+                {...tabBarProps}
+                onTabClick={(tab, index) => {
+                  this.onTabClick(tab, index);
+                }}/>
         }
       </div>,
       <Gesture key="$content"
                onSwipe={this.onSwipe}
                {...{onPan}}>
-        {this.renderContent()}
+        {this.renderContent(children)}
       </Gesture>
     ];
     return <div class={`${prefixCls} ${prefixCls}-${tabDirection} ${prefixCls}-${tabBarPosition}`}>
