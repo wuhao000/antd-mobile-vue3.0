@@ -34,6 +34,7 @@ export default defineComponent({
                  onClick={() => {
                    this.localVisible = true;
                  }}
+                 class={'am-date-picker-item'}
                  required={this.required}
                  disabled={this.isDisabled}
                  error={this.error}

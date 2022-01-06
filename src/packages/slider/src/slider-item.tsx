@@ -46,21 +46,22 @@ export default defineComponent({
   render() {
     return (
       <List.Item multipleLine
+                 class={'am-slider-item'}
+                 control={
+                   <Slider {...this.$props}
+                           disabled={this.isDisabled}
+                           style={{
+                             marginLeft: '8px'
+                           }}
+                           value={this.currentValue}
+                           onChange={
+                             v => {
+                               this.currentValue = v;
+                             }
+                           }/>
+                 }
                  disabled={this.isDisabled}>
         {this.title}
-        <List.Item.Brief style={{padding: '15px'}}>
-          <Slider {...this.$props}
-                  disabled={this.isDisabled}
-                  style={{
-                    marginLeft: '8px'
-                  }}
-                  value={this.currentValue}
-                  onChange={
-                    v => {
-                      this.currentValue = v;
-                    }
-                  }/>
-        </List.Item.Brief>
       </List.Item>
     );
   }

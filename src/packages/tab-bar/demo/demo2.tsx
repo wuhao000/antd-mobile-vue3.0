@@ -13,7 +13,7 @@ export default defineComponent({
 
     const renderContent = (pageText) => {
       return (
-          <div></div>
+          <div>{pageText}</div>
       );
     };
 

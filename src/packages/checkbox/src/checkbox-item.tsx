@@ -13,7 +13,7 @@ export default defineComponent({
     },
     listPrefixCls: {
       type: String as PropType<string>,
-      default: 'am-list'
+      default: 'am-list-item'
     },
     prefixCls: {
       type: String as PropType<string>,

@@ -33,21 +33,14 @@ export default defineComponent({
       const options = getOptions();
       return options.map((option, index) => {
         const optionProps = {};
-        if (index === 0) {
-          Object.assign(optionProps, {
-            error: props.error,
-            errorDisplayType: props.errorDisplayType,
-            errorMessage: props.errorMessage
-          });
-        }
         return <CheckboxItem
-            {...optionProps}
-            value={stateValue.value.includes(option.value)}
-            key={option.value}
-            disabled={option.disabled || isDisabled.value}
-            onChange={(checkState) => {
-              onChange(checkState, option.value);
-            }}>{option.label}</CheckboxItem>;
+          {...optionProps}
+          value={stateValue.value.includes(option.value)}
+          key={option.value}
+          disabled={option.disabled || isDisabled.value}
+          onChange={(checkState) => {
+            onChange(checkState, option.value);
+          }}>{option.label}</CheckboxItem>;
       });
     };
     const onChange = (checkState: any, value: any) => {
@@ -61,12 +54,12 @@ export default defineComponent({
     };
     const renderSearch = () => {
       return props.searchable ? <SearchBar
-          value={searchKeyword.value}
-          {...{
-            ['onUpdate:value']: (v) => {
-              searchKeyword.value = v;
-            }
-          }}/> : null;
+        value={searchKeyword.value}
+        {...{
+          ['onUpdate:value']: (v) => {
+            searchKeyword.value = v;
+          }
+        }}/> : null;
     };
 
     const instance = getCurrentInstance();
@@ -83,6 +76,7 @@ export default defineComponent({
   },
   render() {
     return <List required={this.required}
+                 errorMessage={this.errorMessage}
                  title={this.title}>
       {this.renderSearch()}
       {this.renderOptions()}

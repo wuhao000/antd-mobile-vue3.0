@@ -52,6 +52,7 @@ export default defineComponent({
 
     return (<div>
       <m-radio-list v-model={[this.state.value6, 'value']}
+                    title={'单选'}
                     options={[{label: '选项1', value: 1}, {label: '选项2', value: 2}]}/>
       <m-radio-list value={this.state.value6}
                     onChange={(value) => {

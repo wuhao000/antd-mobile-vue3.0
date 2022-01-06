@@ -67,20 +67,23 @@ export default defineComponent({
     const {isReadonly, isDisabled} = useFormComponent(props, {emit});
     const debounceTimeout: Ref<any> = ref(null);
     const state = reactive({focus: false, value: props.value || ''});
+    const textareaRef = ref(null);
+    const reAlignHeight = () => {
+      if (props.autoHeight) {
+        const textareaDom = textareaRef.value;
+        textareaDom.style.height = ''; // 字数减少时能自动减小高度
+        textareaDom.style.height = `${textareaDom.scrollHeight + 2}px`;
+      }
+    };
     watch(() => props.value, (value: any) => {
       state.value = fixControlledValue(value);
+      reAlignHeight();
     });
     watch(() => state.value, (value: any) => {
       emit('update:value', value);
     });
-    const textareaRef = ref(null);
     const focus = () => {
       textareaRef.value.focus();
-    };
-    const reAlignHeight = () => {
-      const textareaDom = textareaRef.value;
-      textareaDom.style.height = ''; // 字数减少时能自动减小高度
-      textareaDom.style.height = `${textareaDom.scrollHeight}px`;
     };
     const onChange = (e) => {
       const value = e.target.value;
@@ -118,17 +121,15 @@ export default defineComponent({
     };
     const onInput = (e) => {
       state.value = e.target.value;
-      if (props.autoHeight && state.focus) {
+      if (state.focus) {
         reAlignHeight();
       }
     };
     onMounted(() => {
-      if (props.autoHeight) {
-        reAlignHeight();
-      }
+      reAlignHeight();
     });
     onUpdated(() => {
-      if (props.autoHeight && state.focus) {
+      if (state.focus) {
         reAlignHeight();
       }
     });
@@ -202,17 +203,17 @@ export default defineComponent({
             readOnly={!editable}
           />
           {clearable &&
-          editable &&
-          value &&
-          characterLength > 0 && (
-            // @ts-ignore
-            <TouchFeedback activeClassName={`${prefixCls}-clear-active`}>
-              <div
-                class={`${prefixCls}-clear`}
-                onClick={this.clearInput}
-              />
-            </TouchFeedback>
-          )}
+            editable &&
+            value &&
+            characterLength > 0 && (
+              // @ts-ignore
+              <TouchFeedback activeClassName={`${prefixCls}-clear-active`}>
+                <div
+                  class={`${prefixCls}-clear`}
+                  onClick={this.clearInput}
+                />
+              </TouchFeedback>
+            )}
           {hasCount && (
             <span class={`${prefixCls}-count`}>
             <span>{value ? characterLength : 0}</span>/{count}

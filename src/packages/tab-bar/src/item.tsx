@@ -39,14 +39,9 @@ export default defineComponent({
     const localSelected = computed(() => {
       return props.selected !== undefined ? props.selected : (instance.vnode.key === store.currentTab);
     });
-    const onClick = (e) => {
-      tabBar.setCurrentTab(instance.vnode.key);
-      emit('click', e);
-    }
     return {
       tabBar,
-      localSelected,
-      onClick
+      localSelected
     };
   },
   render() {
@@ -67,9 +62,9 @@ export default defineComponent({
     };
     return (
       <Tab {...props}
-           onClick={this.onClick}
-           v-slots={this.$slots}
-           dataAttrs={getDataAttr(this.$props)}/>
+           dataAttrs={getDataAttr(this.$props)}>
+        {this.$slots?.default?.()}
+      </Tab>
     );
   }
 });

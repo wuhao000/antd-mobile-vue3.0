@@ -31,7 +31,7 @@ const Item = defineComponent({
       default: false
     },
     prefixCls: {
-      default: 'am-list'
+      default: 'am-list-item'
     },
     role: {
       type: String as PropType<string>
@@ -44,6 +44,9 @@ const Item = defineComponent({
       type: [String, Object] as PropType<string | object>
     },
     extra: {
+      type: [String, Object] as PropType<string | VNode>
+    },
+    control: {
       type: [String, Object] as PropType<string | VNode>
     },
     extraPosition: {
@@ -117,12 +120,18 @@ const Item = defineComponent({
     const coverRippleStyle: any = ref({display: 'none'});
     const rippleClicked = ref(false);
     const list: any = inject('list', undefined);
-    const showErrorPopover = false;
+    const showErrorPopover = ref(false);
     const instance = getCurrentInstance();
     const actualError = computed(() => props.error ?? instance.parent['error'] ?? false);
     const actualErrorMessage = computed(() => props.errorMessage || instance.parent['errorMessage']);
     const actualDisabled = computed(() => props.disabled);
-    const actualErrorDisplayType = computed(() => props.errorDisplayType ?? instance.parent['errorDisplayType']);
+    const layout = computed(() => list?.layout ?? 'horizontal')
+    const actualErrorDisplayType = computed(() => {
+      if (layout.value === 'vertical') {
+        return 'text';
+      }
+      return props.errorDisplayType ?? instance.parent['errorDisplayType']
+    });
     const onClick = (ev: any) => {
       ev.stopPropagation();
       const isAndroid = props.platform === 'android';
@@ -151,19 +160,53 @@ const Item = defineComponent({
       emit('click');
     };
     const renderExtra = () => {
-      return (!isEmptySlot(slots.extra) || props.extra) ? (
-        <div style={props.extraStyle}
-             class={classNames(`${props.prefixCls}-extra`, {
-               [`${props.prefixCls}-extra-text`]: props.text
-             })}>{slots.extra?.() || props.extra}
+      const extra = [];
+      extra.push(actualError.value && actualErrorDisplayType.value !== 'text' ? (
+        <div
+          class={`${props.prefixCls}-error-extra`}
+          onClick={(e) => {
+            e.stopPropagation();
+            if (actualErrorMessage.value) {
+              if (actualErrorDisplayType.value === 'toast') {
+                toast.fail(actualErrorMessage.value);
+              }
+              if (actualErrorDisplayType.value === 'popover' && !showErrorPopover.value) {
+                showErrorPopover.value = true;
+              }
+            }
+            emit('error-click', e);
+            emit('errorClick', e);
+          }}>
           {
-            props.errorDisplayType === 'text' && actualError.value && actualErrorMessage.value ?
+            actualErrorDisplayType.value === 'popover'
+              ? <Popover v-model={[showErrorPopover.value, 'value']}
+                         mask={false}
+                         v-slots={{
+                           content: () => <Popover.Item>
+                             {actualErrorMessage.value}
+                           </Popover.Item>
+                         }}
+              >
+              </Popover> : null
+          }
+        </div>
+
+      ) : null)
+      const hasExtra = !isEmptySlot(slots.extra) || props.extra || (actualError.value && actualErrorMessage.value);
+      if (hasExtra) {
+        extra.push(<div style={props.extraStyle}
+                        class={classNames(`${props.prefixCls}-extra`, {
+                          [`${props.prefixCls}-extra-text`]: props.text
+                        })}>{slots.extra?.() || props.extra}
+          {
+            actualErrorDisplayType.value === 'text' && actualError.value && actualErrorMessage.value ?
               <div>
                 {actualErrorMessage.value}
               </div> : null
           }
-        </div>
-      ) : null;
+        </div>)
+      }
+      return extra
     };
     const renderThumb = () => {
       const {thumb, prefixCls} = props;
@@ -182,20 +225,25 @@ const Item = defineComponent({
     const renderLabel = () => {
       if (!isEmptySlot(slots.default)) {
         return (
-          <div class={`${props.prefixCls}-content`}
-               style={props.contentStyle}>{slots.default()}</div>
+          <div class={`${props.prefixCls}-title`}
+               style={props.contentStyle}>
+            {renderThumb()}
+            {slots.default()}
+          </div>
         );
       } else if (props.title) {
         return (
-          <div class={`${props.prefixCls}-content`}
-               style={props.contentStyle}>{props.title}</div>
+          <div class={`${props.prefixCls}-title`}
+               style={props.contentStyle}>
+            {renderThumb()}
+            {props.title}</div>
         );
       } else {
-        return null;
+        return renderThumb();
       }
     };
-    const renderControl = () => slots.control ?
-      <div class={props.prefixCls + '-control'}>{slots.control()}</div> : null;
+    const renderControl = () => (slots.control || props.control) ?
+      <div class={props.prefixCls + '-control'}>{slots.control?.() || props.control}</div> : null;
     onBeforeUnmount(() => {
       if (debounceTimeout.value) {
         clearTimeout(debounceTimeout.value);
@@ -209,7 +257,7 @@ const Item = defineComponent({
       onClick, renderThumb,
       renderLabel, renderControl,
       renderExtra, actualErrorMessage,
-      showErrorPopover, list
+      list, layout
     };
   },
   render() {
@@ -225,20 +273,21 @@ const Item = defineComponent({
     } = this;
     const {coverRippleStyle, rippleClicked} = this;
     const section = this.$parent['section'];
-    const wrapCls = classNames(`${prefixCls}-item`,
-      `${prefixCls}-item-label-` + this.labelPosition,
+    const wrapCls = classNames(prefixCls,
+      `${prefixCls}-label-${this.labelPosition}`,
       this.$attrs.class ?? '',
+      `${prefixCls}-${this.layout}`,
       {
-        [`${prefixCls}-item-disabled`]: this.actualDisabled,
-        [`${prefixCls}-item-error`]: actualError,
-        [`${prefixCls}-item-error-text`]: actualError && this.actualErrorDisplayType === 'text',
-        [`${prefixCls}-item-top`]: align === 'top',
-        [`${prefixCls}-item-middle`]: align === 'middle',
-        [`${prefixCls}-item-bottom`]: align === 'bottom',
-        [`${prefixCls}-item-section`]: section,
-        [`${prefixCls}-item-extra-left`]: this.extraPosition === 'left',
-        [`${prefixCls}-item-extra-center`]: this.extraPosition === 'center',
-        [`${prefixCls}-item-extra-right`]: this.extraPosition === 'right'
+        [`${prefixCls}-disabled`]: this.actualDisabled,
+        [`${prefixCls}-error`]: actualError,
+        [`${prefixCls}-error-text`]: actualError && this.actualErrorDisplayType === 'text',
+        [`${prefixCls}-top`]: align === 'top',
+        [`${prefixCls}-middle`]: align === 'middle',
+        [`${prefixCls}-bottom`]: align === 'bottom',
+        [`${prefixCls}-section`]: section,
+        [`${prefixCls}-extra-left`]: this.extraPosition === 'left',
+        [`${prefixCls}-extra-center`]: this.extraPosition === 'center',
+        [`${prefixCls}-extra-right`]: this.extraPosition === 'right'
       });
 
     const rippleCls = classNames(`${prefixCls}-ripple`, {
@@ -259,40 +308,14 @@ const Item = defineComponent({
       <div {...filterHTMLAttrs(this.$attrs)}
            onClick={this.onClick}
            class={wrapCls}>
-        {this.renderThumb()}
         <div class={lineCls}>
-          {this.renderLabel()}
-          {this.renderControl()}
-          {this.renderExtra()}
+          <div class={`${prefixCls}-content`}>
+            {this.renderLabel()}
+            {this.renderControl()}
+            {this.renderExtra()}
+          </div>
           {arrow && <div class={arrowCls}
                          aria-hidden="true"/>}
-          {this.actualError && this.errorDisplayType !== 'text' ? (
-            <div
-              class={`${prefixCls}-error-extra`}
-              onClick={(e) => {
-                e.stopPropagation();
-                if (this.actualErrorMessage) {
-                  if (this.actualErrorDisplayType === 'toast') {
-                    toast.fail(this.actualErrorMessage);
-                  }
-                  if (this.actualErrorDisplayType === 'popover' && !this.showErrorPopover) {
-                    this.showErrorPopover = true;
-                  }
-                }
-                this.$emit('error-click', e);
-                this.$emit('errorClick', e);
-              }}>
-              {
-                this.errorDisplayType === 'popover' ? <Popover v-model={[this.showErrorPopover, 'value']}
-                                                               mask={false}>
-                  <Popover.Item slot="content">
-                    {this.errorMessage}
-                  </Popover.Item>
-                </Popover> : null
-              }
-            </div>
-
-          ) : null}
           {this.$slots.suffix || this.suffix ? <div class={this.prefixCls + '-suffix'}>
             {this.$slots.suffix?.() || this.suffix}
           </div> : null}
@@ -300,11 +323,12 @@ const Item = defineComponent({
         <div style={coverRippleStyle} class={rippleCls}/>
       </div>
     );
+    const feedbackDisabled = disabled || !this.onClick || !this.touchFeedback || (this.list && !this.list.touchFeedback);
     return (
       <TouchFeedback
-        disabled={disabled || !this.onClick || !this.touchFeedback || (this.list && !this.list.touchFeedback)}
+        disabled={feedbackDisabled}
         activeStyle={activeStyle}
-        activeClassName={`${prefixCls}-item-active`}>
+        activeClassName={`${prefixCls}-active`}>
         {content}
       </TouchFeedback>
     );

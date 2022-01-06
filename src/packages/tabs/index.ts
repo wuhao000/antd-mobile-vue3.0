@@ -3,7 +3,7 @@ import MTabs from './src';
 import Tab from './src/tab';
 import './style';
 
-const Plugin: any = MTabs;
+const Plugin = MTabs;
 
 MTabs.Tab = Tab;
 

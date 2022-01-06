@@ -12,7 +12,7 @@ export default defineComponent({
       default: 'am-radio'
     },
     listPrefixCls: {
-      default: 'am-list'
+      default: 'am-list-item'
     },
     radioProps: {
       default: () => {
@@ -30,16 +30,14 @@ export default defineComponent({
   },
   emits: ['change', 'click'],
   setup(props, {emit}) {
-    const onChange = (value: boolean) => {
-      emit('change', value);
-    };
     const onClick = (e) => {
       if (!props.disabled) {
         emit('click', e);
+        emit('change', !props.value);
       }
     };
     return {
-      onClick, onChange
+      onClick
     };
   },
   render() {
@@ -69,17 +67,17 @@ export default defineComponent({
         }
       }
       value={this.value}
-      onChange={this.onChange}
     />;
     return (
       <List.Item
         {
           ...{...otherProps, ...filterHTMLAttrs(this.$attrs)}
         }
+        touchFeedback={!this.disabled && !this.value}
         onClick={this.onClick}
         prefixCls={listPrefixCls}
         class={wrapCls}
-        extra={extra}>
+        suffix={extra}>
         {this.$slots.default?.()}
       </List.Item>
     );

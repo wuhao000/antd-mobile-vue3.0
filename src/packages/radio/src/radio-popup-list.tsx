@@ -3,6 +3,8 @@ import List from '../../list';
 import {optionsBasedComponentProps, useOptionsBaseComponent} from '../../mixins/options-based-component';
 import Popup from '../../popup';
 import RadioList from './radio-list';
+import {isNotNull, isNull} from "../../utils/util";
+import classNames from "classnames";
 
 export default defineComponent({
   name: 'MRadioPopupList',
@@ -75,8 +77,11 @@ export default defineComponent({
       isDisabled,
       disabled
     } = this;
+
     const slots = {
-      extra: () => <span>{(stateValue !== undefined && stateValue !== null) ? optionText : placeholder}</span>,
+      control: () => <span  class={{
+        [`am-list-item-placeholder`]: isNull(stateValue)
+      }}>{(isNotNull(stateValue)) ? optionText : placeholder}</span>,
       default: () => <span>{title}</span>
     };
     return <>
@@ -86,7 +91,7 @@ export default defineComponent({
                  errorMessage={this.errorMessage}
                  errorDisplayType={this.errorDisplayType}
                  style={this.$attrs.style}
-                 class={this.$attrs.class}
+                 class={classNames(this.$attrs.class, 'am-radio-popup-list')}
                  required={this.required}
                  touchFeedback={!readOnly && !disabled}
                  disabled={isDisabled}

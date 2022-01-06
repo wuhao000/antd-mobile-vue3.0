@@ -1,17 +1,25 @@
 import classNames from 'classnames';
 import {defineComponent, PropType, Ref, ref, VNode} from 'vue';
 import {filterHTMLAttrs} from '../../utils/dom';
+import type {FormLayout} from '..'
 
 export default defineComponent({
   install: null,
   name: 'MList',
   inheritAttrs: false,
   props: {
+    errorMessage: {
+      type: String as PropType<string>
+    },
     section: {type: Boolean, default: false},
     sectionSize: {type: String, default: 'default'},
     prefixCls: {
       type: String,
       default: 'am-list'
+    },
+    layout: {
+      type: String as PropType<FormLayout>,
+      default: 'vertical'
     },
     role: {type: String},
     title: {type: [String, Object] as PropType<string | VNode>},
@@ -113,6 +121,7 @@ export default defineComponent({
     const {prefixCls} = this;
     const wrapCls = classNames(prefixCls, {
       [prefixCls + '-section']: this.section,
+      [`${prefixCls}-${this.layout}`]: true,
       [`${prefixCls}-section-${this.sectionSize}`]: this.section
     }, this.$attrs.class);
     return (
@@ -124,8 +133,11 @@ export default defineComponent({
         })}>
           {this.$slots.title?.() ?? this.title}
         </div> : ''}
-        {this.$slots.default ? (
-          <div class={`${prefixCls}-body`}>{this.$slots.default()}</div>
+        {(this.$slots.default || this.errorMessage) ? (
+          <div class={`${prefixCls}-body`}>
+            {this.$slots.default()}
+            {this.errorMessage ? <span class={prefixCls + '-error'}>{this.errorMessage}</span> : undefined}
+          </div>
         ) : null}
         {this.$slots.footer?.()}
       </div>

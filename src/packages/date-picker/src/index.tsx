@@ -183,7 +183,7 @@ export const getDatePicker = (isView: boolean, name: string) => {
                 this.onVisibleChange(true);
               },
               text: !!textValue,
-              extra: childExtra,
+              control: childExtra,
               arrow: 'horizontal'
             });
             return it;

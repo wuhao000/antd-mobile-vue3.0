@@ -12,7 +12,7 @@ export default defineComponent({
     });
     const renderContent = (pageText) => {
       return (
-        <div></div>
+        <div/>
       );
     };
     const tabs = [{
@@ -86,6 +86,7 @@ export default defineComponent({
       <div
         style={this.state.fullScreen ? {position: 'fixed', height: '100%', width: '100%', top: 0} : {height: '400px'}}>
         <m-tab-bar
+          animated={true}
           unselectedTintColor="#949494"
           tintColor="#33A3F4"
           v-model={[this.state.selectedTab, 'value']}
@@ -94,8 +95,10 @@ export default defineComponent({
           }}
           barTintColor="white"
           hidden={this.state.hidden}>
-          {this.tabs.map(it => (
-            <m-tab-bar-item {...it}/>
+          {this.tabs.map((it, index) => (
+            <m-tab-bar-item {...it}>
+              {index}
+            </m-tab-bar-item>
           ))}
         </m-tab-bar>
       </div>

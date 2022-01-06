@@ -14,7 +14,7 @@ const switchItem = defineComponent({
       default: 'am-switch'
     },
     listPrefixCls: {
-      default: 'am-list'
+      default: 'am-list-item'
     },
     switchProps: {
       default: () => {
@@ -78,7 +78,7 @@ const switchItem = defineComponent({
       disabled: this.isDisabled,
       prefixCls: listPrefixCls,
       class: wrapCls,
-      extra
+      control: extra
     };
     return (
       <ListItem {...listItemProps}>

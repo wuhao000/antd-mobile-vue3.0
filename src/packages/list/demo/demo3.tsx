@@ -59,11 +59,9 @@ export default defineComponent({
           Password
         </Input>
         <Item
-          extra={<Switch/>}
+          control={<Switch/>}
         >Confirm Infomation</Item>
-        <Item>
-          <div style={{padding: '15px'}}><Range v-model={[this.state.range, 'value']}/></div>
-        </Item>
+        <Item control={<div style={{padding: '15px'}}><Range v-model={[this.state.range, 'value']}/></div>}/>
         <Item>
           <Button type="primary" size="small" inline onClick={this.onSubmit.bind(this)}>Submit</Button>
           <Button size="small" inline style={{marginLeft: '2.5px'}} onClick={this.onReset.bind(this)}>Reset</Button>

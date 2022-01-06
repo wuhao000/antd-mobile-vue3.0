@@ -3,6 +3,9 @@ import MList from './src';
 import Item, {Brief} from './src/item';
 import './style';
 
+export type FormLayout = 'vertical' | 'horizontal'
+
+
 Item.Brief = Brief;
 MList.Item = Item;
 MList.install = (app: App) => {

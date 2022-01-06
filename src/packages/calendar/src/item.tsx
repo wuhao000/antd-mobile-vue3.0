@@ -106,11 +106,12 @@ export default defineComponent({
           <span>{this.title}</span>
         ];
       },
-      extra: () => {
+      control: () => {
         return <span>{this.displayValue || this.placeholder}</span>;
       }
     };
     return <List.Item text={!!this.displayValue}
+                      class={'am-calendar-item'}
                       required={this.required}
                       touchFeedback={true}
                       disabled={this.disabled}

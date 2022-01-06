@@ -52,6 +52,7 @@ export default defineComponent({
           visible={false}
           v-model={[this.value2, 'value']}
           searchable={true}
+          placeholder="请选择"
           title="点击选择"
           options={options}/>
       <m-checkbox-popup-list

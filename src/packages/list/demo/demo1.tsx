@@ -19,7 +19,7 @@ export default defineComponent({
       switch: false,
       range: [0, 100],
       readonly: false,
-      error: true,
+      error: false,
       errorMessage: '出错了',
       errorDisplayType: 'toast'
     });
@@ -39,19 +39,25 @@ export default defineComponent({
   },
   render() {
     return (<div>
-      <List title="状态控制">
+      <List title="状态控制"
+            layout={'vertical'}>
         <m-switch-item title="禁用" v-model={this.state.disabled}/>
         <m-switch-item title="只读" v-model={this.state.readonly}/>
         <m-switch-item title="错误状态" v-model={this.state.error}/>
       </List>
       <List title="表单"
-            section
+            layout={'vertical'}
             disabled={this.state.disabled}
             editable={!this.state.readonly}>
-        <m-input required={true} title="输入框" error={this.state.error} errorDisplayType={this.state.errorDisplayType}
-                 errorMessage={this.state.errorMessage}/>
+        <m-input required={true}
+                 placeholder={'请输入'}
+                 title="输入框"
+                 error={this.state.error}
+                 errorDisplayType={this.state.errorDisplayType}
+                 errorMessage={'不少于20个字符'}/>
         <m-textarea required={true} title="长文本"
                     error={this.state.error}
+                    placeholder={'请输入'}
                     errorDisplayType={this.state.errorDisplayType}
                     errorMessage={this.state.errorMessage}/>
         <m-textarea required={true} title="长文本"

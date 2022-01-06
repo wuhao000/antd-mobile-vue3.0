@@ -6,9 +6,18 @@
 // Animation
 
 .@{prefixClass} {
+
   .animate {
     animation-duration: .3s;
     animation-fill-mode: both;
+  }
+
+  &-item {
+    &.am-list-item-horizontal {
+      .am-list-item-control {
+        justify-content: flex-end;
+      }
+    }
   }
 
   @keyframes fadeIn {

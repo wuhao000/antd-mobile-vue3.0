@@ -4,6 +4,8 @@ import {optionsBasedComponentProps, useOptionsBaseComponent} from '../../mixins/
 import Popup from '../../popup';
 import SearchBar from '../../search-bar/src/index';
 import CheckboxList from './checkbox-list';
+import omit from "omit.js";
+import classNames from "classnames";
 
 export default defineComponent({
   name: 'MCheckboxPopupList',
@@ -13,7 +15,8 @@ export default defineComponent({
       type: [String, Object] as PropType<string>
     },
     placeholder: {
-      type: String as PropType<string>
+      type: String as PropType<string>,
+      default: '请选择'
     },
     clearable: {
       type: Boolean as PropType<boolean>,
@@ -96,9 +99,12 @@ export default defineComponent({
     listProps.title = undefined;
     const cancelButton = <div onClick={this.onClear}
                               class={`am-popup-item am-popup-header-left`}>清除</div> as VNode;
+
     const slots = {
-      extra: () => {
-        return <span>{stateValue && stateValue.length ? this.optionText : placeholder}</span>;
+      control: () => {
+        return <span class={{
+          [`am-list-item-placeholder`]: !stateValue || stateValue.length === 0
+        }}>{stateValue && stateValue.length ? this.optionText : placeholder}</span>;
       },
       default: () => {
         return <span>{this.title}</span>;
@@ -109,7 +115,7 @@ export default defineComponent({
                        errorMessage={this.errorMessage}
                        errorDisplayType={this.errorDisplayType}
                        style={this.$attrs.style}
-                       class={this.$attrs.class}
+                       class={classNames(this.$attrs.class, 'am-checkbox-popup-list')}
                        touchFeedback={!this.isReadonly && !this.isDisabled}
                        required={this.required}
                        text={!!this.optionText}
@@ -123,7 +129,7 @@ export default defineComponent({
              onOk={this.closePopup}
              onCancel={this.closePopup}>
         <CheckboxList
-          {...listProps}
+          {...omit(listProps, ['errorMessage', 'error', 'errorDisplayType'])}
           maxHeightPercentage={0.7}
           onChange={this.onChange}
         />

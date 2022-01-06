@@ -1,7 +1,7 @@
 @import '../../style/mixins/index';
 @import '../../style/themes/default';
 
-@listPrefixCls: am-list;
+@listPrefixCls: am-list-item;
 @checkboxWarpPrefixCls: am-checkbox;
 @checkboxInnerPrefixCls: ~"@{checkboxWarpPrefixCls}-inner";
 
@@ -70,30 +70,31 @@
 }
 
 .@{listPrefixCls} {
-  & &-item {
-    &.@{checkboxWarpPrefixCls}-item {
-      .@{listPrefixCls}-thumb {
-        width: @icon-size-sm;
-        height: @icon-size-sm;
+  &.@{checkboxWarpPrefixCls}-item {
+    .@{listPrefixCls}-thumb {
+      position: relative;
+      width: @icon-size-sm;
+      height: @icon-size-sm;
 
-        .@{checkboxWarpPrefixCls} {
-          position: absolute;
-          top: 0;
+      .@{checkboxWarpPrefixCls} {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 21px;
+        height: 21px;
+
+        &-inner {
           left: 0;
-          right: 0;
-          bottom: 0;
-          width: 100%;
-          height: @list-item-height;
-
-          &-inner {
-            left: @h-spacing-lg;
-            top: 12 * @hd;
-          }
+          top: 0;
         }
       }
+    }
 
-      &.@{checkboxWarpPrefixCls}-item-disabled {
-        .@{listPrefixCls}-content {
+    &.@{checkboxWarpPrefixCls}-item-disabled {
+      .@{listPrefixCls}-content {
+        .@{listPrefixCls}-title {
           color: @color-text-disabled;
         }
       }
@@ -129,5 +130,13 @@
     line-height: @line-height-paragraph;
     margin-left: 2 * @h-spacing-lg;
     margin-top: 1PX;
+  }
+}
+
+.am-checkbox-popup-list {
+  &.am-list-item-horizontal {
+    .am-list-item-control {
+      justify-content: flex-end;
+    }
   }
 }

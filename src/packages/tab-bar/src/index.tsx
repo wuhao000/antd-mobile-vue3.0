@@ -1,7 +1,10 @@
 import {unwrapFragment} from '../../utils/vue';
-import {defineComponent, PropType, provide, reactive, watch} from 'vue';
+import {defineComponent, isVNode, PropType, provide, reactive, watch} from 'vue';
 import Tabs from '../../tabs';
+import Icon from "../../icon";
+import Badge from "../../badge";
 
+const tabClsPrefix = 'am-tab-bar-tab'
 
 const TabBar = defineComponent({
   name: 'MTabBar',
@@ -67,23 +70,83 @@ const TabBar = defineComponent({
       store.currentTab = tab;
       emit('click', tab, children.find(it => it.key === tab));
     };
+    const renderIcon = (tabProps) => {
+      const selected = tabProps.key === store.currentTab;
+      const {
+        dot,
+        badge,
+        selectedIcon,
+        icon,
+        prefixCls
+      } = tabProps;
+      const realIcon: any = selected ? selectedIcon ?? icon : icon;
+      const iconDom = realIcon ? (
+        isVNode(realIcon) ? realIcon : <Icon
+          class={`${prefixCls}-image`}
+          type={realIcon}
+        />
+      ) : null;
+      if (badge) {
+        return (
+          <Badge text={badge} class={`${prefixCls}-badge tab-badge`}>
+            {' '}
+            {iconDom}{' '}
+          </Badge>
+        );
+      }
+      if (dot) {
+        return (
+          <Badge dot class={`${prefixCls}-badge tab-dot`}>
+            {iconDom}
+          </Badge>
+        );
+      }
+      return iconDom;
+    };
+    const getContent = (tabProps) => {
+      const selected = tabProps.key === store.currentTab;
+      const iconColor = selected ? tabProps.tintColor : tabProps.unselectedTintColor;
+      return <div
+        onClick={() => {
+          setCurrentTab(tabProps.key)
+        }}
+        class={{
+          [tabClsPrefix]: true,
+          [`${tabClsPrefix}-selected`]: selected
+        }}>
+        <div class={`${tabClsPrefix}-icon`} style={{color: iconColor}}>
+          {renderIcon(tabProps)}
+        </div>
+        <p class={`${tabClsPrefix}-title`}
+           style={{color: iconColor}}>
+          {tabProps.title}
+        </p>
+      </div>
+    }
+    const getTabs = () => {
+      const children = unwrapFragment(slots.default());
+      return children.map((it, index) => ({
+        key: it.key ?? `tab_${index}`,
+        ...it.props
+      }));
+    }
     const renderTabBar = () => {
       let cls = `${props.prefixCls}-bar`;
       if (props.hidden) {
         cls += ` ${props.prefixCls}-bar-hidden-${props.tabBarPosition}`;
       }
+      const tabs = getTabs();
       return <div class={cls} style={{backgroundColor: props.barTintColor}}>
-        {slots.default()}
+        {tabs.map(it => getContent(it))}
       </div>;
     };
     provide('tabBar', {
-      setCurrentTab,
       slots,
       props
     });
     provide('tabBarStore', store);
     return {
-      store, renderTabBar
+      store, renderTabBar, getTabs
     };
   },
   render() {
@@ -91,22 +154,20 @@ const TabBar = defineComponent({
       prefixCls,
       animated,
       swipeable,
-      noRenderContent,
       prerenderingSiblingsNumber,
       tabBarPosition
     } = this.$props;
+    const tabs = this.getTabs();
+    const value = tabs.findIndex(it => it.key === this.store.currentTab);
     return (
       <div class={prefixCls}>
         <Tabs renderTabBar={this.renderTabBar}
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
+              value={value}
               tabBarPosition={tabBarPosition}
               animated={animated}
               swipeable={swipeable}
-              noRenderContent={noRenderContent}
               prerenderingSiblingsNumber={prerenderingSiblingsNumber}>
-          {this.$slots.default?.()}
+          {this.$slots.default()}
         </Tabs>
       </div>
     );

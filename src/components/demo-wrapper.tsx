@@ -6,7 +6,7 @@ export default defineComponent({
     title: {
       type: [String, Object]
     },
-    background: String,
+    background: {type: String, default: 'transparent'},
     padding: String
   },
   render() {

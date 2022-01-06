@@ -1,5 +1,16 @@
 import {
-  computed, defineComponent, onBeforeUpdate, onMounted, onUpdated, PropType, provide, reactive, Ref, ref, watch
+  computed,
+  CSSProperties,
+  defineComponent,
+  onBeforeUpdate,
+  onMounted,
+  onUpdated,
+  PropType,
+  provide,
+  reactive,
+  Ref,
+  ref,
+  watch
 } from 'vue';
 import {Models} from '../../../types/models';
 import {unwrapFragment} from '../../utils/vue';
@@ -228,10 +239,6 @@ export default defineComponent({
     const isTabVertical = (direction = props.tabDirection) => {
       return direction === 'vertical';
     };
-    const shouldRenderTab = (idx: number) => {
-      const {prerenderingSiblingsNumber = 0} = props;
-      return currentTab.value - prerenderingSiblingsNumber <= idx && idx <= currentTab.value + prerenderingSiblingsNumber;
-    };
     onMounted(() => {
       prevCurrentTab.value = currentTab.value;
     });
@@ -256,9 +263,6 @@ export default defineComponent({
       if (index >= 0 && index < tabs.value.length) {
         if (!force) {
           emit('change', tabs.value[index], index);
-          if (props.value !== undefined) {
-            return false;
-          }
         }
         currentTab.value = index;
         if (setState) {
@@ -325,8 +329,7 @@ export default defineComponent({
     };
     const goToTab = (index: number, force = false, usePaged = props.usePaged) => {
       const {tabDirection, useLeftInsteadTransform} = props;
-      let setState = () => {
-      };
+      let setState = () => {};
       if (usePaged) {
         setState = () => {
           contentPos.value = getContentPosByIndex(
@@ -389,21 +392,29 @@ export default defineComponent({
           break;
       }
     };
+    const getContentStyle = (): CSSProperties => {
+      const {animated, useLeftInsteadTransform} = props;
+      if (animated) {
+        if (useLeftInsteadTransform) {
+          return {
+            position: 'relative',
+            ...isTabVertical() ? {top: contentPos.value} : {left: contentPos.value}
+          }
+        }
+        return getTransformPropValue(contentPos.value)
+      }
+      return {
+        position: 'relative',
+        ...isTabVertical() ? {top: `${-currentTab.value * 100}%`} : {left: `${-currentTab.value * 100}%`}
+      };
+    }
     const renderContent = (children: JSX.Element[]) => {
       const {prefixCls, animated, destroyInactiveTab, useLeftInsteadTransform} = props;
       let contentCls = `${prefixCls}-content-wrap`;
       if (animated && !isMoving.value) {
         contentCls += ` ${contentCls}-animated`;
       }
-      const contentStyle: any = animated ? (
-          useLeftInsteadTransform ? {
-            position: 'relative',
-            ...isTabVertical() ? {top: contentPos.value} : {left: contentPos}
-          } : getTransformPropValue(contentPos.value)
-      ) : {
-        position: 'relative',
-        ...isTabVertical() ? {top: `${-currentTab.value * 100}%`} : {left: `${-currentTab * 100}%`}
-      };
+      const contentStyle = getContentStyle()
       const {instanceId} = getTabBarBaseProps();
       return <div class={contentCls}
                   style={contentStyle}
@@ -448,9 +459,6 @@ export default defineComponent({
       );
     };
     onCreated();
-    onBeforeUpdate(() => {
-      baseGoToTab(currentTab.value, true);
-    });
     onUpdated(() => {
       prevCurrentTab.value = currentTab.value;
     });
@@ -474,7 +482,7 @@ export default defineComponent({
   render() {
     const {prefixCls, tabBarPosition, tabDirection, useOnPan} = this;
     const isTabVertical = this.isTabVertical(tabDirection);
-    const children = unwrapFragment(this.$slots.default());
+    const children = unwrapFragment(this.$slots?.default?.()) || [];
     const tabs = children.map((it, index) => ({
       key: it.key ?? `tab_${index}`,
       title: it.props.title,

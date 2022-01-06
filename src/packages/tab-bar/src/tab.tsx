@@ -37,67 +37,16 @@ const Tab = defineComponent({
     },
     dataAttrs: {}
   },
-  setup(props, {emit, slots}) {
-    const renderIcon = () => {
-      const {
-        dot,
-        badge,
-        selected,
-        selectedIcon,
-        icon,
-        title,
-        prefixCls
-      } = props;
-      const realIcon: any = selected ? selectedIcon : icon;
-      const iconDom = realIcon ? (
-        isVNode(realIcon) ? realIcon : <Icon
-          class={`${prefixCls}-image`}
-          type={realIcon}
-        />
-      ) : null;
-      if (badge) {
-        return (
-          <Badge text={badge} class={`${prefixCls}-badge tab-badge`}>
-            {' '}
-            {iconDom}{' '}
-          </Badge>
-        );
-      }
-      if (dot) {
-        return (
-          <Badge dot class={`${prefixCls}-badge tab-dot`}>
-            {iconDom}
-          </Badge>
-        );
-      }
-      return iconDom;
-    };
-    return {
-      renderIcon
-    };
-  },
   render() {
     const {
-      title,
       prefixCls,
-      selected,
-      unselectedTintColor,
-      tintColor
     } = this.$props;
-    const iconColor = selected ? tintColor : unselectedTintColor;
     return (
       <div
         {...this.dataAttrs}
         {...this.$attrs}
         class={classNames(prefixCls)}>
-        <div class={`${prefixCls}-icon`} style={{color: iconColor}}>
-          {this.renderIcon()}
-        </div>
-        <p class={`${prefixCls}-title`}
-           style={{color: selected ? tintColor : unselectedTintColor}}
-        >
-          {title}
-        </p>
+        {this.$slots?.default?.()}
       </div>
     );
   }

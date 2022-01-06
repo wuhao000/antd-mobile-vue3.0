@@ -1,7 +1,7 @@
 @import '../../style/mixins/index';
 @import '../../style/themes/default';
 
-@listPrefixCls: am-list;
+@listPrefixCls: am-list-item;
 @radioWarpPrefixCls: am-radio;
 @radioInnerPrefixCls: ~"@{radioWarpPrefixCls}-inner";
 
@@ -48,7 +48,9 @@
 
     &&-selected {
       .@{listPrefixCls}-content {
-        color: @brand-primary;
+        .@{listPrefixCls}-title {
+          color: @brand-primary;
+        }
       }
     }
   }
@@ -77,35 +79,41 @@
 }
 
 .@{listPrefixCls} {
-  & &-item {
-    &.@{radioWarpPrefixCls}-item {
-      .@{listPrefixCls}-line {
-        .@{listPrefixCls}-extra {
-          flex: 0;
+  &.@{radioWarpPrefixCls}-item {
+    .@{listPrefixCls}-line {
+      .@{listPrefixCls}-extra {
+        flex: 0;
 
-          .@{radioWarpPrefixCls} {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            width: 100%;
-            height: @list-item-height;
-            overflow: visible;
+        .@{radioWarpPrefixCls} {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          width: 100%;
+          height: @list-item-height;
+          overflow: visible;
 
-            &-inner {
-              right: @v-spacing-lg;
-              top: @h-spacing-lg;
-            }
+          &-inner {
+            right: @v-spacing-lg;
+            top: @h-spacing-lg;
           }
         }
       }
+    }
 
-      &.@{radioWarpPrefixCls}-item-disabled {
-        .@{listPrefixCls}-content {
-          color: @color-text-disabled;
-        }
+    &.@{radioWarpPrefixCls}-item-disabled {
+      .@{listPrefixCls}-title {
+        color: @color-text-disabled;
       }
+    }
+  }
+}
+
+.am-radio-popup-list {
+  &.am-list-item-horizontal {
+    .am-list-item-control {
+      justify-content: flex-end;
     }
   }
 }
