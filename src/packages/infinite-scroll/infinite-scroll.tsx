@@ -48,7 +48,7 @@ export const InfiniteScroll = defineComponent({
   setup(props) {
     const doLoadMore = useLockFn(() => props.loadMore());
     const elementRef = ref<HTMLDivElement>(null);
-
+    const flag = ref(2);
     const checkTimeoutRef = ref<number>();
     const check = useMemoizedFn(() => {
       window.clearTimeout(checkTimeoutRef.value);
@@ -73,7 +73,13 @@ export const InfiniteScroll = defineComponent({
             ? window.innerHeight
             : parent.getBoundingClientRect().bottom;
         if (current >= elementTop - props.threshold) {
-          doLoadMore();
+          const origin = flag.value;
+          flag.value = 1;
+          if (origin === 2) {
+            doLoadMore();
+          }
+        } else {
+          flag.value = 2;
         }
       });
     });

@@ -161,7 +161,7 @@ export const getDatePicker = (isView: boolean, name: string) => {
         return datePicker;
       }
       const textValue = value ? formatFn(value, this.format, this.mode) : null;
-      const childExtra = textValue ? textValue : (this.extra || extra || this.placeholder);
+      const childExtra = textValue ? textValue : (this.extra || <span class={'am-list-item-placeholder'}>{this.placeholder || extra}</span>);
       const visible = (this.disabled || !this.editable) ? false : this.localVisible;
       return (
         <PopupDatePicker onVisibleChange={this.onVisibleChange}

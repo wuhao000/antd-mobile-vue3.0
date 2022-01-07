@@ -113,6 +113,7 @@ export default defineComponent({
     return [<List.Item onClick={this.onClick}
                        error={this.error}
                        errorMessage={this.errorMessage}
+                       arrow={'horizontal'}
                        errorDisplayType={this.errorDisplayType}
                        style={this.$attrs.style}
                        class={classNames(this.$attrs.class, 'am-checkbox-popup-list')}

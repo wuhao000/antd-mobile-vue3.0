@@ -77,7 +77,6 @@ export default defineComponent({
       isDisabled,
       disabled
     } = this;
-
     const slots = {
       control: () => <span  class={{
         [`am-list-item-placeholder`]: isNull(stateValue)
@@ -87,6 +86,7 @@ export default defineComponent({
     return <>
       <List.Item onClick={onClick}
                  text={!!optionText}
+                 arrow={'horizontal'}
                  error={this.error}
                  errorMessage={this.errorMessage}
                  errorDisplayType={this.errorDisplayType}

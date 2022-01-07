@@ -2,7 +2,6 @@ import {
   computed,
   CSSProperties,
   defineComponent,
-  onBeforeUpdate,
   onMounted,
   onUpdated,
   PropType,
@@ -198,8 +197,8 @@ export default defineComponent({
             offset += panDirection === 'vertical' ? 0 : status.moveStatus.x;
           }
           const canScrollOffset = isVertical ?
-              -layoutRef.value.scrollHeight + layoutRef.value.clientHeight :
-              -layoutRef.value.scrollWidth + layoutRef.value.clientWidth;
+            -layoutRef.value.scrollHeight + layoutRef.value.clientHeight :
+            -layoutRef.value.scrollWidth + layoutRef.value.clientWidth;
           offset = Math.min(offset, 0);
           offset = Math.max(offset, canScrollOffset);
           setPxStyle(layoutRef.value.value, offset, 'px', isVertical, useLeftInsteadTransform);
@@ -217,12 +216,12 @@ export default defineComponent({
           if (offsetIndex === currentTab.value) {
             if (props.usePaged) {
               setTransform(
-                  layoutRef.value.style,
-                  getContentPosByIndex(
-                      offsetIndex,
-                      isTabVertical(),
-                      props.useLeftInsteadTransform
-                  )
+                layoutRef.value.style,
+                getContentPosByIndex(
+                  offsetIndex,
+                  isTabVertical(),
+                  props.useLeftInsteadTransform
+                )
               );
             }
           } else {
@@ -329,13 +328,14 @@ export default defineComponent({
     };
     const goToTab = (index: number, force = false, usePaged = props.usePaged) => {
       const {tabDirection, useLeftInsteadTransform} = props;
-      let setState = () => {};
+      let setState = () => {
+      };
       if (usePaged) {
         setState = () => {
           contentPos.value = getContentPosByIndex(
-              index,
-              isTabVertical(tabDirection),
-              useLeftInsteadTransform
+            index,
+            isTabVertical(tabDirection),
+            useLeftInsteadTransform
           );
         };
       }
@@ -401,7 +401,7 @@ export default defineComponent({
             ...isTabVertical() ? {top: contentPos.value} : {left: contentPos.value}
           }
         }
-        return getTransformPropValue(contentPos.value)
+        return getTransformPropValue(contentPos.value);
       }
       return {
         position: 'relative',
@@ -453,9 +453,9 @@ export default defineComponent({
       nextCurrentTab.value = currentTab.value;
       instanceId.value = instanceId.value++;
       contentPos.value = getContentPosByIndex(
-          currentTab.value,
-          isTabVertical(props.tabDirection),
-          props.useLeftInsteadTransform
+        currentTab.value,
+        isTabVertical(props.tabDirection),
+        props.useLeftInsteadTransform
       );
     };
     onCreated();
@@ -497,11 +497,11 @@ export default defineComponent({
     const content = [
       <div key="tabBar" class={`${prefixCls}-tab-bar-wrap`}>
         {this.renderTabBar?.(tabBarProps)
-            ?? <DefaultTabBar
-                {...tabBarProps}
-                onTabClick={(tab, index) => {
-                  this.onTabClick(tab, index);
-                }}/>
+          ?? <DefaultTabBar
+            {...tabBarProps}
+            onTabClick={(tab, index) => {
+              this.onTabClick(tab, index);
+            }}/>
         }
       </div>,
       <Gesture key="$content"
