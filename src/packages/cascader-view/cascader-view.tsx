@@ -100,7 +100,6 @@ export const CascaderView = defineComponent({
           onChange={key => {
             this.setTabActiveKey(key);
           }}
-          stretch={false}
           class={`${classPrefix}-tabs`}>
         {this.levels.map((level, index) => {
           const selected = level.selected;
