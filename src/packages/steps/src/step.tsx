@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import {computed, defineComponent, getCurrentInstance, inject, isVNode, PropType} from 'vue';
+import {computed, defineComponent, getCurrentInstance, isVNode, PropType} from 'vue';
 import Icon from '../../icon';
 
 function isString(str) {
@@ -16,7 +16,7 @@ export default defineComponent({
   props: {
     prefixCls: {
       type: String as PropType<string>,
-      default: 'am-step'
+      default: 'am-steps'
     },
     wrapperStyle: {},
     itemWidth: {
@@ -81,7 +81,7 @@ export default defineComponent({
       if (progressDot) {
         if (typeof progressDot === 'function') {
           iconNode = (
-            <span class={`${prefixCls}-icon`}>
+              <span class={`${prefixCls}-icon`}>
                 {progressDot(iconDot, {index: stepNumber! - 1, status, title, description})}
               </span>
           );
@@ -103,8 +103,19 @@ export default defineComponent({
       }
       return iconNode;
     };
+    const renderTitle = () => {
+      if (!(slots.title || props.title)) {
+        return undefined;
+      }
+      return <div class={`${props.prefixCls}-item-title`}>
+        {
+            slots.title?.() ?? props.title
+        }
+      </div>;
+    };
     return {
-      renderIconNode
+      renderIconNode,
+      renderTitle
     };
   },
   render() {
@@ -114,11 +125,11 @@ export default defineComponent({
       adjustMarginRight,
       description, title
     } = this.$props;
-
     const classString = classNames(
-      `${prefixCls}-item`,
-      `${prefixCls}-item-${status}`,
-      {[`${prefixCls}-item-custom`]: icon}
+        `${prefixCls}-item`,
+        `${prefixCls}-item-${status}`,
+        this.$attrs.class,
+        {[`${prefixCls}-item-custom`]: icon}
     );
     const stepItemStyle: any = {};
     if (itemWidth) {
@@ -128,25 +139,23 @@ export default defineComponent({
       stepItemStyle.marginRight = adjustMarginRight;
     }
     return (
-      <div
-        {...this.$attrs}
-        class={classString}
-        style={stepItemStyle}>
-        <div class={`${prefixCls}-item-tail`}/>
-        <div class={`${prefixCls}-item-icon`}>
-          {this.renderIconNode()}
-        </div>
-        <div class={`${prefixCls}-item-content`}>
-          <div class={`${prefixCls}-item-title`}>
-            {
-              this.$slots?.title?.() ?? title
-            }
+        <div
+            {...this.$attrs}
+            class={classString}
+            style={stepItemStyle}>
+          <div class={`${prefixCls}-item-tail`}/>
+          <div class={`${prefixCls}-item-icon`}>
+            {this.renderIconNode()}
           </div>
-          {(description || this.$slots.description) && <div class={`${prefixCls}-item-description`}>{
-            this.$slots?.description?.() ?? description
-          }</div>}
+          <div class={`${prefixCls}-item-content`}>
+            {
+              this.renderTitle()
+            }
+            {(description || this.$slots.description) && <div class={`${prefixCls}-item-description`}>{
+                this.$slots?.description?.() ?? description
+            }</div>}
+          </div>
         </div>
-      </div>
     );
   }
 });

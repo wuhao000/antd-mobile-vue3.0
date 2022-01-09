@@ -93,7 +93,6 @@ export const CascaderView = defineComponent({
     };
   },
   render() {
-    console.log(this.tabActiveKey);
     return <div class={classPrefix}>
       <Tabs
           value={this.tabActiveKey}

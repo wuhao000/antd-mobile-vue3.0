@@ -53,7 +53,7 @@ export default defineComponent({
       [`${prefixCls}-label-${adjustedLabelPlacement}`]: direction === 'horizontal',
       [`${prefixCls}-dot`]: !!progressDot
     });
-    const children = unwrapFragment(this.$slots.default?.())
+    const children = unwrapFragment(this.$slots.default?.());
     if (!children) {
       return (
         <div
@@ -73,7 +73,7 @@ export default defineComponent({
         wrapperStyle: {},
         progressDot,
         status: child.props?.status || '',
-        class: ''
+        class: child.props?.class
       };
       let icon: any = childProps.icon;
       if (!icon) {
@@ -83,7 +83,7 @@ export default defineComponent({
         } else if (index > current) {
           // 对应 state: wait
           icon = 'ellipsis';
-          childProps.class = 'ellipsis-item';
+          childProps.class = classNames('ellipsis-item', childProps.class);
         }
         if ((status === 'error' && index === current) || child.props?.status === 'error') {
           icon = 'cross-circle-o';
