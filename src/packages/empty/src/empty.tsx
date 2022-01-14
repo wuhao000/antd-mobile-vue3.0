@@ -19,7 +19,7 @@ export default defineComponent({
   name: 'MEmpty',
   props: {
     image: {
-      type: Object as PropType<JSX.Element>,
+      type: [Object, String] as PropType<JSX.Element | string>,
       default: () => EmptyIcon
     },
     imageStyle: {

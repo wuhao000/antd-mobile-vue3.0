@@ -14,7 +14,7 @@ export default defineComponent({
     title: {
       type: String as PropType<string>
     },
-    onChange: Function,
+    onChange: [Function, Array],
     maxHeightPercentage: {
       type: Number as PropType<number>
     }
