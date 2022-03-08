@@ -1,11 +1,11 @@
-import Button  from '../../button'
 import Space from '../';
-import DemoWrapper from "../../../components/demo-wrapper";
+import DemoWrapper from '../../../components/demo-wrapper';
+import Button from '../../button';
 
 export default () => {
   return (
-    <>
-      <DemoWrapper title='水平方向的间距'>
+      <>
+      <DemoWrapper title="水平方向的间距">
         <Space>
           <Button>按钮1</Button>
           <Button>按钮2</Button>
@@ -13,7 +13,7 @@ export default () => {
         </Space>
       </DemoWrapper>
 
-      <DemoWrapper title='换行'>
+      <DemoWrapper title="换行">
         <Space wrap>
           <Button>按钮1</Button>
           <Button>按钮2</Button>
@@ -29,53 +29,53 @@ export default () => {
         </Space>
       </DemoWrapper>
 
-      <DemoWrapper title='垂直方向的间距'>
-        <Space direction='vertical'>
+      <DemoWrapper title="垂直方向的间距">
+        <Space direction="vertical">
           <Button>按钮1</Button>
           <Button>按钮2</Button>
           <Button>按钮3</Button>
         </Space>
       </DemoWrapper>
 
-      <DemoWrapper title='自定义间距大小'>
-        <Space style={{ '--gap': '24px' }}>
+      <DemoWrapper title="自定义间距大小">
+        <Space style={{'--gap': '24px'}}>
           <Button>按钮1</Button>
           <Button>按钮2</Button>
           <Button>按钮3</Button>
         </Space>
       </DemoWrapper>
 
-      <DemoWrapper title='渲染为块级元素'>
-        <Space direction='vertical' block>
+      <DemoWrapper title="渲染为块级元素">
+        <Space direction="vertical" block>
           <Button>按钮1</Button>
           <Button>按钮2</Button>
           <Button>按钮3</Button>
         </Space>
       </DemoWrapper>
 
-      <DemoWrapper title='主轴对齐方式'>
-        <Space justify='center' block>
+      <DemoWrapper title="主轴对齐方式">
+        <Space justify="center" block>
           <Button>1</Button>
           <Button>
-            2<br />2
+            2<br/>2
           </Button>
           <Button>
-            3<br />3<br />3
+            3<br/>3<br/>3
           </Button>
         </Space>
       </DemoWrapper>
 
-      <DemoWrapper title='交叉轴对齐方式'>
-        <Space align='end'>
+      <DemoWrapper title="交叉轴对齐方式">
+        <Space align="end">
           <Button>1</Button>
           <Button>
-            2<br />2
+            2<br/>2
           </Button>
           <Button>
-            3<br />3<br />3
+            3<br/>3<br/>3
           </Button>
         </Space>
       </DemoWrapper>
     </>
-  )
+  );
 }

@@ -22,6 +22,7 @@ export default defineComponent({
   render() {
     return <div>
       <m-tabs initialPage={1}
+              defaultValue={'tab2'}
               onChange={(tab, index) => {
                 console.log('onChange', index, tab);
               }}
