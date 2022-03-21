@@ -2,7 +2,7 @@ import raf from 'raf';
 import {defineComponent, onBeforeUnmount, onMounted, provide, Ref, ref} from 'vue';
 
 export default defineComponent({
-  name: 'Container',
+  name: 'StickyContainer',
   setup() {
     const framePending: Ref<boolean> = ref(false);
     const events = ref([

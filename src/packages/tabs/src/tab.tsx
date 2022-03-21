@@ -15,12 +15,6 @@ export default defineComponent({
     if (!instance.vnode.key) {
       console.error('Tab key cannot be empty');
     }
-    const {registerTab} = inject(TabsStore);
-    registerTab({
-      key: instance.vnode.key,
-      title: props.title,
-      forceRender: props.forceRender
-    });
     return {};
   },
   render() {

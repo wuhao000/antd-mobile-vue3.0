@@ -29,9 +29,7 @@ export default defineComponent({
       }
     },
     /** 当前激活的标签页 */
-    activeTab: {
-      default: 0
-    },
+    activeTab: String,
     animated: {
       type: Boolean as PropType<boolean>,
       default: true
@@ -108,8 +106,8 @@ export default defineComponent({
           const isVertical = isTabBarVertical();
           let offset = getLastOffset() + (isVertical ? status.moveStatus.y : status.moveStatus.x);
           const canScrollOffset = isVertical ?
-            -layoutRef.value.scrollHeight + layoutRef.value.clientHeight :
-            -layoutRef.value.scrollWidth + layoutRef.value.clientWidth;
+              -layoutRef.value.scrollHeight + layoutRef.value.clientHeight :
+              -layoutRef.value.scrollWidth + layoutRef.value.clientWidth;
           offset = Math.min(offset, 0);
           offset = Math.max(offset, canScrollOffset);
           setPxStyle(layoutRef.value.value, offset, 'px', isVertical);
@@ -129,15 +127,16 @@ export default defineComponent({
     });
     const getTransformByIndex = () => {
       const {activeTab, tabs, page = 0} = props;
+      const tabIndex = tabs.map(it => it.key).indexOf(activeTab);
       const isVertical = isTabBarVertical();
       const size = getTabSize(page, tabs.length);
       const center = page / 2;
-      const pos = Math.min(activeTab, tabs.length - center - .5);
+      const pos = Math.min(tabIndex, tabs.length - center - .5);
       const skipSize = Math.min(-(pos - center + .5) * size, 0);
       onPan.value.setCurrentOffset(`${skipSize}%`);
       transform.value = getPxStyle(skipSize, '%', isVertical);
-      showPrev.value = activeTab > center - .5 && tabs.length > page;
-      showNext.value = activeTab < tabs.length - center - .5 && tabs.length > page;
+      showPrev.value = tabIndex > center - .5 && tabs.length > page;
+      showNext.value = tabIndex < tabs.length - center - .5 && tabs.length > page;
     };
     const onPress = (index: number) => {
       const {goToTab, tabs} = props;
@@ -152,9 +151,10 @@ export default defineComponent({
         prefixCls, renderTab, activeTab,
         tabBarTextStyle,
         tabBarActiveTextColor,
-        tabBarInactiveTextColor
-
+        tabBarInactiveTextColor,
+        tabs
       } = props;
+      const tabIndex = tabs.indexOf(activeTab);
 
       const textStyle = {...tabBarTextStyle} as any;
       let cls = `${prefixCls}-tab`;
@@ -169,7 +169,7 @@ export default defineComponent({
       if (props.card) {
         cls += ` ${cls}-card`;
       }
-      if (activeTab === i) {
+      if (tabIndex === i) {
         cls += ` ${cls}-active`;
         ariaSelected = true;
         if (tabBarActiveTextColor) {
@@ -212,7 +212,7 @@ export default defineComponent({
   },
   render() {
     const {
-      prefixCls, animated, tabs = [], page = 0, activeTab = 0,
+      prefixCls, animated, tabs = [], page = 0,
       tabBarBackgroundColor, tabBarUnderlineStyle, tabBarPosition
     } = this.$props;
     const renderUnderline = !this.card && this.renderUnderline;
@@ -238,10 +238,11 @@ export default defineComponent({
     } : {};
 
     const {setCurrentOffset, ...onPan} = this.onPan;
+    const activeIndex = Math.max(this.tabs.map(it => it.key).indexOf(this.activeTab), 0);
     const underlineProps = {
       style: {
         ...isTabBarVertical ? {height: `${size}%`} : {width: `${size}%`},
-        ...isTabBarVertical ? {top: `${size * activeTab}%`} : {left: `${size * activeTab}%`},
+        ...isTabBarVertical ? {top: `${size * activeIndex}%`} : {left: `${size * activeIndex}%`},
         ...tabBarUnderlineStyle
       },
       class: `${prefixCls}-underline`
