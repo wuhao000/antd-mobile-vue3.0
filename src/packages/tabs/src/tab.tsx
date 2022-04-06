@@ -1,6 +1,5 @@
 import {defineComponent, getCurrentInstance, inject} from 'vue';
 import {filterHTMLAttrs} from '../../utils/dom';
-import {TabsStore} from './utils';
 
 export default defineComponent({
   name: 'MTab',
@@ -10,7 +9,7 @@ export default defineComponent({
     key: String,
     forceRender: Boolean
   },
-  setup(props) {
+  setup() {
     const instance = getCurrentInstance();
     if (!instance.vnode.key) {
       console.error('Tab key cannot be empty');

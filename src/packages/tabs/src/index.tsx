@@ -163,9 +163,7 @@ const InternalTabs = defineComponent({
     const prevCurrentTab: Ref<string> = ref(null);
     const tabCache: { [index: number]: any } = reactive({});
     watch(() => props.value, tab => {
-      if (typeof tab === 'number') {
-        currentTab.value = tab;
-      }
+      currentTab.value = tab;
     }, {immediate: true});
     const layoutRef = ref(null);
     watch(() => currentTab.value, (index) => {
