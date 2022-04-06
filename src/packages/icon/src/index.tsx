@@ -27,7 +27,7 @@ const Icon = defineComponent({
       `am-icon-${size}`,
       this.$attrs.class
     );
-    const style: any = {};
+    const style: any = this.$attrs.style ?? {};
     if (this.color) {
       style.color = this.color;
     }
@@ -40,8 +40,13 @@ const Icon = defineComponent({
       return <IconComponent class={cls} style={style}/>;
     }
     return (
-      <svg class={cls} style={style}
-           {...{...restProps, ...this.$attrs}}>
+      <svg
+        {...{
+          ...restProps,
+          ...this.$attrs,
+          class: cls,
+          style
+        }}>
         <use xlinkHref={`#${type}`}/>
       </svg>
     );
