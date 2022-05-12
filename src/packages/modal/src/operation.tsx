@@ -1,7 +1,7 @@
-import {createApp, App} from 'vue';
+import {App, createApp} from 'vue';
 import closest from '../../utils/closest';
 import Modal from './modal';
-import {Action} from './props-type';
+import {Action} from '../../../../types/components/modal';
 
 export default function operation(
   actions = [{text: '确定'}],
@@ -35,13 +35,11 @@ export default function operation(
 
       const res = orginPress();
       if (res && res.then) {
-        res
-          .then(() => {
-            closed = true;
-            close();
-          })
-          .catch(() => {
-          });
+        res.then(() => {
+          closed = true;
+          close();
+        }).catch(() => {
+        });
       } else {
         closed = true;
         close();
@@ -62,7 +60,6 @@ export default function operation(
 
   modal = createApp({
     render() {
-      // @ts-ignore
       return <Modal
         visible={true}
         operation

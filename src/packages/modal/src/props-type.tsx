@@ -1,4 +1,5 @@
 import {VNode} from 'vue';
+import {Action} from '../../../../types/components/modal';
 
 export interface ModalPropsType<T> {
   title?: string | VNode;
@@ -14,12 +15,6 @@ export interface ModalPropsType<T> {
   onAnimationEnd?: (visible: boolean) => void;
   animateAppear?: boolean;
   operation?: boolean;
-}
-
-export interface Action<T> {
-  text: string;
-  onPress?: (...args: any[]) => void | Promise<any>;
-  style?: T | string;
 }
 
 export type Callback = (valueOrLogin: string, password?: string) => void;

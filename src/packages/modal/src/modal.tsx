@@ -4,7 +4,7 @@ import {defineComponent, PropType} from 'vue';
 import Button from '../../button';
 import Popup from '../../popup';
 import TouchFeedback from '../../vmc-feedback';
-import {Action} from './props-type';
+import {Action} from '../../../../types/components/modal';
 
 export default defineComponent({
   alert: null,

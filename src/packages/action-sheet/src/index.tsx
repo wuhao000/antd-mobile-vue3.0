@@ -19,6 +19,7 @@ export interface ActionSheetMenu {
   badge: any;
   value: string | number;
   label: string | VNode;
+  type: string;
 }
 
 export default defineComponent({
@@ -99,13 +100,6 @@ export default defineComponent({
     watch(() => show.value, value => {
       emit('update:value', value);
     });
-    const showStyle = computed(() => {
-      const style: any = {};
-      if (!show.value) {
-        style.display = 'none';
-      }
-      return style;
-    });
     const listClassPrefix = computed(() => `${props.prefixCls}-button-list`);
     const cancelClick = () => {
       emit('input', false);
@@ -131,11 +125,7 @@ export default defineComponent({
         ($tabbar.value as HTMLElement).style.zIndex = zIndex;
       }
     };
-    const onClickingMask = () => {
-      emit('click-mask');
-      props.closeOnClickingMask && (show.value = false);
-    };
-    const onMenuClick = (text, index) => {
+    const onMenuClick = (text: string | ActionSheetMenu, index) => {
       if (typeof text === 'string') {
         emitEvent('click-menu', index, text);
       } else {
@@ -161,9 +151,9 @@ export default defineComponent({
                 {
                   props.menus.map((item, index) => {
                     return <div
-                        class={`${props.prefixCls}-share-list-item`}
-                        role="button"
-                        onClick={() => onMenuClick(item, index)}
+                      class={`${props.prefixCls}-share-list-item`}
+                      role="button"
+                      onClick={() => onMenuClick(item, index)}
                     >
                       <div class={`${props.prefixCls}-share-list-item-icon`}>{item.icon}</div>
                       <div class={`${props.prefixCls}-share-list-item-title`}>
@@ -208,9 +198,11 @@ export default defineComponent({
         [itemClassPrefix]: true,
         [listClassPrefix.value + '-badge']: typeof menu === 'string' ? false : menu.badge
       };
-      return <MTouchFeedback onClick={() => {
-        onMenuClick(typeof menu === 'string' ? menu : menu.value, index);
-      }} activeClassName={itemClassPrefix + '-active'}>
+      return <MTouchFeedback
+        onClick={() => {
+          onMenuClick(menu, index);
+        }}
+        activeClassName={itemClassPrefix + '-active'}>
         <div class={classes} role="button">
           <span class={itemClassPrefix + '-content'}>{typeof menu === 'string' ? menu : menu.label}</span>
           {typeof menu !== 'string' ? renderBadge(menu.badge) : null}
@@ -219,8 +211,8 @@ export default defineComponent({
     };
     const renderBadge = (badge: boolean | any) => {
       if (badge) {
-        const props = typeof badge === 'object' ? badge : {};
-        return badge ? <Badge class="am-badge-not-a-wrapper" {...props}/> : null;
+        const badgeProps = typeof badge === 'object' ? badge : {};
+        return badge ? <Badge class="am-badge-not-a-wrapper" {...badgeProps}/> : null;
       }
     };
     const renderCancelButton = () => {

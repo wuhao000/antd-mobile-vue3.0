@@ -1,6 +1,12 @@
 import {VNode} from 'vue';
-import {Action} from '../../src/packages/modal/src/props-type';
 import {UIComponent} from './component';
+
+
+export interface Action<T> {
+  text: string | VNode;
+  onPress?: (...args: any[]) => void | Promise<any>;
+  style?: T | string;
+}
 
 export declare class ModalComponent extends UIComponent {
   public static alert: (

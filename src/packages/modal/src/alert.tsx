@@ -1,7 +1,7 @@
 import {App, createApp, VNode} from 'vue';
 import closest from '../../utils/closest';
 import Modal from './modal';
-import {Action} from './props-type';
+import {Action} from '../../../../types/components/modal';
 
 export default function alert(
   title: string | VNode,
