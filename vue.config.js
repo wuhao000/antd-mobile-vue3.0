@@ -52,7 +52,6 @@ module.exports = {
         { loader: 'decoded-text-loader' }
       ]
     });
-    config.plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/));
     config.plugins.push(
         new CompressionWebpackPlugin({
           test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
@@ -64,7 +63,6 @@ module.exports = {
     config.externals = {
       'vue': 'Vue',
       'axios': 'axios',
-      'moment': 'moment',
       'highlight': 'hljs',
       'codemirror': 'CodeMirror',
       'core-js': 'CoreJS'

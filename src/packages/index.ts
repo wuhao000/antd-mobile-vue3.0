@@ -1,7 +1,6 @@
 // 导入颜色选择器组件
 import HttpMethod from './http-method';
 import VueIcon from '@ant-design/icons-vue';
-import zhCn from './moment-zh_CN';
 import Accordion from './accordion';
 import ActionSheet from './action-sheet';
 import ActivityIndicator from './activity-indicator';
@@ -54,10 +53,6 @@ import Mask from './mask';
 import WhiteSpace from './white-space';
 import Space from './space';
 import WingBlank from './wing-blank';
-// 注册moment中文国际化文案
-if (window.moment) {
-  window.moment.updateLocale('zh-cn', zhCn);
-}
 // 存储组件列表
 const components = [
   Accordion,

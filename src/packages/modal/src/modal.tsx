@@ -228,12 +228,9 @@ export default defineComponent({
             prefixCls={prefixCls}
             title={this.title}
             class={cls}
-            onClose={this.onClose || ((e) => {
+            onClose={this.onClose as any || ((e) => {
               this.$emit('update:visible', false);
               this.$emit('close', e);
-            })}
-            onOk={this.onOk || (e => {
-              this.$emit('ok', e);
             })}
             wrapClassName={wrapCls}
             transitionName={transitionName || transName}

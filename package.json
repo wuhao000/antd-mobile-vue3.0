@@ -1,6 +1,6 @@
 {
   "name": "antd-mobile-vue-next",
-  "version": "0.0.1-83",
+  "version": "0.0.2",
   "description": "基于Vue 3.0、vite2.0 移植的ant-design-mobile组件库",
   "main": "es/index.js",
   "keyword": "antd antd-mobile vue vue3 vite antd-mobile-vue",
@@ -87,8 +87,9 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.2.26",
     "add-dom-event-listener": "^1.1.0",
-    "ant-design-vue": "2.2.8-2",
+    "ant-design-vue": "^3.2.3",
     "antd-mobile-demo-data": "^0.3.0",
+    "dayjs": "^1.11.2",
     "array-tree-filter": "^2.1.0",
     "axios": "^0.21.1",
     "babel-plugin-import": "^1.13.3",

@@ -62,7 +62,7 @@ export default defineComponent({
               onClose={this.onClose('modal1')}
               title="Title"
               onOk={() => {
-
+                console.log('ok clicked');
               }}
               wrapProps={{onTouchStart: this.onWrapTouchStart}}
           >

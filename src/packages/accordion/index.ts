@@ -1,4 +1,4 @@
-import RcCollapse from 'ant-design-vue/es/vc-collapse';
+import RcCollapse from '../vc-collapse';
 import {App} from 'vue';
 import MAccordion from './src';
 import './style';

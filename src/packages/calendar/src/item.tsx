@@ -1,10 +1,10 @@
+import dayjs from 'dayjs';
 import {computed, defineComponent, inject, PropType, Ref, ref, watch} from 'vue';
 import List from '../../list';
 import {useBaseInputComponent} from '../../mixins/base-input-component';
 import {pureInputComponentProps} from '../../mixins/pure-input-component';
 import {simpleFormComponentProps} from '../../mixins/simple-form-component';
 import Calendar from './index';
-import moment from 'moment';
 
 const MIN_DATE = new Date(2000, 1, 1, 0, 0, 0);
 const MAX_DATE = new Date(new Date().getFullYear() + 10, 12, 31, 23, 59, 59);
@@ -50,9 +50,9 @@ export default defineComponent({
           return null;
         }
         if (props.pickTime) {
-          return moment(it).format('YYYY/MM/DD HH:mm');
+          return dayjs(it).format('YYYY/MM/DD HH:mm');
         } else {
-          return moment(it).format('YYYY/MM/DD');
+          return dayjs(it).format('YYYY/MM/DD');
         }
       });
       if (props.type === 'range') {

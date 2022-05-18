@@ -1,7 +1,7 @@
-import RcCheckbox from 'ant-design-vue/es/vc-checkbox';
+import RcCheckbox from 'ant-design-vue/es/vc-checkbox/Checkbox';
 import classnames from 'classnames';
 import {defineComponent, PropType} from 'vue';
-import {usePureInput} from "../../mixins/pure-input-component";
+import {usePureInput} from '../../mixins/pure-input-component';
 
 export default defineComponent({
   name: 'MCheckbox',
@@ -25,8 +25,8 @@ export default defineComponent({
       default: false
     }
   },
-  setup(props, {emit, attrs, slots}) {
-    const {stateValue, setStateValue} = usePureInput(props, {emit, attrs})
+  setup(props, {emit, attrs}) {
+    const {stateValue, setStateValue} = usePureInput(props, {emit, attrs});
     const onClick = e => {
       e.stopPropagation();
       emit('click', e);
@@ -38,20 +38,20 @@ export default defineComponent({
     const {prefixCls} = this.$props;
     const wrapCls = classnames(`${prefixCls}-wrapper`);
     const mark = (
-      <label class={wrapCls}>
-        <RcCheckbox
-          onClick={this.onClick}
-          checked={this.value}
-          {...this.$props}/>
-        {this.$slots.default?.()}
-      </label>
+        <label class={wrapCls}>
+          <RcCheckbox
+              onClick={this.onClick}
+              checked={this.value}
+              {...this.$props}/>
+          {this.$slots.default?.()}
+        </label>
     );
     if (this.wrapLabel) {
       return mark;
     }
     return <RcCheckbox
-      onClick={this.onClick}
-      checked={this.value}
-      {...this.$props}>{this.$slots.default()}</RcCheckbox>;
+        onClick={this.onClick}
+        checked={this.value}
+        {...this.$props}>{this.$slots.default()}</RcCheckbox>;
   }
 });

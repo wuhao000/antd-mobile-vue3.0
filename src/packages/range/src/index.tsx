@@ -1,6 +1,5 @@
 import VcHandle from 'ant-design-vue/es/vc-slider/src/Handle';
 import RcRange from 'ant-design-vue/es/vc-slider/src/Range';
-import RcSlider from 'ant-design-vue/es/vc-slider/src/Slider';
 import {defineComponent, PropType} from 'vue';
 import {formComponentProps, useFormComponent} from '../../mixins/form-component';
 
@@ -45,15 +44,16 @@ export default defineComponent({
     return {currentValue, handle};
   },
   render() {
+    const Range = RcRange as any;
     return (
         <div class={`${this.prefixCls}-wrapper`}>
-          <RcRange {...this.$props}
-                   handle={this.handle}
-                   value={this.currentValue}
-                   pushable={this.pushable}
-                   onChange={v => {
-                     this.currentValue = v;
-                   }}/>
+          <Range {...this.$props}
+                 handle={this.handle}
+                 value={this.currentValue}
+                 pushable={this.pushable}
+                 onChange={v => {
+                   this.currentValue = v;
+                 }}/>
         </div>
     );
   }

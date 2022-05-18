@@ -1,4 +1,4 @@
-import RcCheckbox from 'ant-design-vue/es/vc-checkbox';
+import RcCheckbox from 'ant-design-vue/es/vc-checkbox/Checkbox';
 import classnames from 'classnames';
 import {defineComponent, PropType, ref} from 'vue';
 
@@ -29,7 +29,7 @@ export default defineComponent({
       default: false
     }
   },
-  setup(props, {emit, slots}) {
+  setup(props, {emit}) {
     const checked = ref(props.value || false);
     const onClick = () => {
       checked.value = !checked.value;
@@ -51,7 +51,7 @@ export default defineComponent({
     const mark = (
         <label class={wrapCls}
                onClick={this.onClick}>
-          <RcCheckbox {...this.$props}
+          <RcCheckbox {...this.$props as any}
                       checked={this.value}
                       type="radio"/>
           {this.$slots.default?.()}
@@ -60,6 +60,9 @@ export default defineComponent({
     if (this.wrapLabel) {
       return mark;
     }
-    return <RcCheckbox type="radio" checked={this.value} {...this.$props}>{this.$slots.default?.()}</RcCheckbox>;
+    return <RcCheckbox
+        {...this.$props as any}
+        type="radio"
+        checked={this.value}>{this.$slots.default?.()}</RcCheckbox>;
   }
 });

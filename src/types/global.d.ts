@@ -1,5 +1,3 @@
-import moment from 'moment';
-
 
 export interface MessageOptions {
   /**
@@ -83,7 +81,6 @@ export interface MessageConfigOptions {
 }
 
 declare global {
-  export const moment: typeof moment;
   export const axios: any;
   export const hljs: any;
   export const aegis: any;

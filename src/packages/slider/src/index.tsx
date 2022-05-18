@@ -43,9 +43,10 @@ export default defineComponent({
   },
   render() {
     const props = Object.assign({}, this.$props, {disabled: this.isDisabled});
+    const Slider = RcSlider as any;
     return (
-      <div class={`${this.prefixCls}-wrapper`}>
-        <RcSlider {...props}
+        <div class={`${this.prefixCls}-wrapper`}>
+          <Slider {...props}
                   value={this.currentValue}
                   handle={this.handle}
                   included={true}
@@ -54,7 +55,7 @@ export default defineComponent({
                       this.currentValue = value;
                     }
                   }/>
-      </div>
+        </div>
     );
   }
 });
