@@ -6,29 +6,33 @@
   </div>
 </template>
 <script lang="ts">
-import {defineComponent} from 'vue';
-import {useRouter} from 'vue-router';
+  import {defineComponent} from 'vue';
+  import {useRouter} from 'vue-router';
+  import Components from '../../packages/map.json';
 
-export default defineComponent({
-  name: 'MobileDemoHome',
-  setup() {
-    const data = [
-      {icon: 'check-circle', text: '标签页', route: 'm-tabs'},
-      {icon: 'check-circle', text: '下拉刷新', route: 'm-pull-request'},
-      {icon: 'check-circle', text: '单选', route: 'm-radio'},
-      {icon: 'check-circle', text: '复选', route: 'm-checkbox'}
-    ];
-    const router = useRouter();
-    return {
-      data,
-      itemClicked(item) {
-        router.push({
-          name: item.route
-        });
-      }
-    };
-  }
-});
+
+
+  console.log(Components);
+
+  export default defineComponent({
+    name: 'MobileDemoHome',
+    setup() {
+      const data = Object.keys(Components).map(it => ({
+        icon: 'check-circle',
+        text: Components[it].chineseName,
+        route: 'm-' + it
+      }));
+      const router = useRouter();
+      return {
+        data,
+        itemClicked(item) {
+          router.push({
+            name: item.route
+          });
+        }
+      };
+    }
+  });
 </script>
 <style lang="less">
 </style>

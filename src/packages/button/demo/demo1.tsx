@@ -1,10 +1,10 @@
 export default {
   render() {
     return <m-wing-blank>
-      <m-button onClick={() => {
+      <m-buttonz onClick={() => {
         console.log('on btn click');
       }}>default
-      </m-button>
+      </m-buttonz>
       <m-white-space/>
       <m-button disabled>default disabled</m-button>
       <m-white-space/>

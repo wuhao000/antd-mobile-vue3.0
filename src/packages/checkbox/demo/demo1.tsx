@@ -16,7 +16,7 @@ export default defineComponent({
       {value: 2, label: 'College diploma'}
     ];
     return (<div>
-      <m-list title="CheckboxItem demo">
+      <m-list ztitle="CheckboxItem demo">
         {data.map(i => (
           <m-checkbox-item key={i.value} onChange={checked => this.onChange(checked)}>
             {i.label}

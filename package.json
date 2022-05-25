@@ -1,6 +1,6 @@
 {
   "name": "antd-mobile-vue-next",
-  "version": "0.0.2",
+  "version": "0.0.2-1",
   "description": "基于Vue 3.0、vite2.0 移植的ant-design-mobile组件库",
   "main": "es/index.js",
   "keyword": "antd antd-mobile vue vue3 vite antd-mobile-vue",
@@ -25,7 +25,7 @@
     "lint": "vue-cli-service lint",
     "lib": "npm run docs && vue-cli-service build --target lib --name antdm --dest lib src/packages/index.ts",
     "remove": "ts-node build/remove.ts && npm run docs",
-    "cdn": "npm run lib && ts-node build/cdn.ts",
+    "cdn": "npm run lib --trace-warnings && ts-node build/cdn.ts",
     "compile": "npm run docs && ts-node compile/build-components.ts",
     "release": "npm run cdn && npm run compile && npm publish"
   },

@@ -3,6 +3,7 @@
 import ObsClient from 'esdk-obs-nodejs-new';
 import * as fs from 'fs';
 
+process.setMaxListeners(100);
 const obsConfig = JSON.parse(fs.readFileSync('obs.json').toString());
 const obs = new ObsClient({
   access_key_id: obsConfig.ak,
@@ -13,9 +14,7 @@ const fileNames = fs.readdirSync('lib');
 
 const pk = JSON.parse(fs.readFileSync('package.json').toString());
 const projectName = pk.name;
-
 upload();
-
 function upload() {
   fileNames.forEach(name => {
     let ContentType = '';
@@ -43,6 +42,8 @@ function upload() {
       } else {
         console.error('上传文件【' + name + '】失败', res);
       }
+    }).catch(e => {
+      console.error(e);
     });
   });
 

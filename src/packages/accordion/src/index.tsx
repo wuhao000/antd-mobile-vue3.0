@@ -13,6 +13,6 @@ export default defineComponent({
   },
   render() {
     return this.$slots.default ?
-      <RcCollapse {...this.$props}>{this.$slots.default()}</RcCollapse> : null;
+      <RcCollapse {...this.$props as any}>{this.$slots.default()}</RcCollapse> : null;
   }
 });
