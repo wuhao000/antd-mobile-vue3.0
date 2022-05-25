@@ -42,10 +42,7 @@ export default defineComponent({
           onCancel={onCancel}
           onConfirm={onConfirm}
           onSelectHasDisableDate={onSelectHasDisableDate}
-          getDateExtra={getDateExtra}
-          defaultDate={now}
-          minDate={new Date(+now - 5184000000)}
-          maxDate={new Date(+now + 31536000000)}>
+          getDateExtra={getDateExtra}>
         </m-calendar-item>
       );
     };

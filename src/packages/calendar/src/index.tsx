@@ -1,10 +1,10 @@
-import {defineComponent, watch} from 'vue';
+import {defineComponent} from 'vue';
 import Icon from '../../icon';
 import {getComponentLocale} from '../../utils/getLocale';
 import {Calendar as VMCalendar} from '../../vmc-calendar';
 import CalendarProps from '../../vmc-calendar/calendar-props';
 import defaultLocale from './locale/zh_CN';
-import {useLocalValue} from "../../../use/value";
+import {useLocalValue} from "../../utils/value";
 
 export default defineComponent({
   install: null,

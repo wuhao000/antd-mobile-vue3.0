@@ -121,7 +121,8 @@ export const useBaseCalendar = (props, {emit}) => {
       locale,
       showClear: !!startDate,
       onClear: onClear,
-      onCancel: onCancel
+      onCancel: onCancel,
+      prefixCls
     };
     return (
       <div class={`${prefixCls}`}>

@@ -1,6 +1,7 @@
 import {inject, onBeforeMount, reactive, ref, Ref, watch} from 'vue';
 import {CellData, MonthData, SelectType} from './data-types';
 import {formatDate, genWeekData, getDateWithoutTime, getMonthDate} from './util';
+import {isNotNull, isNull} from "../utils/util";
 
 export interface StateType {
   months: MonthData[];
@@ -25,14 +26,33 @@ export const useDatePickerBase = (props, {emit}, {
     if (props.startDate) {
       return props.startDate;
     } else {
-      const min = props.minDate || props.defaultValue;
-      const max = props.maxDate || props.defaultValue;
-      if (monthsBetween(min, max) < 6) {
-        return props.minDate;
+      if (Array.isArray(props.defaultValue)) {
+        if (props.defaultValue[0]) {
+          return props.defaultValue[0]
+        }
+      } else if (isNotNull(props.defaultValue)) {
+        return props.defaultValue;
+      }
+      const min = props.minDate;
+      const max = props.maxDate;
+      if (isNull(min) && isNull(max)) {
+        return new Date();
+      } else if (isNull(min)) {
+        if (Date.now() <= max.getTime()) {
+          return new Date();
+        } else {
+          return max;
+        }
+      } else if (isNull(max)) {
+        if (Date.now() >= min.getTime()) {
+          return new Date();
+        } else {
+          return min;
+        }
+      } else if (Date.now() >= min.getTime() && Date.now() <= max.getTime()) {
+        return new Date();
       } else {
-        const date = new Date(max.getTime());
-        date.setMonth(date.getMonth() - 6);
-        return date;
+        return min;
       }
     }
   };

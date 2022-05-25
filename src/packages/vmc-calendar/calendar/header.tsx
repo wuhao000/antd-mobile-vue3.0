@@ -1,5 +1,6 @@
 import {defineComponent, PropType, VNode} from 'vue';
 import {Locale} from '../data-types';
+import _default from "ant-design-vue/lib/color-picker";
 
 export interface PropsType {
   title?: string;
@@ -17,7 +18,8 @@ const Header = defineComponent({
     title: {type: String},
     locale: {type: Object as PropType<Locale>},
     showClear: {type: Boolean},
-    clearIcon: {}
+    clearIcon: {},
+    prefixCls: String
   },
   render() {
     const {
@@ -26,14 +28,14 @@ const Header = defineComponent({
       showClear,
       clearIcon
     } = this.$props;
-
     return (
-      <div class="header">
-        <span class="left" onClick={() => this.$emit('cancel')}>关闭</span>
-        <span class="title">{title || locale.title}</span>
+      <div class={this.prefixCls + '-header'}>
+        <span class={this.prefixCls + '-header-left'}
+              onClick={() => this.$emit('cancel')}>关闭</span>
+        <span class={this.prefixCls + '-header-title'}>{title || locale.title}</span>
         {
           showClear &&
-          <span class="right"
+          <span class={this.prefixCls + '-header-right'}
                 onClick={() => this.$emit('clear')}
           >{clearIcon || locale.clear}</span>
         }
