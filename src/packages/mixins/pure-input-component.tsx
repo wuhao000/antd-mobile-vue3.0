@@ -59,19 +59,19 @@ export const usePureInput = <T extends any>(props, {emit, attrs}, options: {
     return style;
   });
   const listeners = computed(() => {
-    const listeners = {
-      onInput,
+    const obj = {
+      ['onUpdate:value']: onInput,
       onBlur: handleBlur,
       onChange: handleChange,
       onKeydown: handleKeydown,
       onKeyup: handleKeyup
     };
     Object.keys(attrs).forEach(key => {
-      if (key in listeners) {
-        listeners[key] = attrs[key];
+      if (key in obj) {
+        obj[key] = attrs[key];
       }
     });
-    return listeners;
+    return obj;
   });
   const slots = computed(() => Object.assign({}, slots, getSlots()));
   const getSlots = () => {

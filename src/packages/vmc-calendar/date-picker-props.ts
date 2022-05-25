@@ -3,7 +3,7 @@ import {ExtraData, Locale} from './data-types';
 
 export default {
   /** 默认日期，default: today */
-  defaultValue: {type: Date as PropType<Date>},
+  defaultValue: {type: [Date, Array] as PropType<Date | Date[]>},
   /** 选择值 */
   endDate: {type: Date as PropType<Date>},
   /** 日期扩展数据 */

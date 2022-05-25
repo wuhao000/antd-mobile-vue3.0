@@ -1,7 +1,8 @@
 import classnames from 'classnames';
-import {computed, defineComponent, PropType, ref, Ref} from 'vue';
+import {defineComponent, PropType, ref, Ref} from 'vue';
 import {IS_IOS} from '../../utils/exenv';
 import TouchFeedback from '../../vmc-feedback';
+import {filterHTMLAttrs} from "@/packages/utils/dom";
 
 const KeyboardItem = defineComponent({
   name: 'MKeyboardItem',
@@ -56,10 +57,12 @@ export default defineComponent({
     confirmLabel: {},
     backspaceLabel: {type: String as PropType<string>},
     cancelKeyboardLabel: {type: String as PropType<string>},
-    wrapProps: {},
+    wrapProps: {
+      type: Object
+    },
     header: {}
   },
-  setup(props, {emit, slots}) {
+  setup() {
     const linkedInput: Ref<any> = ref(null);
     const confirmDisabled: Ref<boolean> = ref(null);
     const confirmKeyboardItem: Ref<HTMLTableDataCellElement | null> = ref(null);
@@ -119,7 +122,8 @@ export default defineComponent({
     );
     const KeyboardItem2: any = KeyboardItem;
     return (
-        <div class={wrapperCls} ref="antmKeyboard" {...wrapProps}>
+        <div class={wrapperCls} ref="antmKeyboard"
+             {...wrapProps}>
           {header}
           <table>
             <tbody>

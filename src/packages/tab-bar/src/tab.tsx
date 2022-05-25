@@ -35,7 +35,9 @@ const Tab = defineComponent({
     tintColor: {
       type: String as PropType<string>
     },
-    dataAttrs: {}
+    dataAttrs: {
+      type: Object
+    }
   },
   render() {
     const {

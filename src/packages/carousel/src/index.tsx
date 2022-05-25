@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import {defineComponent, PropType, ref, Ref} from 'vue';
+import {CSSProperties, defineComponent, PropType, ref, Ref} from 'vue';
 import CarouselBase from './base';
 
 type IFrameOverFlow = 'visible' | 'hidden';
@@ -23,10 +23,10 @@ const DotDecorator = defineComponent({
       default: 'am-carousel'
     },
     dotActiveStyle: {
-      type: Object as PropType<object>
+      type: Object as PropType<CSSProperties>
     },
     dotStyle: {
-      type: Object as PropType<object>
+      type: Object as PropType<CSSProperties>
     }
   },
   render() {
@@ -38,8 +38,7 @@ const DotDecorator = defineComponent({
       const dotCls = classnames(`${this.prefixCls}-wrap-dot`, {
         [`${this.prefixCls}-wrap-dot-active`]: index === this.currentSlide
       });
-      const currentDotStyle =
-        index === this.currentSlide ? this.dotActiveStyle : this.dotStyle;
+      const currentDotStyle: CSSProperties = index === this.currentSlide ? this.dotActiveStyle : this.dotStyle;
       return (
         <div class={dotCls} key={index}>
           <span style={currentDotStyle}/>

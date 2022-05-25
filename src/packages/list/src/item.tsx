@@ -1,5 +1,15 @@
 import classNames from 'classnames';
-import {computed, defineComponent, getCurrentInstance, inject, onBeforeUnmount, PropType, ref, VNode} from 'vue';
+import {
+  computed,
+  CSSProperties,
+  defineComponent,
+  getCurrentInstance,
+  inject,
+  onBeforeUnmount,
+  PropType,
+  ref,
+  VNode
+} from 'vue';
 import Popover from '../../popover';
 import toast from '../../toast';
 import {filterHTMLAttrs} from '../../utils/dom';
@@ -94,13 +104,13 @@ const Item = defineComponent({
       default: 'left'
     },
     contentStyle: {
-      type: Object as PropType<object>,
+      type: Object as PropType<CSSProperties>,
       default: () => {
         return {};
       }
     },
     extraStyle: {
-      type: Object as PropType<object>,
+      type: Object as PropType<CSSProperties>,
       default: () => {
         return {};
       }
@@ -115,7 +125,7 @@ const Item = defineComponent({
     },
     suffix: {}
   },
-  setup(props, {emit, slots, attrs}) {
+  setup(props, {emit, slots}) {
     const debounceTimeout = ref(null);
     const coverRippleStyle: any = ref({display: 'none'});
     const rippleClicked = ref(false);

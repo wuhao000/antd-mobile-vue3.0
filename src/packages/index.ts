@@ -1,6 +1,6 @@
 // 导入颜色选择器组件
 import HttpMethod from './http-method';
-import VueIcon from '@ant-design/icons-vue';
+import TouchFeedback from './vmc-feedback';
 import Accordion from './accordion';
 import ActionSheet from './action-sheet';
 import ActivityIndicator from './activity-indicator';
@@ -177,6 +177,7 @@ export default {
   // 导出的对象必须具有 install，才能被 Vue.use() 方法安装
   install,
   HttpMethod,
+  TouchFeedback,
   Accordion,
 	ActionSheet,
 	ActivityIndicator,

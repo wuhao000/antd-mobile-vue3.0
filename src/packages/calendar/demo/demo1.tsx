@@ -22,7 +22,7 @@ Object.keys(extra).forEach((key) => {
 export default defineComponent({
   name: 'Test',
   props: {},
-  setup(props) {
+  setup() {
     const originbodyScrollY = document.getElementsByTagName('body')[0].style.overflowY;
     const state = reactive({
       en: false,

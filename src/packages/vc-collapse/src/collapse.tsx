@@ -11,7 +11,7 @@ import {unwrapFragment} from '../../utils/vue';
 import openAnimationFactory from './open-animation-factory';
 import {collapseProps} from './common-props';
 import {getDataAndAriaProps} from 'ant-design-vue/es/_util/util';
-import {defineComponent, ref, watch} from 'vue';
+import {CSSProperties, defineComponent, ref, watch} from 'vue';
 
 function _toArray(activeKey) {
   let currentActiveKey = activeKey;
@@ -134,9 +134,8 @@ export default defineComponent({
         <div
             class={collapseClassName}
             {...getDataAndAriaProps(this.$attrs)}
-            style={style}
-            role={accordion ? 'tablist' : null}
-        >
+            style={style as CSSProperties}
+            role={accordion ? 'tablist' : null}>
           {this.getItems()}
         </div>
     );

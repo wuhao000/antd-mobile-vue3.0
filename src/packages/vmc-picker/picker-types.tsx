@@ -1,4 +1,4 @@
-import {PropType} from 'vue';
+import {CSSProperties, PropType} from 'vue';
 
 
 export default {
@@ -12,7 +12,9 @@ export default {
   prefixCls: {
     type: String as PropType<string>
   },
-  indicatorStyle: {},
+  indicatorStyle: {
+    type: Object as PropType<CSSProperties>
+  },
   indicatorClassName: {
     type: String as PropType<string>
   },

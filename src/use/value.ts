@@ -1,4 +1,6 @@
-import {getCurrentInstance, ref, watch} from 'vue';
+import {Ref, ref, watch} from 'vue';
+import isequal from 'lodash.isequal';
+import cloneDeep from 'lodash.clonedeep';
 
 const isNullOrUndefined = (value) => {
   return value === undefined || value === null;
@@ -16,57 +18,51 @@ function isEqual(a, b) {
   return compareA === compareB;
 }
 
-export const useLocalValue = (defaultValue?: any, propName: string = 'value', options: {
-  transform: (value: any) => any,
-  reverseTransform: (value: any) => any
-} = {
-  transform: v => v,
-  reverseTransform: v => v
-}) => {
-  const context = {
-    doAfterSetValue: null,
-    doBeforeSetValue: null
-  };
-  const instance = getCurrentInstance();
-  const stateValue = ref(isNullOrUndefined(instance.props[propName]) ? options.transform(defaultValue) : options.transform(instance.props[propName]));
-  watch(() => instance.props[propName], (value) => {
-    const newValue = options.transform(value);
-    if (!isEqual(stateValue.value, newValue)) {
-      stateValue.value = newValue;
-    }
+interface LocalValueOptions<T> {
+  prop?: string;
+  defaultValue?: T;
+  autoEmit?: boolean;
+  onBeforeEmit?: (value: T) => void;
+}
+
+const defaultOptions: LocalValueOptions<any> = {
+  prop: 'value',
+  defaultValue: undefined,
+  autoEmit: true
+};
+
+export const useLocalValue = <T = unknown>(props, emit,
+                                           nameOrOptions: string | LocalValueOptions<T> = 'value',
+                                           defaultValue: T = undefined): { localValue: Ref<T> } => {
+  const options = typeof nameOrOptions === 'object' ? Object.assign({}, defaultOptions, nameOrOptions) : Object.assign({}, defaultOptions, {
+    prop: nameOrOptions,
+    defaultValue
   });
+  const localValue = ref(props[options.prop] ?? options.defaultValue);
+  watch(() => props[options.prop], value => {
+    if (!isequal(value, localValue.value)) {
+      if (value === null || value === undefined) {
+        localValue.value = options.defaultValue;
+      } else {
+        if (typeof value === 'object') {
+          localValue.value = cloneDeep(value);
+        } else {
+          localValue.value = value;
+        }
+      }
+    }
+  }, {deep: true});
+  if (options.autoEmit) {
+    watch(() => localValue.value, (value: T) => {
+      const finalValue = options.onBeforeEmit ? options.onBeforeEmit(value) : value;
+      if (options.prop) {
+        emit(`update:${options.prop}`, finalValue);
+      } else {
+        emit('update', finalValue);
+      }
+    }, {deep: true});
+  }
   return {
-    afterValueSetAction(callback) {
-      context.doAfterSetValue = callback;
-    },
-    setBeforeAction(callback) {
-      context.doBeforeSetValue = callback;
-    },
-    setValue(value, eventKeyOrCallback?: string | (() => any)) {
-      if (context.doBeforeSetValue) {
-        context.doBeforeSetValue(value);
-      }
-      let event: string = null;
-      if (typeof eventKeyOrCallback === 'string') {
-        event = eventKeyOrCallback ? eventKeyOrCallback : `update:${propName}`;
-      } else {
-        event = `update:${propName}`;
-      }
-      if (instance.props[propName] === undefined) {
-        stateValue.value = value;
-      } else {
-        instance.emit(event, options.reverseTransform(value));
-      }
-      if (typeof eventKeyOrCallback === 'function') {
-        eventKeyOrCallback();
-      }
-      if (context.doAfterSetValue) {
-        context.doAfterSetValue(value);
-      }
-    },
-    getValue() {
-      return stateValue.value;
-    },
-    stateValue
+    localValue
   };
 };

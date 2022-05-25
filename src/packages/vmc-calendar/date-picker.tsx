@@ -1,12 +1,12 @@
 import {useDatePickerBase} from './date-picker-base';
-import {computed, defineComponent, onMounted, ref} from 'vue';
+import {computed, defineComponent, nextTick, onMounted, ref} from 'vue';
 import {Locale, MonthData} from './data-types';
 import DatePickerProps from './date-picker-props';
 import SingleMonth from './date/single-month';
 import WeekPanel from './date/week-panel';
 
 const DatePicker = defineComponent({
-  name: 'DatePicker',
+  name: 'VmcDatePicker',
   props: {
     ...DatePickerProps,
     displayMode: {type: Boolean, default: false}
@@ -39,6 +39,22 @@ const DatePicker = defineComponent({
     const transform = ref('');
     const wrapper = ref(null);
     const panel = ref(null);
+    const adding = ref(false);
+    const addMonth = () => {
+      if (adding.value) {
+        return;
+      }
+      adding.value = true;
+      const lastMonthFirstDate = state.months[state.months.length - 1].firstDate;
+      const lastDate = state.months[state.months.length - 1].lastDate as Date;
+      if (props.maxDate && lastDate.getTime() >= props.maxDate.getTime()) {
+        return;
+      }
+      genMonthData(lastMonthFirstDate, 1);
+      nextTick().then(() => {
+        adding.value = false;
+      });
+    };
     const touchHandler = computed(() => {
       const initDelta = 0;
       let lastY = 0;
@@ -134,6 +150,7 @@ const DatePicker = defineComponent({
       },
       transform,
       touchHandler,
+      addMonth,
       genMonthComponent
     };
   },
@@ -155,6 +172,12 @@ const DatePicker = defineComponent({
              style={{
                overflowX: 'hidden',
                overflowY: 'visible'
+             }}
+             onScroll={(e) => {
+               const div = e.target as HTMLDivElement;
+               if ( div.scrollHeight - div.scrollTop - div.clientHeight < 100) {
+                 this.addMonth();
+               }
              }}
              ref={this.setWrapper}
              {...wrapperEvents}>

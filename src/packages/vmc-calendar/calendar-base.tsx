@@ -82,9 +82,7 @@ export const useBaseCalendar = (props, {emit}) => {
       date = startDate;
     }
     if (date) {
-      let hours = timeValue[0];
       if (timeValue[2] === 1) {
-        hours += 12;
         date.setUTCHours(timeValue[0]);
       }
       date = new Date(date.getFullYear(), date.getMonth(),
@@ -99,9 +97,6 @@ export const useBaseCalendar = (props, {emit}) => {
 
   /** 清除时回调 */
   const onClear = () => {
-    state.startDate = undefined;
-    state.endDate = undefined;
-    state.showTimePicker = false;
     emit('clear');
   };
 
@@ -125,7 +120,7 @@ export const useBaseCalendar = (props, {emit}) => {
     const headerProps = {
       locale,
       showClear: !!startDate,
-      onClear: onCancel,
+      onClear: onClear,
       onCancel: onCancel
     };
     return (

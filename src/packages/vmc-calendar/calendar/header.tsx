@@ -17,7 +17,6 @@ const Header = defineComponent({
     title: {type: String},
     locale: {type: Object as PropType<Locale>},
     showClear: {type: Boolean},
-    closeIcon: {default: 'X'},
     clearIcon: {}
   },
   render() {
@@ -25,13 +24,12 @@ const Header = defineComponent({
       title,
       locale = {} as Locale,
       showClear,
-      closeIcon,
       clearIcon
     } = this.$props;
 
     return (
       <div class="header">
-        <span class="left" onClick={() => this.$emit('cancel')}>{closeIcon}</span>
+        <span class="left" onClick={() => this.$emit('cancel')}>关闭</span>
         <span class="title">{title || locale.title}</span>
         {
           showClear &&

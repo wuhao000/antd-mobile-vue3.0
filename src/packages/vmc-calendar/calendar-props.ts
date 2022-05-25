@@ -13,7 +13,7 @@ export default {
     }
   },
   value: {type: Array as PropType<Date[]>},
-  defaultValue: {type: Array as PropType<Date[]>},
+  defaultValue: {type: [Array, Date] as PropType<Date[] | Date>},
   displayMode: {type: Boolean, default: false},
   enterDirection: {type: String, default: 'vertical'},
   getDateExtra: {type: Function},
@@ -38,5 +38,6 @@ export default {
   timePickerPrefixCls: {type: String},
   title: {type: String},
   type: {type: String, default: 'range'},
-  visible: {type: Boolean, default: false}
+  visible: {type: Boolean, default: false},
+  onClear: {type: Function}
 };

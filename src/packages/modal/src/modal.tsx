@@ -1,6 +1,6 @@
 import Dialog from 'ant-design-vue/es/vc-dialog';
 import classnames from 'classnames';
-import {defineComponent, PropType} from 'vue';
+import {CSSProperties, defineComponent, PropType} from 'vue';
 import Button from '../../button';
 import Popup from '../../popup';
 import TouchFeedback from '../../vmc-feedback';
@@ -37,7 +37,9 @@ export default defineComponent({
       type: String as PropType<string>,
       default: 'ios'
     },
-    bodyStyle: {},
+    bodyStyle: {
+      type: Object as PropType<CSSProperties>
+    },
     title: {
       type: [String, Object]
     },

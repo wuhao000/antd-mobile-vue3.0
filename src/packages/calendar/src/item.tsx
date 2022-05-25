@@ -5,6 +5,7 @@ import {useBaseInputComponent} from '../../mixins/base-input-component';
 import {pureInputComponentProps} from '../../mixins/pure-input-component';
 import {simpleFormComponentProps} from '../../mixins/simple-form-component';
 import Calendar from './index';
+import {isNull} from "lodash";
 
 const MIN_DATE = new Date(2000, 1, 1, 0, 0, 0);
 const MAX_DATE = new Date(new Date().getFullYear() + 10, 12, 31, 23, 59, 59);
@@ -44,6 +45,13 @@ export default defineComponent({
         currentValue.value = value;
       }
     }, {immediate: true});
+    const onUpdate = v => {
+      if (v === null || v === undefined) {
+        currentValue.value = [];
+      } else {
+        currentValue.value = v;
+      }
+    };
     const displayValue = computed(() => {
       const valueStrs = currentValue.value.map(it => {
         if (!it) {
@@ -85,7 +93,8 @@ export default defineComponent({
       onClick, onConfirm, listeners,
       getDefaultSlot, cssStyle,
       inputSlots, visible,
-      currentValue
+      currentValue,
+      onUpdate
     };
   },
   render() {
@@ -94,8 +103,9 @@ export default defineComponent({
         return [
           <Calendar {...this.inputProps}
                     {...this.listeners}
+                    onUpdate:value={this.onUpdate}
                     value={this.currentValue}
-                    visible={this.visible}
+                    v-model={[this.visible, 'visible']}
                     onClose={this.onClose}
                     onConfirm={this.onConfirm}
                     defaultValue={this.currentValue}

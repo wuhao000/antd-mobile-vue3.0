@@ -1,9 +1,10 @@
-import {defineComponent, reactive, watch} from 'vue';
+import {defineComponent, watch} from 'vue';
 import Icon from '../../icon';
 import {getComponentLocale} from '../../utils/getLocale';
 import {Calendar as VMCalendar} from '../../vmc-calendar';
 import CalendarProps from '../../vmc-calendar/calendar-props';
 import defaultLocale from './locale/zh_CN';
+import {useLocalValue} from "../../../use/value";
 
 export default defineComponent({
   install: null,
@@ -16,28 +17,27 @@ export default defineComponent({
     timePickerPickerPrefixCls: {type: String, default: 'am-picker-col'}
   },
   setup(props, {emit}) {
-    const state = reactive({
-      visible: props.visible,
-      value: props.value
+    const {localValue} = useLocalValue<Date[]>(props, emit, {
+      autoEmit: false,
+      prop: 'value'
     });
-    watch(() => props.visible, (value) => {
-      state.visible = value;
-    });
+    const {localValue: localVisible} = useLocalValue(props, emit, 'visible');
     const onConfirm = (...args) => {
       emit('confirm', ...args);
-      emit('update:value', state.value);
+      emit('update:value', localValue.value);
       onClose();
     };
     const onClear = (e) => {
+      localValue.value = undefined;
+      emit('update:value', undefined);
+      localVisible.value = false;
       emit('clear', e);
     };
     const onClose = (...args) => {
-      state.visible = false;
-      state.value = props.value;
+      localVisible.value = false;
       emit('close', ...args);
-      emit('update:visible', false);
     };
-    return {onClose, onConfirm, onClear, state};
+    return {onClose, onConfirm, onClear, localValue, localVisible};
   },
   render() {
     const locale = getComponentLocale(this.$props, {}, 'Calendar', () =>
@@ -49,7 +49,7 @@ export default defineComponent({
         {
           ...this.$props
         }
-        v-model={[this.state.value, 'value']}
+        v-model={[this.localValue, 'value']}
         locale={locale}
         renderHeader={headerProps => (
           <Header {...headerProps} closeIcon={<Icon type="cross"/>}/>
@@ -63,7 +63,7 @@ export default defineComponent({
         onSelectHasDisableDate={(...args) => {
           this.$emit('select-has-disable-date', ...args);
         }}
-        visible={this.state.visible}
+        visible={this.localVisible}
       />
     );
   }
