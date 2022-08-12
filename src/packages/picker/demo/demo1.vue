@@ -1,5 +1,12 @@
 <template>
   <div>
+    <div>{{value0}}</div>
+    <m-picker v-model:value="value0"
+              :data="data0"
+              extra="请选择(可选)"
+              title="Areas">
+      <m-list-item arrow="horizontal">Multiple & cascader</m-list-item>
+    </m-picker>
     <m-picker v-model:value="value1"
               :data="district"
               extra="请选择(可选)"
@@ -51,8 +58,31 @@
       const value = ref(null);
 
       const value1 = ref(['340000', '341500', '341502']);
+      const value0 = ref([]);
       return {
         value1,
+        value0,
+        data0: [{
+          label: '1',
+          value: '1',
+          children: [{
+            label: '1-1',
+            value: '1-1'
+          }, {
+            label: '1-2',
+            value: '1-2'
+          }]
+        }, {
+          label: '2',
+          value: '2',
+          children: [{
+            label: '2-1',
+            value: '2-1'
+          }, {
+            label: '2-2',
+            value: '2-2'
+          }]
+        }],
         data,
         value2,
         data2,

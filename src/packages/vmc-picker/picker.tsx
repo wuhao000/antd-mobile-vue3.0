@@ -14,6 +14,7 @@ import {
 } from 'vue';
 import PickerMixin from './picker-mixin';
 import PickerProps from './picker-types';
+import {isNotNull} from "../utils/util";
 
 const Picker = defineComponent({
   name: 'Picker',
@@ -40,6 +41,19 @@ const Picker = defineComponent({
             itemHeight.value,
             props.noAnimate ? scrollToWithoutAnimation : scrollTo
         );
+      }
+    });
+    watch(() => props.data, data => {
+      if (isNotNull(props.value)) {
+        if (data.length) {
+          if (!data.map(it => it.value).includes(state.value)) {
+            state.value = data[0].value;
+            emit('update:value', state.value);
+          }
+        } else {
+          state.value = null;
+          emit('update:value', null);
+        }
       }
     });
     const rootRef = ref<HTMLElement>(null);
