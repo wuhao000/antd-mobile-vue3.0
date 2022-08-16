@@ -10,7 +10,7 @@ export default defineComponent({
     key: String,
     forceRender: Boolean
   },
-  setup(props) {
+  setup(props, {slots}) {
     const instance = getCurrentInstance();
     if (!instance.vnode.key) {
       console.error('Tab key cannot be empty');
@@ -18,7 +18,7 @@ export default defineComponent({
     const {registerTab} = inject(TabsStore);
     registerTab({
       key: instance.vnode.key,
-      title: props.title,
+      title: slots?.title() ?? props.title,
       forceRender: props.forceRender
     });
     return {};
