@@ -8,7 +8,7 @@ import {
   provide,
   reactive,
   Ref,
-  ref,
+  ref, Slots, VNode,
   watch
 } from 'vue';
 import {Models} from '../../../types/models';
@@ -30,6 +30,13 @@ export const getPanDirection = (direction: number | undefined) => {
     default:
       return 'none';
   }
+};
+
+const getTabTitle = (it: VNode) => {
+  if (it.children && typeof it.children === 'object' && (it.children as Slots).title) {
+    return (it.children as Slots).title()
+  }
+  return it.props.title;
 };
 
 export default defineComponent({
@@ -151,7 +158,6 @@ export default defineComponent({
     const currentTab: Ref<number> = ref(0);
     const nextCurrentTab: Ref<number> = ref(null);
     const prevCurrentTab: Ref<number> = ref(null);
-    const tabCache: { [index: number]: any } = reactive({});
     watch(() => props.value, tab => {
       if (typeof tab === 'number') {
         currentTab.value = tab;
@@ -429,21 +435,17 @@ export default defineComponent({
             } else {
               cls += ` ${cls}-inactive`;
             }
-            // update tab cache
-            if (tab.props.forceRender || index === currentTab.value) {
-              tabCache[index] = tab;
-            } else if (destroyInactiveTab) {
-              tabCache[index] = undefined;
-            }
             return <TabPane key={tab.key}
                             class={cls}
+                            forceRender={tab.props.forceRender}
+                            title={getTabTitle(tab)}
                             active={currentTab.value === index}
                             role="tabpanel"
                             aria-hidden={currentTab.value !== index}
                             aria-labelledby={`m-tabs-${instanceId}-${index}`}
                             fixX={isTabVertical()}
                             fixY={!isTabVertical()}>
-              {tabCache[index]}
+              {tab}
             </TabPane>;
           })
         }
@@ -464,31 +466,29 @@ export default defineComponent({
     });
     provide(TabsStore, {
       registerTab: (tab) => {
+        const index = tabs.value.findIndex(it => it.key === tab.key)
+        if (index >= 0) {
+          tabs.value[index] = tab;
+        } else {
+          tabs.value.push(tab);
+        }
       }
     });
     return {
       isTabVertical,
       getTabBarBaseProps,
       onPan,
+      tabs,
       onTabClick,
       onSwipe,
       currentTab,
-      renderContent,
-      setTabs: (v) => {
-        tabs.value = v;
-      }
+      renderContent
     };
   },
   render() {
-    const {prefixCls, tabBarPosition, tabDirection, useOnPan} = this;
+    const {prefixCls, tabBarPosition, tabDirection, useOnPan, tabs} = this;
     const isTabVertical = this.isTabVertical(tabDirection);
     const children = unwrapFragment(this.$slots?.default?.()) || [];
-    const tabs = children.map((it, index) => ({
-      key: it.key ?? `tab_${index}`,
-      title: it.props.title,
-      forceRender: it.props.forceRender
-    }));
-    this.setTabs(tabs);
     const tabBarProps: any = {
       ...this.getTabBarBaseProps(),
       tabs

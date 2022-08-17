@@ -1,6 +1,6 @@
-import {defineComponent, onBeforeUpdate, PropType, ref, Ref} from 'vue';
+import {defineComponent, getCurrentInstance, inject, onBeforeUpdate, PropType, ref, Ref, VNode, watchEffect} from 'vue';
 import {filterHTMLAttrs} from '../../utils/dom';
-import {getPxStyle, getTransformPropValue} from './utils';
+import {getPxStyle, getTransformPropValue, TabsStore} from './utils';
 
 export default defineComponent({
   inheritAttrs: false,
@@ -8,6 +8,9 @@ export default defineComponent({
   props: {
     role: {
       type: String as PropType<string>
+    },
+    title: {
+      type: [String, Object] as PropType<string | VNode>
     },
     active: {
       type: Boolean as PropType<boolean>
@@ -19,7 +22,8 @@ export default defineComponent({
     fixY: {
       type: Boolean as PropType<boolean>,
       default: true
-    }
+    },
+    forceRender: Boolean
   },
   setup(props) {
     const layout: Ref<HTMLDivElement> = ref(null);
@@ -29,16 +33,23 @@ export default defineComponent({
       layout.value = div;
     };
     onBeforeUpdate(() => {
-      if (props.active !== props.active) {
-        if (props.active) {
-          offsetX.value = 0;
-          offsetY.value = 0;
-        } else {
-          offsetX.value = layout.value.scrollLeft;
-          offsetY.value = layout.value.scrollTop;
-        }
+      if (props.active) {
+        offsetX.value = 0;
+        offsetY.value = 0;
+      } else {
+        offsetX.value = layout.value.scrollLeft;
+        offsetY.value = layout.value.scrollTop;
       }
     });
+    const instance = getCurrentInstance();
+    const {registerTab} = inject(TabsStore);
+    watchEffect(() => {
+      registerTab({
+        key: instance.vnode.key,
+        title: props.title,
+        forceRender: props.forceRender
+      });
+    }, {flush: "sync"})
     return {
       setLayout,
       offsetX, offsetY
@@ -54,7 +65,7 @@ export default defineComponent({
       {...filterHTMLAttrs(this.$attrs)}
       style={style}
       ref={this.setLayout}>
-      {this.$slots.default()}
+      {this.active || this.forceRender ? this.$slots.default() : undefined}
     </div>;
   }
 });
