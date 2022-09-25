@@ -116,7 +116,7 @@ export default defineComponent({
                        arrow={'horizontal'}
                        errorDisplayType={this.errorDisplayType}
                        style={this.$attrs.style}
-                       class={classNames(this.$attrs.class, 'am-checkbox-popup-list')}
+                       class={classNames(this.$attrs.class as string | Record<string, string>, 'am-checkbox-popup-list')}
                        touchFeedback={!this.isReadonly && !this.isDisabled}
                        required={this.required}
                        text={!!this.optionText}

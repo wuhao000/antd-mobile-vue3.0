@@ -329,7 +329,7 @@ export default defineComponent({
       <div
         {...filterHTMLAttrs({...restProps, ...this.$attrs})}
         ref={this.setContainerRef}
-        class={classNames(this.className, prefixCls, `${prefixCls}-${direction}`)}>
+        class={classNames(this.className as string | Record<string, string>, prefixCls, `${prefixCls}-${direction}`)}>
         {renderRefresh(`${prefixCls}-content`)}
       </div>
     );

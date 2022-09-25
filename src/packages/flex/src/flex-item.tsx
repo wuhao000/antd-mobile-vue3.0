@@ -18,7 +18,7 @@ export default defineComponent({
   },
   render() {
     const {prefixCls, ...restProps} = this.$props;
-    const wrapCls = classnames(`${prefixCls}-item`, this.$attrs.class);
+    const wrapCls = classnames(`${prefixCls}-item`, this.$attrs.class as string | Record<string, string>);
     const props = {
       ...restProps,
       ...this.$attrs,

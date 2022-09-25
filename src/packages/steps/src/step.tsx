@@ -128,7 +128,7 @@ export default defineComponent({
     const classString = classNames(
         `${prefixCls}-item`,
         `${prefixCls}-item-${status}`,
-        this.$attrs.class,
+        this.$attrs.class as string | Record<string, string>,
         {[`${prefixCls}-item-custom`]: icon}
     );
     const stepItemStyle: any = {};

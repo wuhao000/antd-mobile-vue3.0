@@ -192,7 +192,7 @@ export default defineComponent({
     const wrapCls = classnames(wrapClassName, {
       [`${prefixCls}-wrap-popup`]: popup
     });
-    const cls = classnames(this.$attrs.class, {
+    const cls = classnames(this.$attrs.class as string | Record<string, string>, {
       [`${prefixCls}-transparent`]: transparent,
       [`${prefixCls}-popup`]: popup,
       [`${prefixCls}-operation`]: operation,

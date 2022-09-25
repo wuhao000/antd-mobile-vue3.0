@@ -42,7 +42,9 @@ export default defineComponent({
       }
     });
     const instance = getCurrentInstance();
-    const {registerTab} = inject(TabsStore);
+    const {registerTab} = inject<{
+      registerTab: (tab) => void
+    }>(TabsStore);
     watchEffect(() => {
       registerTab({
         key: instance.vnode.key,

@@ -34,7 +34,7 @@ const Input = defineComponent({
   render(): any {
     const {currentValue} = this;
     const type = this.type === 'number' ? 'text' : this.type;
-    const classes = classNames(this.$attrs.class, 'am-input-align-' + this.textAlign);
+    const classes = classNames(this.$attrs.class as string | Record<string, string>, 'am-input-align-' + this.textAlign);
     const props: any = {
       ...this.$props,
       ...this.$attrs,

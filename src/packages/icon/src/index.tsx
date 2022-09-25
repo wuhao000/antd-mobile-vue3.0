@@ -25,7 +25,7 @@ const Icon = defineComponent({
       'am-icon',
       (typeof type === 'string') ? `am-icon-${type}` : undefined,
       `am-icon-${size}`,
-      this.$attrs.class
+      this.$attrs.class as string | Record<string, string>
     );
     const style: any = this.$attrs.style ?? {};
     if (this.color) {

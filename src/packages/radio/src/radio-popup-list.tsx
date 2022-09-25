@@ -91,7 +91,7 @@ export default defineComponent({
                  errorMessage={this.errorMessage}
                  errorDisplayType={this.errorDisplayType}
                  style={this.$attrs.style}
-                 class={classNames(this.$attrs.class, 'am-radio-popup-list')}
+                 class={classNames(this.$attrs.class as string | Record<string, string>, 'am-radio-popup-list')}
                  required={this.required}
                  touchFeedback={!readOnly && !disabled}
                  disabled={isDisabled}

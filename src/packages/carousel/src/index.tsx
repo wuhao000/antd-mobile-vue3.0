@@ -147,7 +147,7 @@ const Carousel = defineComponent({
     }
     const wrapCls = classnames(prefixCls, {
       [`${prefixCls}-vertical`]: vertical
-    }, this.$attrs.class);
+    }, this.$attrs.class as string | Record<string, string>);
     return (
       <CarouselBase
         {

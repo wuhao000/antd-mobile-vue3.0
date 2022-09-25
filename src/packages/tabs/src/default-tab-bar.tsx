@@ -246,7 +246,7 @@ export default defineComponent({
       },
       class: `${prefixCls}-underline`
     };
-    return <div class={classNames(cls, `${prefixCls}-${tabBarPosition}`, this.$attrs.class)} style={style}>
+    return <div class={classNames(cls, `${prefixCls}-${tabBarPosition}`, this.$attrs.class as string | Record<string, string>)} style={style}>
       {showPrev && <div class={`${prefixCls}-prevpage`}/>}
       <Gesture {...onPan}
                direction={isTabBarVertical ? 'vertical' : 'horizontal'}>

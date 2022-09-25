@@ -67,7 +67,7 @@ export default defineComponent({
       [`${prefixCls}-disabled`]: disabled,
       [`${prefixCls}-loading`]: loading,
       [`${prefixCls}-icon`]: !!iconType
-    }, this.$attrs.class);
+    }, this.$attrs.class as string | Record<string, string>);
     const kids = this.$slots.default?.()?.map(this.insertSpace)?? '';
 
     const iconEl = iconType ? <Icon type={iconType}

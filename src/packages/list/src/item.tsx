@@ -285,7 +285,7 @@ const Item = defineComponent({
     const section = this.$parent['section'];
     const wrapCls = classNames(prefixCls,
       `${prefixCls}-label-${this.labelPosition}`,
-      this.$attrs.class ?? '',
+      this.$attrs.class as string | Record<string, string> ?? '',
       `${prefixCls}-${this.layout}`,
       {
         [`${prefixCls}-disabled`]: this.actualDisabled,
