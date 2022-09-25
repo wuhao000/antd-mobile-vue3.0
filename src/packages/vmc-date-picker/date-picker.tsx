@@ -2,6 +2,7 @@ import {defineComponent, inject, onBeforeUpdate, reactive, Ref, ref, watch} from
 import MultiPicker from '../vmc-picker/multi-picker';
 import RMCPicker from '../vmc-picker/picker';
 import DatePickerProps from './date-picker-props';
+import {isNull} from "../utils/util";
 
 const HOURS_OF_DAY = 24;
 const HOURS_HALF_DAY = 12;
@@ -91,9 +92,65 @@ export default defineComponent({
       return date;
     };
     const getDate = () => clipDate(state.value || getDefaultMinDate() as any);
+    const getNewDate = (values) => {
+      const newValue = cloneDate(getDate());
+      if (isNull(values)) {
+        return newValue
+      }
+      const {mode} = props;
+      values.forEach((value, index) => {
+        if (mode === DATETIME || mode === DATE || mode === YEAR || mode === MONTH) {
+          switch (index) {
+            case 0:
+              newValue.setFullYear(value);
+              break;
+            case 1:
+              // Note: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/setMonth
+              // e.g. from 2017-03-31 to 2017-02-28
+              setMonth(newValue, value);
+              break;
+            case 2:
+              let maxDay = getDaysInMonth(newValue);
+              if (value > maxDay) {
+                values[2] = maxDay;
+                newValue.setDate(maxDay);
+              } else {
+                newValue.setDate(value);
+              }
+              break;
+            case 3:
+              setHours(newValue, value);
+              break;
+            case 4:
+              newValue.setMinutes(value);
+              break;
+            case 5:
+              setAmPm(newValue, value);
+              break;
+            default:
+              break;
+          }
+        } else if (mode === TIME) {
+          switch (index) {
+            case 0:
+              setHours(newValue, value);
+              break;
+            case 1:
+              newValue.setMinutes(value);
+              break;
+            case 2:
+              setAmPm(newValue, value);
+              break;
+            default:
+              break;
+          }
+        }
+      });
+      return clipDate(newValue);
+    };
     const getDateData = (): DateDataCol[] => {
       const {locale, formatMonth, formatDay, mode} = props;
-      const date = getDate();
+      const date = getNewDate(state.values);
       const selYear = date.getFullYear();
       const selMonth = date.getMonth();
       const minDateYear = getMinYear();
@@ -137,7 +194,6 @@ export default defineComponent({
       const days: LabelItem[] = [];
       let minDay = 1;
       let maxDay = getDaysInMonth(date);
-
       if (minDateYear === selYear && minDateMonth === selMonth) {
         minDay = minDateDay;
       }
@@ -324,61 +380,17 @@ export default defineComponent({
       }] : []);
       return {cols, selMinute};
     };
+    const colData = ref([]);
     watch(() => state.value, () => {
-      const {value} = getValueCols();
+      const {value, cols} = getValueCols();
+      colData.value = cols;
       state.values = value;
-    }, {immediate: true});
+    }, {immediate: true, deep: true});
     onBeforeUpdate(() => {
       if (props.value !== undefined) {
         state.value = props.value || props.defaultDate;
       }
     });
-    const getNewDate = (values, index) => {
-      const value = parseInt(values[index], 10);
-      const {mode} = props;
-      const newValue = cloneDate(getDate());
-      if (mode === DATETIME || mode === DATE || mode === YEAR || mode === MONTH) {
-        switch (index) {
-          case 0:
-            newValue.setFullYear(value);
-            break;
-          case 1:
-            // Note: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/setMonth
-            // e.g. from 2017-03-31 to 2017-02-28
-            setMonth(newValue, value);
-            break;
-          case 2:
-            newValue.setDate(value);
-            break;
-          case 3:
-            setHours(newValue, value);
-            break;
-          case 4:
-            newValue.setMinutes(value);
-            break;
-          case 5:
-            setAmPm(newValue, value);
-            break;
-          default:
-            break;
-        }
-      } else if (mode === TIME) {
-        switch (index) {
-          case 0:
-            setHours(newValue, value);
-            break;
-          case 1:
-            newValue.setMinutes(value);
-            break;
-          case 2:
-            setAmPm(newValue, value);
-            break;
-          default:
-            break;
-        }
-      }
-      return clipDate(newValue);
-    };
     const onOk = () => {
       const newValue = cloneDate(getDate());
       newValue.setSeconds(0);
@@ -419,16 +431,20 @@ export default defineComponent({
       emit('update:value', newValue);
     };
     const onCancel = () => {
-      const {value} = getValueCols();
+      const {value, cols} = getValueCols();
+      colData.value = cols;
       state.values = value;
       emit('cancel', value);
     };
-    const onValueChange = (values, index) => {
+    const onValueChange = (values) => {
       if (!Array.isArray(values)) {
         throw new Error('MultiPicker返回了非法数值：' + JSON.stringify(values));
       }
       state.values = values;
-      emit('change', getNewDate(values, index));
+      const newValue = getNewDate(values)
+      const {cols} = getValueCols();
+      colData.value = cols;
+      emit('change', newValue);
     };
     const setHours = (date, hour) => {
       if (props.use12Hours) {
@@ -452,10 +468,14 @@ export default defineComponent({
       store.onOk = onOk;
       store.onCancel = onCancel;
     }
-    return {getValueCols, state, onValueChange};
+    const onCreated = () => {
+      const {cols} = getValueCols();
+      colData.value = cols;
+    }
+    onCreated();
+    return {getValueCols, colData, state, onValueChange};
   },
   render() {
-    const {cols} = this.getValueCols();
     const value = this.state.values;
     const {
       disabled, pickerPrefixCls, prefixCls, itemStyle
@@ -471,7 +491,7 @@ export default defineComponent({
     };
     return (
         <MultiPicker {...pickerProps}>
-          {cols.map(p => (
+          {this.colData.map(p => (
               <RMCPicker
                   disabled={disabled}
                   prefixCls={pickerPrefixCls}
