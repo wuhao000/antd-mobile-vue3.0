@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import {defineComponent, PropType, reactive, watch} from 'vue';
+import {defineComponent, PropType} from 'vue';
 import List from '../../list';
 import Checkbox from './checkbox';
 import {usePureInput} from "../../mixins/pure-input-component";
@@ -39,6 +39,9 @@ export default defineComponent({
       type: Boolean as PropType<boolean>,
       default: false
     },
+    readOnly: {
+      type: Boolean
+    },
     value: {
       type: Boolean as PropType<boolean>,
       default: false
@@ -47,10 +50,11 @@ export default defineComponent({
   emits: ['change', 'update:value'],
   setup(props, {emit, attrs}) {
     const {stateValue, setStateValue} = usePureInput(props, {emit, attrs})
-    const onChange = (value: boolean) => {
+    const onChange = () => {
+      // do nothing
     };
-    const onClick = (e) => {
-      if (!props.disabled) {
+    const onClick = () => {
+      if (!props.disabled && !props.readOnly) {
         setStateValue(!stateValue.value);
       }
     };
@@ -60,12 +64,14 @@ export default defineComponent({
     const {
       listPrefixCls,
       disabled,
+      readOnly,
       checkboxProps,
       ...restProps
     } = this.$props;
     const {prefixCls} = restProps;
     const wrapCls = classnames(`${prefixCls}-item`, {
-      [`${prefixCls}-item-disabled`]: disabled === true
+      [`${prefixCls}-item-disabled`]: disabled === true,
+      [`${prefixCls}-item-readonly`]: readOnly === true
     });
 
     const extraProps: any = {};

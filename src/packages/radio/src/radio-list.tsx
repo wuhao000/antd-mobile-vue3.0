@@ -22,7 +22,7 @@ export default defineComponent({
   setup(props, {emit, slots, attrs}) {
     const instance = getCurrentInstance();
     const form = inject('list', undefined);
-    const {getOptions, stateValue, setStateValue, searchKeyword, isDisabled} = useOptionsBaseComponent(props, {
+    const {getOptions, stateValue, setStateValue, isReadonly, searchKeyword, isDisabled} = useOptionsBaseComponent(props, {
       emit,
       slots,
       attrs
@@ -42,6 +42,7 @@ export default defineComponent({
           return <RadioItem
               {...optionProps}
               disabled={option.disabled || isDisabled.value}
+              readOnly={isReadonly.value}
               value={stateValue.value === option.value}
               key={option.value}
               onChange={(checkState) => {

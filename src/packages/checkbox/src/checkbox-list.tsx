@@ -21,7 +21,7 @@ export default defineComponent({
   },
   setup(props, {emit, slots, attrs}) {
     const form = inject('list', undefined);
-    const {getOptions, setStateValue, stateValue, searchKeyword, isDisabled} = useOptionsBaseComponent(props, {
+    const {getOptions, setStateValue, isReadonly, stateValue, searchKeyword, isDisabled} = useOptionsBaseComponent(props, {
       emit,
       attrs,
       slots
@@ -38,6 +38,7 @@ export default defineComponent({
           value={stateValue.value.includes(option.value)}
           key={option.value}
           disabled={option.disabled || isDisabled.value}
+          readOnly={isReadonly.value}
           onChange={(checkState) => {
             onChange(checkState, option.value);
           }}>{option.label}</CheckboxItem>;

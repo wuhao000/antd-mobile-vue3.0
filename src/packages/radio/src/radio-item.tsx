@@ -23,6 +23,7 @@ export default defineComponent({
       type: Boolean as PropType<boolean>,
       default: false
     },
+    readOnly: Boolean,
     value: {
       type: Boolean as PropType<boolean>,
       default: false
@@ -31,7 +32,7 @@ export default defineComponent({
   emits: ['change', 'click'],
   setup(props, {emit}) {
     const onClick = (e) => {
-      if (!props.disabled) {
+      if (!props.disabled && !props.readOnly) {
         emit('click', e);
         emit('change', !props.value);
       }
@@ -44,13 +45,15 @@ export default defineComponent({
     const {
       listPrefixCls,
       disabled,
+      readOnly,
       radioProps,
       ...otherProps
     } = this.$props;
     const {prefixCls} = otherProps;
     const wrapCls = classnames(`${prefixCls}-item`, {
       [`${prefixCls}-item-disabled`]: disabled === true,
-      [`${prefixCls}-item-selected`]: this.value === true
+      [`${prefixCls}-item-selected`]: this.value === true,
+      [`${prefixCls}-item-readonly`]: readOnly === true
     });
 
     const extraProps: any = {};

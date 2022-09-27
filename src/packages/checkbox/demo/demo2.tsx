@@ -29,6 +29,18 @@ export default defineComponent({
                          options={this.options}></m-checkbox-list>
       </div>
       <div>
+        <m-checkbox-list v-model={[this.state.value, 'value']}
+                         title={'禁用'}
+                         disabled={true}
+                         options={this.options}></m-checkbox-list>
+      </div>
+      <div>
+        <m-checkbox-list v-model={[this.state.value, 'value']}
+                         title={'只读'}
+                         readOnly={true}
+                         options={this.options}></m-checkbox-list>
+      </div>
+      <div>
         <m-checkbox-list value={this.state.value}
                          onChange={value => {
                            this.state.value = value;
