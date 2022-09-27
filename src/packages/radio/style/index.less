@@ -4,8 +4,11 @@
 @listPrefixCls: am-list-item;
 @radioWarpPrefixCls: am-radio;
 @radioInnerPrefixCls: ~"@{radioWarpPrefixCls}-inner";
+@icon-size: 22px;
+@font-size: 17px;
 
 .@{radioWarpPrefixCls} {
+
   position: relative;
   display: inline-block;
   vertical-align: middle;
@@ -40,16 +43,50 @@
   }
 
   &-item {
+    cursor: pointer;
+    &&-selected {
+      cursor: default;
+    }
+    &&-readonly {
+      cursor: default;
+    }
+    &&-disabled {
+      cursor: not-allowed;
+    }
+    &&-disabled,
+    &&-readonly&-selected {
+      .@{radioWarpPrefixCls}-icon {
+        opacity: 0.45;
+      }
+    }
     .@{listPrefixCls}-error-extra {
       position: absolute;
       top: 15px;
       right: 15px;
     }
+    .@{radioWarpPrefixCls}-icon {
+      background-color: #fff;
+      color: var(--adm-color-primary);
+      flex: none;
+      border: 1px solid var(--adm-color-light);
+      border-radius: @icon-size;
+      box-sizing: border-box;
+      width: @icon-size;
+      height: @icon-size;
+      margin-right: 8px;
+      path {
+        display: none;
+      }
+    }
 
     &&-selected {
       .@{listPrefixCls}-content {
         .@{listPrefixCls}-title {
-          color: @brand-primary;
+          .@{radioWarpPrefixCls}-icon {
+            path {
+              display: initial;
+            }
+          }
         }
       }
     }

@@ -71,6 +71,16 @@
 
 .@{listPrefixCls} {
   &.@{checkboxWarpPrefixCls}-item {
+    &&-readonly {
+      .@{checkboxWarpPrefixCls} {
+        &.@{checkboxWarpPrefixCls}-checked {
+          .@{checkboxInnerPrefixCls} {
+            opacity: 0.45;
+          }
+        }
+      }
+    }
+
     .@{listPrefixCls}-thumb {
       position: relative;
       width: @icon-size-sm;

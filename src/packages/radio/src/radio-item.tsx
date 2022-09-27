@@ -79,8 +79,14 @@ export default defineComponent({
         touchFeedback={!this.disabled && !this.value}
         onClick={this.onClick}
         prefixCls={listPrefixCls}
-        class={wrapCls}
-        suffix={extra}>
+        class={wrapCls}>
+        <div class={prefixCls + '-icon'}>
+          <svg viewBox="0 0 40 40">
+            <path
+              d="M20,9 C26.0752953,9 31,13.9247047 31,20 C31,26.0752953 26.0752953,31 20,31 C13.9247047,31 9,26.0752953 9,20 C9,13.9247047 13.9247047,9 20,9 Z"
+              fill="currentColor"></path>
+          </svg>
+        </div>
         {this.$slots.default?.()}
       </List.Item>
     );
