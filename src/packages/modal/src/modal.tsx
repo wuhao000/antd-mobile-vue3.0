@@ -33,6 +33,7 @@ export default defineComponent({
       type: String
     },
     wrapProps: {},
+    loading: Boolean,
     platform: {
       type: String as PropType<string>,
       default: 'ios'
@@ -132,6 +133,7 @@ export default defineComponent({
   },
   render() {
     const {
+      loading,
       prefixCls,
       wrapClassName,
       transitionName,
@@ -161,12 +163,16 @@ export default defineComponent({
               this.renderFooterButton(button as Action<any>, prefixCls, i)
           )}
           {
-            this.onClose ? <Button prefixCls="am-modal-button" onClick={(e) => {
+            this.onClose ? <Button
+                disabled={loading}
+                prefixCls="am-modal-button" onClick={(e) => {
               this.$emit('close', e);
             }}>{this.closeText ?? '关闭'}</Button> : undefined
           }
           {
-            this.onOk ? <Button prefixCls="am-modal-button" onClick={(e) => {
+            this.onOk ? <Button
+                loading={loading}
+                prefixCls="am-modal-button" onClick={(e) => {
               this.$emit('ok', e);
             }}>{this.onText ?? '确定'}</Button> : undefined
           }
