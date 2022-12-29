@@ -99,6 +99,7 @@ export default defineComponent({
   },
   render() {
     const slots = {
+      ...this.$slots,
       default: () => {
         return [
           <Calendar {...this.inputProps}
