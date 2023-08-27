@@ -81,7 +81,7 @@ export default function alert(
     modal = createApp({
       render() {
         return <Modal
-          visible
+          open
           transparent
           title={title}
           transitionName="am-zoom"

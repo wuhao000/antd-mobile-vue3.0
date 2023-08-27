@@ -245,7 +245,7 @@ export default defineComponent({
   },
   render() {
     const classes = `${this.prefixCls} ${this.prefixCls}-${this.type}`;
-    return <Popup visible={this.show}
+    return <Popup open={this.show}
                   showTitle={false}
                   onCancel={this.cancelClick}>
       <div class={classes}>

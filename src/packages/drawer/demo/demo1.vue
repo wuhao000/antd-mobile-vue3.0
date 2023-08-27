@@ -8,7 +8,7 @@
     </m-nav-bar>
     <m-drawer :content-style="{ color : '#A6A6A6', textAlign : 'center', paddingTop : '42px' }"
               :style="drawerStyle"
-              v-model:visible="state.open"
+              v-model:open="state.open"
               class="my-drawer" enable-drag-handle
               @open-change="{onOpenChange}">
       <template v-slot:sidebar>

@@ -1,6 +1,5 @@
 import {defineComponent, PropType, VNode} from 'vue';
 import {Locale} from '../data-types';
-import _default from "ant-design-vue/lib/color-picker";
 
 export interface PropsType {
   title?: string;

@@ -8,7 +8,7 @@ function showToast() {
 }
 
 function showToastNoMask() {
-  Toast.info('Toast without mask !!!', 2, null, false);
+  Toast.info('Toast without mask !!!', 2, null, true);
 }
 
 function successToast() {

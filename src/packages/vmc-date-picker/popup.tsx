@@ -4,9 +4,9 @@ import PopupPicker from '../vmc-picker/popup';
 export default defineComponent({
   name: 'PopupDatePicker',
   props: {
-    onVisibleChange: {},
+    onOpenChange: {},
     title: {},
-    visible: {
+    open: {
       type: Boolean, default: false
     },
     cancelText: {type: String},

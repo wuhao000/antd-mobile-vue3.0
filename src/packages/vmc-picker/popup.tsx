@@ -1,12 +1,12 @@
 import Popup from '../popup';
 import PopupMixin from './popup-mixin';
 
-const getModal = (props, visible: boolean, {getContent, hide, onCancel, onOk}) => {
+const getModal = (props, open: boolean, {getContent, hide, onCancel, onOk}) => {
   const content = getContent();
   return <Popup
       {...{
         title: props.title,
-        visible,
+        open,
         showCancel: true,
         showOk: true,
         closable: false,

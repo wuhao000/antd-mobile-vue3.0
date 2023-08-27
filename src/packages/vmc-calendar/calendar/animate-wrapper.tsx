@@ -3,15 +3,15 @@ import {defineComponent} from 'vue';
 export default defineComponent({
   name: 'AnimateWrapper',
   props: {
-    visible: {type: Boolean},
+    open: {type: Boolean},
     displayType: {type: String}
   },
   render() {
-    const {displayType, visible} = this.$props;
+    const {displayType, open} = this.$props;
     return <div
       class="animate"
-      style={{display: visible ? displayType : 'none'}}>
-      {visible && this.$slots.default?.()}
+      style={{display: open ? displayType : 'none'}}>
+      {open && this.$slots.default?.()}
     </div>;
   }
 });

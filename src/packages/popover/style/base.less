@@ -28,14 +28,39 @@
 
 // Arrows
 .@{popoverPrefixCls}-arrow {
-  background-color: @fill-base;
+  background-color: transparent;
   border-radius: 1PX;
   box-shadow: 0 0 2 * @hd rgba(0, 0, 0, 0.21);
   height: @popover-arrow-width;
   position: absolute;
-  transform: rotate(45deg);
   width: @popover-arrow-width;
   z-index: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-75%);
+
+  &:before {
+    position: absolute;
+    bottom: 0;
+    inset-inline-start: 0;
+    width: 16px;
+    height: 8px;
+    background: var(--antd-arrow-background-color);
+    content: "";
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    width: 8.970562748477143px;
+    height: 8.970562748477143px;
+    bottom: 0;
+    inset-inline: 0;
+    margin: auto;
+    border-radius: 0 0 2px 0;
+    transform: translateY(50%) rotate(-135deg);
+    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.1);
+    z-index: 0;
+    background: transparent;
+  }
 }
 
 .@{popoverPrefixCls} {

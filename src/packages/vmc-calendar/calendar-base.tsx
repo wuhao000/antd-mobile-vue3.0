@@ -16,7 +16,7 @@ export class StateType {
   public endDate?: Date = undefined;
   public disConfirmBtn?: boolean = true;
   public clientHight?: number = 0;
-  public visible: boolean = false;
+  public open: boolean = false;
 }
 
 export const useBaseCalendar = (props, {emit}) => {
@@ -30,7 +30,7 @@ export const useBaseCalendar = (props, {emit}) => {
     disConfirmBtn: true,
     clientHeight: 0,
     contentStyle: {},
-    visible: props.visible
+    open: props.open
   });
   const onSelectedDate = (date: Date) => {
     const {startDate, endDate} = state;
@@ -54,7 +54,7 @@ export const useBaseCalendar = (props, {emit}) => {
   const onClose = () => {
     setState(new StateType());
     emit('close');
-    emit('update:visible', false);
+    emit('update:open', false);
   };
 
   /** 关闭时回调 */
@@ -271,7 +271,7 @@ export const useBaseCalendar = (props, {emit}) => {
     currentValue.value[1] = value.endDate;
   }, {deep: true});
   watch(() => props.defaultValue, () => {
-    if (props.visible && props.defaultValue) {
+    if (props.open && props.defaultValue) {
       shortcutSelect(props.defaultValue[0], props.defaultValue[1]);
     }
   });

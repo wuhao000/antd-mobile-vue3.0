@@ -1,91 +1,96 @@
-import Notification from 'ant-design-vue/es/vc-notification';
-import classnames from 'classnames';
-import {VNode} from 'vue';
+import {App, createApp, Transition, VNode} from 'vue';
 import Icon from '../../icon';
+import {notification} from "ant-design-vue";
+import {v4} from 'uuid'
+import {NotificationArgsProps} from "ant-design-vue/es/notification";
 
 const prefixCls = 'am-toast';
 
-function getMessageInstance(mask: boolean,
-                            callback: (notification: any) => void) {
-  (Notification as any).newInstance(
-    {
-      prefixCls,
-      style: {}, // clear rmc-notification default style
-      transitionName: 'am-fade',
-      class: classnames({
-        [`${prefixCls}-mask`]: mask,
-        [`${prefixCls}-nomask`]: !mask
-      })
-    },
-    (notification: any) => callback && callback(notification)
-  );
-}
+const iconTypes: { [key: string]: string } = {
+  info: '',
+  success: 'success',
+  fail: 'fail',
+  offline: 'dislike',
+  loading: 'loading'
+};
 
-function notice(content: string | VNode, type: string,
-                duration = 3, onClose: (() => void) | undefined, mask = true) {
-  const iconTypes: { [key: string]: string } = {
-    info: '',
-    success: 'success',
-    fail: 'fail',
-    offline: 'dislike',
-    loading: 'loading'
-  };
-  const iconType = iconTypes[type];
-  const messageInstance: any = {
-    $destroy: () => {
-      console.error('Toast渲染未完成');
-    },
-    destroyed: false
-  };
-  messageInstance.destroy = () => {
-    if (!messageInstance.destroyed) {
-      messageInstance.destroyed = true;
-      messageInstance.$destroy();
-    }
-  };
-  messageInstance.hide = () => {
-    if (typeof messageInstance.destroy === 'function') {
-      messageInstance.destroy();
-    }
-  };
-  getMessageInstance(mask, notification => {
-    messageInstance.$destroy = notification.destroy;
-    messageInstance.component = notification.component;
-    notification.notice({
-      duration,
-      style: {},
-      onClick: () => {
-      },
-      content(h) {
-        return !!iconType ? (
-          <div
-            class={`${prefixCls}-text ${prefixCls}-text-icon`}
-            role={'alert'}
-            aria-live={'assertive'}>
-            <Icon type={iconType} size={'lg'}/>
-            <div class={`${prefixCls}-text-info`}>{content}</div>
-          </div>
-        ) : (
-          <div class={`${prefixCls}-text`}
-               role={'alert'}
-               aria-live={'assertive'}>
-            <div>{content}</div>
-          </div>
-        );
-      },
-      closable: true,
-      onClose() {
-        if (onClose) {
-          onClose();
-        }
-        if (typeof notification.destroy === 'function') {
-          notification.destroy();
-        }
-        messageInstance.destroy = null;
-      }
-    });
+const map = new Map<string, { container: HTMLDivElement; app: App }>();
+
+const destroyAll = () => {
+  map.forEach((value, key) => {
+    value.app.unmount();
+    value.container.remove();
+    map.delete(key);
   });
-  return messageInstance;
+};
+
+const destroy = (key: string) => {
+  const record = map.get(key);
+  if (!record) {
+    return;
+  }
+  record.app.unmount();
+  record.container.remove();
+  map.delete(key);
+};
+
+function notice(content: string | VNode, type: 'success' | 'info' | 'offline' | 'loading' | 'fail' | 'warning',
+                duration = 3, onClose: (() => void) | undefined, mask: boolean = false) {
+  const key = v4();
+  const div = document.createElement('div');
+  destroyAll();
+  const options: NotificationArgsProps = {
+    key,
+    placement: 'top',
+    prefixCls,
+    message: content,
+    icon: iconTypes[type] ? <Icon type={iconTypes[type]} size={'lg'}/> : undefined,
+    duration: duration * 1000,
+    onClose
+  };
+  document.body.appendChild(div);
+  const app = createApp({
+    render() {
+      return (
+        <Transition key={'fade-in'}>
+          <div
+            class={{
+              [prefixCls]: true,
+              [`${prefixCls}-mask`]: mask
+            }}
+            style="inset: 24px auto auto 50%; transform: translateX(-50%);">
+            <div>
+              <div class={`${prefixCls}-notice`}>
+                <div class={`${prefixCls}-notice-content`}>
+                  <div class={`${prefixCls}-notice-with-icon`}>
+                    {options.icon ? <span class={`${prefixCls}-notice-icon`}>
+                    {options.icon}
+                  </span> : undefined}
+                    <div class={`${prefixCls}-notice-message`}
+                         v-text={content}>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Transition>
+      );
+    }
+  });
+  app.mount(div);
+  map.set(key, {
+    container: div,
+    app
+  });
+  setTimeout(() => {
+    destroy(key);
+  }, duration * 100000);
+  return {
+    hide: () => {
+      destroy(key);
+    }
+  };
 }
 
 export default {
@@ -93,7 +98,7 @@ export default {
   },
   show(content: string | VNode, duration?: number, mask?: boolean) {
     return notice(content, 'info', duration, () => {
-    }, mask);
+    });
   },
   info(
     content: string | VNode,

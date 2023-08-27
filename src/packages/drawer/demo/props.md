@@ -14,4 +14,4 @@ sidebar||VNode|
 sidebarStyle|抽屉内容容器样式|any|
 touch|是否开启触摸手势|boolean|true
 transitions||boolean|
-visible|支持v-model|boolean|false
+open|支持v-model|boolean|false

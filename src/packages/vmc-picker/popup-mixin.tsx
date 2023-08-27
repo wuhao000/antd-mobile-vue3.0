@@ -14,16 +14,16 @@ export default function PopupMixin(getModal, newProps) {
       const picker = ref(null);
       const state = reactive({
         pickerValue: props.value !== undefined ? props.value : null,
-        visible: props.visible || false
+        open: props.open || false
       });
-      watch(() => state.visible, (visible) => {
-        emit('visible-change', visible);
+      watch(() => state.open, (open) => {
+        emit('open-change', open);
       });
       watch(() => props.value, value => {
         state.pickerValue = value;
       });
-      watch(() => props.visible, (value: boolean) => {
-        setVisibleState(value);
+      watch(() => props.open, (value: boolean) => {
+        setOpenState(value);
       });
 
       const onPickerChange = pickerValue => {
@@ -38,17 +38,17 @@ export default function PopupMixin(getModal, newProps) {
       const saveRef = picker => {
         picker.value = picker;
       };
-      const setVisibleState = visible => {
-        state.visible = visible;
-        if (!visible) {
+      const setOpenState = open => {
+        state.open = open;
+        if (!open) {
           state.pickerValue = null;
         }
       };
-      const fireVisibleChange = visible => {
-        if (state.visible !== visible) {
-          setVisibleState(visible);
-          emit('visible-change', visible);
-          emit('update:visible', visible);
+      const fireOpenChange = open => {
+        if (state.open !== open) {
+          setOpenState(open);
+          emit('open-change', open);
+          emit('update:open', open);
         }
       };
       const onTriggerClick = e => {
@@ -57,11 +57,11 @@ export default function PopupMixin(getModal, newProps) {
         if (childProps[props.triggerType!]) {
           childProps[props.triggerType!](e);
         }
-        fireVisibleChange(!state.visible);
+        fireOpenChange(!state.open);
       };
       const onOk = () => {
         emit('ok');
-        fireVisibleChange(false);
+        fireOpenChange(false);
       };
       const getContent = () => {
         if (slots.picker) {
@@ -93,11 +93,11 @@ export default function PopupMixin(getModal, newProps) {
         }
       };
       const onCancel = () => {
-        fireVisibleChange(false);
+        fireOpenChange(false);
         emit('cancel');
       };
       const hide = () => {
-        fireVisibleChange(false);
+        fireOpenChange(false);
         emit('hide');
       };
 
@@ -110,7 +110,7 @@ export default function PopupMixin(getModal, newProps) {
       const props = this.$props;
       const children = unwrapFragment(this.$slots.default());
       if (!children) {
-        return getModal(props, this.state.visible, {
+        return getModal(props, this.state.open, {
           getContent: this.getContent,
           onOk: this.onOk,
           hide: this.hide,
@@ -125,7 +125,7 @@ export default function PopupMixin(getModal, newProps) {
           });
         });
       }
-      const modal = getModal(props, this.state.visible, {
+      const modal = getModal(props, this.state.open, {
         getContent: this.getContent,
         onOk: this.onOk,
         hide: this.hide,

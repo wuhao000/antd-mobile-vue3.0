@@ -1,10 +1,11 @@
 <template>
-  <a-layout>
+  <a-layout theme="light">
     <a-layout-header id="app-header">
       <ui-header/>
     </a-layout-header>
     <a-layout id="app-body">
       <a-layout-sider v-show="!isDemo"
+                      theme="light"
                       id="app-nav"
                       width="220px">
         <nav-list :menu-list="routersName"></nav-list>
@@ -13,6 +14,7 @@
         <router-view/>
       </a-layout-content>
       <a-layout-sider style="padding: 0 0 0 10px;"
+                      theme="light"
                       width="375px">
         <iframe v-if="componentName"
                 :src="`/demo/mobile/${componentName}`"
@@ -69,13 +71,14 @@
 <style lang="less">
   @import "/src/assets/styles/common";
   @import "/src/assets/styles/custom";
-  @import "/node_modules/ant-design-vue/es/style/themes/default";
+  @import "../packages/style/variables";
 
   body {
     background: @body-background;
   }
 
   #app-header {
+    background: white;
     height: 60px;
   }
 

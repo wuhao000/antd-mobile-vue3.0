@@ -56,7 +56,7 @@ export default defineComponent({
           <Button onClick={this.showModal('modal1')}><Icon type="up"/>basic<Icon type="up"/></Button>
           <WhiteSpace/>
           <Modal
-              visible={this.state.modal1}
+              open={this.state.modal1}
               transparent
               maskClosable={false}
               onClose={this.onClose('modal1')}
@@ -80,7 +80,7 @@ export default defineComponent({
           <Modal
               popup
               title={<div>委托买入</div> as VNode}
-              visible={this.state.modal2}
+              open={this.state.modal2}
               onClose={this.onClose('modal2')}
               animationType="slide-up"
           >

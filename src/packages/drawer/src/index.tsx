@@ -40,7 +40,7 @@ const Drawer = defineComponent({
     sidebar: {
       type: Object
     },
-    visible: {
+    open: {
       type: Boolean as PropType<boolean>,
       default: false
     },
@@ -54,9 +54,9 @@ const Drawer = defineComponent({
       ...this.$props,
       ...this.$attrs,
       sidebar: this.$slots.sidebar?.() ?? this.sidebar,
-      visible: this.visible,
+      open: this.open,
       onOpen: value => {
-        this.$emit('update:visible', value);
+        this.$emit('update:open', value);
       }
     };
     return <RmcDrawer {...props}>

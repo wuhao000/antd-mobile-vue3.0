@@ -88,7 +88,7 @@ export default defineComponent({
       type: Boolean as PropType<boolean>,
       default: false
     },
-    visible: Boolean
+    open: Boolean
   },
   setup() {
     const renderFooterButton = (button: Action<any>, prefixCls: string | undefined, i: number) => {
@@ -211,7 +211,7 @@ export default defineComponent({
           <Popup
               placement={placement}
               showOk={false}
-              visible={this.visible}
+              open={this.open}
               title={this.title as any}
               maskClosable={this.closable}
               class={cls}
@@ -225,14 +225,14 @@ export default defineComponent({
           </Popup>
       );
     }
-    restProps['onUpdate:visible'] = (v) => {
-      this.$emit('update:visible', v);
+    restProps['onUpdate:open'] = (v) => {
+      this.$emit('update:open', v);
     };
     return (
         <Dialog
             {...restProps}
             maskClosable={this.maskClosable}
-            visible={this.visible}
+            visible={this.open}
             prefixCls={prefixCls}
             title={this.title}
             class={cls}

@@ -14,10 +14,10 @@ const Calendar = defineComponent({
   },
   setup(props, ctx) {
     const {state, shortcutSelect, onClose, renderCalendar} = useBaseCalendar(props, ctx);
-    watch(() => props.visible, () => {
-      state.visible = props.visible;
+    watch(() => props.open, () => {
+      state.open = props.open;
       const defaultValue = props.defaultValue;
-      if (props.visible && defaultValue) {
+      if (props.open && defaultValue) {
         shortcutSelect(defaultValue[0], defaultValue[1]);
       }
     });
@@ -27,10 +27,10 @@ const Calendar = defineComponent({
     const height = document.body.clientHeight;
     const popupProps = {
       onClose: this.onClose,
-      visible: this.visible,
+      open: this.open,
       height: `${height}px`,
       width: `${height}px`,
-      value: this.state.visible,
+      value: this.state.open,
       placement: this.enterDirection === 'vertical' ? 'bottom' : 'right'
     };
     return (

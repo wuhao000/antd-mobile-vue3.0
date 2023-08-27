@@ -27,7 +27,7 @@
     <m-calendar :default-date="new Date()"
                 :maxDate="maxDate"
                 :minDate="minDate"
-                :visible.sync="value"/>
+                :open.sync="value"/>
   </div>
 </template>
 <script lang="ts">

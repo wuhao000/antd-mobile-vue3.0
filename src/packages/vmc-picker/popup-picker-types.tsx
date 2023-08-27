@@ -11,7 +11,7 @@ export const PopupPickerProps = {
   cancelText: {},
   okText: {},
   title: {},
-  visible: {
+  open: {
     type: Boolean as PropType<boolean>,
     default: false
   },
@@ -40,10 +40,10 @@ export interface IPopupPickerProps {
   cancelText?: string | VNode; // React.ReactElement only for web
   okText?: string | VNode; // React.ReactElement only for web
   title?: string | VNode; // React.ReactElement only for web
-  visible?: boolean;
+  open?: boolean;
   disabled?: boolean;
   style?: any;
-  onVisibleChange?: (visible: boolean) => void;
+  onOpenChange?: (open: boolean) => void;
   content?: VNode | string;
   /** react-native only */
   styles?: any;

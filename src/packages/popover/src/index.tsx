@@ -9,7 +9,7 @@ export default defineComponent({
     /**
      * 是否显示气泡（v-model）
      */
-    visible: {
+    open: {
       type: Boolean as PropType<boolean>,
       default: false
     },
@@ -39,12 +39,12 @@ export default defineComponent({
   item: null,
   install: null,
   setup(props, {emit}) {
-    const currentValue = ref(props.visible);
-    watch(() => props.visible, (value: boolean) => {
+    const currentValue = ref(props.open);
+    watch(() => props.open, (value: boolean) => {
       currentValue.value = value;
     });
     watch(() => currentValue.value, (currentValue: boolean) => {
-      emit('update:visible', currentValue);
+      emit('update:open', currentValue);
       emit('change', currentValue);
     });
     return {currentValue};
@@ -70,11 +70,10 @@ export default defineComponent({
     const popoverProps: any = {
       ...this.$attrs,
       prefixCls: this.prefixCls,
-      'v-model': [this.currentValue, 'visible'],
+      'v-model': [this.currentValue, 'open'],
       trigger: ['click'],
       destroyTooltipOnHide: this.destroyOnHide
     };
-    console.log(popoverProps);
     return <Popover {...popoverProps}
                     v-slots={slots}/>;
   }

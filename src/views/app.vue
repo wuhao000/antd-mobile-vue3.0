@@ -16,7 +16,7 @@
 <style lang="less">
   @import "../assets/styles/common";
   @import "../assets/styles/custom";
-  @import "../../node_modules/ant-design-vue/es/style/themes/default";
+  @import "../packages/style/variables";
 
   body {
     background: @body-background;

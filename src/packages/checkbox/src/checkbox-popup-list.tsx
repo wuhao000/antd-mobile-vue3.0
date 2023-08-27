@@ -26,7 +26,7 @@ export default defineComponent({
       type: String as PropType<string>,
       default: '、'
     },
-    visible: {
+    open: {
       type: Boolean as PropType<boolean>,
       default: false
     }
@@ -38,12 +38,12 @@ export default defineComponent({
       slots,
       attrs
     }, form);
-    const popupVisible: Ref<boolean> = ref(props.visible);
-    watch(() => props.visible, (visible: boolean) => {
-      popupVisible.value = visible;
+    const popupOpen: Ref<boolean> = ref(props.open);
+    watch(() => props.open, (open: boolean) => {
+      popupOpen.value = open;
     });
-    watch(() => popupVisible.value, (popupVisible: boolean) => {
-      emit('update:visible', popupVisible);
+    watch(() => popupOpen.value, (open: boolean) => {
+      emit('update:open', open);
     });
     const optionText = computed(() => {
       const options = getOptions();
@@ -72,7 +72,7 @@ export default defineComponent({
     };
     const onClick = () => {
       if (!isDisabled.value && !isReadonly.value) {
-        popupVisible.value = true;
+        popupOpen.value = true;
       }
     };
     const onClear = () => {
@@ -81,12 +81,12 @@ export default defineComponent({
       closePopup();
     };
     const closePopup = () => {
-      popupVisible.value = false;
+      popupOpen.value = false;
     };
     return {
       onChange, stateValue, getOptions,
       onClick, isDisabled, isReadonly, closePopup,
-      onClear, popupVisible, optionText
+      onClear, popupOpen, optionText
     };
   },
   render() {
@@ -123,7 +123,7 @@ export default defineComponent({
                        v-slots={slots}
                        disabled={this.isDisabled}>
     </List.Item>,
-      <Popup visible={this.isDisabled ? false : this.popupVisible}
+      <Popup open={this.isDisabled ? false : this.popupOpen}
              showCancel={this.clearable}
              cancelButton={cancelButton}
              title={this.title}

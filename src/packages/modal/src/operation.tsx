@@ -61,7 +61,7 @@ export default function operation(
   modal = createApp({
     render() {
       return <Modal
-        visible={true}
+        open={true}
         operation
         transparent
         prefixCls={prefixCls}

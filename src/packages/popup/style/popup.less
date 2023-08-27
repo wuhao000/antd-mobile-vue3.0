@@ -157,15 +157,11 @@
     }
   }
 
-  &-header {
+  & &-header {
     align-items: center;
-    background-image: linear-gradient(to bottom, #e7e7e7, #e7e7e7, transparent, transparent);
-    background-image: -webkit-linear-gradient(top, #e7e7e7, #e7e7e7, transparent, transparent);
-    background-position: bottom;
-    background-repeat: no-repeat;
-    background-size: 100% 1PX;
     display: flex;
     position: relative;
+    padding: 0;
     .hairline('bottom');
 
     &-title {
@@ -207,11 +203,12 @@
     text-align: center;
   }
 
-  &-body {
+  & &-body {
     font-size: @font-size-base;
     line-height: @line-height-base;
     word-wrap: break-word;
     overflow-y: auto;
+    padding: 0;
     flex: 1;
 
     .am-list-body {

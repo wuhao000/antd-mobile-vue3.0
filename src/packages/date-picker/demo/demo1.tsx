@@ -55,7 +55,7 @@ export default defineComponent({
       utcDate: utcNow,
       dpValue: null,
       customChildValue: null,
-      visible: false
+      open: false
     });
     const minDate2 = ref(state.time);
     const maxDate2 = ref(new Date(2024, 7, 1));
@@ -138,18 +138,18 @@ export default defineComponent({
           </m-date-picker>
           <m-list-item
               extra={this.state.dpValue && formatDate(this.state.dpValue)}
-              onClick={() => this.state.visible = true}
+              onClick={() => this.state.open = true}
           >
-            External control visible state
+            External control open state
           </m-list-item>
           <m-date-picker
-              visible={this.state.visible}
+              open={this.state.open}
               value={this.state.dpValue}
               onOk={date => {
                 this.state.dpValue = date;
-                this.state.visible = false;
+                this.state.open = false;
               }}
-              onCancel={() => this.state.visible = false}
+              onCancel={() => this.state.open = false}
           />
           <m-date-picker
               mode="time"

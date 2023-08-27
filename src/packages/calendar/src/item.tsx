@@ -37,7 +37,7 @@ export default defineComponent({
       slots
     }, form);
     const currentValue: Ref<Date[]> = ref([]);
-    const visible: Ref<boolean> = ref(false);
+    const open: Ref<boolean> = ref(false);
     watch(() => props.value, (value: any) => {
       if (props.type === 'one') {
         currentValue.value = [value];
@@ -73,7 +73,7 @@ export default defineComponent({
       }
     });
     const onClick = () => {
-      visible.value = true;
+      open.value = true;
     };
     const onConfirm = (value1, value2) => {
       if (props.type === 'range') {
@@ -85,14 +85,14 @@ export default defineComponent({
       }
     };
     const onClose = () => {
-      visible.value = false;
+      open.value = false;
     };
 
     return {
       onClose, inputProps, displayValue,
       onClick, onConfirm, listeners,
       getDefaultSlot, cssStyle,
-      inputSlots, visible,
+      inputSlots, open,
       currentValue,
       onUpdate
     };
@@ -106,7 +106,7 @@ export default defineComponent({
                     {...this.listeners}
                     onUpdate:value={this.onUpdate}
                     value={this.currentValue}
-                    v-model={[this.visible, 'visible']}
+                    v-model={[this.open, 'open']}
                     onClose={this.onClose}
                     onConfirm={this.onConfirm}
                     defaultValue={this.currentValue}

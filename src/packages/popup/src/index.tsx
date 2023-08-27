@@ -1,6 +1,6 @@
 import {Drawer} from 'ant-design-vue';
 import classNames from 'classnames';
-import {defineComponent, inject, PropType, VNode} from 'vue';
+import {defineComponent, inject, PropType, ref, VNode} from 'vue';
 import Icon from '../../icon';
 import {useBaseInputComponent} from '../../mixins/base-input-component';
 import {pureInputComponentProps} from '../../mixins/pure-input-component';
@@ -14,7 +14,7 @@ export default defineComponent({
     ...pureInputComponentProps,
     onCancel: {},
     onOk: {},
-    visible: {
+    open: {
       type: Boolean,
       default: false
     },
@@ -81,7 +81,7 @@ export default defineComponent({
       emit,
       attrs,
       slots
-    }, form, {propName: 'visible', defaultValue: props.visible});
+    }, form, {propName: 'open', defaultValue: props.open});
     const onCancel = (e) => {
       if (props.onCancel) {
         emit('cancel', e);
@@ -153,11 +153,20 @@ export default defineComponent({
             {props.confirmLoading ? props.loadingText : props.okText}</div>
         </Touchable> : null;
     };
+    const drawerRef = ref();
+    const setDrawerRef = (el) => {
+      drawerRef.value = el;
+    };
+    const calcContentHeight = () => {
+      // todo
+    };
     return {
       getProps,
       slots,
       getDefaultSlot,
       cssStyle,
+      calcContentHeight,
+      setDrawerRef,
       stateValue,
       getListeners,
       isReadonly,
@@ -168,17 +177,19 @@ export default defineComponent({
     const props: any = omit({
       ...this.getListeners(),
       ...this.getProps(),
+      closable: false,
       style: this.cssStyle,
-      visible: this.stateValue,
+      open: this.stateValue,
       maskClosable: this.confirmLoading ? false : this.maskClosable
     }, ['cancelText', 'loadingText', 'okText', "position", 'showOk', 'showTitle',
       'block', 'confirmLoading', 'showCancel']);
-    if (!props.visible) {
-      props.style.width = '0px';
+    this.calcContentHeight();
+    if (!props.open) {
+      props.height = '50%';
     }
-    return <Drawer {...props}
-                   v-slots={this.slots}>
-      {this.getDefaultSlot()}
-    </Drawer>;
+    return <Drawer
+      ref={this.setDrawerRef}
+      {...props}
+      v-slots={this.slots}/>;
   }
 });

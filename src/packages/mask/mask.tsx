@@ -16,7 +16,7 @@ const opacityRecord = {
 export const Mask = defineComponent({
   name: 'MMask',
   props: {
-    visible: {type: Boolean, default: false},
+    open: {type: Boolean, default: false},
     onMaskClick: Function as PropType<(event: MouseEvent) => void>,
     destroyOnClose: Boolean,
     forceRender: Boolean,
@@ -36,7 +36,7 @@ export const Mask = defineComponent({
   setup(props) {
     const wrapperRef = ref(null);
 
-    useLockScroll(wrapperRef, props.visible && props.disableBodyScroll);
+    useLockScroll(wrapperRef, props.open && props.disableBodyScroll);
 
     const background = computed(() => {
       const opacity = opacityRecord[props.opacity] ?? props.opacity;
@@ -44,19 +44,19 @@ export const Mask = defineComponent({
       return `rgba(${rgb}, ${opacity})`;
     });
 
-    const active = ref(props.visible);
+    const active = ref(props.open);
     const opacity = ref(0);
 
     const intervalRef = ref();
 
-    watch(() => props.visible, visible => {
+    watch(() => props.open, open => {
       if (intervalRef.value) {
         clearInterval(intervalRef.value);
-        opacity.value = visible ? 0 : 1;
+        opacity.value = open ? 0 : 1;
       }
-      console.log(visible, opacity.value);
+      console.log(open, opacity.value);
       intervalRef.value = setInterval(() => {
-        if (visible) {
+        if (open) {
           if (opacity.value >= 1) {
             onEnd();
           } else {
@@ -75,8 +75,8 @@ export const Mask = defineComponent({
     const onEnd = () => {
       clearInterval(intervalRef.value);
       intervalRef.value = undefined;
-      active.value = props.visible;
-      if (props.visible) {
+      active.value = props.open;
+      if (props.open) {
         props.afterShow?.();
       } else {
         props.afterClose?.();
@@ -99,7 +99,7 @@ export const Mask = defineComponent({
     };
   },
   render() {
-    const display = this.visible ? 'unset' : (this.active ? 'unset' : 'none');
+    const display = this.open ? 'unset' : (this.active ? 'unset' : 'none');
     const node = withStopPropagation(
         ['click'],
         withNativeProps(

@@ -22,7 +22,7 @@ export default defineComponent({
     }
   },
   setup(props, {emit, slots, attrs}) {
-    const popupVisible: Ref<boolean> = ref(false);
+    const popupOpen: Ref<boolean> = ref(false);
     const form = inject('list', undefined);
     const {getOptions, isDisabled, isReadonly, stateValue} = useOptionsBaseComponent(props, {emit, slots, attrs}, form);
     const optionText = computed(() => {
@@ -36,11 +36,11 @@ export default defineComponent({
     };
     const onChange = (value: any) => {
       stateValue.value = value;
-      popupVisible.value = false;
+      popupOpen.value = false;
     };
     const onClick = () => {
       if (!isDisabled.value && !isReadonly.value) {
-        popupVisible.value = true;
+        popupOpen.value = true;
       }
     };
     const onClear = () => {
@@ -49,11 +49,11 @@ export default defineComponent({
       closePopup();
     };
     const closePopup = () => {
-      popupVisible.value = false;
+      popupOpen.value = false;
     };
     return {
       onClick, onChange, onCancel, onClear, getOptions, stateValue, closePopup,
-      optionText, popupVisible, isDisabled
+      optionText, popupOpen, isDisabled
     };
   },
   render() {
@@ -96,7 +96,7 @@ export default defineComponent({
                  touchFeedback={!readOnly && !disabled}
                  disabled={isDisabled}
                  v-slots={slots}/>
-      <Popup visible={isDisabled ? false : this.popupVisible}
+      <Popup open={isDisabled ? false : this.popupOpen}
              showCancel={clearable}
              cancelButton={cancelButton}
              title={title}

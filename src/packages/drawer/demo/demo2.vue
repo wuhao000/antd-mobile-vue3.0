@@ -10,7 +10,7 @@
               :sidebarStyle="{ border : '1px solid #ddd' }"
               :touch="true"
               :style="drawerStyle"
-              v-model:visible="state.open"
+              v-model:open="state.open"
               class="my-drawer">
       <template v-slot:sidebar>
         <m-list>

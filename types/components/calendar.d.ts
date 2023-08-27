@@ -36,7 +36,7 @@ interface CalendarProps {
   timePickerPrefixCls: string;
   title: string;
   type: string;
-  visible: boolean;
+  open: boolean;
 }
 
 export declare class CalendarComponent extends UIComponent {

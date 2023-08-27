@@ -32,7 +32,7 @@ export const useBaseInputComponent = (props, {emit, attrs, slots}, form, options
         ...getProps(),
         disabled: isDisabled,
         readOnly: isReadonly,
-        visible: stateValue
+        open: stateValue
       };
     })
   };

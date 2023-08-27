@@ -1,6 +1,5 @@
 <template>
   <div>
-    11111
     <slot/>
     <slot name="code"/>
   </div>

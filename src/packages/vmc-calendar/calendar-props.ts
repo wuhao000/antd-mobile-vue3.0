@@ -38,6 +38,6 @@ export default {
   timePickerPrefixCls: {type: String},
   title: {type: String},
   type: {type: String, default: 'range'},
-  visible: {type: Boolean, default: false},
+  open: {type: Boolean, default: false},
   onClear: {type: Function}
 };

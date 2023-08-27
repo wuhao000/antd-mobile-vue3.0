@@ -25,7 +25,7 @@ export default defineComponent({
   },
   setup(props) {
     const state = reactive({
-      visible: props.visible
+      open: props.open
     });
     return {
       state
@@ -56,7 +56,7 @@ export default defineComponent({
             maxDate: this.maxDate || endOfMonth()
           }
         }
-        visible={this.state.visible}
+        open={this.state.open}
       />
     );
   }

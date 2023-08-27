@@ -69,18 +69,18 @@ export const PickerMixin = (isView) => {
       onChange: {},
       itemStyle: {},
       indicatorStyle: {},
-      visible: {
+      open: {
         type: Boolean, default: false
       }
     },
     setup(props, {emit, slots}) {
       const state = reactive({
-        visible: props.visible
+        open: props.open
       });
-      watch(() => props.visible, v => {
-        state.visible = v;
+      watch(() => props.open, v => {
+        state.open = v;
       });
-      watch(() => state.visible, v => emit('update:visible', v));
+      watch(() => state.open, v => emit('update:open', v));
       const currentValue: Ref<Array<any>> = ref(props.value ?? []);
       const popupProps: Ref<{
         WrapComponent: 'div',
@@ -127,7 +127,7 @@ export const PickerMixin = (isView) => {
       };
       const onOk = (v: any) => {
         emit('update:value', [...currentValue.value]);
-        state.visible = false;
+        state.open = false;
       };
       const setScrollValue = (v: any) => {
         currentValue.value = v;
@@ -150,7 +150,7 @@ export const PickerMixin = (isView) => {
         emit('pickerChange', v);
       };
       const onCancel = () => {
-        state.visible = false;
+        state.open = false;
         currentValue.value = props.value ?? [];
       };
       const getPlaceholder = () => props.placeholder || '';
@@ -216,7 +216,7 @@ export const PickerMixin = (isView) => {
         ...restProps,
         ...popupMoreProps,
         prefixCls: popupPrefixCls,
-        visible: this.state.visible,
+        open: this.state.open,
         cascader,
         cancelText,
         okText,
@@ -236,7 +236,7 @@ export const PickerMixin = (isView) => {
                       extra: childExtra,
                       arrow: 'horizontal',
                       onClick: () => {
-                        this.state.visible = true;
+                        this.state.open = true;
                       }
                     });
                     return node;

@@ -16,8 +16,8 @@ export default defineComponent({
   setup(props, {emit, slots, attrs}) {
     const form = inject('list', undefined);
     const {stateValue, isDisabled, cssStyle, isReadonly} = useBaseInputComponent(props, {emit, slots, attrs}, form);
-    const localVisible = ref(false);
-    return {stateValue, localVisible, isDisabled, isReadonly, cssStyle};
+    const localOpen = ref(false);
+    return {stateValue, localOpen, isDisabled, isReadonly, cssStyle};
   },
   render() {
     return <DatePicker {...this.$attrs}
@@ -25,14 +25,14 @@ export default defineComponent({
                        editable={!this.isReadonly}
                        v-models={[
                          [this.stateValue, 'value'],
-                         [this.localVisible, 'visible']
+                         [this.localOpen, 'open']
                        ]}
                        v-slots={this.$slots}
                        style={this.cssStyle}>
       <List.Item title={this.title}
                  touchFeedback={true}
                  onClick={() => {
-                   this.localVisible = true;
+                   this.localOpen = true;
                  }}
                  class={'am-date-picker-item'}
                  required={this.required}

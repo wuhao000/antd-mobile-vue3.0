@@ -3,7 +3,7 @@ import {Action} from '../../../../types/components/modal';
 
 export interface ModalPropsType<T> {
   title?: string | VNode;
-  visible: boolean;
+  open: boolean;
   maskClosable?: boolean;
   closable?: boolean;
   footer?: Array<Action<T>>;
@@ -12,7 +12,7 @@ export interface ModalPropsType<T> {
   popup?: boolean;
   animated?: boolean;
   animationType?: any;
-  onAnimationEnd?: (visible: boolean) => void;
+  onAnimationEnd?: (open: boolean) => void;
   animateAppear?: boolean;
   operation?: boolean;
 }

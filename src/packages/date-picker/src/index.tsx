@@ -48,7 +48,7 @@ export const getDatePicker = (isView: boolean, name: string) => {
       value: {
         type: [Object, Number, String] as PropType<Date | number | string>
       },
-      visible: {type: Boolean, default: false},
+      open: {type: Boolean, default: false},
       placeholder: {
         type: String as PropType<string>,
         default: ''
@@ -81,9 +81,9 @@ export const getDatePicker = (isView: boolean, name: string) => {
         }
       };
       const scrollValue = ref<Date>(getDate());
-      const localVisible = ref(props.visible);
-      watch(() => props.visible, visible => {
-        localVisible.value = visible;
+      const localOpen = ref(props.open);
+      watch(() => props.open, open => {
+        localOpen.value = open;
       });
       const onOk = () => {
         let value = props.value;
@@ -94,9 +94,9 @@ export const getDatePicker = (isView: boolean, name: string) => {
         emit('change', value);
         emit('ok', value);
       };
-      const onVisibleChange = (visible: boolean) => {
-        localVisible.value = visible;
-        emit('update:visible', visible);
+      const onOpenChange = (open: boolean) => {
+        localOpen.value = open;
+        emit('update:open', open);
       };
       const fixOnOk = (picker: any) => {
         if (picker) {
@@ -116,11 +116,11 @@ export const getDatePicker = (isView: boolean, name: string) => {
       return {
         scrollValue,
         onOk,
-        onVisibleChange,
+        onOpenChange,
         fixOnOk,
         onChange,
         getDate,
-        localVisible
+        localOpen
       };
     },
     render() {
@@ -162,15 +162,15 @@ export const getDatePicker = (isView: boolean, name: string) => {
       }
       const textValue = value ? formatFn(value, this.format, this.mode) : null;
       const childExtra = textValue ? textValue : (this.extra || <span class={'am-list-item-placeholder'}>{this.placeholder || extra}</span>);
-      const visible = (this.disabled || !this.editable) ? false : this.localVisible;
+      const open = (this.disabled || !this.editable) ? false : this.localOpen;
       return (
-        <PopupDatePicker onVisibleChange={this.onVisibleChange}
+        <PopupDatePicker onOpenChange={this.onOpenChange}
                          datePicker={datePicker}
                          {...this.$props}
                          title={this.title}
                          disabled={this.disabled}
                          editable={this.editable}
-                         visible={visible}
+                         open={open}
                          prefixCls={popupPrefixCls}
                          date={this.getDate()}
                          cancelText={this.cancelText || cancelText}
@@ -180,7 +180,7 @@ export const getDatePicker = (isView: boolean, name: string) => {
             setProps(it, {
               touchFeedback: true,
               onClick: () => {
-                this.onVisibleChange(true);
+                this.onOpenChange(true);
               },
               text: !!textValue,
               control: childExtra,

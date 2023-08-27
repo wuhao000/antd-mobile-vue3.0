@@ -58,7 +58,7 @@ const Drawer = defineComponent({
       type: Boolean as PropType<boolean>,
       default: false
     },
-    visible: {
+    open: {
       type: Boolean as PropType<boolean>,
       default: false
     },
@@ -152,7 +152,7 @@ const Drawer = defineComponent({
       };
     });
     const onOverlayClicked = () => {
-      if (props.visible) {
+      if (props.open) {
         // see https://github.com/react-component/drawer/issues/9
         setTimeout(() => {
           emit('open', false, {overlayClicked: true});
@@ -189,17 +189,17 @@ const Drawer = defineComponent({
         // trigger a change to open if sidebar has been dragged beyond dragToggleDistance
         const touchWidth = touchSidebarWidth();
 
-        if (props.visible && touchWidth < state.sidebarWidth - props.dragToggleDistance ||
-            !props.visible && touchWidth > props.dragToggleDistance) {
-          emit('update:visible', !props.visible);
+        if (props.open && touchWidth < state.sidebarWidth - props.dragToggleDistance ||
+            !props.open && touchWidth > props.dragToggleDistance) {
+          emit('update:open', !props.open);
         }
 
         const touchHeight = touchSidebarHeight();
 
-        if (props.visible &&
+        if (props.open &&
             touchHeight < state.sidebarHeight - props.dragToggleDistance ||
-            !props.visible && touchHeight > props.dragToggleDistance) {
-          emit('update:visible', !props.visible);
+            !props.open && touchHeight > props.dragToggleDistance) {
+          emit('update:open', !props.open);
         }
 
         state.touchIdentifier = null;
@@ -268,7 +268,7 @@ const Drawer = defineComponent({
       // we will only drag the distance they moved their finger
       // otherwise we will move the sidebar to be below the finger.
       if (props.position === 'right') {
-        if (props.visible && window.innerWidth - state.touchStartX < state.sidebarWidth) {
+        if (props.open && window.innerWidth - state.touchStartX < state.sidebarWidth) {
           if (state.touchCurrentX > state.touchStartX) {
             return state.sidebarWidth + state.touchStartX - state.touchCurrentX;
           }
@@ -278,7 +278,7 @@ const Drawer = defineComponent({
       }
 
       if (props.position === 'left') {
-        if (props.visible && state.touchStartX < state.sidebarWidth) {
+        if (props.open && state.touchStartX < state.sidebarWidth) {
           if (state.touchCurrentX > state.touchStartX) {
             return state.sidebarWidth;
           }
@@ -292,7 +292,7 @@ const Drawer = defineComponent({
       // we will only drag the distance they moved their finger
       // otherwise we will move the sidebar to be below the finger.
       if (props.position === 'bottom') {
-        if (props.visible &&
+        if (props.open &&
             window.innerHeight - state.touchStartY < state.sidebarHeight) {
           if (state.touchCurrentY > state.touchStartY) {
             return state.sidebarHeight + state.touchStartY - state.touchCurrentY;
@@ -304,7 +304,7 @@ const Drawer = defineComponent({
 
       if (props.position === 'top') {
         const touchStartOffsetY = state.touchStartY - state.sidebarTop;
-        if (props.visible && touchStartOffsetY < state.sidebarHeight) {
+        if (props.open && touchStartOffsetY < state.sidebarHeight) {
           if (state.touchCurrentY > state.touchStartY) {
             return state.sidebarHeight;
           }
@@ -389,7 +389,7 @@ const Drawer = defineComponent({
   render() {
     const {
       prefixCls, position, transitions,
-      touch, enableDragHandle, sidebar, docked, visible
+      touch, enableDragHandle, sidebar, docked, open
     } = this.$props;
 
     const sidebarStyle: any = {...this.sidebarStyle};
@@ -408,11 +408,11 @@ const Drawer = defineComponent({
     if (isTouching) {
       this.renderStyle({sidebarStyle, isTouching: true, overlayStyle});
     } else if (this.docked) {
-      if (this.visible) {
+      if (this.open) {
         rootCls[`${prefixCls}-docked`] = true;
         this.renderStyle({sidebarStyle, contentStyle});
       }
-    } else if (this.visible && !docked) {
+    } else if (this.open && !docked) {
       rootCls[`${prefixCls}-open`] = true;
       this.renderStyle({sidebarStyle});
       overlayStyle.opacity = 1;

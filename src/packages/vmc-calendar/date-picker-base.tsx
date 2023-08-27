@@ -171,7 +171,7 @@ export const useDatePickerBase = (props, {emit}, {
       }
     }
   };
-  const computeVisible = (clientHeight: number, scrollTop: number): boolean => {
+  const computeOpen = (clientHeight: number, scrollTop: number): boolean => {
     let needUpdate = false;
     const MAX_VIEW_PORT = clientHeight * 2;
     const MIN_VIEW_PORT = clientHeight;
@@ -233,7 +233,7 @@ export const useDatePickerBase = (props, {emit}, {
 
       timer = setTimeout(() => {
         timer = undefined;
-        if (computeVisible(clientHeight, scrollTop)) {
+        if (computeOpen(clientHeight, scrollTop)) {
           updateFlag.value++;
         }
       }, 64);

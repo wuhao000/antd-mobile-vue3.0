@@ -21,7 +21,7 @@ export default defineComponent({
       autoEmit: false,
       prop: 'value'
     });
-    const {localValue: localVisible} = useLocalValue(props, emit, 'visible');
+    const {localValue: localOpen} = useLocalValue(props, emit, 'open');
     const onConfirm = (...args) => {
       emit('confirm', ...args);
       emit('update:value', localValue.value);
@@ -30,14 +30,14 @@ export default defineComponent({
     const onClear = (e) => {
       localValue.value = undefined;
       emit('update:value', undefined);
-      localVisible.value = false;
+      localOpen.value = false;
       emit('clear', e);
     };
     const onClose = (...args) => {
-      localVisible.value = false;
+      localOpen.value = false;
       emit('close', ...args);
     };
-    return {onClose, onConfirm, onClear, localValue, localVisible};
+    return {onClose, onConfirm, onClear, localValue, localOpen: localOpen};
   },
   render() {
     const locale = getComponentLocale(this.$props, {}, 'Calendar', () =>
@@ -63,7 +63,7 @@ export default defineComponent({
         onSelectHasDisableDate={(...args) => {
           this.$emit('select-has-disable-date', ...args);
         }}
-        visible={this.localVisible}
+        open={this.localOpen}
       />
     );
   }

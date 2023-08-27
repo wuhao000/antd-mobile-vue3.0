@@ -27,7 +27,7 @@ export default defineComponent({
           title={'这是标题'}
           height={'80%'}
           showCancel={true}
-          v-model={[this.show, 'visible']}>
+          v-model={[this.show, 'open']}>
           <m-date-picker-item/>
           <m-checkbox-popup-list
             title={'复选'}
@@ -36,22 +36,16 @@ export default defineComponent({
           ]}/>
         </Popup>
       </div>
-      <div style={{
-        position: 'relative'
-      }}>
+      <div>
         <m-button
           onClick={this.onClick2}>显示
         </m-button>
         <Popup
-          style={{
-            marginTop: '47px',
-            zIndex: -1
-          }}
           showTitle={false}
-          getContainer={false}
-          height={'30%'}
           placement={'top'}
-          v-model={[this.show2, 'visible']}>
+          getContainer={false}
+          height={'60%'}
+          v-model={[this.show2, 'open']}>
           <div>22222222</div>
         </Popup>
       </div>

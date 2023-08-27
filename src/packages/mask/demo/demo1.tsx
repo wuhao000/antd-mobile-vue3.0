@@ -7,16 +7,16 @@ import './demo1.less';
 // 基础用法
 const Simple = defineComponent({
   setup() {
-    const visible = ref(false);
+    const open = ref(false);
     return {
-      visible
+      open
     };
   },
   render() {
     return (
         <>
-          <Button onClick={() => this.visible = true}>显示遮罩层</Button>
-          <Mask visible={this.visible} onMaskClick={() => this.visible = false}/>
+          <Button onClick={() => this.open = true}>显示遮罩层</Button>
+          <Mask open={this.open} onMaskClick={() => this.open = false}/>
         </>
     );
   }
@@ -25,16 +25,16 @@ const Simple = defineComponent({
 // 自定义内容
 const WithContent = defineComponent({
   setup() {
-    const visible = ref(false);
-    return {visible};
+    const open = ref(false);
+    return {open};
   },
   render() {
     return (
         <>
-      <Mask visible={this.visible} onMaskClick={() => this.visible = false}>
+      <Mask open={this.open} onMaskClick={() => this.open = false}>
         <div class={'overlayContent'}>内容</div>
       </Mask>
-      <Button onClick={() => this.visible = true}>显示带内容的遮罩层</Button>
+      <Button onClick={() => this.open = true}>显示带内容的遮罩层</Button>
     </>
     );
   }
@@ -43,18 +43,18 @@ const WithContent = defineComponent({
 // 遮罩层的颜色深度 - 深一些
 const Thick = defineComponent({
   setup() {
-    const visible = ref(false);
-    return {visible};
+    const open = ref(false);
+    return {open};
   },
   render() {
     return (
         <>
       <Mask
-          visible={this.visible}
-          onMaskClick={() => this.visible = false}
+        open={this.open}
+          onMaskClick={() => this.open = false}
           opacity="thick"
       />
-      <Button onClick={() => this.visible = true}>显示深一些的遮罩层</Button>
+      <Button onClick={() => this.open = true}>显示深一些的遮罩层</Button>
     </>
     );
   }
@@ -63,18 +63,18 @@ const Thick = defineComponent({
 // 遮罩层的颜色深度 - 浅一些
 const Thin = defineComponent({
   setup() {
-    const visible = ref(false);
-    return {visible};
+    const open = ref(false);
+    return {open};
   },
   render() {
     return (
         <>
       <Mask
-          visible={this.visible}
-          onMaskClick={() => this.visible = false}
+        open={this.open}
+          onMaskClick={() => this.open = false}
           opacity="thin"
       />
-      <Button onClick={() => this.visible = true}>显示浅一些的遮罩层</Button>
+      <Button onClick={() => this.open = true}>显示浅一些的遮罩层</Button>
     </>
     );
   }
@@ -83,17 +83,17 @@ const Thin = defineComponent({
 // 遮罩层的颜色深度 - 自定义
 const CustomOpacity = defineComponent({
   setup() {
-    const visible = ref(false);
-    return {visible};
+    const open = ref(false);
+    return {open};
   },
   render() {
     return (<>
       <Mask
-          visible={this.visible}
-          onMaskClick={() => this.visible = false}
+        open={this.open}
+          onMaskClick={() => this.open = false}
           opacity={1}
       />
-      <Button onClick={() => this.visible = true}>显示自定义透明度的遮罩层</Button>
+      <Button onClick={() => this.open = true}>显示自定义透明度的遮罩层</Button>
     </>);
   }
 });
@@ -101,17 +101,17 @@ const CustomOpacity = defineComponent({
 // 白色的遮罩层
 const White = defineComponent({
   setup() {
-    const [visible, setVisible] = useState(false);
-    return {visible, setVisible};
+    const [open, setOpen] = useState(false);
+    return {open, setOpen};
   },
   render() {
     return (
         <>
-      <Button onClick={() => this.setVisible(true)}>显示白色的遮罩层</Button>
+      <Button onClick={() => this.setOpen(true)}>显示白色的遮罩层</Button>
       <Mask
           color="white"
-          visible={this.visible}
-          onMaskClick={() => this.setVisible(false)}
+          open={this.open}
+          onMaskClick={() => this.setOpen(false)}
       />
     </>
     );
