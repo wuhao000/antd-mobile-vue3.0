@@ -192,7 +192,7 @@ const Gesture = defineComponent({
   setup(props, {emit, slots}) {
     const gesture: Ref<IGestureStatus> = ref(null);
     const event: Ref<any> = ref(null);
-    const pressTimer: Ref<NodeJS.Timer> = ref(null);
+    const pressTimer: Ref<number> = ref(null);
     const directionSetting: Ref<number> = ref(null);
 
 
@@ -233,7 +233,7 @@ const Gesture = defineComponent({
           press: true
         });
         triggerEvent('onPress');
-      }, PRESS.time);
+      }, PRESS.time) as unknown as number;
     };
     const cleanPressTimer = () => {
       /* tslint:disable:no-unused-expression */
@@ -510,9 +510,6 @@ const Gesture = defineComponent({
         return;
       }
       triggerEvent('onTap');
-    };
-    const componentWillUnmount = () => {
-      cleanPressTimer();
     };
     const getTouchAction = () => {
       const {enablePinch, enableRotate} = props;

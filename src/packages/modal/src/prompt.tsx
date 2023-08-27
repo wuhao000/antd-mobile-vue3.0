@@ -215,9 +215,8 @@ export default function prompt(
         }
       },
       render() {
-        // @ts-ignore
         return <Modal
-          visible
+          open
           transparent
           prefixCls={prefixCls}
           title={title}

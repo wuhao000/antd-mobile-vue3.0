@@ -17,7 +17,7 @@ export default defineComponent({
   }),
   methods: {
     handleItemClick() {
-      this.__emit('itemClick', this.panelKey);
+      this.$emit('itemClick', this.panelKey);
     },
     handleKeyPress(e) {
       if (e.key === 'Enter' || e.keyCode === 13 || e.which === 13) {
