@@ -156,10 +156,17 @@ export const PickerMixin = (isView) => {
       const getPlaceholder = () => props.placeholder || '';
       provide('store', {onOk: null});
       return {
-        onOk, onPickerChange, getSel,
-        getPlaceholder, state, onCancel,
-        setCasecadeScrollValue, setScrollValue,
-        getPickerCol, popupProps, currentValue
+        currentValue,
+        getPickerCol,
+        getPlaceholder,
+        getSel,
+        onCancel,
+        onOk,
+        onPickerChange,
+        popupProps,
+        setCasecadeScrollValue,
+        setScrollValue,
+        state
       };
     },
     render() {

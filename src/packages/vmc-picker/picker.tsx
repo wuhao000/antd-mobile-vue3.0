@@ -9,7 +9,6 @@ import {
   PropType,
   reactive,
   ref,
-  Ref,
   watch
 } from 'vue';
 import PickerMixin from './picker-mixin';
@@ -30,16 +29,17 @@ const Picker = defineComponent({
     }
   },
   setup(props, {emit}) {
-    const itemHeight: Ref<number> = ref(null);
     const scrollValue = ref(null);
     const state: any = reactive({});
+    const indicatorRef = ref<HTMLElement>(null);
+    const itemHeight = ref(34);
     watch(() => props.value, (value: any) => {
       if (state.value !== value) {
         state.value = value;
         props.select(
-            state.value,
-            itemHeight.value,
-            props.noAnimate ? scrollToWithoutAnimation : scrollTo
+          state.value,
+          itemHeight.value,
+          props.noAnimate ? scrollToWithoutAnimation : scrollTo
         );
       }
     });
@@ -59,7 +59,6 @@ const Picker = defineComponent({
     const rootRef = ref<HTMLElement>(null);
     const maskRef = ref<HTMLElement>(null);
     const contentRef = ref<HTMLElement>(null);
-    const indicatorRef = ref<HTMLElement>(null);
     const scrollHandlers = computed(() => {
       let scrollY = -1;
       let lastY = 0;
@@ -122,23 +121,19 @@ const Picker = defineComponent({
         let targetY = scrollY;
         const height = (props.data.length - 1) * itemHeight.value;
         let time = .3;
-
         const velocity = Velocity.getVelocity(targetY) * 4;
         if (velocity) {
           targetY = velocity * 40 + targetY;
           time = Math.abs(velocity) * .1;
         }
-
         if (targetY % itemHeight.value !== 0) {
           targetY = Math.round(targetY / itemHeight.value) * itemHeight.value;
         }
-
         if (targetY < 0) {
           targetY = 0;
         } else if (targetY > height) {
           targetY = height;
         }
-
         scrollTo(0, targetY, time < .3 ? .3 : time);
         onScrollChange();
       };
@@ -240,7 +235,7 @@ const Picker = defineComponent({
     onMounted(() => {
       const rootHeight = rootRef.value.clientHeight;
       // https://github.com/react-component/m-picker/issues/18
-      const itemHeightValue = itemHeight.value = indicatorRef.value.clientHeight;
+      const itemHeightValue = itemHeight.value;
       let num = Math.floor(rootHeight / itemHeightValue);
       if (num % 2 === 0) {
         num--;
@@ -305,11 +300,11 @@ const Picker = defineComponent({
     const map = (item: PickerData) => {
       const {style, value, label, class: className = ''} = item;
       return (
-          <div style={{...itemStyle, ...style}}
-               class={`${stateValue === value ? selectedItemClassName : itemClassName} ${className}`}
-               key={value}>
-            {label}
-          </div>
+        <div style={{...itemStyle, ...style}}
+             class={`${stateValue === value ? selectedItemClassName : itemClassName} ${className}`}
+             key={value}>
+          {label}
+        </div>
       );
     };
     const items = this.data.map(map);
@@ -317,20 +312,20 @@ const Picker = defineComponent({
       [prefixCls as string]: true
     };
     return (
-        <div class={classNames(pickerCls)}
-             ref={this.setRootRef}>
-          <div class={`${prefixCls}-mask`}
-               ref={this.setMaskRef}/>
-          <div
-              class={`${prefixCls}-indicator ${indicatorClassName}`}
-              ref={this.setIndicatorRef}
-              style={indicatorStyle}
-          />
-          <div class={`${prefixCls}-content`}
-               ref={this.setContentRef}>
-            {items}
-          </div>
+      <div class={classNames(pickerCls)}
+           ref={this.setRootRef}>
+        <div class={`${prefixCls}-mask`}
+             ref={this.setMaskRef}/>
+        <div
+          class={`${prefixCls}-indicator ${indicatorClassName}`}
+          ref={this.setIndicatorRef}
+          style={indicatorStyle}
+        />
+        <div class={`${prefixCls}-content`}
+             ref={this.setContentRef}>
+          {items}
         </div>
+      </div>
     );
   }
 });
