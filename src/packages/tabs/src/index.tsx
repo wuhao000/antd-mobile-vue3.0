@@ -2,13 +2,13 @@ import {
   computed,
   CSSProperties,
   defineComponent,
-  nextTick,
   onMounted,
   onUpdated,
   PropType,
-  provide,
   Ref,
-  ref, Slots, VNode,
+  ref,
+  Slots,
+  VNode,
   watch
 } from 'vue';
 import {Models} from '../../../types/models';
@@ -17,7 +17,8 @@ import Gesture, {IGestureStatus} from '../../vmc-gesture';
 import {DIRECTION_DOWN, DIRECTION_LEFT, DIRECTION_RIGHT, DIRECTION_UP} from '../../vmc-gesture/config';
 import DefaultTabBar from './default-tab-bar';
 import TabPane from './tab-pane';
-import {getTransformPropValue, setPxStyle, setTransform, TabsStore} from './utils';
+import {getTransformPropValue, setPxStyle, setTransform} from './utils';
+import {camelize, flattenChildren, isValidElement} from "ant-design-vue/es/_util/props-util";
 
 export const getPanDirection = (direction: number | undefined) => {
   switch (direction) {
@@ -39,124 +40,129 @@ const getTabTitle = (it: VNode) => {
   return it.props.title;
 };
 
-export default defineComponent({
+const tabsProps = () => ({
+  /**
+   * 使用卡片样式
+   */
+  card: {
+    type: Boolean as PropType<boolean>
+  },
+  /**
+   * 激活的卡片背景色（未激活卡片的边框色与之相同）
+   */
+  activeCardColor: {
+    type: String as PropType<string>
+  },
+  /**
+   * class前缀
+   */
+  prefixCls: {
+    type: String as PropType<string>,
+    default: 'am-tabs'
+  },
+  useOnPan: {
+    type: Boolean as PropType<boolean>,
+    default: true
+  },
+  renderTabBar: {type: Function},
+  /** TabBar's position | default: top */
+  tabBarPosition: {
+    default: 'top'
+  },
+  /**
+   * 当前激活的卡片的索引
+   */
+  value: {
+    type: [Number] as PropType<number>,
+    default: 0
+  },
+  /**
+   * 是否支持手势
+   */
+  swipeable: {
+    type: Boolean as PropType<boolean>,
+    default: true
+  },
+  /**
+   * 与当前激活标签相邻的提前渲染的标签数量
+   */
+  prerenderingSiblingsNumber: {
+    type: Number as PropType<number>,
+    default: 1
+  },
+  /**
+   * 切换标签时是否有动画
+   */
+  animated: {
+    type: Boolean as PropType<boolean>,
+    default: true
+  },
+  /**
+   * 是否销毁未激活的标签页
+   */
+  destroyInactiveTab: {
+    type: Boolean as PropType<boolean>,
+    default: false
+  },
+  /**
+   * 切换卡片的滑动距离，0-1之间
+   */
+  distanceToChangeTab: {
+    type: Number as PropType<number>,
+    default: 0.3
+  },
+  usePaged: {
+    type: Boolean as PropType<boolean>,
+    default: true
+  },
+  /**
+   * 标签页方向
+   */
+  tabDirection: {
+    type: String as PropType<'horizontal' | 'vertical'>,
+    default: 'horizontal'
+  },
+  /** 标签下划线样式 */
+  tabBarUnderlineStyle: {
+    type: Object as PropType<any>
+  },
+  /** 标签页背景颜色 */
+  tabBarBackgroundColor: {
+    type: String as PropType<string>
+  },
+  page: {
+    type: Number,
+    default: 5
+  },
+  /** 激活的标签页文字颜色 */
+  tabBarActiveTextColor: {
+    type: String as PropType<string>
+  },
+  /** 未激活的标签页文字颜色 */
+  tabBarInactiveTextColor: {
+    type: String as PropType<string>
+  },
+  /** 标签栏文字样式 */
+  tabBarTextStyle: {
+    type: Object as PropType<any>
+  },
+  /** use left instead of transform | default: false */
+  useLeftInsteadTransform: {
+    type: Boolean as PropType<boolean>
+  },
+  onChange: Function
+});
+
+
+const InternalTabs = defineComponent({
   DefaultTabBar,
-  name: 'MTabs',
+  name: 'MTabsInternal',
   props: {
-    /**
-     * 使用卡片样式
-     */
-    card: {
-      type: Boolean as PropType<boolean>
-    },
-    /**
-     * 激活的卡片背景色（未激活卡片的边框色与之相同）
-     */
-    activeCardColor: {
-      type: String as PropType<string>
-    },
-    /**
-     * class前缀
-     */
-    prefixCls: {
-      type: String as PropType<string>,
-      default: 'am-tabs'
-    },
-    useOnPan: {
-      type: Boolean as PropType<boolean>,
-      default: true
-    },
-    renderTabBar: {type: Function},
-    /** TabBar's position | default: top */
-    tabBarPosition: {
-      default: 'top'
-    },
-    /**
-     * 当前激活的卡片的索引
-     */
-    value: {
-      type: [Number] as PropType<number>,
-      default: 0
-    },
-    /**
-     * 是否支持手势
-     */
-    swipeable: {
-      type: Boolean as PropType<boolean>,
-      default: true
-    },
-    /**
-     * 与当前激活标签相邻的提前渲染的标签数量
-     */
-    prerenderingSiblingsNumber: {
-      type: Number as PropType<number>,
-      default: 1
-    },
-    /**
-     * 切换标签时是否有动画
-     */
-    animated: {
-      type: Boolean as PropType<boolean>,
-      default: true
-    },
-    /**
-     * 是否销毁未激活的标签页
-     */
-    destroyInactiveTab: {
-      type: Boolean as PropType<boolean>,
-      default: false
-    },
-    /**
-     * 切换卡片的滑动距离，0-1之间
-     */
-    distanceToChangeTab: {
-      type: Number as PropType<number>,
-      default: 0.3
-    },
-    usePaged: {
-      type: Boolean as PropType<boolean>,
-      default: true
-    },
-    /**
-     * 标签页方向
-     */
-    tabDirection: {
-      type: String as PropType<'horizontal' | 'vertical'>,
-      default: 'horizontal'
-    },
-    /** 标签下划线样式 */
-    tabBarUnderlineStyle: {
-      type: Object as PropType<any>
-    },
-    /** 标签页背景颜色 */
-    tabBarBackgroundColor: {
-      type: String as PropType<string>
-    },
-    page: {
-      type: Number,
-      default: 5
-    },
-    /** 激活的标签页文字颜色 */
-    tabBarActiveTextColor: {
-      type: String as PropType<string>
-    },
-    /** 未激活的标签页文字颜色 */
-    tabBarInactiveTextColor: {
-      type: String as PropType<string>
-    },
-    /** 标签栏文字样式 */
-    tabBarTextStyle: {
-      type: Object as PropType<any>
-    },
-    /** use left instead of transform | default: false */
-    useLeftInsteadTransform: {
-      type: Boolean as PropType<boolean>
-    },
-    onChange: Function
+    ...tabsProps(),
+    tabs: Array
   },
   setup(props, {emit, slots}) {
     const contentPos: Ref<string> = ref('');
-    const tabs = ref([]);
     const isMoving = ref(false);
     const instanceId: Ref<number> = ref(null);
     const currentTab: Ref<number> = ref(0);
@@ -249,16 +255,14 @@ export default defineComponent({
       return direction === 'vertical';
     };
     onMounted(() => {
-      nextTick(() => {
-        nextCurrentTab.value = currentTab.value;
-        instanceId.value = instanceId.value++;
-        contentPos.value = getContentPosByIndex(
-          currentTab.value,
-          isTabVertical(props.tabDirection),
-          props.useLeftInsteadTransform
-        );
-        prevCurrentTab.value = currentTab.value;
-      });
+      nextCurrentTab.value = currentTab.value;
+      instanceId.value = instanceId.value++;
+      contentPos.value = getContentPosByIndex(
+        currentTab.value,
+        isTabVertical(props.tabDirection),
+        props.useLeftInsteadTransform
+      );
+      prevCurrentTab.value = currentTab.value;
     });
     const getOffsetIndex = (current: number, width: number, threshold = props.distanceToChangeTab || 0) => {
       const ratio = Math.abs(current / width);
@@ -278,17 +282,15 @@ export default defineComponent({
         return false;
       }
       nextCurrentTab.value = index;
-      setTimeout(() => {
-        if (index >= 0 && index < tabs.value.length) {
-          if (!force) {
-            emit('change', tabs.value[index], index);
-          }
-          currentTab.value = index;
-          if (setState) {
-            setState();
-          }
+      if (index >= 0 && index < props.tabs.length) {
+        if (!force) {
+          emit('change', props.tabs[index], index);
         }
-      });
+        currentTab.value = index;
+        if (setState) {
+          setState();
+        }
+      }
       return true;
     };
     const getTabBarBaseProps = () => {
@@ -333,20 +335,6 @@ export default defineComponent({
         }
         return subElements;
       };
-    };
-    const getSubElement = (tab: JSX.Element,
-                           index: number,
-                           defaultPrefix: string = '$i$-',
-                           allPrefix: string = '$ALL$') => {
-
-      const key = (tab.key !== null && tab.key !== undefined && tab.key !== '') ? tab.key : `${defaultPrefix}${index}`;
-      const getSubElementsFn = getSubElements();
-      const elements = getSubElementsFn(defaultPrefix, allPrefix);
-      let component = elements[key as string] || elements[allPrefix];
-      if (component instanceof Function) {
-        component = component(tab, index);
-      }
-      return component || null;
     };
     const goToTab = (index: number, force = false, usePaged = props.usePaged) => {
       const {tabDirection, useLeftInsteadTransform} = props;
@@ -470,21 +458,10 @@ export default defineComponent({
     onUpdated(() => {
       prevCurrentTab.value = currentTab.value;
     });
-    provide(TabsStore, {
-      registerTab: (tab) => {
-        const index = tabs.value.findIndex(it => it.key === tab.key)
-        if (index >= 0) {
-          tabs.value[index] = tab;
-        } else {
-          tabs.value.push(tab);
-        }
-      }
-    });
     return {
       isTabVertical,
       getTabBarBaseProps,
       onPan,
-      tabs,
       onTabClick,
       onSwipe,
       currentTab,
@@ -521,5 +498,66 @@ export default defineComponent({
         tabBarPosition === 'top' || tabBarPosition === 'left' ? content : content.reverse()
       }
     </div>;
+  }
+});
+
+export default defineComponent({
+  name: 'MTabsInternal',
+  props: {
+    ...tabsProps()
+  },
+  // emits: ['tabClick', 'tabScroll', 'change', 'update:activeKey'],
+  setup(props, {attrs, slots, emit}) {
+    const parseTabList = (children) => {
+      return children
+        .map(node => {
+          if (isValidElement(node)) {
+            const props = {...(node.props || {})};
+            for (const [k, v] of Object.entries(props)) {
+              delete props[k];
+              props[camelize(k)] = v;
+            }
+            const slots = node.children || {};
+            const key = node.key !== undefined ? node.key : undefined;
+            const {
+              tab = slots.tab,
+              disabled,
+              forceRender,
+              closable,
+              animated,
+              active,
+              title,
+              destroyInactiveTabPane,
+            } = props;
+            return {
+              key,
+              ...props,
+              node,
+              closeIcon: slots.closeIcon,
+              title,
+              tab,
+              disabled: disabled === '' || disabled,
+              forceRender: forceRender === '' || forceRender,
+              closable: closable === '' || closable,
+              animated: animated === '' || animated,
+              active: active === '' || active,
+              destroyInactiveTabPane: destroyInactiveTabPane === '' || destroyInactiveTabPane,
+            };
+          }
+          return null;
+        })
+        .filter(tab => tab);
+    };
+    return () => {
+      const tabs = parseTabList(flattenChildren(slots.default?.()));
+      return (
+        <InternalTabs
+          {...props}
+          {...attrs}
+          tabs={tabs}
+          v-slots={slots}
+        />
+      );
+    };
   }
 });

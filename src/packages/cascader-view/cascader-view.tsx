@@ -31,6 +31,7 @@ export const CascaderView = defineComponent({
   props: {
     options: Array as PropType<CascaderOption[]>,
     value: Array as PropType<CascaderValue[]>,
+    animated: Boolean,
     defaultValue: {
       type: Array as PropType<CascaderValue[]>,
       default: () => []
@@ -98,6 +99,8 @@ export const CascaderView = defineComponent({
     return <div class={classPrefix}>
       <Tabs
           value={this.tabActiveKey}
+          swipeable={false}
+          animated={this.animated}
           onChange={(_, index) => {
             this.setTabActiveKey(index);
           }}

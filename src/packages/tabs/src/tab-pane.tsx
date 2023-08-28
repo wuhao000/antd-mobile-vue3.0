@@ -1,4 +1,4 @@
-import {defineComponent, getCurrentInstance, inject, onBeforeUpdate, PropType, ref, Ref, VNode, watchEffect} from 'vue';
+import {defineComponent, onBeforeUpdate, PropType, ref, Ref, VNode, watchEffect} from 'vue';
 import {filterHTMLAttrs} from '../../utils/dom';
 import {getPxStyle, getTransformPropValue, TabsStore} from './utils';
 
@@ -41,17 +41,6 @@ export default defineComponent({
         offsetY.value = layout.value.scrollTop;
       }
     });
-    const instance = getCurrentInstance();
-    const {registerTab} = inject<{
-      registerTab: (tab) => void
-    }>(TabsStore);
-    watchEffect(() => {
-      registerTab({
-        key: instance.vnode.key,
-        title: props.title,
-        forceRender: props.forceRender
-      });
-    }, {flush: "sync"})
     return {
       setLayout,
       offsetX, offsetY
