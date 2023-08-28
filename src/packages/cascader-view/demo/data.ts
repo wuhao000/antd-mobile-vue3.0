@@ -1,19 +1,19 @@
 export const options = [
   {
     label: '浙江',
-    value: '浙江',
+    value: 'zhejiang',
     children: [
       {
         label: '杭州',
-        value: '杭州',
+        value: 'hangzhou',
         children: [
           {
             label: '西湖区',
-            value: '西湖区',
+            value: 'xihuqu',
           },
           {
             label: '上城区',
-            value: '上城区',
+            value: 'shangchengqu',
           },
           {
             label: '余杭区',

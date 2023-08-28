@@ -85,19 +85,21 @@ export const CascaderView = defineComponent({
       stateValue.value = next;
     };
     return {
-      tabActiveKey, levels, onItemSelect,
-      stateValue,
-      setTabActiveKey: (key) => {
+      levels,
+      onItemSelect,
+      setTabActiveKey: (key: number) => {
         tabActiveKey.value = key;
-      }
+      },
+      stateValue,
+      tabActiveKey
     };
   },
   render() {
     return <div class={classPrefix}>
       <Tabs
           value={this.tabActiveKey}
-          onChange={key => {
-            this.setTabActiveKey(key);
+          onChange={(_, index) => {
+            this.setTabActiveKey(index);
           }}
           class={`${classPrefix}-tabs`}>
         {this.levels.map((level, index) => {

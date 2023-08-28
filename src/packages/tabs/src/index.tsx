@@ -2,11 +2,11 @@ import {
   computed,
   CSSProperties,
   defineComponent,
+  nextTick,
   onMounted,
   onUpdated,
   PropType,
   provide,
-  reactive,
   Ref,
   ref, Slots, VNode,
   watch
@@ -249,7 +249,16 @@ export default defineComponent({
       return direction === 'vertical';
     };
     onMounted(() => {
-      prevCurrentTab.value = currentTab.value;
+      nextTick(() => {
+        nextCurrentTab.value = currentTab.value;
+        instanceId.value = instanceId.value++;
+        contentPos.value = getContentPosByIndex(
+          currentTab.value,
+          isTabVertical(props.tabDirection),
+          props.useLeftInsteadTransform
+        );
+        prevCurrentTab.value = currentTab.value;
+      });
     });
     const getOffsetIndex = (current: number, width: number, threshold = props.distanceToChangeTab || 0) => {
       const ratio = Math.abs(current / width);
@@ -269,15 +278,17 @@ export default defineComponent({
         return false;
       }
       nextCurrentTab.value = index;
-      if (index >= 0 && index < tabs.value.length) {
-        if (!force) {
-          emit('change', tabs.value[index], index);
+      setTimeout(() => {
+        if (index >= 0 && index < tabs.value.length) {
+          if (!force) {
+            emit('change', tabs.value[index], index);
+          }
+          currentTab.value = index;
+          if (setState) {
+            setState();
+          }
         }
-        currentTab.value = index;
-        if (setState) {
-          setState();
-        }
-      }
+      });
       return true;
     };
     const getTabBarBaseProps = () => {
@@ -456,16 +467,6 @@ export default defineComponent({
         }
       </div>;
     };
-    const onCreated = () => {
-      nextCurrentTab.value = currentTab.value;
-      instanceId.value = instanceId.value++;
-      contentPos.value = getContentPosByIndex(
-        currentTab.value,
-        isTabVertical(props.tabDirection),
-        props.useLeftInsteadTransform
-      );
-    };
-    onCreated();
     onUpdated(() => {
       prevCurrentTab.value = currentTab.value;
     });
