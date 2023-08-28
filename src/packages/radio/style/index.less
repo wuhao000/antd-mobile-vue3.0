@@ -3,6 +3,7 @@
 
 @listPrefixCls: am-list-item;
 @radioWarpPrefixCls: am-radio;
+@radioItemPrefixCls: ~"@{radioWarpPrefixCls}-item";
 @radioInnerPrefixCls: ~"@{radioWarpPrefixCls}-inner";
 @icon-size: 22px;
 @font-size: 17px;
@@ -44,8 +45,20 @@
 
   &-item {
     cursor: pointer;
+    &&-icon-check {
+      .@{listPrefixCls}-title {
+        & > .@{radioItemPrefixCls}-label {
+          flex: 1;
+        }
+      }
+    }
     &&-selected {
       cursor: default;
+      &.@{radioWarpPrefixCls}-item-icon-check {
+        .@{listPrefixCls}-title {
+          color: var(--adm-color-primary);
+        }
+      }
     }
     &&-readonly {
       cursor: default;

@@ -112,9 +112,10 @@ export const CascaderView = defineComponent({
             ['onUpdate:value']: (v) => {
               this.onItemSelect(v, index);
             },
+            iconType: 'check',
             options: level.options,
             class: `${classPrefix}-content`
-          };
+          } as const;
           return (
               <Tabs.Tab
                   key={`tab_${index}`}

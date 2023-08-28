@@ -1,4 +1,4 @@
-import {defineComponent, getCurrentInstance, inject, onMounted, PropType} from 'vue';
+import {defineComponent, getCurrentInstance, inject, onMounted, Prop, PropType} from 'vue';
 import List from '../../list';
 import {optionsBasedComponentProps, useOptionsBaseComponent} from '../../mixins/options-based-component';
 import SearchBar from '../../search-bar/src';
@@ -17,7 +17,11 @@ export default defineComponent({
     onChange: [Function, Array],
     maxHeightPercentage: {
       type: Number as PropType<number>
-    }
+    },
+    iconType: {
+      type: String,
+      default: 'radio'
+    } as Prop<'radio' | 'check'>
   },
   setup(props, {emit, slots, attrs}) {
     const instance = getCurrentInstance();
@@ -41,6 +45,7 @@ export default defineComponent({
           }
           return <RadioItem
               {...optionProps}
+              iconType={props.iconType}
               disabled={option.disabled || isDisabled.value}
               readOnly={isReadonly.value}
               value={stateValue.value === option.value}
