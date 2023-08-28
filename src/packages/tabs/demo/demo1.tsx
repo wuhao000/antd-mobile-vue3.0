@@ -23,6 +23,7 @@ export default defineComponent({
     return <div>
       <m-tabs initialPage={1}
               defaultValue={'tab2'}
+              page={3}
               onChange={(tab, index) => {
                 console.log('onChange', index, tab);
               }}
@@ -65,6 +66,30 @@ export default defineComponent({
               backgroundColor: '#fff'
             }}>
           Content of third tab
+        </m-tab>
+        <m-tab
+          title={<m-badge dot={true}>Forth Tab</m-badge>}
+          key={'tab4'}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '150px',
+            backgroundColor: '#fff'
+          }}>
+          Content of forth tab
+        </m-tab>
+        <m-tab
+          title={<m-badge dot={true}>Fifth Tab</m-badge>}
+          key={'tab5'}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '150px',
+            backgroundColor: '#fff'
+          }}>
+          Content of fifth tab
         </m-tab>
       </m-tabs>
       <m-white-space/>

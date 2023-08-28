@@ -3,6 +3,7 @@ import List from '../../list';
 import {useBaseInputComponent} from '../../mixins/base-input-component';
 import {formComponentProps} from '../../mixins/form-component';
 import DatePicker from './index';
+import classNames from "classnames";
 
 export default defineComponent({
   name: 'MDatePickerItem',
@@ -27,14 +28,14 @@ export default defineComponent({
                          [this.stateValue, 'value'],
                          [this.localOpen, 'open']
                        ]}
-                       v-slots={this.$slots}
-                       style={this.cssStyle}>
+                       v-slots={this.$slots}>
       <List.Item title={this.title}
                  touchFeedback={true}
                  onClick={() => {
                    this.localOpen = true;
                  }}
-                 class={'am-date-picker-item'}
+                 style={this.cssStyle}
+                 class={classNames('am-date-picker-item', this.$attrs.class as string | Record<string, string>)}
                  required={this.required}
                  disabled={this.isDisabled}
                  error={this.error}

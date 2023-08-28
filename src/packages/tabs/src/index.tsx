@@ -132,6 +132,10 @@ export default defineComponent({
     tabBarBackgroundColor: {
       type: String as PropType<string>
     },
+    page: {
+      type: Number,
+      default: 5
+    },
     /** 激活的标签页文字颜色 */
     tabBarActiveTextColor: {
       type: String as PropType<string>
@@ -291,6 +295,7 @@ export default defineComponent({
         animated,
         card: props.card,
         activeCardColor: props.activeCardColor,
+        page: props.page,
         goToTab: tabClickGoToTab,
         tabBarActiveTextColor,
         tabBarBackgroundColor,
