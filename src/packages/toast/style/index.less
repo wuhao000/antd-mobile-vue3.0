@@ -3,79 +3,67 @@
 
 @toastPrefixCls: am-toast;
 
-.@{toastPrefixCls} {
-  font-size: @font-size-base;
-  position: fixed;
-  text-align: center;
-  width: 100%;
-  z-index: @toast-zindex;
-  margin: 0;
+.@{toastPrefixCls}-mask {
+  background: rgba(0, 0, 0, 0);
+  opacity: 1;
 
-  > span {
-    max-width: 50%;
-    min-width: 100px;
-  }
-
-  &&-mask {
-    align-items: center;
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    left: 0;
-    top: 0;
-    transform: translateZ(1px);
-    background: rgba(0, 0, 0, 0.05);
-  }
-
-  &&-nomask {
-    left: 50%;
-    max-width: 50%;
+  .@{toastPrefixCls}-wrap {
     position: fixed;
-    top: 50%;
-    transform: translateZ(1px);
-    width: auto;
-
-    .@{toastPrefixCls}-notice {
-      transform: translateX(-50%) translateY(-50%);
-    }
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center
   }
 
-  &-notice {
-
-    background-color: @toast-fill;
-    border-radius: @radius-sm;
-    color: @color-text-base-inverse;
-    line-height: @line-height-paragraph;
-    min-width: 60 * @hd;
-    padding: @v-spacing-md @h-spacing-lg;
-    width: 204px;
+  .@{toastPrefixCls}-main {
+    display: inline-block;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    width: auto;
+    max-width: 204px;
     max-height: 70%;
-    margin-inline-start: initial;
-    position: absolute;
-    left: calc(50% - 102px);
-    top: 100px;
-    height: auto;
-    display: table;
+    overflow: auto;
+    color: #fff;
+    word-break: break-all;
+    background-color: rgba(0, 0, 0, .7);
+    border-radius: 8px;
+    pointer-events: all;
+    font-size: var(--adm-font-size-7);
+    line-height: 1.5;
+    box-sizing: border-box
+  }
 
-    & &-icon {
-      position: initial;
-    }
+  .@{toastPrefixCls}-main-text {
+    padding: 12px;
+    min-width: 0
+  }
 
-    .@{toastPrefixCls}-notice-content {
-      .@{toastPrefixCls}-notice-message {
-        color: @color-text-base-inverse;
-        margin: 0;
-      }
-    }
+  .@{toastPrefixCls}-main-icon {
+    padding: 35px 12px;
+    min-width: 150px;
 
-    &.@{toastPrefixCls}-text-icon {
-      border-radius: @radius-md;
-      padding: @v-spacing-lg @h-spacing-lg;
-
-      .@{toastPrefixCls}-text-info {
-        margin-top: @v-spacing-sm;
-      }
+    .adm-toast-icon {
+      text-align: center;
+      margin-bottom: 8px;
+      font-size: 36px;
+      line-height: 1
     }
   }
 }
 
+.am-auto-center {
+  display: flex;
+  justify-content: center
+}
+
+.am-auto-center-content {
+  flex: 0 1 auto
+}
+
+
+.@{toastPrefixCls}-loading {
+  --size: 48px;
+  margin: 0 auto 8px
+}

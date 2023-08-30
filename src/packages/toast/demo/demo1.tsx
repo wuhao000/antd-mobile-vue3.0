@@ -1,22 +1,25 @@
-import {inject, provide, ref, Ref, reactive, nextTick, PropType, defineComponent, onMounted, VNode} from 'vue';
-import Vue from 'vue';
-import Component from 'vue-class-component';
+import {defineComponent, onMounted} from 'vue';
 import {Button, Toast, WhiteSpace, WingBlank} from '../../index';
 
 function showToast() {
-  Toast.info('This is a toast tips !!!', 1, null, true);
+  Toast.show({
+    content: 'This is a toast tips !!!',
+    duration: 3,
+    mask: true,
+    position: 'top'
+  });
 }
 
 function showToastNoMask() {
-  Toast.info('Toast without mask !!!', 2, null, true);
+  Toast.info('Toast without mask !!!', 3, null, false);
 }
 
 function successToast() {
-  Toast.success('Load success !!!', 1, null, true);
+  Toast.success('Load success !!!', 3, null, true);
 }
 
 function failToast() {
-  Toast.fail('Load failed !!!', 1, null, true);
+  Toast.fail('Load failed !!!', 3, null, true);
 }
 
 function offline() {
@@ -24,7 +27,7 @@ function offline() {
 }
 
 function loadingToast() {
-  Toast.loading('Loading...', 1, () => {
+  Toast.loading('Loading...', 3, () => {
     console.log('Load complete !!!');
   }, true);
 }
