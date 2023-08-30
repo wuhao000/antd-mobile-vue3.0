@@ -8,7 +8,7 @@ const obsConfig = JSON.parse(fs.readFileSync('obs.json').toString());
 const obs = new ObsClient({
   access_key_id: obsConfig.ak,
   secret_access_key: obsConfig.sk,
-  server: obsConfig.url
+  server: 'https://obs.myhuaweicloud.com'
 });
 const fileNames = fs.readdirSync('lib');
 

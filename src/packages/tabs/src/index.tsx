@@ -502,7 +502,7 @@ const InternalTabs = defineComponent({
 });
 
 export default defineComponent({
-  name: 'MTabsInternal',
+  name: 'MTabs',
   props: {
     ...tabsProps()
   },
