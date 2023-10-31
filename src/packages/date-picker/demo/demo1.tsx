@@ -1,3 +1,4 @@
+import {Dayjs} from 'dayjs';
 import {defineComponent, reactive, ref} from 'vue';
 import DatePicker from '../index';
 
@@ -71,6 +72,9 @@ export default defineComponent({
     return (
         <m-list class="date-picker-list" style={{backgroundColor: 'white'}}>
           <DatePicker.Item title="空"
+                           disabledDate={(dayjs: Dayjs) => {
+                             return true;
+                           }}
                            v-model={[this.state.empty, 'value']}/>
           <DatePicker.Item title="输入字符串"
                            value="2021-12-28T07:29:49.968Z"/>
@@ -138,8 +142,7 @@ export default defineComponent({
           </m-date-picker>
           <m-list-item
               extra={this.state.dpValue && formatDate(this.state.dpValue)}
-              onClick={() => this.state.open = true}
-          >
+              onClick={() => this.state.open = true}>
             External control open state
           </m-list-item>
           <m-date-picker

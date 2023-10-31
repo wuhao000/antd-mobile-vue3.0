@@ -1,4 +1,5 @@
-import {defineComponent, PropType, provide, ref, watch} from 'vue';
+import {Dayjs} from 'dayjs';
+import {defineComponent, Prop, PropType, provide, ref, watch} from 'vue';
 import {getComponentLocale} from '../../utils/getLocale';
 import {setProps} from '../../utils/vnode';
 import RCDatePicker from '../../vmc-date-picker/date-picker';
@@ -32,6 +33,9 @@ export const getDatePicker = (isView: boolean, name: string) => {
       maxDate: {
         type: Date as PropType<Date>
       },
+      disabledDate: {
+        type: Function
+      } as Prop<(date: Dayjs) => boolean>,
       minDate: {
         type: Date as PropType<Date>
       },
@@ -152,6 +156,7 @@ export const getDatePicker = (isView: boolean, name: string) => {
         mode: this.mode,
         pickerPrefixCls: this.pickerPrefixCls,
         prefixCls: this.prefixCls,
+        disabledDate: this.disabledDate,
         value: this.getDate(),
         use12Hours: this.use12Hours,
         onChange: this.onChange

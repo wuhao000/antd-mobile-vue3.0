@@ -1,8 +1,9 @@
+import dayjs from 'dayjs';
 import {defineComponent, inject, onBeforeUpdate, reactive, Ref, ref, watch} from 'vue';
+import {isNull} from '../utils/util';
 import MultiPicker from '../vmc-picker/multi-picker';
 import RMCPicker from '../vmc-picker/picker';
 import DatePickerProps from './date-picker-props';
-import {isNull} from "../utils/util";
 
 const HOURS_OF_DAY = 24;
 const HOURS_HALF_DAY = 12;
@@ -95,7 +96,7 @@ export default defineComponent({
     const getNewDate = (values) => {
       const newValue = cloneDate(getDate());
       if (isNull(values)) {
-        return newValue
+        return newValue;
       }
       const {mode} = props;
       values.forEach((value, index) => {
@@ -170,7 +171,6 @@ export default defineComponent({
       if (mode === YEAR) {
         return [yearCol];
       }
-
       const months: LabelItem[] = [];
       let minMonth = 0;
       let maxMonth = 11;
@@ -202,10 +202,20 @@ export default defineComponent({
       }
       for (let i = minDay; i <= maxDay; i++) {
         const label = formatDay ? formatDay(i, date) : (i + locale.day);
+        if (props.disabledDate?.(dayjs(date).set('date', i))) {
+          continue;
+        }
         days.push({
           value: i,
           label
         });
+      }
+      if (days.length === 0) {
+        return [
+          {key: 'year', props: {children: []}},
+          {key: 'month', props: {children: []}},
+          {key: 'day', props: {children: []}}
+        ];
       }
       return [
         yearCol,
@@ -245,9 +255,8 @@ export default defineComponent({
         cols = cols.concat(time.cols);
         const hour = date.getHours();
         let dtValue = [hour, time.selMinute];
-        let nhour = hour;
         if (use12Hours) {
-          nhour = hour === 0 ? HOURS_HALF_DAY : (hour > HOURS_HALF_DAY ? hour - HOURS_HALF_DAY : hour);
+          const nhour = hour === 0 ? HOURS_HALF_DAY : (hour > HOURS_HALF_DAY ? hour - HOURS_HALF_DAY : hour);
           dtValue = [nhour, time.selMinute, (hour >= HOURS_HALF_DAY ? 1 : 0)];
         }
         value = value.concat(dtValue);
@@ -441,7 +450,7 @@ export default defineComponent({
         throw new Error('MultiPicker返回了非法数值：' + JSON.stringify(values));
       }
       state.values = values;
-      const newValue = getNewDate(values)
+      const newValue = getNewDate(values);
       const {cols} = getValueCols();
       colData.value = cols;
       emit('change', newValue);
@@ -471,7 +480,7 @@ export default defineComponent({
     const onCreated = () => {
       const {cols} = getValueCols();
       colData.value = cols;
-    }
+    };
     onCreated();
     return {getValueCols, colData, state, onValueChange};
   },
@@ -490,18 +499,18 @@ export default defineComponent({
       ['onUpdate:value']: this.onValueChange
     };
     return (
-        <MultiPicker {...pickerProps}>
-          {this.colData.map(p => (
-              <RMCPicker
-                  disabled={disabled}
-                  prefixCls={pickerPrefixCls}
-                  itemStyle={itemStyle}
-                  data={p.props.children}
-                  style={{flex: 1}}
-                  key={p.key}>
-              </RMCPicker>
-          ))}
-        </MultiPicker>
+      <MultiPicker {...pickerProps}>
+        {this.colData.map(p => (
+          <RMCPicker
+            disabled={disabled}
+            prefixCls={pickerPrefixCls}
+            itemStyle={itemStyle}
+            data={p.props.children}
+            style={{flex: 1}}
+            key={p.key}>
+          </RMCPicker>
+        ))}
+      </MultiPicker>
     );
   }
 });

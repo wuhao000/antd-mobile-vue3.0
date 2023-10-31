@@ -207,10 +207,10 @@ const Picker = defineComponent({
       const top = scrollHandlers.value.getValue();
       if (top >= 0) {
         const index = props.computeChildIndex(top, itemHeight.value, props.data.length);
-        if (scrollValue.value !== index) {
+        if (scrollValue.value !== index && index >= 0) {
           scrollValue.value = index;
           const child = props.data[index];
-          emit('scroll-change', child.value);
+          emit('scroll-change', child?.value);
         }
       }
     };

@@ -1,4 +1,5 @@
-import {PropType} from 'vue';
+import {Dayjs} from 'dayjs';
+import {Prop, PropType} from 'vue';
 import defaultLocale from './locale/zh_CN';
 
 const DATE = 'date';
@@ -31,6 +32,9 @@ export type DatePickerMode = 'date' | 'datetime' | 'time' | 'month' | 'year';
 export default {
   onChange: {},
   value: {type: Date as PropType<Date>},
+  disabledDate: {
+    type: Function
+  } as Prop<(date: Dayjs) => boolean>,
   defaultDate: {
     type: Date as PropType<Date>,
     default: () => new Date()
