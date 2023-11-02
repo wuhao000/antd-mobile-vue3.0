@@ -23,14 +23,16 @@ export default defineComponent({
           <List title="Customize to focus">
             <InputItem
                 placeholder="auto focus"
-                ref="autoFocusInst"
-            >标题</InputItem>
+                ref="autoFocusInst">
+              标题
+            </InputItem>
             <InputItem
                 placeholder="click the button below to focus"
                 ref={(el) => {
                   this.inputRef = el;
-                }}
-            >标题</InputItem>
+                }}>
+              标题
+            </InputItem>
             <List.Item>
               <div
                   style={{width: '100%', color: '#108ee9', textAlign: 'center'}}
@@ -38,6 +40,12 @@ export default defineComponent({
                 click to focus
               </div>
             </List.Item>
+            <InputItem
+              placeholder="auto focus"
+              extra={'个人'}
+              ref="autoFocusInst">
+              带后缀
+            </InputItem>
           </List>
           <List title="Whether is controlled">
             <InputItem

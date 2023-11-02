@@ -104,6 +104,14 @@
     flex: 1;
     font-size: @input-font-size;
 
+    &.@{inputPrefixCls}-control-extra {
+      display: flex;
+
+      & > .@{inputPrefixCls}-extra {
+        padding-left: 8px;
+      }
+    }
+
     input {
       appearance: none;
       background-color: transparent;

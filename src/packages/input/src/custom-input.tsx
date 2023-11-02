@@ -1,10 +1,6 @@
 import classnames from 'classnames';
-import {defineComponent, onBeforeUnmount, onMounted, PropType, Ref, ref, Teleport, TeleportProps} from 'vue';
-import {addClass, removeClass} from '../../utils/class';
+import {defineComponent, onBeforeUnmount, PropType, Ref, ref, Teleport, TeleportProps, watch} from 'vue';
 import CustomKeyboard from './custom-keyboard';
-
-let instanceArr: any = [];
-let customNumberKeyboard: any = null;
 
 export default defineComponent({
   name: 'MNumberInput',
@@ -38,14 +34,13 @@ export default defineComponent({
       }
     }
   },
-  setup(props, {emit, slots}) {
+  setup(props, {emit}) {
     const container: Ref<HTMLElement> = ref(null);
-    const inputRef: Ref<HTMLDivElement | null> = ref(null);
     const focus: Ref<boolean> = ref(false);
     const currentValue: Ref<string> = ref(null);
-    const keyboardRef = ref(null);
-
-
+    watch(() => focus.value, () => {
+      console.log(focus.value);
+    }, {immediate: true});
     const onChange = (value: any) => {
       if (props.value === undefined) {
         currentValue.value = value.target.value;
@@ -61,10 +56,6 @@ export default defineComponent({
     const removeBlurListener = () => {
       document.removeEventListener('click', doBlur, false);
     };
-    const saveRef = (el: any) => {
-      customNumberKeyboard = el;
-      instanceArr.push({el, container: container.value});
-    };
     const getComponent = () => {
       const {
         confirmLabel,
@@ -76,9 +67,7 @@ export default defineComponent({
       } = props;
       return (
         <CustomKeyboard
-          ref={(el) => {
-            keyboardRef.value = el;
-          }}
+          open={focus.value}
           onClick={onKeyboardClick}
           prefixCls={keyboardPrefixCls}
           confirmLabel={confirmLabel}
@@ -92,79 +81,25 @@ export default defineComponent({
     const getContainer = () => {
       const {keyboardPrefixCls} = props;
       if (!container.value) {
-        const container: HTMLDivElement = document.createElement('div');
-        container.setAttribute('id', `${keyboardPrefixCls}-container-${(new Date().getTime())}`);
-        document.body.appendChild(container);
-        container['value'] = container;
+        const div: HTMLDivElement = document.createElement('div');
+        div.setAttribute('id', `${keyboardPrefixCls}-container-${(new Date().getTime())}`);
+        document.body.appendChild(div);
+        container.value = div;
       }
       return container.value;
     };
-    const doBlur = (ev: MouseEvent) => {
-      if (ev.target !== inputRef.value) {
-        onInputBlur(props.value.toString());
-      }
-    };
-    const removeCurrentExtraKeyboard = () => {
-      instanceArr = instanceArr.filter((item: any) => {
-        const {el, container} = item;
-        if (el && container && el !== customNumberKeyboard) {
-          (container as any).parentNode.removeChild(container);
-        }
-        return el === customNumberKeyboard;
-      });
-    };
-    const unLinkInput = () => {
-      if (
-        customNumberKeyboard &&
-        customNumberKeyboard.antmKeyboard &&
-        customNumberKeyboard.linkedInput &&
-        customNumberKeyboard.linkedInput === this
-      ) {
-        customNumberKeyboard.linkedInput = null;
-        addClass(
-          customNumberKeyboard.antmKeyboard,
-          `${props.keyboardPrefixCls}-wrapper-hide`
-        );
-      }
-      // for unmount
-      removeBlurListener();
-      removeCurrentExtraKeyboard();
+    const doBlur = () => {
+      onInputBlur(props.value.toString());
     };
     const onInputBlur = (value: string) => {
       if (focus.value) {
         focus.value = false;
         emit('blur', value);
-        setTimeout(() => {
-          unLinkInput();
-        }, 50);
       }
     };
-    const onInputFocus = (e?) => {
+    const onInputFocus = () => {
       emit('focus', props.value);
       focus.value = true;
-      if (customNumberKeyboard) {
-        customNumberKeyboard.linkedInput = this;
-        if (customNumberKeyboard.antmKeyboard) {
-          removeClass(
-            customNumberKeyboard.antmKeyboard,
-            `${props.keyboardPrefixCls}-wrapper-hide`
-          );
-        }
-        customNumberKeyboard.confirmDisabled = props.value === '';
-        if (customNumberKeyboard.confirmKeyboardItem) {
-          if (props.value === '') {
-            addClass(
-              customNumberKeyboard.confirmKeyboardItem,
-              `${props.keyboardPrefixCls}-item-disabled`
-            );
-          } else {
-            removeClass(
-              customNumberKeyboard.confirmKeyboardItem,
-              `${props.keyboardPrefixCls}-item-disabled`
-            );
-          }
-        }
-      }
     };
     const onKeyboardClick = (keyboardItemValue: string) => {
       const {maxLength, value} = props;
@@ -185,43 +120,25 @@ export default defineComponent({
       } else if (keyboardItemValue === 'hide') {
         valueAfterChange = value;
         onInputBlur(valueAfterChange);
+      } else if (maxLength !== undefined &&
+        +maxLength >= 0 &&
+        (value + keyboardItemValue).length > maxLength
+      ) {
+        valueAfterChange = (value + keyboardItemValue).substring(0, maxLength);
+        onChange({target: {value: valueAfterChange}});
       } else {
-        if (maxLength !== undefined &&
-          +maxLength >= 0 &&
-          (value + keyboardItemValue).length > maxLength
-        ) {
-          valueAfterChange = (value + keyboardItemValue).substr(0, maxLength);
-          onChange({target: {value: valueAfterChange}});
-        } else {
-          valueAfterChange = value + keyboardItemValue;
-          onChange({target: {value: valueAfterChange}});
-        }
-      }
-      if (customNumberKeyboard) {
-        customNumberKeyboard.confirmDisabled = valueAfterChange === '';
-        if (customNumberKeyboard.confirmKeyboardItem) {
-          if (valueAfterChange === '') {
-            addClass(
-              customNumberKeyboard.confirmKeyboardItem,
-              `${props.keyboardPrefixCls}-item-disabled`
-            );
-          } else {
-            removeClass(
-              customNumberKeyboard.confirmKeyboardItem,
-              `${props.keyboardPrefixCls}-item-disabled`
-            );
-          }
-        }
+        valueAfterChange = value + keyboardItemValue;
+        onChange({target: {value: valueAfterChange}});
       }
     };
-    const onFakeInputClick = (e) => {
-      focusFunc(e);
+    const onFakeInputClick = () => {
+      focusFunc();
     };
-    const focusFunc = (e) => {
+    const focusFunc = () => {
       // this focus may invocked by users page button click, so this click may trigger blurEventListener at the same time
       removeBlurListener();
       if (!focus.value) {
-        onInputFocus(e);
+        onInputFocus();
       }
       setTimeout(() => {
         addBlurListener();
@@ -246,28 +163,18 @@ export default defineComponent({
       if (!focus.value) {
         emit('blur', props.value);
       }
-      unLinkInput();
     });
-    onMounted(() => {
-      saveRef(keyboardRef.value as any);
-    });
-
     return {
       container,
-      inputRef,
       focus,
       currentValue,
-      keyboardRef,
       onChange,
       onConfirm,
       addBlurListener,
       removeBlurListener,
-      saveRef,
       getComponent,
       getContainer,
       doBlur,
-      removeCurrentExtraKeyboard,
-      unLinkInput,
       onInputBlur,
       onInputFocus,
       onKeyboardClick,
@@ -277,7 +184,7 @@ export default defineComponent({
     };
   },
   render() {
-    const {placeholder, disabled, editable, moneyKeyboardAlign} = this;
+    const {onFakeInputClick, renderPortal, placeholder, disabled, editable, moneyKeyboardAlign} = this;
     const {focus, value} = this;
     const preventKeyboard = disabled || !editable;
     const fakeInputCls = classnames(`fake-input`, {
@@ -295,13 +202,11 @@ export default defineComponent({
         <div
           role="textbox"
           class={fakeInputCls}
-          ref="input"
           onClick={preventKeyboard ? () => {
-          } : this.onFakeInputClick}
-        >
+          } : onFakeInputClick}>
           {value}
         </div>
-        {this.renderPortal()}
+        {renderPortal()}
       </div>
     );
   }
