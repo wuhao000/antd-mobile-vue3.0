@@ -1,3 +1,4 @@
+import {unwrapFragment} from '../../utils/vue';
 import classNames from 'classnames'
 import {defineComponent, PropType} from "vue";
 
@@ -34,7 +35,7 @@ export const Space = defineComponent({
       })}
       onClick={onClick}
     >
-      {this.$slots.default?.()?.map(child => {
+      {unwrapFragment(this.$slots.default?.())?.map(child => {
         return child ? <div class={`${classPrefix}-item`}>{child}</div> : undefined;
       })}
     </div>;

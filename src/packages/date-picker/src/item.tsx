@@ -1,15 +1,15 @@
+import classNames from 'classnames';
 import {defineComponent, inject, PropType, ref} from 'vue';
 import List from '../../list';
 import {useBaseInputComponent} from '../../mixins/base-input-component';
-import {formComponentProps} from '../../mixins/form-component';
+import {creatFormComponentProps} from '../../mixins/form-component';
 import DatePicker from './index';
-import classNames from "classnames";
 
 export default defineComponent({
   name: 'MDatePickerItem',
   inheritAttrs: false,
   props: {
-    ...formComponentProps,
+    ...creatFormComponentProps(),
     title: {
       type: [String, Object] as PropType<string>
     }

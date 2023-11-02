@@ -56,7 +56,7 @@ function createDemoRouteStr(it: Component) {
 }`;
 }
 
-function createRoutesForType(type: string, typeComponents: Component[]) {
+function createRoutesForType(type: string, typeComponents: Array<Component>) {
   const route: string = typeComponents.map((it: Component) => {
     return createRouteStr(it);
   }).join(', ');
@@ -66,7 +66,7 @@ function createRoutesForType(type: string, typeComponents: Component[]) {
   fs.writeFileSync(`src/router/${type}.ts`, routerTmpl);
 }
 
-function createDemoRoutesForType(typeComponents: Component[]) {
+function createDemoRoutesForType(typeComponents: Array<Component>) {
   const route: string = typeComponents.map((it: Component) => {
     return createDemoRouteStr(it);
   }).join(', ');

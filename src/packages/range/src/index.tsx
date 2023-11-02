@@ -1,7 +1,7 @@
 import VcHandle from 'ant-design-vue/es/vc-slider/src/Handle';
 import RcRange from 'ant-design-vue/es/vc-slider/src/Range';
 import {defineComponent, PropType} from 'vue';
-import {formComponentProps, useFormComponent} from '../../mixins/form-component';
+import {creatFormComponentProps, useFormComponent} from '../../mixins/form-component';
 
 export interface HandleGeneratorInfo {
   value: number;
@@ -14,7 +14,7 @@ export interface HandleGeneratorInfo {
 export default defineComponent({
   name: 'Range',
   props: {
-    ...formComponentProps,
+    ...creatFormComponentProps(),
     prefixCls: {
       type: String as PropType<string>,
       default: 'am-slider'
@@ -46,15 +46,15 @@ export default defineComponent({
   render() {
     const Range = RcRange as any;
     return (
-        <div class={`${this.prefixCls}-wrapper`}>
-          <Range {...this.$props}
-                 handle={this.handle}
-                 value={this.currentValue}
-                 pushable={this.pushable}
-                 onChange={v => {
-                   this.currentValue = v;
-                 }}/>
-        </div>
+      <div class={`${this.prefixCls}-wrapper`}>
+        <Range {...this.$props}
+               handle={this.handle}
+               value={this.currentValue}
+               pushable={this.pushable}
+               onChange={v => {
+                 this.currentValue = v;
+               }}/>
+      </div>
     );
   }
 });

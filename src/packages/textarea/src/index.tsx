@@ -1,8 +1,8 @@
-import {renderLabel} from '../../input/src/utils';
 import classnames from 'classnames';
 import {defineComponent, onBeforeUnmount, onMounted, onUpdated, PropType, reactive, ref, Ref, VNode, watch} from 'vue';
+import {renderLabel} from '../../input/src/utils';
 import List from '../../list';
-import {formComponentProps, useFormComponent} from '../../mixins/form-component';
+import {creatFormComponentProps, useFormComponent} from '../../mixins/form-component';
 import {IS_IOS} from '../../utils/exenv';
 import TouchFeedback from '../../vmc-feedback';
 
@@ -22,7 +22,7 @@ function countSymbols(text: any = '') {
 export default defineComponent({
   name: 'MTextarea',
   props: {
-    ...formComponentProps,
+    ...creatFormComponentProps(),
     prefixCls: {
       type: String as PropType<string>,
       default: 'am-textarea'

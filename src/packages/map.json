@@ -62,6 +62,13 @@
     "chineseName": "复选框",
     "tag": "数据入口"
   },
+  "selector": {
+    "type": "component",
+    "componentType": "mobile",
+    "name": "selector",
+    "chineseName": "选择器",
+    "tag": "数据入口"
+  },
   "date-picker": {
     "type": "component",
     "componentType": "mobile",

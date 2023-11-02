@@ -2,8 +2,8 @@ import {useSimpleFormComponent} from './simple-form-component';
 import {computed} from 'vue';
 import {usePureInput} from './pure-input-component';
 
-export const useBaseInputComponent = (props, {emit, attrs, slots}, form, options: {
-  defaultValue: any,
+export const useBaseInputComponent = <T extends any>(props, {emit, attrs, slots}, form, options: {
+  defaultValue: T,
   propName: string
 } = {
   defaultValue: undefined,

@@ -1,11 +1,10 @@
+import classNames from 'classnames';
+import omit from 'omit.js';
 import {computed, defineComponent, inject, PropType, ref, Ref, VNode, watch} from 'vue';
 import List from '../../list';
 import {optionsBasedComponentProps, useOptionsBaseComponent} from '../../mixins/options-based-component';
 import Popup from '../../popup';
-import SearchBar from '../../search-bar/src/index';
 import CheckboxList from './checkbox-list';
-import omit from "omit.js";
-import classNames from "classnames";
 
 export default defineComponent({
   name: 'MCheckboxPopupList',
@@ -116,7 +115,10 @@ export default defineComponent({
                        arrow={'horizontal'}
                        errorDisplayType={this.errorDisplayType}
                        style={this.$attrs.style}
-                       class={classNames(this.$attrs.class as string | Record<string, string>, 'am-checkbox-popup-list')}
+                       class={classNames(this.$attrs.class as string | Record<string, string>, {
+                         'am-checkbox-popup-list': true,
+                         'am-checkbox-popup-list-focus': this.isDisabled ? false : this.popupOpen,
+                       })}
                        touchFeedback={!this.isReadonly && !this.isDisabled}
                        required={this.required}
                        text={!!this.optionText}

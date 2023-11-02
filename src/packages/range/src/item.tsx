@@ -1,15 +1,15 @@
 import {defineComponent, PropType, VNode} from 'vue';
 import List from '../../list';
-import {formComponentProps, useFormComponent} from '../../mixins/form-component';
+import {creatFormComponentProps, useFormComponent} from '../../mixins/form-component';
 import Range from './index';
 
 const RangeItem = defineComponent({
   name: 'MRangeItem',
   props: {
-    ...formComponentProps,
+    ...creatFormComponentProps(),
     title: {
       type: [String, Object] as PropType<string | VNode>
-    },
+    }
   },
   setup(props, {emit}) {
     const {isDisabled, currentValue} = useFormComponent(props, {emit});

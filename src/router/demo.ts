@@ -40,6 +40,10 @@ export default [{
   name: 'm-checkbox',
   component: () => import('../generated/checkbox/demo.vue')
 }, {
+  path: 'm-selector',
+  name: 'm-selector',
+  component: () => import('../generated/selector/demo.vue')
+}, {
   path: 'm-date-picker',
   name: 'm-date-picker',
   component: () => import('../generated/date-picker/demo.vue')

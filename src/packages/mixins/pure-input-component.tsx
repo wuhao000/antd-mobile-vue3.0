@@ -15,7 +15,7 @@ export const usePureInput = <T extends any>(props, {emit, attrs}, options: {
     if (convertedValue !== null && convertedValue !== undefined) {
       return convertedValue;
     } else {
-      return options?.defaultValue;
+      return options?.defaultValue ?? props.defaultValue;
     }
   });
   const stateValue = ref(defaultValue.value);

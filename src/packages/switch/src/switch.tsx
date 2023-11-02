@@ -1,11 +1,11 @@
-import {formComponentProps, useFormComponent} from '../../mixins/form-component';
 import classnames from 'classnames';
 import {defineComponent, PropType} from 'vue';
+import {creatFormComponentProps, useFormComponent} from '../../mixins/form-component';
 
 export default defineComponent({
   name: 'MSwitch',
   props: {
-    ...formComponentProps,
+    ...creatFormComponentProps(),
     color: {
       type: String as PropType<string>
     },

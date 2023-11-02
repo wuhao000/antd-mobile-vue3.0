@@ -10,6 +10,7 @@ import Calendar from './calendar';
 import Card from './card';
 import Carousel from './carousel';
 import Checkbox from './checkbox';
+import Selector from './selector';
 import DatePicker from './date-picker';
 import DatePickerView from './date-picker-view';
 import Drawer from './drawer';
@@ -64,6 +65,7 @@ const components = [
 	Card,
 	Carousel,
 	Checkbox,
+	Selector,
 	DatePicker,
 	DatePickerView,
 	Drawer,
@@ -129,6 +131,7 @@ export {
 	Card,
 	Carousel,
 	Checkbox,
+	Selector,
 	DatePicker,
 	DatePickerView,
 	Drawer,
@@ -187,6 +190,7 @@ export default {
 	Card,
 	Carousel,
 	Checkbox,
+	Selector,
 	DatePicker,
 	DatePickerView,
 	Drawer,

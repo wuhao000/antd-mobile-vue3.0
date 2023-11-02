@@ -7,6 +7,7 @@ import {CalendarComponent} from './components/calendar';
 import {CardComponent} from './components/card';
 import {CarouselComponent} from './components/carousel';
 import {CheckboxComponent} from './components/checkbox';
+import {SelectorComponent} from './components/selector';
 import {DatePickerComponent} from './components/date-picker';
 import {DatePickerViewComponent} from './components/date-picker-view';
 import {DrawerComponent} from './components/drawer';
@@ -68,6 +69,8 @@ export class Card extends CardComponent {
 export class Carousel extends CarouselComponent {
 }
 export class Checkbox extends CheckboxComponent {
+}
+export class Selector extends SelectorComponent {
 }
 export class DatePicker extends DatePickerComponent {
 }

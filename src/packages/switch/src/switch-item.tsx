@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import {defineComponent, PropType, reactive, watch} from 'vue';
 import List from '../../list';
-import {formComponentProps, useFormComponent} from '../../mixins/form-component';
+import {creatFormComponentProps, useFormComponent} from '../../mixins/form-component';
 import Switch from './switch';
 
 const ListItem = List.Item as any;
@@ -9,7 +9,7 @@ const ListItem = List.Item as any;
 const switchItem = defineComponent({
   name: 'MSwitchItem',
   props: {
-    ...formComponentProps,
+    ...creatFormComponentProps(),
     prefixCls: {
       default: 'am-switch'
     },

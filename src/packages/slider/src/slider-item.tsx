@@ -1,13 +1,13 @@
-import {formComponentProps, useFormComponent} from '../../mixins/form-component';
 import {defineComponent, PropType} from 'vue';
 import List from '../../list';
+import {creatFormComponentProps, useFormComponent} from '../../mixins/form-component';
 import Slider from './index';
 
 export default defineComponent({
   install: null,
   name: 'MSliderItem',
   props: {
-    ...formComponentProps,
+    ...creatFormComponentProps(),
     prefixCls: {
       type: String as PropType<string>,
       default: 'am-slider'

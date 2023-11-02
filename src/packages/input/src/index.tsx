@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import {defineComponent, getCurrentInstance, onBeforeUnmount, PropType, reactive, ref, watch} from 'vue';
 import List from '../../list';
-import {formComponentProps, useFormComponent} from '../../mixins/form-component';
+import {creatFormComponentProps, useFormComponent} from '../../mixins/form-component';
 import TouchFeedback from '../../vmc-feedback';
 import CustomInput from './custom-input';
 import Input from './input';
@@ -21,7 +21,7 @@ function normalizeValue(value?: string) {
 export default defineComponent({
   name: 'MInputItem',
   props: {
-    ...formComponentProps,
+    ...creatFormComponentProps(),
     onChange: Function,
     onBlur: Function,
     onConfirm: Function,
@@ -123,7 +123,8 @@ export default defineComponent({
   install: null,
   setup(props, {emit}) {
     const state = reactive({
-      placeholder: props.placeholder || ''
+      placeholder: props.placeholder || '',
+      focus: false
     });
     const {currentValue, isDisabled, isReadonly, onFieldBlur, onFieldChange} = useFormComponent(props, {emit});
     const debounceTimeout = ref(null);
@@ -145,9 +146,9 @@ export default defineComponent({
           ctrlValue = rawVal.replace(/\D/g, '').substring(0, 11);
           const valueLen = ctrlValue.length;
           if (valueLen > 3 && valueLen < 8) {
-            ctrlValue = `${ctrlValue.substr(0, 3)} ${ctrlValue.substr(3)}`;
+            ctrlValue = `${ctrlValue.substring(0, 3)} ${ctrlValue.substr(3)}`;
           } else if (valueLen >= 8) {
-            ctrlValue = `${ctrlValue.substr(0, 3)} ${ctrlValue.substr(3, 4)} ${ctrlValue.substr(
+            ctrlValue = `${ctrlValue.substring(0, 3)} ${ctrlValue.substr(3, 4)} ${ctrlValue.substr(
               7
             )}`;
           }
@@ -207,6 +208,7 @@ export default defineComponent({
         debounceTimeout.value = null;
       }
       (instance.vnode.el as HTMLElement).focus();
+      state.focus = true;
       emit('focus', value);
     };
     const onInputBlur = (value: string) => {
@@ -226,6 +228,7 @@ export default defineComponent({
         }
       }, 100);
       onFieldBlur();
+      state.focus = false;
       emit('blur', value);
     };
     const clearInput = () => {
@@ -246,7 +249,7 @@ export default defineComponent({
       const isAddition = editLength > 0;
       let pos = prePos;
       if (isAddition) {
-        const additionStr = rawVal.substr(pos - editLength, editLength);
+        const additionStr = rawVal.substring(pos - editLength, editLength);
         let ctrlCharCount = additionStr.replace(maskReg, '').length;
         pos -= (editLength - ctrlCharCount);
         let placeholderCharCount = 0;
@@ -295,7 +298,8 @@ export default defineComponent({
       moneyKeyboardAlign,
       moneyKeyboardWrapProps,
       moneyKeyboardHeader,
-      name, maxLength
+      name, maxLength,
+      state: {placeholder, focus}
     } = this;
     const extra = this.$slots.extra || this.extra;
     const {
@@ -307,11 +311,6 @@ export default defineComponent({
       backspaceLabel: '退格',
       cancelKeyboardLabel: '收起键盘'
     };
-
-    const {
-      focus,
-      state: {placeholder}
-    } = this;
 
     const wrapCls = classnames(
       `${prefixListCls}-item`,

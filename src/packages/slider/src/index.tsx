@@ -1,14 +1,14 @@
-import {HandleGeneratorInfo} from '../../range/src';
 import VcHandle from 'ant-design-vue/es/vc-slider/src/Handle';
 import RcSlider from 'ant-design-vue/es/vc-slider/src/Slider';
 import {defineComponent, PropType} from 'vue';
-import {formComponentProps, useFormComponent} from '../../mixins/form-component';
+import {creatFormComponentProps, useFormComponent} from '../../mixins/form-component';
+import {HandleGeneratorInfo} from '../../range/src';
 
 export default defineComponent({
   install: null,
   name: 'MSlider',
   props: {
-    ...formComponentProps,
+    ...creatFormComponentProps(),
     prefixCls: {
       type: String as PropType<string>,
       default: 'am-slider'
@@ -45,17 +45,17 @@ export default defineComponent({
     const props = Object.assign({}, this.$props, {disabled: this.isDisabled});
     const Slider = RcSlider as any;
     return (
-        <div class={`${this.prefixCls}-wrapper`}>
-          <Slider {...props}
-                  value={this.currentValue}
-                  handle={this.handle}
-                  included={true}
-                  onChange={
-                    value => {
-                      this.currentValue = value;
-                    }
-                  }/>
-        </div>
+      <div class={`${this.prefixCls}-wrapper`}>
+        <Slider {...props}
+                value={this.currentValue}
+                handle={this.handle}
+                included={true}
+                onChange={
+                  value => {
+                    this.currentValue = value;
+                  }
+                }/>
+      </div>
     );
   }
 });

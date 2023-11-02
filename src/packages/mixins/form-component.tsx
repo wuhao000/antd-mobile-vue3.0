@@ -1,56 +1,60 @@
 import AsyncValidator, {ValidateRule} from 'async-validator';
-import {computed, getCurrentInstance, inject, nextTick, PropType, Ref, ref, watch} from 'vue';
+import {computed, getCurrentInstance, inject, nextTick, Prop, PropType, Ref, ref, watch} from 'vue';
 import {useEmitter} from './emitter';
 import {getPropByPath} from './utils';
 
 const noop = function noop(a?, b?) {
+  // do nothing
 };
 
-export const formComponentProps = {
-  /**
-   * class 前缀
-   */
-  prefixCls: {
-    type: String as PropType<string>
-  },
-  disabled: {
-    type: Boolean as PropType<boolean>
-  },
-  error: {
-    type: Boolean as PropType<boolean>,
-    default: false
-  },
-  errorMessage: {
-    type: String as PropType<string>
-  },
-  errorDisplayType: {
-    type: String as PropType<'toast' | 'popover' | 'text' | undefined>
-  },
-  prop: {
-    type: String as PropType<string>
-  },
-  editable: {
-    type: Boolean as PropType<boolean>,
-    default: true
-  },
-  /**
-   * 是否必须
-   */
-  required: {
-    type: Boolean as PropType<boolean>,
-    default: false
-  },
-  rules: {
-    type: Array as PropType<ValidateRule[]>
-  },
-  value: {}
+export const creatFormComponentProps = <T extends any>() => {
+  return {
+    /**
+     * class 前缀
+     */
+    prefixCls: {
+      type: String as PropType<string>
+    },
+    disabled: {
+      type: Boolean as PropType<boolean>
+    },
+    error: {
+      type: Boolean as PropType<boolean>,
+      default: false
+    },
+    errorMessage: {
+      type: String as PropType<string>
+    },
+    errorDisplayType: {
+      type: String as PropType<'toast' | 'popover' | 'text' | undefined>
+    },
+    prop: {
+      type: String as PropType<string>
+    },
+    editable: {
+      type: Boolean as PropType<boolean>,
+      default: true
+    },
+    /**
+     * 是否必须
+     */
+    required: {
+      type: Boolean as PropType<boolean>,
+      default: false
+    },
+    rules: {
+      type: Array as PropType<ValidateRule[]>
+    },
+    defaultValue: {} as Prop<T>,
+    value: {} as Prop<T>
+  };
 };
-export const useFormComponent = (props, {emit}) => {
+export const useFormComponent = (props, {emit, onChange}: {emit: any; onChange?: ((v) => void)}) => {
   const {dispatch} = useEmitter(getCurrentInstance());
   const currentErrorMessage = ref(props.errorMessage);
   const list: any = inject('list', undefined);
   const validateStatus: Ref<'' | 'success' | 'warning' | 'error' | 'validating'> = ref('');
-  const currentValue = ref(props.value);
+  const currentValue = ref(props.value ?? props.defaultValue);
   const validateDisabled: Ref<boolean> = ref(true);
   const isCurrentError: Ref<boolean> = ref(false);
   watch(() => props.errorMessage, (errorMessage: string) => {
@@ -61,9 +65,13 @@ export const useFormComponent = (props, {emit}) => {
       currentValue.value = value;
     }
   });
-  watch(() => currentValue.value, (currentValue) => {
-    emit('update:value', currentValue);
-    emit('change', currentValue);
+  watch(() => currentValue.value, val => {
+    emit('update:value', val);
+    if (onChange) {
+      onChange(val);
+    } else {
+      emit('change', val);
+    }
   });
   const fieldValue = computed(() => {
     return currentValue.value;
@@ -98,13 +106,12 @@ export const useFormComponent = (props, {emit}) => {
     }).map(rule => Object.assign({}, rule));
   };
   const getRules = () => {
-    let formRules: any = list && list.rules;
+    let formRules: any = list?.rules;
     const prop = getPropByPath(formRules, props.prop || '');
     formRules = formRules ? (prop.o[props.prop || ''] || prop.v) : [];
     const selfRules = props.rules;
     let requiredRule = props.required !== undefined ? {required: props.required} : [];
-    if ((formRules && formRules.some(rule => rule.required !== undefined))
-      || (selfRules && selfRules.some(rule => rule.required !== undefined))) {
+    if (formRules?.some(rule => rule.required !== undefined) || selfRules?.some(rule => rule.required !== undefined)) {
       requiredRule = [];
     }
     return [].concat(selfRules || formRules || []).concat(requiredRule);
@@ -142,14 +149,12 @@ export const useFormComponent = (props, {emit}) => {
         currentErrorMessage.value = errors ? errors[0].message : '';
         callback(currentErrorMessage.value, invalidFields);
         emit('validate', !errors, errors);
-        list && list.$emit('validate', props.prop, !errors, currentErrorMessage.value || null);
+        list?.$emit('validate', props.prop, !errors, currentErrorMessage.value || null);
       });
     });
   };
-  {
-    if (list) {
-      dispatch('DForm', 'd.form.addField', [this]);
-    }
+  if (list) {
+    dispatch('DForm', 'd.form.addField', [this]);
   }
   return {
     currentValue, onFieldChange, validate, onFieldBlur, isReadonly, isDisabled

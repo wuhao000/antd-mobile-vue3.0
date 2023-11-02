@@ -1,4 +1,4 @@
-import {onBeforeUpdate, PropType, Ref, ref, watch} from 'vue';
+import {onBeforeUpdate, Prop, PropType, Ref, ref, watch} from 'vue';
 import {getOptionProperty} from '../utils/option';
 import {getNodeText, isEmptySlot} from '../utils/vnode';
 import {unwrapFragment} from '../utils/vue';
@@ -22,7 +22,7 @@ export const optionsBasedComponentProps = {
   /**
    * 选项对象中作为值的属性名称
    */
-  valueProperty: {type: [String, Function], default: 'value'},
+  valueProperty: {type: [String, Function], default: 'value'} as Prop<string | ((option) => any)>,
   /**
    * 选项数据
    */
@@ -36,7 +36,7 @@ export const useOptionsBaseComponent = (props, {emit, attrs, slots}, form, optio
   propName: 'value'
 }) => {
   const {isDisabled, setStateValue, stateValue, isReadonly} =
-      useBaseInputComponent(props, {emit, attrs, slots}, form, options);
+    useBaseInputComponent(props, {emit, attrs, slots}, form, options);
   const searchKeyword: Ref<string> = ref('');
 
   watch(() => props.searchText, searchText => {
@@ -51,22 +51,22 @@ export const useOptionsBaseComponent = (props, {emit, attrs, slots}, form, optio
   const getResolvedOptions = (options: any[]) => {
     if (options) {
       return options
-          .filter(item => {
-            if (props.filterOption) {
-              return props.filterOption(item);
-            }
-            let label = getOptionProperty(item, props.labelProperty);
-            if (typeof label === 'object') {
-              label = getNodeText(label) || '';
-            }
-            return !searchKeyword.value || label.includes(searchKeyword.value);
-          })
-          .map(item => {
-            return Object.assign({}, item, {
-              label: getOptionProperty(item, props.labelProperty),
-              value: getOptionProperty(item, props.valueProperty)
-            });
+        .filter(item => {
+          if (props.filterOption) {
+            return props.filterOption(item);
+          }
+          let label = getOptionProperty(item, props.labelProperty);
+          if (typeof label === 'object') {
+            label = getNodeText(label) || '';
+          }
+          return !searchKeyword.value || label.includes(searchKeyword.value);
+        })
+        .map(item => {
+          return Object.assign({}, item, {
+            label: getOptionProperty(item, props.labelProperty),
+            value: getOptionProperty(item, props.valueProperty)
           });
+        });
     } else {
       return [];
     }

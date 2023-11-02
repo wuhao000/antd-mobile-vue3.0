@@ -64,6 +64,13 @@ export default [{
   },
   component: () => import('../generated/checkbox/index.vue')
 }, {
+  path: 'selector',
+  name: 'Selector 选择器',
+  meta: {
+    tag: '数据入口'
+  },
+  component: () => import('../generated/selector/index.vue')
+}, {
   path: 'date-picker',
   name: 'DatePicker 日期选择',
   meta: {
