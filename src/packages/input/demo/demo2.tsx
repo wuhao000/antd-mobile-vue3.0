@@ -22,6 +22,12 @@ export default defineComponent({
         <div>
           <List title="Customize to focus">
             <InputItem
+                onKeydown={(e) => {
+                  console.log('keydown', e);
+                }}
+                onKeyup={e => {
+                  console.log('keyup', e);
+                }}
                 placeholder="auto focus"
                 ref="autoFocusInst">
               标题

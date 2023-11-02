@@ -25,6 +25,8 @@ export default defineComponent({
     onChange: Function,
     onBlur: Function,
     onConfirm: Function,
+    onKeydown: Function,
+    onKeyup: Function,
     defaultValue: {
       type: [String, Number] as PropType<string | number>
     },
@@ -393,6 +395,8 @@ export default defineComponent({
                   placeholder,
                   readonly: isReadonly,
                   disabled: isDisabled,
+                  onKeydown: this.onKeydown,
+                  onKeyup: this.onKeyup,
                   onChange: this.onInputChange,
                   onFocus: this.onInputFocus,
                   onBlur: this.onInputBlur,
