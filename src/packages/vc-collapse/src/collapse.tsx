@@ -1,10 +1,8 @@
+import {getPropsData} from '../../utils/props-util';
 import BaseMixin from 'ant-design-vue/es/_util/BaseMixin';
 import {
-  hasProp,
-  getPropsData,
   isEmptyElement,
-  initDefaultProps,
-  getSlot
+  initDefaultProps
 } from 'ant-design-vue/es/_util/props-util';
 import {cloneElement} from 'ant-design-vue/es/_util/vnode';
 import {unwrapFragment} from '../../utils/vue';
