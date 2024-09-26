@@ -34,9 +34,6 @@
     "types",
     "es"
   ],
-  "publishConfig": {
-    "registry": "https://nexus.aegis-info.com/repository/npm-aegis/"
-  },
   "postcss": {
     "plugins": {
       "autoprefixer": {}

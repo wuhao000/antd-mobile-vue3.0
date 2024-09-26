@@ -1,4 +1,4 @@
-export * from './aegis-ui';
+export * from './antdm';
 
 import {UIComponent} from "./components/component";
 
