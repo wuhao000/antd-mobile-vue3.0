@@ -42,8 +42,8 @@ export const CascaderView = defineComponent({
       default: '请选择'
     }
   },
-  setup(props, {emit, attrs}) {
-    const {stateValue} = usePureInput(props, {emit, attrs}, {
+  setup(props, {emit, attrs, slots}) {
+    const {stateValue} = usePureInput(props, {emit, attrs, slots}, {
       defaultValue: props.defaultValue
     });
     const tabActiveKey = ref<number>(0);

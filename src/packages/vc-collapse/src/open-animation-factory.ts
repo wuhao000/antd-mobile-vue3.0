@@ -1,4 +1,4 @@
-import cssAnimation from 'ant-design-vue/es/_util/css-animation';
+import cssAnimation from './css-animation';
 
 function animate(node, show, transitionName, done) {
   let height;

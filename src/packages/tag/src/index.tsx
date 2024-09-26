@@ -46,8 +46,8 @@ export default defineComponent({
       default: false
     }
   },
-  setup(props, {emit, attrs}) {
-    const {} = usePureInput(props, {emit, attrs})
+  setup(props, {emit, attrs, slots}) {
+    const {} = usePureInput(props, {emit, attrs, slots})
 
     const onClick = () => {
       const {disabled} = props;

@@ -1,4 +1,5 @@
 import {cloneElement} from 'ant-design-vue/es/_util/vnode';
+import { VNode } from 'vue';
 
 export type PropagationEvent = 'click';
 
@@ -8,7 +9,7 @@ const eventToPropRecord: Record<PropagationEvent, string> = {
 
 export function withStopPropagation(
     events: PropagationEvent[],
-    element: JSX.Element
+    element: VNode
 ) {
   const props: Record<string, any> = {...element.props};
   for (const key of events) {

@@ -64,7 +64,7 @@ export default defineComponent({
     const extraProps: any = {};
     ['name', 'disabled'].forEach(i => {
       if (i in this.$props) {
-        extraProps[i] = (this.$props as any)[i];
+        extraProps[i] = this.$props[i];
       }
     });
     return (

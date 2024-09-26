@@ -186,7 +186,7 @@ const InternalTabs = defineComponent({
         let offset = +`${lastOffset}`.replace('%', '');
         if (`${lastOffset}`.indexOf('%') >= 0) {
           offset /= 100;
-          offset *= isVertical ? layoutRef.clientHeight : layoutRef.value.clientWidth;
+          offset *= isVertical ? layoutRef.value.clientHeight : layoutRef.value.clientWidth;
         }
         return offset;
       };
@@ -418,7 +418,7 @@ const InternalTabs = defineComponent({
         ...isTabVertical() ? {top: `${-currentTab.value * 100}%`} : {left: `${-currentTab.value * 100}%`}
       };
     }
-    const renderContent = (children: JSX.Element[]) => {
+    const renderContent = (children: VNode[]) => {
       const {prefixCls, animated, destroyInactiveTab, useLeftInsteadTransform} = props;
       let contentCls = `${prefixCls}-content-wrap`;
       if (animated && !isMoving.value) {

@@ -1,4 +1,4 @@
-import {defineComponent, inject, PropType} from 'vue';
+import { defineComponent, inject, PropType } from 'vue';
 import PopupPicker from '../vmc-picker/popup';
 
 export default defineComponent({

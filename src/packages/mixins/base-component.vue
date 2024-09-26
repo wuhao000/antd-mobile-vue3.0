@@ -30,7 +30,7 @@
         };
       });
       const slotNames = computed(() => {
-        return Object.keys(this.$slots);
+        return Object.keys(slots);
       });
       const getInputComponent = () => {
         return {};
@@ -40,9 +40,9 @@
       };
       const getSlotProps = () => {
         const props: any = {};
-        Object.keys(this.$slots).forEach((slotKey: string) => {
+        Object.keys(slots).forEach((slotKey: string) => {
           if (slotKey !== 'default') {
-            props[slotKey] = this.$slots[slotKey];
+            props[slotKey] = slots[slotKey];
           }
         });
         return props;

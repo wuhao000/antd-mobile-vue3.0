@@ -25,8 +25,8 @@ export default defineComponent({
       default: false
     }
   },
-  setup(props, {emit, attrs}) {
-    const {stateValue, setStateValue} = usePureInput(props, {emit, attrs});
+  setup(props, {emit, attrs, slots}) {
+    const {stateValue, setStateValue} = usePureInput(props, {emit, attrs, slots});
     const onClick = e => {
       e.stopPropagation();
       emit('click', e);

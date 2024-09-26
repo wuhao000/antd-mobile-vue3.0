@@ -48,8 +48,8 @@ export default defineComponent({
     }
   },
   emits: ['change', 'update:value'],
-  setup(props, {emit, attrs}) {
-    const {stateValue, setStateValue} = usePureInput(props, {emit, attrs})
+  setup(props, {emit, attrs, slots}) {
+    const {stateValue, setStateValue} = usePureInput(props, {emit, attrs, slots})
     const onChange = () => {
       // do nothing
     };
@@ -77,7 +77,7 @@ export default defineComponent({
     const extraProps: any = {};
     ['name', 'defaultChecked', 'checked', 'onChange', 'disabled'].forEach(i => {
       if (i in this.$props) {
-        extraProps[i] = (this.$props as any)[i];
+        extraProps[i] = this.$props[i];
       }
     });
     // @ts-ignore

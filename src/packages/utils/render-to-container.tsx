@@ -1,4 +1,4 @@
-import {Teleport} from 'vue';
+import { Teleport, VNode } from 'vue';
 import {canUseDom} from './can-use-dom';
 import {resolveContainer} from './get-container';
 
@@ -6,7 +6,7 @@ export type GetContainer = HTMLElement | (() => HTMLElement) | null
 
 export function renderToContainer(
     getContainer: GetContainer,
-    node: JSX.Element
+    node: VNode
 ) {
   if (canUseDom && getContainer) {
     const container = resolveContainer(getContainer);

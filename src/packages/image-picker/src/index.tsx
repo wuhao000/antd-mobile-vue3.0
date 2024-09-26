@@ -64,6 +64,7 @@ export default defineComponent({
       default: 'am-image-picker'
     },
     value: {
+      type: Array,
       default: () => {
         return [];
       }
@@ -81,7 +82,7 @@ export default defineComponent({
       default: '*'
     },
     length: {
-      type: Number as PropType<number | string>,
+      type: Number,
       default: 4
     },
     maxLength: {

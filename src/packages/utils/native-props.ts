@@ -1,6 +1,6 @@
 import {cloneElement} from 'ant-design-vue/es/_util/vnode';
 import classNames from 'classnames';
-import {CSSProperties} from 'vue';
+import { CSSProperties, VNode } from 'vue';
 
 export interface NativeProps<S extends string = never> {
   className?: string;
@@ -10,7 +10,7 @@ export interface NativeProps<S extends string = never> {
 
 export function withNativeProps(
     props: any,
-    element: JSX.Element
+    element: VNode
 ) {
   const p = {
     ...element.props

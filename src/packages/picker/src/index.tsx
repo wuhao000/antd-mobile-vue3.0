@@ -54,7 +54,6 @@ export const PickerMixin = (isView) => {
       format: {
         type: Function as PropType<(values: Array<VNode | string>) => string | VNode[]>,
         default: (values: VNode[]) => {
-          // label is JSX.Element or other
           if (values.length > 0 && typeof values[0] !== 'string') {
             return values;
           }

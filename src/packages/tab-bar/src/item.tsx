@@ -1,4 +1,4 @@
-import {computed, defineComponent, getCurrentInstance, inject, onMounted, PropType, ref, VNode} from 'vue';
+import { computed, defineComponent, getCurrentInstance, inject, onMounted, PropType, ref, VNode } from 'vue';
 import getDataAttr from '../../utils/get-data-attr';
 import Tab from './tab';
 

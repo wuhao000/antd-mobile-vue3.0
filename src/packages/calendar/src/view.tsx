@@ -1,8 +1,8 @@
-import {defineComponent, reactive} from 'vue';
+import { defineComponent, reactive } from 'vue';
 import defaultLocale from './locale/zh_CN';
 import Icon from '../../icon';
-import {getComponentLocale} from '../../utils/getLocale';
-import {CalendarView as VMCalendar} from '../../vmc-calendar';
+import { getComponentLocale } from '../../utils/getLocale';
+import { CalendarView as VMCalendar } from '../../vmc-calendar';
 import CalendarProps from '../../vmc-calendar/calendar-props';
 
 const endOfMonth = () => {
@@ -42,7 +42,7 @@ export default defineComponent({
         class={this.prefixCls + '-view'}
         locale={locale}
         renderHeader={headerProps => (
-          <Header {...headerProps} closeIcon={<Icon type="cross"/>}/>
+          <Header {...headerProps} closeIcon={<Icon type="cross" />} />
         )}
         onSelectHasDisableDate={(...args) => {
           this.$emit('select-has-disable-date', ...args);

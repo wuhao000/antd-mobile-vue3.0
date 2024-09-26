@@ -2,7 +2,7 @@ import isEqual from 'lodash.isequal';
 import {computed, getCurrentInstance, onBeforeUnmount, onMounted, ref, watch} from 'vue';
 import {useEmitter} from './emitter';
 
-export const usePureInput = <T extends any>(props, {emit, attrs}, options: {
+export const usePureInput = <T extends any>(props, {emit, attrs, slots}, options: {
   defaultValue: any,
   propName?: string
 } = {
@@ -73,10 +73,6 @@ export const usePureInput = <T extends any>(props, {emit, attrs}, options: {
     });
     return obj;
   });
-  const slots = computed(() => Object.assign({}, slots, getSlots()));
-  const getSlots = () => {
-    return {};
-  };
   const convertValueBack = value => value;
   const getInputComponent = () => {
     return {};

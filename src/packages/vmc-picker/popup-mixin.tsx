@@ -11,7 +11,7 @@ export default function PopupMixin(getModal, newProps) {
       ...PopupPickerProps
     },
     setup(props, {emit, slots}) {
-      const picker = ref(null);
+      const picker = ref<VNode>(null);
       const state = reactive({
         pickerValue: props.value !== undefined ? props.value : null,
         open: props.open || false
@@ -30,8 +30,9 @@ export default function PopupMixin(getModal, newProps) {
         if (state.pickerValue !== pickerValue) {
           state.pickerValue = pickerValue;
           const {pickerValueChangeProp} = props;
-          if (picker && picker.props[pickerValueChangeProp!]) {
-            picker.props[pickerValueChangeProp!](pickerValue);
+
+          if (picker.value?.props[pickerValueChangeProp!]) {
+            (picker.value.props[pickerValueChangeProp!] as (p: unknown) => void)(pickerValue);
           }
         }
       };
