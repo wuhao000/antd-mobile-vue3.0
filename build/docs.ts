@@ -1,8 +1,8 @@
 import fs from 'fs';
-import {Component} from './components';
-import componentList from "./components";
+import { Component } from './components';
+import componentList from './components';
 
-import {render as renderTemplate} from "./tmpl";
+import { render as renderTemplate } from './tmpl';
 
 const basePath = 'src/packages';
 
@@ -52,12 +52,14 @@ function createDemoTemplate(demos: DemoDescriptor[], options) {
       <span></span>
       <h2>${titleMap[it]}</h2>
     </div>
-    <${it}-doc/>`;
+    <div 
+      class="markdown-body"
+      v-html="${it}Doc"></div>`;
     } else {
       return '';
     }
   }).filter(it => it.length > 0).join('\n\t\t');
-  const title = options.title ? '<title-doc/>' : '';
+  const title = options.title ? '<div class="markdown-body" v-html="titleDoc"/>' : '';
   return renderTemplate('src/templates/demo.vue.tmpl', {
     title,
     demoComponents,
@@ -78,7 +80,7 @@ function createDemoTemplate(demos: DemoDescriptor[], options) {
  */
 function createDemoIndex(component: Component, componentDemoRootPath, demos: DemoDescriptor[]) {
   const demoImports = demos.map(it => `  import ${it.name} from './${it.name}.vue';`)
-      .join('\n');
+    .join('\n');
   const options = {
     title: fs.existsSync(`${componentDemoRootPath}/README.md`),
     props: fs.existsSync(`${componentDemoRootPath}/props.md`),
@@ -87,9 +89,9 @@ function createDemoIndex(component: Component, componentDemoRootPath, demos: Dem
     slots: fs.existsSync(`${componentDemoRootPath}/slots.md`)
   };
   const mdImports = Object.keys(options)
-      .filter(it => options[it])
-      .map(it => `import ${it.substr(0, 1).toUpperCase() + it.substr(1)}Doc from '../../packages/${component.dir}/demo/${it === 'title' ? 'README' : it}.md';`)
-      .join('\n  ');
+    .filter(it => options[it])
+    .map(it => `import { html as ${it}Doc } from '../../packages/${component.dir}/demo/${it === 'title' ? 'README' : it}.md';`)
+    .join('\n  ');
 
   function generateComponents(demos: DemoDescriptor[], options: {
     slots: boolean;
@@ -99,11 +101,6 @@ function createDemoIndex(component: Component, componentDemoRootPath, demos: Dem
     props: boolean
   }) {
     const components = [];
-    Object.keys(options).forEach(key => {
-      if (options[key]) {
-        components.push(`${key.substr(0, 1).toUpperCase() + key.substr(1)}Doc`);
-      }
-    });
     if (demos.length) {
       components.push(`M${component.upperCase}: ${component.upperCase}`);
       components.push(...demos.map(it => it.name));
@@ -122,7 +119,12 @@ ${demoImports};
   export default defineComponent({
     components: {${generateComponents(demos, options)}},
     setup() {
-      return {};
+      return {
+        ${
+    Object.keys(options)
+      .filter(it => options[it]).map(it => `${it}Doc`).join(',')
+  }
+      };
     }
   });
 </script>
@@ -175,7 +177,7 @@ function resolveDemo(component) {
       const vueContent = fs.readFileSync(demoFile).toString();
       const markdownPath = componentDemoRootPath + '/' + demoName + '.md';
       createDemoFile(component, componentDemoRootPath,
-          demoName, fileName, vueContent);
+        demoName, fileName, vueContent);
       const markdownContent = fs.existsSync(markdownPath) ? fs.readFileSync(markdownPath).toString() : '';
       const firstLine = markdownContent.split('\n')[0];
       demos.push({

@@ -6,8 +6,8 @@
   </div>
 </template>
 <script lang="ts">
-  import source from './{{{demoName}}}.txt';
-  import md from '../../packages/{{{dir}}}/demo/{{{demoName}}}.md';
+  import source from './{{{demoName}}}.txt?raw';
+  import { html as md } from '../../packages/{{{dir}}}/demo/{{{demoName}}}.md';
   import CodeBox from '../../components/code-box.vue';
   import {defineComponent} from 'vue';
 
