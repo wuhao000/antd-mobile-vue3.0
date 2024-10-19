@@ -25,7 +25,7 @@ const classString = nonToolComponents.map(it => {
 }`;
 }).join('\n');
 const componentsDefContent = importString + '\n\n' + classString + '\n';
-const packageDefPath = 'types/aegis-ui.d.ts';
+const packageDefPath = 'types/antd-mobile-vue.d.ts';
 
 fs.writeFileSync(packageDefPath, componentsDefContent);
 console.log('生成typescript定义文件完成');

@@ -1,4 +1,4 @@
-export * from './aegis-ui';
+export * from './antd-mobile-vue';
 
 import {UIComponent} from "./components/component";
 

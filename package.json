@@ -1,6 +1,6 @@
 {
   "name": "antd-mobile-vue-next",
-  "version": "0.1.0-9",
+  "version": "0.1.0-10",
   "description": "基于Vue 3.0、vite2.0 移植的ant-design-mobile组件库",
   "main": "es/index.js",
   "keyword": "antd antd-mobile vue vue3 vite antd-mobile-vue",
@@ -19,24 +19,20 @@
   "private": false,
   "scripts": {
     "dev": "npm run docs && vite",
-    "create": "ts-node build/create.ts && npm run docs",
+    "cnpreate": "ts-node build/create.ts && npm run docs",
     "docs": "ts-node build/check.ts && ts-node build/def.ts && ts-node build/docs.ts",
     "build": "npm run docs && ts-node compile/build-components.ts && vue-cli-service build",
     "lint": "vue-cli-service lint",
     "lib": "npm run docs && vue-cli-service build --target lib --name antdm --dest lib src/packages/index.ts",
     "remove": "ts-node build/remove.ts && npm run docs",
-    "cdn": "set NODE_OPTIONS=--openssl-legacy-provider && npm run lib --trace-warnings && ts-node build/cdn.ts",
     "compile": "npm run docs && ts-node compile/build-components.ts",
-    "release": "set NODE_OPTIONS=--openssl-legacy-provider && npm run cdn && npm run compile && npm publish"
+    "release": "set NODE_OPTIONS=--openssl-legacy-provider && npm run compile && npm publish"
   },
   "files": [
     "README.md",
     "types",
     "es"
   ],
-  "publishConfig": {
-    "registry": "https://nexus.aegis-info.com/repository/npm-aegis/"
-  },
   "postcss": {
     "plugins": {
       "autoprefixer": {}

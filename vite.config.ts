@@ -1,4 +1,4 @@
-  import vue from '@vitejs/plugin-vue';
+import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import {defineConfig} from 'vite';
 import Markdown from 'vite-plugin-md';
