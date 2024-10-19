@@ -1,20 +1,21 @@
 <template>
   <div class="home">
-    <develop-doc/>
-    <read-me/>
+    <div
+      class="markdown-body"
+      v-html="developDoc" />
+    <div
+      class="markdown-body"
+      v-html="readMe" />
   </div>
 </template>
 <script lang="ts">
   import {defineComponent, onMounted, reactive} from 'vue';
-  import ReadMe from '../documents/change-log/README.md';
-  import DevelopDoc from '../documents/develop.md';
+  import { html as readMe } from '../documents/change-log/README.md';
+  import { html as developDoc } from '../documents/develop.md';
   import '../styles/github-markdown.less';
 
   export default defineComponent({
     name: 'Home',
-    components: {
-      ReadMe, DevelopDoc
-    },
     setup(props, {emit, slots}) {
       const form = reactive({
         value: null
@@ -23,7 +24,9 @@
         form.value = '2';
       });
       return {
-        form
+        form,
+        readMe,
+        developDoc
       };
     }
   });

@@ -1,4 +1,4 @@
-import {defineComponent, PropType} from 'vue';
+import { defineComponent, PropType } from 'vue';
 import RmcDrawer from '../../vmc-drawer';
 
 const Drawer = defineComponent({

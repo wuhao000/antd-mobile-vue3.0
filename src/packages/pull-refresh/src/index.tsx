@@ -142,8 +142,8 @@ export default defineComponent({
       _to.value = {
         touchstart: onTouchStart.bind(this).bind(this, ele),
         touchmove: onTouchMove.bind(this).bind(this, ele),
-        touchend: onTouchEnd.bind(this).bind(this, ele),
-        touchcancel: onTouchEnd.bind(this).bind(this, ele)
+        touchend: onTouchEnd.bind(this).bind(this),
+        touchcancel: onTouchEnd.bind(this).bind(this)
       };
       Object.keys(_to.value).forEach(key => {
         ele.addEventListener(key, _to.value[key], willPreventDefault);

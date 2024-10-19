@@ -8,7 +8,6 @@
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const path = require('path');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
-const webpack = require('webpack');
 const resolve = dir => {
   return path.join(__dirname, dir);
 };

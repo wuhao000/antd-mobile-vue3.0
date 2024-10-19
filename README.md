@@ -5,6 +5,8 @@
 如有问题可添加个人微信（wuhao1200），欢迎共同交流
 ![](http://chuantu.xyz/t6/740/1595927552x-633054266.jpg)
 
+[查看文档](https://antdm.sxltserver.com/)
+
 # antd-mobile-vue
 
 > 基于 Vue3 的组件库，代码由antd-mobile转为Vue版本，目前已具备antd-mobile的绝大部分组件

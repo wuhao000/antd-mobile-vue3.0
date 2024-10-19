@@ -1,26 +1,21 @@
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import {defineConfig} from 'vite';
-import Markdown from 'vite-plugin-md';
+import { defineConfig } from 'vite';
+import Markdown, { Mode } from 'vite-plugin-markdown';
 import vitePluginString from 'vite-plugin-string';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vitePluginString(
-        {
-          include: [
-            '**/*.txt'
-          ],
-          compress: false
-        }),
-    vueJsx({
-      // options are passed on to @vue/babel-plugin-jsx
+    Markdown({
+      mode: [Mode.HTML]
     }),
-    vue({
-      include: [/\.vue$/, /\.md$/]
+    vitePluginString({
+      include: ['**/*.txt'],
+      compress: false
     }),
-    Markdown()
+    vueJsx(),
+    vue({include: [/\.vue$/]})
   ],
   css: {
     preprocessorOptions: {

@@ -1,4 +1,4 @@
-export * from './antd-mobile-vue';
+export * from './antdm';
 
 import {UIComponent} from "./components/component";
 

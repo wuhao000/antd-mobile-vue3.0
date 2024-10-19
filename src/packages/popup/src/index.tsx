@@ -6,6 +6,7 @@ import {useBaseInputComponent} from '../../mixins/base-input-component';
 import {pureInputComponentProps} from '../../mixins/pure-input-component';
 import Touchable from '../../vmc-feedback/feedback';
 import omit from "omit.js";
+import { getZIndex } from "../../utils/zindex-manage";
 
 export default defineComponent({
   name: 'MPopup',
@@ -190,6 +191,10 @@ export default defineComponent({
     return <Drawer
       ref={this.setDrawerRef}
       {...props}
+      zIndex={getZIndex()}
+      push={{
+        distance: 0
+      }}
       v-slots={this.slots}/>;
   }
 });

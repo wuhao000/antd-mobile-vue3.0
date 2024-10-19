@@ -85,8 +85,8 @@ function notice(props: ToastProps) {
   const app = createApp({
     render() {
       return (
-        <Transition key={'fade-in'}>
-          <div>
+        <Transition>
+          <div key={'fade-in'}>
             <div class={['am-mask', 'am-toast-mask']}
                  style={{
                    pointerEvents: mask ? 'all' : 'none'

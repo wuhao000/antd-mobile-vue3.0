@@ -3,7 +3,7 @@ import { initDefaultProps, getComponent, getSlot } from 'ant-design-vue/es/_util
 import { panelProps } from './common-props';
 import { defineComponent } from 'vue';
 import BaseMixin from 'ant-design-vue/es/_util/BaseMixin';
-import Transition from 'ant-design-vue/es/_util/transition';
+import { Transition } from 'vue';
 
 export default defineComponent({
   name: 'Panel',

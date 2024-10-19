@@ -1,18 +1,21 @@
 <template>
   <div class="home">
-    <read-me></read-me>
+    <div
+      class="markdown-body"
+      v-html="readMe" />
   </div>
 </template>
 <script lang="ts">
   import {defineComponent} from 'vue';
   import '../styles/github-markdown.less';
-  import ReadMe from './../../README.md';
+  import { html as readMe } from './../../README.md';
 
   export default defineComponent({
     name: 'Home',
-    components: {ReadMe},
-    setup(props, {emit, slots}) {
-      return {};
+    setup() {
+      return {
+        readMe
+      };
     }
   });
 </script>

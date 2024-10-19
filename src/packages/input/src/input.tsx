@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import {defineComponent, PropType, ref, Ref, watch} from 'vue';
+import { defineComponent, PropType, ref, Ref, watch } from 'vue';
 
 const Input = defineComponent({
   name: 'MInput',
@@ -54,7 +54,7 @@ const Input = defineComponent({
         this.$emit('change', e);
       }
     };
-    return <input {...props}/>;
+    return <input {...props} />;
   }
 });
 

@@ -12,7 +12,8 @@ export const useBaseInputComponent = <T extends any>(props, {emit, attrs, slots}
   const {isReadonly, componentSize, isDisabled} = useSimpleFormComponent(props, form);
   const {getSlotProps, setStateValue, cssStyle, listeners, getDefaultSlot, getProps, stateValue} = usePureInput(props, {
     emit,
-    attrs
+    attrs,
+    slots
   }, options);
   return {
     isReadonly,

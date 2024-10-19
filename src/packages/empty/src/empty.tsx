@@ -1,14 +1,14 @@
 import classNames from 'classnames';
-import {CSSProperties, defineComponent, PropType} from 'vue';
+import { CSSProperties, defineComponent, PropType, VNode } from 'vue';
 import EmptyIcon from '../../assets/empty-icon.svg';
 import {NativeProps, withNativeProps} from '../../utils/native-props';
 
 const classPrefix = `adm-empty`;
 
 export type EmptyProps = {
-  image?: JSX.Element;
+  image?: VNode;
   imageStyle?: CSSProperties;
-  description?: JSX.Element;
+  description?: VNode;
 } & NativeProps;
 
 const defaultProps = {
@@ -19,14 +19,14 @@ export default defineComponent({
   name: 'MEmpty',
   props: {
     image: {
-      type: [Object, String] as PropType<JSX.Element | string>,
+      type: [Object, String] as PropType<VNode | string>,
       default: () => EmptyIcon
     },
     imageStyle: {
       type: Object as PropType<CSSProperties>
     },
     description: {
-      type: [Object, String] as PropType<JSX.Element | string>
+      type: [Object, String] as PropType<VNode | string>
     }
   },
   render() {

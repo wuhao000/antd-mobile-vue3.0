@@ -51,7 +51,7 @@ export default defineComponent({
     const mark = (
         <label class={wrapCls}
                onClick={this.onClick}>
-          <RcCheckbox {...this.$props as any}
+          <RcCheckbox {...this.$props}
                       checked={this.value}
                       type="radio"/>
           {this.$slots.default?.()}

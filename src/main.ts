@@ -8,7 +8,6 @@ import markdown from './components/markdown.vue';
 import Antdm from './packages';
 import router from './router';
 import App from './views/app.vue';
-import 'ant-design-vue/dist/antd.min.css';
 
 /**
  * 注册全局指令，hljs在router跳转时被清除

@@ -1,102 +1,111 @@
 <template xmlns:v-clipboard="http://www.w3.org/1999/xhtml">
   <div class="code-box code-box-target">
-    <component :is="markdown"
-               class="code-box-meta"></component>
-    <CopyOutlined class="copy-btn"/>
-    <pre class="code-box-code markdown-body clearfix">
-      <a-layout>
-        <code v-text="code"></code>
-      </a-layout>
-    </pre>
+    <div
+      class="code-box-meta markdown-body"
+      v-html="markdown" />
+    <CopyOutlined class="copy-btn" />
+    <a-layout>
+      <code-editor
+        mode="text/x-vue"
+        height="300px"
+        :value="code" />
+    </a-layout>
   </div>
 </template>
 <script lang="ts">
-  import {message} from 'ant-design-vue';
-  import {defineComponent, ref} from 'vue';
+import { message } from 'ant-design-vue';
+import { defineComponent, ref } from 'vue';
+import CodeEditor from './code-editor.vue';
 
-  export default defineComponent({
-    name: 'CodeBox',
-    props: {
-      code: String,
-      markdown: [String, Object]
-    },
-    setup(props) {
-      const showCode = ref(false);
-      const copied = () => {
-        message.success('已复制');
-      };
-      return {
-        showCode,
-        copied
-      };
-    }
-  });
+export default defineComponent({
+  name: 'CodeBox',
+  components: {CodeEditor},
+  props: {
+    code: String,
+    markdown: String
+  },
+  setup(props) {
+    const showCode = ref(false);
+    const copied = () => {
+      message.success('已复制');
+    };
+    return {
+      showCode,
+      copied
+    };
+  }
+});
 </script>
 <style lang="less">
-  .code-box {
-    border: 1px solid #ebedf0;
-    border-radius: 2px;
-    display: inline-block;
+.code-box {
+  border: 1px solid #ebedf0;
+  border-radius: 2px;
+  display: inline-block;
+  width: 100%;
+  position: relative;
+  margin: 0 0 16px;
+  transition: all 0.2s;
+
+  &.code-box-target {
+    -webkit-box-shadow: 0 0 4px rgba(16, 142, 233, .5);
+    box-shadow: 0 0 4px rgba(16, 142, 233, .5);
+  }
+}
+
+.CodeMirror {
+  font-size: 16px;
+}
+
+.code-box-demo {
+  border-bottom: 1px solid #ebedf0;
+  padding: 22px 24px 30px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.copy-btn {
+  position: absolute;
+  cursor: pointer;
+  right: 30px;
+  top: 20px;
+}
+
+.code-box-code {
+  padding: 0 22px;
+  position: relative;
+
+
+  code {
     width: 100%;
-    position: relative;
-    margin: 0 0 16px;
-    transition: all 0.2s;
-
-    &.code-box-target {
-      -webkit-box-shadow: 0 0 4px rgba(16, 142, 233, .5);
-      box-shadow: 0 0 4px rgba(16, 142, 233, .5);
-    }
+    top: 0;
+    max-height: 220px;
+    overflow: auto;
   }
+}
 
-  .code-box-demo {
-    border-bottom: 1px solid #ebedf0;
-    padding: 22px 24px 30px;
-    color: rgba(0, 0, 0, 0.65);
-  }
+.code-box-meta.markdown-body {
+  position: relative;
+  padding: 18px 22px;
+  border-radius: 0 0 2px 2px;
+  transition: background-color 0.4s;
+  width: 100%;
+  font-size: 14px;
+}
 
-  .copy-btn {
-    position: absolute;
-    cursor: pointer;
-    right: 30px;
-    top: 20px;
-  }
+.code-box-meta > h4 {
+  font-size: 16px;
+  color: #777;
+  -webkit-transition: all .4s ease;
+  transition: all .4s ease;
+}
 
-  .code-box-code {
-    padding: 0 22px;
-    position: relative;
+.markdown-body {
+  color: #314659;
+  font-size: 14px;
+  line-height: 2;
+}
 
-
-    code {
-      width: 100%;
-      top: 0;
-      max-height: 220px;
-    }
-  }
-
-  .code-box-meta.markdown-body {
-    position: relative;
-    padding: 18px 22px;
-    border-radius: 0 0 2px 2px;
-    transition: background-color 0.4s;
-    width: 100%;
-    font-size: 14px;
-  }
-
-  .code-box-meta > h4 {
-    font-size: 16px;
-    color: #777;
-    -webkit-transition: all .4s ease;
-    transition: all .4s ease;
-  }
-
-  .markdown-body {
-    color: #314659;
-    font-size: 14px;
-    line-height: 2;
-  }
-
-  .show-code-btn {
-    text-align: center;
-    border-top: 1px solid #eee;
-  }
+.show-code-btn {
+  text-align: center;
+  border-top: 1px solid #eee;
+}
 </style>

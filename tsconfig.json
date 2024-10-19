@@ -1,20 +1,24 @@
 {
   "compilerOptions": {
-    "target": "es2015",
+    "target": "esnext",
     "module": "esnext",
     "strict": true,
     "jsx": "preserve",
-    "jsxFactory": "h",
-    "importHelpers": true,
     "moduleResolution": "node",
-    "strictNullChecks": false,
+    "skipLibCheck": true,
     "esModuleInterop": true,
-    "noImplicitAny": false,
     "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "useDefineForClassFields": true,
+    "noImplicitAny": false,
     "experimentalDecorators": true,
+    "strictNullChecks": false,
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
+      "webpack-env",
+      "@types/jest",
+      "jest",
       "node"
     ],
     "paths": {

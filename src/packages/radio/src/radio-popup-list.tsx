@@ -1,10 +1,10 @@
-import {computed, defineComponent, inject, PropType, ref, Ref, VNode} from 'vue';
+import { computed, defineComponent, inject, PropType, ref, Ref, VNode } from 'vue';
 import List from '../../list';
-import {optionsBasedComponentProps, useOptionsBaseComponent} from '../../mixins/options-based-component';
+import { optionsBasedComponentProps, useOptionsBaseComponent } from '../../mixins/options-based-component';
 import Popup from '../../popup';
 import RadioList from './radio-list';
-import {isNotNull, isNull} from "../../utils/util";
-import classNames from "classnames";
+import { isNotNull, isNull } from '../../utils/util';
+import classNames from 'classnames';
 
 export default defineComponent({
   name: 'MRadioPopupList',
@@ -78,7 +78,7 @@ export default defineComponent({
       disabled
     } = this;
     const slots = {
-      control: () => <span  class={{
+      control: () => <span class={{
         [`am-list-item-placeholder`]: isNull(stateValue)
       }}>{(isNotNull(stateValue)) ? optionText : placeholder}</span>,
       default: () => <span>{title}</span>
@@ -95,7 +95,7 @@ export default defineComponent({
                  required={this.required}
                  touchFeedback={!readOnly && !disabled}
                  disabled={isDisabled}
-                 v-slots={slots}/>
+                 v-slots={slots} />
       <Popup open={isDisabled ? false : this.popupOpen}
              showCancel={clearable}
              cancelButton={cancelButton}
@@ -104,7 +104,7 @@ export default defineComponent({
              onCancel={closePopup}>
         <RadioList {...listProps}
                    maxHeightPercentage={0.7}
-                   onChange={this.onChange}/>
+                   onChange={this.onChange} />
       </Popup>
     </>;
   }

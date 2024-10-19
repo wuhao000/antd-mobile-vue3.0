@@ -1,4 +1,4 @@
-import {defineComponent, inject, PropType, VNode} from 'vue';
+import { defineComponent, inject, PropType, VNode } from 'vue';
 import PopupPicker from '../vmc-picker/popup';
 
 export default defineComponent({
@@ -44,11 +44,11 @@ export default defineComponent({
       onOk: this.onOk
     };
     return (<PopupPicker
-        {...props}
-        v-slots={{
-          picker: () => this.cascader,
-          default: this.$slots.default
-        }}
+      {...props}
+      v-slots={{
+        picker: () => this.cascader,
+        default: this.$slots.default
+      }}
     />);
   }
 });
