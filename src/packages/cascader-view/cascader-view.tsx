@@ -1,8 +1,10 @@
 import {computed, defineComponent, PropType, ref, watch} from 'vue';
 import {usePureInput} from '../mixins/pure-input-component';
 import RadioList from '../radio/src/radio-list';
+import CheckboxList from '../checkbox/src/checkbox-list';
 import Tabs from '../tabs';
 import {NativeProps} from '../utils/native-props';
+import { flatten } from 'lodash';
 
 const classPrefix = `adm-cascader-view`;
 
@@ -40,7 +42,8 @@ export const CascaderView = defineComponent({
     placeholder: {
       type: String,
       default: '请选择'
-    }
+    },
+    multiple: Boolean
   },
   setup(props, {emit, attrs, slots}) {
     const {stateValue} = usePureInput(props, {emit, attrs, slots}, {
@@ -54,13 +57,25 @@ export const CascaderView = defineComponent({
       }[] = [];
       let currentOptions = props.options;
       let reachedEnd = false;
-      for (const v of stateValue.value || []) {
-        const target = currentOptions.find(option => option.value === v);
+      for (const v of (stateValue.value || [])) {
+        let target;
+        if (Array.isArray(v)) {
+          const selected = currentOptions.filter(it => v.includes(it.value));
+          if (selected.length) {
+            target = {
+              value: selected.map(it => it.value),
+              label: selected.length + '个选项',
+              children: flatten(selected.map(it => it.children || []))
+            }
+          }
+        } else {
+          target = currentOptions.find(option => option.value === v);
+        }
         ret.push({
           selected: target,
           options: currentOptions
         });
-        if (!target || !target.children || target.children.length === 0) {
+        if (!target?.children?.length) {
           reachedEnd = true;
           break;
         }
@@ -116,6 +131,7 @@ export const CascaderView = defineComponent({
             options: level.options,
             class: `${classPrefix}-content`
           } as const;
+          const hasChildren = level.options.some(it => it.children?.length);
           return (
               <Tabs.Tab
                   key={`tab_${index}`}
@@ -125,7 +141,9 @@ export const CascaderView = defineComponent({
                     </div>
                   }
                   forceRender>
-                <RadioList {...radioProps}/>
+                {
+                  this.multiple && index === this.levels.length - 1 && !hasChildren ? <CheckboxList {...radioProps}/> : <RadioList {...radioProps}/>
+                }
               </Tabs.Tab>
           );
         })}

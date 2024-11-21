@@ -54,10 +54,9 @@
     }
   }
 
-  &&-vertical {
     &>.@{listPrefixCls}-body {
 
-      &>.@{listItemPrefixCls} {
+      &>.@{listItemPrefixCls}.@{listItemPrefixCls}-vertical {
         &>.@{listItemPrefixCls}-line {
           & >.@{listItemPrefixCls}-content {
             & >.@{listItemPrefixCls}-control {
@@ -67,12 +66,10 @@
         }
       }
     }
-  }
 
-  &&-horizontal {
     &>.@{listPrefixCls}-body {
 
-      &>.@{listItemPrefixCls} {
+      &>.@{listItemPrefixCls}.@{listItemPrefixCls}-horizontal {
         &>.@{listItemPrefixCls}-line {
           & >.@{listItemPrefixCls}-content {
             display: flex;
@@ -88,7 +85,6 @@
         }
       }
     }
-  }
 
   &-item {
 

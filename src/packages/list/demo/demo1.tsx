@@ -1,5 +1,5 @@
-import {defineComponent, reactive, ref, Ref} from 'vue';
-import {List} from '../../index';
+import { defineComponent, reactive, ref, Ref } from 'vue';
+import { List } from '../../index';
 import './index1.less';
 
 const options = [{
@@ -107,20 +107,20 @@ export default defineComponent({
         <m-slider-item title="滑动输入条" v-model={this.state.slider}
                        error={this.state.error}
                        errorDisplayType={this.state.errorDisplayType}
-                       errorMessage={this.state.errorMessage}/>
+                       errorMessage={this.state.errorMessage} />
         <m-radio-list required={true}
                       title="单选"
                       options={options}
                       error={this.state.error}
                       errorDisplayType={this.state.errorDisplayType}
-                      errorMessage={this.state.errorMessage}/>
+                      errorMessage={this.state.errorMessage} />
         <m-checkbox-list
           required={true}
           title="多选"
           options={options}
           error={this.state.error}
           errorDisplayType={this.state.errorDisplayType}
-          errorMessage={this.state.errorMessage}/>
+          errorMessage={this.state.errorMessage} />
       </List>
     </div>);
   }

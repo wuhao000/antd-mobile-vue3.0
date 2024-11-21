@@ -21,10 +21,11 @@ export default defineComponent({
         <CascaderView options={options}/>
       </DemoBlock>
 
-      <DemoBlock title="受控模式" padding="0">
+      <DemoBlock title="多选模式" padding="0">
         <CascaderView
             options={options}
             value={this.value}
+            multiple={true}
             onChange={(val) => {
               this.setValue(val);
               console.log('onChange', val);

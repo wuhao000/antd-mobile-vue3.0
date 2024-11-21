@@ -15,6 +15,7 @@ import toast from '../../toast';
 import {filterHTMLAttrs} from '../../utils/dom';
 import {isEmptySlot} from '../../utils/vnode';
 import TouchFeedback from '../../vmc-feedback';
+import type { FormLayout } from '../index';
 
 export const Brief = defineComponent({
   name: 'MListItemBrief',
@@ -42,6 +43,9 @@ const Item = defineComponent({
     },
     prefixCls: {
       default: 'am-list-item'
+    },
+    layout: {
+      type: String as PropType<FormLayout>
     },
     role: {
       type: String as PropType<string>
@@ -135,7 +139,7 @@ const Item = defineComponent({
     const actualError = computed(() => props.error ?? instance.parent['error'] ?? false);
     const actualErrorMessage = computed(() => props.errorMessage || instance.parent['errorMessage']);
     const actualDisabled = computed(() => props.disabled);
-    const layout = computed(() => list?.layout ?? 'horizontal')
+    const layout = computed(() => props.layout || list?.layout || 'horizontal')
     const actualErrorDisplayType = computed(() => {
       if (layout.value === 'vertical') {
         return 'text';
