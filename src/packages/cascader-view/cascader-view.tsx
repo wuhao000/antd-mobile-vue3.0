@@ -30,6 +30,7 @@ export type CascaderViewProps = {
 } & NativeProps<'--height'>;
 
 export const CascaderView = defineComponent({
+  name: 'MCascaderView',
   props: {
     options: Array as PropType<CascaderOption[]>,
     value: Array as PropType<CascaderValue[]>,
@@ -45,9 +46,11 @@ export const CascaderView = defineComponent({
     },
     multiple: Boolean
   },
+  emits: ['update:value'],
   setup(props, {emit, attrs, slots}) {
     const {stateValue} = usePureInput(props, {emit, attrs, slots}, {
-      defaultValue: props.defaultValue
+      defaultValue: props.defaultValue,
+      propName: 'value'
     });
     const tabActiveKey = ref<number>(0);
     const levels = computed(() => {
