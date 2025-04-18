@@ -45,18 +45,7 @@ export const usePureInput = <T extends any>(props, {emit, attrs, slots}, options
     }
   });
   const cssStyle = computed(() => {
-    const style: any = props.style || attrs.style || {};
-    if (props.block) {
-      style.display = 'block';
-    }
-    if (props.width) {
-      if (typeof props.width === 'number') {
-        style.width = `${props.width}px`;
-      } else {
-        style.width = props.width;
-      }
-    }
-    return style;
+    return props.style || attrs.style || {};
   });
   const listeners = computed(() => {
     const obj = {
