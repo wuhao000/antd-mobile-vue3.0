@@ -19,6 +19,7 @@ import Grid from './grid';
 import Icon from './icon';
 import ImagePicker from './image-picker';
 import Input from './input';
+import Cascader from './cascader';
 import CascaderView from './cascader-view';
 import List from './list';
 import LoadingDirective from './loading-directive';
@@ -74,6 +75,7 @@ const components = [
 	Icon,
 	ImagePicker,
 	Input,
+	Cascader,
 	CascaderView,
 	List,
 	LoadingDirective,
@@ -140,6 +142,7 @@ export {
 	Icon,
 	ImagePicker,
 	Input,
+	Cascader,
 	CascaderView,
 	List,
 	LoadingDirective,
@@ -199,6 +202,7 @@ export default {
 	Icon,
 	ImagePicker,
 	Input,
+	Cascader,
 	CascaderView,
 	List,
 	LoadingDirective,

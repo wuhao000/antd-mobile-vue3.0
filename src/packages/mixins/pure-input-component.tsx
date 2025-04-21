@@ -23,7 +23,7 @@ export const usePureInput = <T extends any>(props, {emit, attrs, slots}, options
   const {dispatch} = useEmitter(instance);
   watch(() => stateValue.value, value => {
     const val = convertValueBack(value);
-    if (attrs[`onUpdate:${options.propName}`] && !isEqual(props[options.propName], val)) {
+    if (!isEqual(props[options.propName], val)) {
       emit(`update:${options.propName}`, val);
     }
     emit('change', val);

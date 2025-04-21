@@ -18,11 +18,11 @@ export const optionsBasedComponentProps = {
   /**
    * 选项对象中作为标签的属性名称
    */
-  labelProperty: {type: [String, Function], default: 'label'},
+  labelProperty: {type: [String, Function] as PropType<string | ((option: any) => any)>, default: 'label'},
   /**
    * 选项对象中作为值的属性名称
    */
-  valueProperty: {type: [String, Function], default: 'value'} as Prop<string | ((option) => any)>,
+  valueProperty: {type: [String, Function] as PropType<string | ((option: any) => any)>, default: 'value'} as Prop<string | ((option) => any)>,
   /**
    * 选项数据
    */
@@ -63,6 +63,7 @@ export const useOptionsBaseComponent = (props, {emit, attrs, slots}, form, optio
         })
         .map(item => {
           return Object.assign({}, item, {
+            ...item,
             label: getOptionProperty(item, props.labelProperty),
             value: getOptionProperty(item, props.valueProperty)
           });

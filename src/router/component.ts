@@ -127,6 +127,13 @@ export default [{
   },
   component: () => import('../generated/input/index.vue')
 }, {
+  path: 'cascader',
+  name: 'Cascader 级联选择',
+  meta: {
+    tag: '数据入口'
+  },
+  component: () => import('../generated/cascader/index.vue')
+}, {
   path: 'cascader-view',
   name: 'CascaderView 级联选择',
   meta: {

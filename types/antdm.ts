@@ -17,6 +17,7 @@ import {IconComponent} from './components/icon';
 import {ImagePickerComponent} from './components/image-picker';
 import {InputComponent} from './components/input';
 import {CascaderViewComponent} from './components/cascader-view';
+import {CascaderComponent} from './components/cascader';
 import {ListComponent} from './components/list';
 import {LoadingDirectiveComponent} from './components/loading-directive';
 import {MenuComponent} from './components/menu';
@@ -89,6 +90,8 @@ export class ImagePicker extends ImagePickerComponent {
 export class Input extends InputComponent {
 }
 export class CascaderView extends CascaderViewComponent {
+}
+export class Cascader extends CascaderComponent {
 }
 export class List extends ListComponent {
 }

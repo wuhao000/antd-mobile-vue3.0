@@ -76,6 +76,10 @@ export default [{
   name: 'm-input',
   component: () => import('../generated/input/demo.vue')
 }, {
+  path: 'm-cascader',
+  name: 'm-cascader',
+  component: () => import('../generated/cascader/demo.vue')
+}, {
   path: 'm-cascader-view',
   name: 'm-cascader-view',
   component: () => import('../generated/cascader-view/demo.vue')

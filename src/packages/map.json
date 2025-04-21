@@ -123,6 +123,13 @@
     "chineseName": "输入框",
     "tag": "数据入口"
   },
+  "cascader": {
+    "type": "component",
+    "componentType": "mobile",
+    "name": "cascader",
+    "chineseName": "级联选择",
+    "tag": "数据入口"
+  },
   "cascader-view": {
     "type": "component",
     "componentType": "mobile",

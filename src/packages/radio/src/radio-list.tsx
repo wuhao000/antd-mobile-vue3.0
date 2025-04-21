@@ -21,7 +21,7 @@ export default defineComponent({
     iconType: {
       type: String,
       default: 'radio'
-    } as Prop<'radio' | 'check'>
+    } as Prop<'radio' | 'check' | 'loading'>
   },
   setup(props, {emit, slots, attrs}) {
     const instance = getCurrentInstance();
@@ -45,7 +45,7 @@ export default defineComponent({
           }
           return <RadioItem
               {...optionProps}
-              iconType={props.iconType}
+              iconType={option.loading ? 'loading' : props.iconType}
               disabled={option.disabled || isDisabled.value}
               readOnly={isReadonly.value}
               value={stateValue.value === option.value}

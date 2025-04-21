@@ -1,4 +1,4 @@
-import {computed, defineComponent, PropType, ref, watch} from 'vue';
+import {computed, defineComponent, nextTick, PropType, ref, watch} from 'vue';
 import {usePureInput} from '../mixins/pure-input-component';
 import RadioList from '../radio/src/radio-list';
 import CheckboxList from '../checkbox/src/checkbox-list';
@@ -15,6 +15,8 @@ export type CascaderOption = {
   value: string
   disabled?: boolean
   children?: CascaderOption[]
+  loading?: boolean;
+  isLeaf?: boolean;
 };
 
 export type CascaderValueExtend = {
@@ -34,7 +36,9 @@ export const CascaderView = defineComponent({
   props: {
     options: Array as PropType<CascaderOption[]>,
     value: Array as PropType<CascaderValue[]>,
+    disabled: Boolean,
     animated: Boolean,
+    loadData: Function,
     defaultValue: {
       type: Array as PropType<CascaderValue[]>,
       default: () => []
@@ -95,7 +99,6 @@ export const CascaderView = defineComponent({
     watch(() => stateValue.value, () => {
       tabActiveKey.value = levels.value.length - 1;
     });
-
     const onItemSelect = (selectValue: CascaderValue, depth: number) => {
       const next = stateValue.value.slice(0, depth);
       if (selectValue !== undefined) {
@@ -103,6 +106,22 @@ export const CascaderView = defineComponent({
       }
       stateValue.value = next;
     };
+    watch(() => levels.value, () => {
+      const selected = levels.value[levels.value.length - 1].selected;
+      const options = levels.value.map(it => it.selected);
+      if (selected && !selected.isLeaf && !selected.children && props.loadData) {
+        selected.loading = true;
+        props.loadData(options).then(() => {
+          nextTick(() => {
+            tabActiveKey.value = levels.value.length - 1;
+          });
+        }).catch(e => {
+          console.error(e);
+        }).finally(() => {
+          selected.loading = false;
+        });
+      }
+    });
     return {
       levels,
       onItemSelect,

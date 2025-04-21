@@ -3,7 +3,6 @@ import Icon from '../../icon';
 import {defineComponent, Prop, PropType} from 'vue';
 import List from '../../list';
 import {filterHTMLAttrs} from "../../utils/dom";
-import {CheckOutlined} from '@ant-design/icons-vue';
 
 export default defineComponent({
   name: 'MRadioItem',
@@ -32,7 +31,7 @@ export default defineComponent({
     iconType: {
       type: String,
       default: 'radio'
-    } as Prop<'radio' | 'check'>
+    } as Prop<'radio' | 'check' | 'loading'>
   },
   emits: ['change', 'click'],
   setup(props, {emit}) {
@@ -87,7 +86,7 @@ export default defineComponent({
         }
         <span class={`${prefixCls}-item-label`}>{this.$slots.default?.()}</span>
         {
-          this.value && this.iconType === 'check' ? <CheckOutlined /> : undefined
+          this.value && this.iconType && <Icon type={this.iconType} />
         }
       </List.Item>
     );
