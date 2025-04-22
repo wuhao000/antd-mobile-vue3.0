@@ -1,17 +1,17 @@
 import classnames from 'classnames';
-import {defineComponent} from 'vue';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'MBadge',
   props: {
-    prefixCls: {default: 'am-badge'},
-    hot: {type: Boolean, default: false},
-    size: {type: String, default: 'small'},
-    overflowCount: {type: Number, default: 99},
-    corner: {type: Boolean, default: false},
-    dot: {type: Boolean, default: false},
-    text: {type: [String, Number]},
-    textStyle: {type: Object}
+    prefixCls: { type: String, default: 'am-badge' },
+    hot: { type: Boolean, default: false },
+    size: { type: String, default: 'small' },
+    overflowCount: { type: Number, default: 99 },
+    corner: { type: Boolean, default: false },
+    dot: { type: Boolean, default: false },
+    text: { type: [String, Number] },
+    textStyle: { type: Object }
   },
   render() {
     let {
@@ -26,9 +26,9 @@ export default defineComponent({
       hot
     } = this.$props;
     text =
-        typeof text === 'number' && text > overflowCount
-            ? `${overflowCount}+`
-            : text;
+      typeof text === 'number' && text > overflowCount
+        ? `${overflowCount}+`
+        : text;
     // dot mode don't need text
     if (dot) {
       text = '';
@@ -50,15 +50,17 @@ export default defineComponent({
     });
 
     return (
-        <span class={badgeCls}>
-          {this.$slots.default?.()}
-          {(text || dot) && (
-              <sup class={scrollNumberCls}
-                   style={this.textStyle}>
-                {text}
-              </sup>
-          )}
-        </span>
+      <span
+        class={badgeCls}>
+        {this.$slots.default?.()}
+        {(text || dot) && (
+          <sup
+            class={scrollNumberCls}
+            style={this.textStyle}>
+            {text}
+          </sup>
+        )}
+      </span>
     );
   }
 });

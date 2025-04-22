@@ -38,7 +38,7 @@ const Item = defineComponent({
   props: {
     onClick: {},
     text: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     prefixCls: {
@@ -48,7 +48,7 @@ const Item = defineComponent({
       type: String as PropType<FormLayout>
     },
     role: {
-      type: String as PropType<string>
+      type: String
     },
     platform: {
       type: String as PropType<'android' | 'ios'>,
@@ -71,22 +71,22 @@ const Item = defineComponent({
       type: Object as PropType<any>
     },
     multipleLine: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     error: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     errorMessage: {
-      type: String as PropType<string>
+      type: String
     },
     errorDisplayType: {
       type: String as PropType<'toast' | 'popover' | 'text'>,
       default: 'text'
     },
     disabled: {
-      type: Boolean as PropType<false>,
+      type: Boolean,
       default: false
     },
     align: {
@@ -94,7 +94,7 @@ const Item = defineComponent({
       default: 'middle'
     },
     wrap: {
-      type: Boolean as PropType<boolean>
+      type: Boolean
     },
     arrow: {
       type: String as PropType<'horizontal' | 'down' | 'up' | 'empty' | ''>
@@ -120,11 +120,11 @@ const Item = defineComponent({
       }
     },
     touchFeedback: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     required: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     suffix: {}

@@ -19,13 +19,25 @@
 
   &-content {
     height: var(--height);
-    padding-top: 4px;
     box-sizing: border-box;
+
     &.am-list {
       --border-inner: none;
       --border-bottom: none;
       --border-top: none;
       overflow-y: auto;
+
+      .am-list-body {
+        border: none;
+
+        .am-list-item {
+          & > .am-list-item-line {
+            & > .am-list-item-content {
+              border-bottom: 0;
+            }
+          }
+        }
+      }
     }
   }
 
@@ -36,6 +48,7 @@
       color: var(--adm-color-primary);
     }
   }
+
   .adm-list-inner {
     margin-bottom: 0;
   }

@@ -7,20 +7,20 @@ export default defineComponent({
   name: 'TabPane',
   props: {
     role: {
-      type: String as PropType<string>
+      type: String
     },
     title: {
       type: [String, Object] as PropType<string | VNode>
     },
     active: {
-      type: Boolean as PropType<boolean>
+      type: Boolean
     },
     fixX: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     fixY: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     forceRender: Boolean

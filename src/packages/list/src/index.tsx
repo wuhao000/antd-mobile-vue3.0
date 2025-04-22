@@ -9,7 +9,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     errorMessage: {
-      type: String as PropType<string>
+      type: String
     },
     section: {type: Boolean, default: false},
     sectionSize: {type: String, default: 'default'},

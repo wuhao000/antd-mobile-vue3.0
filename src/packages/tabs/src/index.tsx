@@ -45,23 +45,23 @@ const tabsProps = () => ({
    * 使用卡片样式
    */
   card: {
-    type: Boolean as PropType<boolean>
+    type: Boolean
   },
   /**
    * 激活的卡片背景色（未激活卡片的边框色与之相同）
    */
   activeCardColor: {
-    type: String as PropType<string>
+    type: String
   },
   /**
    * class前缀
    */
   prefixCls: {
-    type: String as PropType<string>,
+    type: String,
     default: 'am-tabs'
   },
   useOnPan: {
-    type: Boolean as PropType<boolean>,
+    type: Boolean,
     default: true
   },
   renderTabBar: {type: Function},
@@ -80,39 +80,39 @@ const tabsProps = () => ({
    * 是否支持手势
    */
   swipeable: {
-    type: Boolean as PropType<boolean>,
+    type: Boolean,
     default: true
   },
   /**
    * 与当前激活标签相邻的提前渲染的标签数量
    */
   prerenderingSiblingsNumber: {
-    type: Number as PropType<number>,
+    type: Number,
     default: 1
   },
   /**
    * 切换标签时是否有动画
    */
   animated: {
-    type: Boolean as PropType<boolean>,
+    type: Boolean,
     default: true
   },
   /**
    * 是否销毁未激活的标签页
    */
   destroyInactiveTab: {
-    type: Boolean as PropType<boolean>,
+    type: Boolean,
     default: false
   },
   /**
    * 切换卡片的滑动距离，0-1之间
    */
   distanceToChangeTab: {
-    type: Number as PropType<number>,
+    type: Number,
     default: 0.3
   },
   usePaged: {
-    type: Boolean as PropType<boolean>,
+    type: Boolean,
     default: true
   },
   /**
@@ -128,7 +128,7 @@ const tabsProps = () => ({
   },
   /** 标签页背景颜色 */
   tabBarBackgroundColor: {
-    type: String as PropType<string>
+    type: String
   },
   page: {
     type: Number,
@@ -136,11 +136,11 @@ const tabsProps = () => ({
   },
   /** 激活的标签页文字颜色 */
   tabBarActiveTextColor: {
-    type: String as PropType<string>
+    type: String
   },
   /** 未激活的标签页文字颜色 */
   tabBarInactiveTextColor: {
-    type: String as PropType<string>
+    type: String
   },
   /** 标签栏文字样式 */
   tabBarTextStyle: {
@@ -148,7 +148,7 @@ const tabsProps = () => ({
   },
   /** use left instead of transform | default: false */
   useLeftInsteadTransform: {
-    type: Boolean as PropType<boolean>
+    type: Boolean
   },
   onChange: Function
 });
@@ -506,8 +506,7 @@ export default defineComponent({
   props: {
     ...tabsProps()
   },
-  // emits: ['tabClick', 'tabScroll', 'change', 'update:activeKey'],
-  setup(props, {attrs, slots, emit}) {
+  setup(props, {attrs, slots}) {
     const parseTabList = (children) => {
       return children
         .map(node => {

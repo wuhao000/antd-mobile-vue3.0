@@ -10,16 +10,16 @@ const DotDecorator = defineComponent({
   inheritAttrs: false,
   props: {
     slideCount: {
-      type: Number as PropType<number>
+      type: Number
     },
     slidesToScroll: {
-      type: Number as PropType<number>
+      type: Number
     },
     currentSlide: {
-      type: Number as PropType<number>
+      type: Number
     },
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-carousel'
     },
     dotActiveStyle: {
@@ -53,7 +53,7 @@ const Carousel = defineComponent({
   name: 'MCarousel',
   props: {
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-carousel'
     },
     beforeChange: {},
@@ -76,35 +76,35 @@ const Carousel = defineComponent({
       type: String as PropType<IFrameOverFlow>
     },
     cellAlign: {
-      type: String as PropType<string>,
+      type: String,
       default: 'center'
     },
     cellSpacing: {
-      type: Number as PropType<number>
+      type: Number
     },
     slideWidth: {
       type: [String, Number] as PropType<string | number>
     },
     dots: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     vertical: {
-      type: Boolean as PropType<boolean>
+      type: Boolean
     },
     autoplay: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     autoplayInterval: {
-      type: Number as PropType<number>
+      type: Number
     },
     infinite: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     initialSlideWidth: {
-      type: Number as PropType<number>
+      type: Number
     }
   },
   setup(props) {

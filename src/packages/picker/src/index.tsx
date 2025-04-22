@@ -12,31 +12,31 @@ export const PickerMixin = (isView) => {
     name: 'MPicker',
     props: {
       placeholder: {
-        type: String as PropType<string>,
+        type: String,
         default: ''
       },
       cancelText: {
-        type: String as PropType<string>,
+        type: String,
         default: '取消'
       },
       okText: {
-        type: String as PropType<string>,
+        type: String,
         default: '确定'
       },
       prefixCls: {
-        type: String as PropType<string>,
+        type: String,
         default: 'am-picker'
       },
       triggerType: {
-        type: String as PropType<string>,
+        type: String,
         default: 'click'
       },
       pickerPrefixCls: {
-        type: String as PropType<string>,
+        type: String,
         default: 'am-picker-col'
       },
       popupPrefixCls: {
-        type: String as PropType<string>,
+        type: String,
         default: 'am-picker-popup'
       },
       title: {
@@ -45,7 +45,7 @@ export const PickerMixin = (isView) => {
       },
       data: {},
       cascade: {
-        type: Boolean as PropType<boolean>,
+        type: Boolean,
         default: true
       },
       value: {
@@ -61,7 +61,7 @@ export const PickerMixin = (isView) => {
         }
       },
       cols: {
-        type: Number as PropType<number>,
+        type: Number,
         default: 3
       },
       extra: {},

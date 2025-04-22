@@ -54,7 +54,6 @@ export const Mask = defineComponent({
         clearInterval(intervalRef.value);
         opacity.value = open ? 0 : 1;
       }
-      console.log(open, opacity.value);
       intervalRef.value = setInterval(() => {
         if (open) {
           if (opacity.value >= 1) {

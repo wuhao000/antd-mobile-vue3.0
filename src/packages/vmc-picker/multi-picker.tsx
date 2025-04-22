@@ -9,7 +9,7 @@ export default defineComponent({
     onValueChange: {},
     onScrollChange: {},
     prefixCls: {
-      type: String as PropType<string>
+      type: String
     },
     value: {type: Array as PropType<any[]>}
   },

@@ -8,24 +8,24 @@ export default defineComponent({
   props: {
     onChange: {},
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-radio'
     },
     listPrefixCls: {
-      type: String as PropType<string>
+      type: String
     },
     disabled: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     name: {
-      type: String as PropType<string>
+      type: String
     },
     wrapLabel: {
       default: true
     },
     value: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     }
   },

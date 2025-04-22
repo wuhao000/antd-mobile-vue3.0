@@ -20,18 +20,18 @@ export default defineComponent({
       default: false
     },
     cancelText: {
-      type: String as PropType<string>,
+      type: String,
       default: '取消'
     },
     showCancel: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     cancelButton: {
       type: Object as PropType<VNode>
     },
     showOk: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     title: {
@@ -39,21 +39,21 @@ export default defineComponent({
       default: ''
     },
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-popup'
     },
     height: {
-      type: String as PropType<string>
+      type: String
     },
     width: {
-      type: String as PropType<string>
+      type: String
     },
     placement: {
-      type: String as PropType<string>,
+      type: String,
       default: 'bottom'
     },
     showTitle: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     confirmLoading: {
@@ -67,7 +67,7 @@ export default defineComponent({
       type: String
     },
     maskClosable: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     okText: {
@@ -100,13 +100,26 @@ export default defineComponent({
     const getProps = () => {
       const open = isDisabled.value ? false : stateValue.value
       return {
-        ...props,
-        title: renderHeader(),
+        block: props.block,
+        cancelButton: props.cancelButton,
+        cancelText: props.cancelText,
+        confirmLoading: props.confirmLoading,
         getContainer: props.getContainer,
+        loadingText: props.loadingText,
+        maskClosable: props.maskClosable,
+        prefixCls: props.prefixCls,
+        okText: props.okText,
+        onCancel: props.onCancel,
+        onOk: props.onOk,
+        showCancel: props.showCancel,
+        showOk: props.showOk,
+        showTitle: props.showTitle,
+        value: props.value,
+        title: renderHeader(),
         height: props.height || 'auto',
-        width: open ? (props.width || 'auto') : '0px',
+        width: props.width || 'auto',
         disabled: isDisabled.value,
-        position: props.placement,
+        placement: props.placement,
         open
       };
     };
@@ -175,22 +188,20 @@ export default defineComponent({
     };
   },
   render() {
-    const props: any = omit({
+    const props = omit({
       ...this.getListeners(),
       ...this.getProps(),
       closable: false,
       style: this.cssStyle,
       open: this.stateValue,
-      maskClosable: this.confirmLoading ? false : this.maskClosable
-    }, ['cancelText', 'loadingText', 'okText', "position", 'showOk', 'showTitle',
+      maskClosable: this.confirmLoading ? false : this.maskClosable,
+    }, ['cancelText', 'loadingText', 'okText', 'showOk', 'showTitle',
       'block', 'confirmLoading', 'showCancel']);
     this.calcContentHeight();
-    if (!props.open) {
-      props.height = '50%';
-    }
+    
     return <Drawer
-      ref={this.setDrawerRef}
       {...props}
+      ref={this.setDrawerRef}
       zIndex={getZIndex()}
       push={{
         distance: 0

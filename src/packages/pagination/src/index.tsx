@@ -10,29 +10,29 @@ export default defineComponent({
   name: 'MPagination',
   props: {
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-pagination'
     },
     mode: {
       default: 'button'
     },
     simple: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     value: {
-      type: Number as PropType<number>,
+      type: Number,
       default: 1
     },
     total: {
-      type: Number as PropType<number>,
+      type: Number,
       default: 0
     },
     prevText: {
-      type: String as PropType<string>
+      type: String
     },
     nextText: {
-      type: String as PropType<string>
+      type: String
     }
   },
   setup(props, {emit, slots}) {

@@ -67,7 +67,7 @@ export default defineComponent({
      */
     width: String
   },
-  emits: ['update:value'],
+  emits: ['update:value', 'change'],
   setup(props) {
     const changed = ref(false);
     /*

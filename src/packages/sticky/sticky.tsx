@@ -6,23 +6,23 @@ export default defineComponent({
   name: 'Container',
   props: {
     topOffset: {
-      type: Number as PropType<number>,
+      type: Number,
       default: 0
     },
     bottomOffset: {
-      type: Number as PropType<number>,
+      type: Number,
       default: 0
     },
     relative: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     disableCompensation: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     disableHardwareAcceleration: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     }
   },

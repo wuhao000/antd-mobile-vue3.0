@@ -14,28 +14,28 @@ const TabBar = defineComponent({
     },
     className: {},
     hidden: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     placeholder: {
-      type: String as PropType<string>,
+      type: String,
       default: '正在加载'
     },
     noRenderContent: {},
     prerenderingSiblingsNumber: {
-      type: Number as PropType<number>,
+      type: Number,
       default: 1
     },
     barTintColor: {
-      type: String as PropType<string>,
+      type: String,
       default: 'white'
     },
     tintColor: {
-      type: String as PropType<string>,
+      type: String,
       default: '#108ee9'
     },
     unselectedTintColor: {
-      type: String as PropType<string>,
+      type: String,
       default: '#888'
     },
     tabBarPosition: {
@@ -43,11 +43,11 @@ const TabBar = defineComponent({
       default: 'bottom'
     },
     animated: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     swipeable: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     value: {

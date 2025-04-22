@@ -16,7 +16,7 @@ export default function PickerMixin(ComposedComponent) {
       data: {type: Array as PropType<Array<{ label: any, value: any, [key: string]: any }>>, required: true},
       value: {},
       disabled: {
-        type: Boolean as PropType<boolean>,
+        type: Boolean,
         default: false
       },
       itemStyle: {},

@@ -15,11 +15,11 @@ export default defineComponent({
     datePicker: {},
     date: {},
     disabled: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     editable: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     }
   },

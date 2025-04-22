@@ -13,11 +13,11 @@ export default defineComponent({
   name: 'MResult',
   props: {
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-result'
     },
     imgUrl: {
-      type: String as PropType<string>
+      type: String
     },
     img: {
       type: [String, Object] as PropType<string | VNode>
@@ -29,9 +29,10 @@ export default defineComponent({
       type: [String, Object] as PropType<string | VNode>
     },
     buttonText: {
-      type: String as PropType<string>
+      type: String
     },
     buttonType: {
+      type: String,
       default: ''
     }
   },

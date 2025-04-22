@@ -16,7 +16,7 @@ export default defineComponent({
   name: 'MTag',
   props: {
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-tag'
     },
     color: {
@@ -34,15 +34,15 @@ export default defineComponent({
     },
     round: Boolean,
     disabled: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     selected: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     small: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     }
   },

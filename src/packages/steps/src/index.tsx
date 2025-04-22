@@ -10,19 +10,19 @@ export default defineComponent({
       type: [String, Object] as PropType<string | object>
     },
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-steps'
     },
     iconPrefix: {
-      type: String as PropType<string>,
+      type: String,
       default: 'ant'
     },
     direction: {
-      type: String as PropType<string>,
+      type: String,
       default: 'vertical'
     },
     labelPlacement: {
-      type: String as PropType<string>,
+      type: String,
       default: 'vertical'
     },
     status: {
@@ -38,7 +38,7 @@ export default defineComponent({
       default: false
     },
     current: {
-      type: Number as PropType<number>,
+      type: Number,
       default: 0
     }
   },

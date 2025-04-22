@@ -11,7 +11,7 @@ const ConfirmPanel = defineComponent({
     disableBtn: {type: Boolean},
     startDateTime: {type: Date as PropType<Date>},
     endDateTime: {type: Date as PropType<Date>},
-    formatStr: {type: String as PropType<string>}
+    formatStr: {type: String}
   },
   setup(props, {emit}) {
     const onConfirm = () => {

@@ -5,16 +5,16 @@ const InputHandler = defineComponent({
   name: 'InputHandler',
   props: {
     prefixCls: {
-      type: String as PropType<string>
+      type: String
     },
     disabled: {
-      type: Boolean as PropType<boolean>
+      type: Boolean
     },
     role: {
-      type: String as PropType<string>
+      type: String
     },
     unselectable: {
-      type: Boolean as PropType<boolean>
+      type: Boolean
     }
   },
   setup(props, {emit, slots}) {

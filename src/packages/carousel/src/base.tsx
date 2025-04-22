@@ -87,19 +87,19 @@ const CarouselBase = defineComponent({
       }
     },
     autoplay: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     resetAutoplay: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     swipeSpeed: {
-      type: Number as PropType<number>,
+      type: Number,
       default: 12
     },
     autoplayInterval: {
-      type: Number as PropType<number>,
+      type: Number,
       default: 3000
     },
     beforeSlide: {
@@ -123,7 +123,7 @@ const CarouselBase = defineComponent({
       }
     },
     dragging: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     easing: {
@@ -139,7 +139,7 @@ const CarouselBase = defineComponent({
       default: 'hidden'
     },
     initialSlideHeight: {
-      type: Number as PropType<number>
+      type: Number
     },
     initialSlideWidth: {},
     slideIndex: {
@@ -159,18 +159,18 @@ const CarouselBase = defineComponent({
       default: 500
     },
     swiping: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     vertical: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     width: {
       default: '100%'
     },
     wrapAround: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     }
   },

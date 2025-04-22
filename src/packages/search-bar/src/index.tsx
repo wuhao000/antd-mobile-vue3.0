@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import {defineComponent, onBeforeUnmount, onMounted, onUpdated, PropType, reactive, ref, Ref, watch} from 'vue';
+import { defineComponent, onBeforeUnmount, onMounted, onUpdated, reactive, ref, Ref, watch } from 'vue';
 import TouchFeedback from '../../vmc-feedback';
 
 function onNextFrame(cb: () => void) {
@@ -21,38 +21,39 @@ export default defineComponent({
   name: 'MSearchBar',
   props: {
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-search'
     },
     defaultValue: {
-      type: String as PropType<string>
+      type: String
     },
     value: {
-      type: String as PropType<string>
+      type: String
     },
     placeholder: {
-      type: String as PropType<string>
+      type: String
     },
     showCancelButton: {
-      type: Boolean as PropType<boolean>
+      type: Boolean
     },
     cancelText: {
-      type: String as PropType<string>
+      type: String
     },
     disabled: {
-      type: Boolean as PropType<boolean>
+      type: Boolean
     },
     autoFocus: {
-      type: Boolean as PropType<boolean>
+      type: Boolean
     },
     focused: {
-      type: Boolean as PropType<boolean>
+      type: Boolean
     },
     maxLength: {
-      type: Number as PropType<number>
+      type: Number
     }
   },
-  setup(props, {emit, attrs, slots}) {
+  emits: ['update:value', 'submit', 'change', 'focus', 'blur', 'clear', 'cancel'],
+  setup(props, { emit, attrs }) {
     const rightBtnInitMarginleft: Ref<string | null> = ref(null);
     const firstFocus: Ref<boolean> = ref(null);
     const blurFromOnClear: Ref<boolean> = ref(null);
@@ -200,7 +201,7 @@ export default defineComponent({
     // tslint:disable-next-line:variable-name
     const cancelText = '取消';
 
-    const {value, focus} = this.state;
+    const { value, focus } = this.state;
 
     const wrapCls = classnames(prefixCls, {
       [`${prefixCls}-start`]: (focus || (value && value.length > 0))
@@ -219,10 +220,11 @@ export default defineComponent({
       [`${prefixCls}-cancel-anim`]: this.firstFocus
     });
     return (
-      <form onSubmit={this.onSubmit}
-            class={wrapCls}
-            ref={this.inputContainerRef}
-            action="#">
+      <form
+        onSubmit={this.onSubmit}
+        class={wrapCls}
+        ref={this.inputContainerRef}
+        action="#">
         <div class={`${prefixCls}-input`}>
           <div
             class={`${prefixCls}-synthetic-ph`}
@@ -232,7 +234,7 @@ export default defineComponent({
               class={`${prefixCls}-synthetic-ph-container`}
               ref={this.syntheticPhContainerRef}
             >
-              <i class={`${prefixCls}-synthetic-ph-icon`}/>
+              <i class={`${prefixCls}-synthetic-ph-icon`} />
               <span
                 class={`${prefixCls}-synthetic-ph-placeholder`}
                 // tslint:disable-next-line:jsx-no-multiline-js
@@ -258,7 +260,7 @@ export default defineComponent({
             maxlength={maxLength}
           />
           <TouchFeedback activeClassName={`${prefixCls}-clear-active`}>
-            <a onClick={this.onClear} class={clearCls}/>
+            <a onClick={this.onClear} class={clearCls} />
           </TouchFeedback>
         </div>
         {

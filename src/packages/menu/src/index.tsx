@@ -20,23 +20,23 @@ export default defineComponent({
   name: 'MMenu',
   props: {
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-menu'
     },
     subMenuPrefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-sub-menu'
     },
     radioPrefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-radio'
     },
     multiSelectMenuBtnsCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-multi-select-btns'
     },
     MenuSelectContanerPrefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-menu-select-container'
     },
     data: {
@@ -52,10 +52,10 @@ export default defineComponent({
       default: 2
     },
     height: {
-      type: Number as PropType<number>
+      type: Number
     },
     multiSelect: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     }
   },

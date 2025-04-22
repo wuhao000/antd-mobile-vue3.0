@@ -1,11 +1,11 @@
 import classnames from 'classnames';
-import {defineComponent, getCurrentInstance, onBeforeUnmount, PropType, reactive, ref, watch} from 'vue';
+import { defineComponent, getCurrentInstance, onBeforeUnmount, PropType, reactive, ref, watch } from 'vue';
 import List from '../../list';
-import {creatFormComponentProps, useFormComponent} from '../../mixins/form-component';
+import { creatFormComponentProps, useFormComponent } from '../../mixins/form-component';
 import TouchFeedback from '../../vmc-feedback';
 import CustomInput from './custom-input';
 import Input from './input';
-import {renderLabel} from './utils';
+import { renderLabel } from './utils';
 
 function noop() {
   // do nothing
@@ -37,14 +37,14 @@ export default defineComponent({
      * class 前缀
      */
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-input'
     },
     /**
      * list class 前缀
      */
     prefixListCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-list'
     },
     /**
@@ -52,7 +52,7 @@ export default defineComponent({
      * 可选为 <code>'left'</code>, <code>'right'</code>
      */
     moneyKeyboardAlign: {
-      type: String as PropType<string>,
+      type: String,
       default: 'right'
     },
     moneyKeyboardWrapProps: {
@@ -72,27 +72,27 @@ export default defineComponent({
      * input元素的name属性
      */
     name: {
-      type: String as PropType<string>
+      type: String
     },
     /**
      * 占位文字
      */
     placeholder: {
-      type: String as PropType<string>,
+      type: String,
       default: ''
     },
     /**
      * 是否支持清除内容
      */
     clearable: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     /**
      * 最大长度
      */
     maxLength: {
-      type: Number as PropType<number>, default: 1_000_000
+      type: Number, default: 1_000_000
     },
     /**
      * 右边注释
@@ -108,11 +108,11 @@ export default defineComponent({
     },
     locale: {},
     android: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     required: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     errorDisplayType: {
@@ -120,13 +120,14 @@ export default defineComponent({
       default: 'toast'
     }
   },
+  emits: ['update:value', 'change', 'blur', 'focus', 'confirm', 'keydown', 'keyup', 'extra-click'],
   install: null,
-  setup(props, {emit}) {
+  setup(props, { emit }) {
     const state = reactive({
       placeholder: props.placeholder || '',
       focus: false
     });
-    const {currentValue, isDisabled, isReadonly, onFieldBlur, onFieldChange} = useFormComponent(props, {emit});
+    const { currentValue, isDisabled, isReadonly, onFieldBlur, onFieldChange } = useFormComponent(props, { emit });
     const debounceTimeout = ref(null);
     watch(() => props.placeholder, (placeholder: string) => {
       state.placeholder = placeholder;
@@ -134,9 +135,9 @@ export default defineComponent({
     const inputRef = ref(null);
     const onInputChange = (e) => {
       const el = e.target;
-      const {value: rawVal, selectionEnd: prePos} = el;
+      const { value: rawVal, selectionEnd: prePos } = el;
       const preCtrlVal = currentValue.value ?? '';
-      const {type} = props;
+      const { type } = props;
       let ctrlValue = rawVal;
       switch (type) {
         case 'bankCard':
@@ -144,10 +145,9 @@ export default defineComponent({
           break;
         case 'phone':
           ctrlValue = rawVal.replace(/\D/g, '').substring(0, 11);
-          const valueLen = ctrlValue.length;
-          if (valueLen > 3 && valueLen < 8) {
+          if (ctrlValue.length > 3 && ctrlValue.length < 8) {
             ctrlValue = `${ctrlValue.substring(0, 3)} ${ctrlValue.substr(3)}`;
-          } else if (valueLen >= 8) {
+          } else if (ctrlValue.length >= 8) {
             ctrlValue = `${ctrlValue.substring(0, 3)} ${ctrlValue.substr(3, 4)} ${ctrlValue.substr(
               7
             )}`;
@@ -299,7 +299,7 @@ export default defineComponent({
       moneyKeyboardWrapProps,
       moneyKeyboardHeader,
       name, maxLength,
-      state: {placeholder, focus}
+      state: { placeholder, focus }
     } = this;
     const extra = this.$slots.extra || this.extra;
     const {
@@ -406,10 +406,11 @@ export default defineComponent({
             />
           )}
           {extra !== '' ? (
-            <div class={`${prefixCls}-extra`}
-                 onClick={(e) => {
-                   this.$emit('extra-click', e);
-                 }}>
+            <div
+              class={`${prefixCls}-extra`}
+              onClick={(e) => {
+                this.$emit('extra-click', e);
+              }}>
               {extra}
             </div>
           ) : null}
@@ -417,25 +418,28 @@ export default defineComponent({
       },
       suffix: () => {
         return clearable &&
-        !isReadonly &&
-        !isDisabled &&
-        (currentValue && `${currentValue}`.length > 0) ? (
-          // @ts-ignore
-          <TouchFeedback activeClassName={`${prefixCls}-clear-active`}>
-            <div class={`${prefixCls}-clear`}
-                 onClick={this.clearInput}/>
-          </TouchFeedback>
-        ) : null;
+          !isReadonly &&
+          !isDisabled &&
+          (
+            currentValue && `${currentValue}`.length > 0) &&
+          (
+            <TouchFeedback activeClassName={`${prefixCls}-clear-active`}>
+              <div
+                class={`${prefixCls}-clear`}
+                onClick={this.clearInput} />
+            </TouchFeedback>
+          );
       }
     };
     return (
-      <List.Item title={renderLabel(this.$props, this.$slots)}
-                 required={this.required}
-                 error={this.error}
-                 errorMessage={this.errorMessage}
-                 errorDisplayType={this.errorDisplayType}
-                 v-slots={slots}
-                 class={wrapCls}/>
+      <List.Item
+        title={renderLabel(this.$props, this.$slots)}
+        required={this.required}
+        error={this.error}
+        errorMessage={this.errorMessage}
+        errorDisplayType={this.errorDisplayType}
+        v-slots={slots}
+        class={wrapCls} />
     );
   }
 });

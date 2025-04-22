@@ -12,18 +12,18 @@ export default defineComponent({
       default: () => ({})
     },
     listPrefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-list-item'
     },
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-checkbox'
     },
     name: {
-      type: String as PropType<string>
+      type: String
     },
     wrapLabel: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     checkboxProps: {
@@ -33,17 +33,17 @@ export default defineComponent({
       }
     },
     extra: {
-      type: String as PropType<string>
+      type: String
     },
     disabled: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     readOnly: {
       type: Boolean
     },
     value: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     }
   },
@@ -80,7 +80,6 @@ export default defineComponent({
         extraProps[i] = this.$props[i];
       }
     });
-    // @ts-ignore
     const thumb = <Checkbox
       {...{
         ...checkboxProps,
@@ -90,7 +89,6 @@ export default defineComponent({
       style={this.thumbStyle}
       onChange={this.onChange}/>;
     return (
-      // @ts-ignore
       <List.Item
         {...restProps}
         touchFeedback={!this.disabled}

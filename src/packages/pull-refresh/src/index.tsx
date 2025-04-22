@@ -53,15 +53,15 @@ export default defineComponent({
   name: 'MPullRefresh',
   props: {
     activateText: {
-      type: String as PropType<string>,
+      type: String,
       default: '松开刷新'
     },
     deactivateText: {
-      type: String as PropType<string>,
+      type: String,
       default: '取消刷新'
     },
     finishText: {
-      type: String as PropType<string>,
+      type: String,
       default: '刷新完成'
     },
     getScrollContainer: {
@@ -75,19 +75,19 @@ export default defineComponent({
     },
     value: {},
     distanceToRefresh: {
-      type: Number as PropType<number>,
+      type: Number,
       default: 35
     },
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-pull-to-refresh'
     },
     damping: {
-      type: Number as PropType<number>,
+      type: Number,
       default: 80
     },
     indicatorHeight: {
-      type: Number as PropType<number>,
+      type: Number,
       default: 40
     },
     className: {}

@@ -23,7 +23,7 @@ const TimePicker = defineComponent({
         return MAX_DATE;
       }
     },
-    clientHeight: {type: Number as PropType<number>}
+    clientHeight: {type: Number}
   },
   setup(props, {emit}) {
 

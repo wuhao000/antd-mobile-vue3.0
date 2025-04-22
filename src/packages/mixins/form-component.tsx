@@ -7,39 +7,39 @@ const noop = function noop(a?, b?) {
   // do nothing
 };
 
-export const creatFormComponentProps = <T extends any>() => {
+export const creatFormComponentProps = <T,>() => {
   return {
     /**
      * class 前缀
      */
     prefixCls: {
-      type: String as PropType<string>
+      type: String
     },
     disabled: {
-      type: Boolean as PropType<boolean>
+      type: Boolean
     },
     error: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     errorMessage: {
-      type: String as PropType<string>
+      type: String
     },
     errorDisplayType: {
       type: String as PropType<'toast' | 'popover' | 'text' | undefined>
     },
     prop: {
-      type: String as PropType<string>
+      type: String
     },
     editable: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     /**
      * 是否必须
      */
     required: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     rules: {

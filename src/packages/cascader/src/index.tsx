@@ -5,6 +5,7 @@ import Popup from "../../popup";
 import {optionsBasedComponentProps, useOptionsBaseComponent} from "../../mixins/options-based-component";
 import classNames from "classnames";
 import {getOptionProperty} from "../../utils/option";
+import Search from '../../search-bar';
 
 export default defineComponent({
   name: 'MCascader',
@@ -13,6 +14,7 @@ export default defineComponent({
     title: [String, Object] as PropType<string | VNode>,
     disabled: Boolean,
     options: Array as PropType<CascaderOption[]>,
+    popupHeight: [Number, String],
     value: Array as PropType<CascaderValue[]>,
     animated: Boolean,
     loadData: Function,
@@ -21,6 +23,7 @@ export default defineComponent({
       type: Array as PropType<CascaderValue[]>,
       default: () => []
     },
+    searchable: Boolean,
     onChange: Function as PropType<(value: CascaderValue[], extend: CascaderValueExtend) => void>,
     placeholder: {
       type: String,
@@ -30,7 +33,7 @@ export default defineComponent({
   },
   setup(props, {emit, slots, attrs}) {
     const form = inject('list', undefined);
-    const {getOptions, searchKeyword, isReadonly, isDisabled} = useOptionsBaseComponent(props, {
+    const {getOptions, filteredValues, searchKeyword, isReadonly, isDisabled} = useOptionsBaseComponent(props, {
       emit,
       slots,
       attrs
@@ -62,8 +65,8 @@ export default defineComponent({
     });
     const popupOpen = ref(false);
     const onClick = () => {
-
       if (!isDisabled.value && !isReadonly.value) {
+        stateValue.value = [...(props.value ?? [])]
         popupOpen.value = true;
       }
     }
@@ -81,9 +84,11 @@ export default defineComponent({
     }
     return {
       optionText,
+      searchKeyword,
       popupOpen,
       confirm,
       stateValue,
+      filteredValues,
       close,
       isDisabled,
       isReadonly,
@@ -92,8 +97,12 @@ export default defineComponent({
     }
   },
   render() {
-    const cancelButton = <div onClick={this.onClear}
-                              class={`am-popup-item am-popup-header-left`}>清除</div> as VNode;
+    const cancelButton = (
+      <div
+        onClick={this.onClear}
+        class={`am-popup-item am-popup-header-left`}>清除</div> as VNode
+    );
+    const placeholder = <span class={'am-list-item-placeholder'}>{this.placeholder}</span>;
     return [<List.Item
       disabled={this.disabled}
       onClick={this.onClick}
@@ -111,21 +120,32 @@ export default defineComponent({
       text={!!this.optionText}
       v-slots={{
         default: () => this.title,
-        control: () => <div>{this.optionText}</div>
+        control: () =>
+          <div>{this.optionText}{(!this.stateValue || this.stateValue.length === 0) && this.placeholder && placeholder}</div>
       }}
-    />, <Popup open={this.disabled ? false : this.popupOpen}
-               showCancel={this.clearable}
-               cancelButton={cancelButton}
-               title={this.title}
-               onOk={this.confirm}
-               onCancel={this.close}>
+    />, <Popup
+      open={this.disabled ? false : this.popupOpen}
+      showCancel={this.clearable}
+      height={this.popupHeight}
+      cancelButton={cancelButton}
+      title={this.title}
+      onOk={this.confirm}
+      onCancel={this.close}>
+      {this.searchable && <Search
+        v-model={[this.searchKeyword, 'value']}
+      />}
       <CascaderView
         options={this.options}
         animated={this.animated}
         defaultValue={this.defaultValue}
+        filterOption={(option) => {
+          if (this.searchKeyword) {
+            return this.filteredValues.includes(getOptionProperty(option, this.valueProperty));
+          }
+          return true;
+        }}
         loadData={this.loadData}
         v-model={[this.stateValue, 'value']}
-        placeholder={this.placeholder}
         multiple={this.multiple}
         disabled={this.disabled}
       />

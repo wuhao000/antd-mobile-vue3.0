@@ -43,6 +43,7 @@ export const CascaderView = defineComponent({
       type: Array as PropType<CascaderValue[]>,
       default: () => []
     },
+    filterOption: Function as PropType<(option: CascaderOption) => boolean>,
     onChange: Function as PropType<(value: CascaderValue[], extend: CascaderValueExtend) => void>,
     placeholder: {
       type: String,
@@ -50,7 +51,7 @@ export const CascaderView = defineComponent({
     },
     multiple: Boolean
   },
-  emits: ['update:value'],
+  emits: ['update:value', 'change'],
   setup(props, {emit, attrs, slots}) {
     const {stateValue} = usePureInput(props, {emit, attrs, slots}, {
       defaultValue: props.defaultValue,
@@ -100,11 +101,15 @@ export const CascaderView = defineComponent({
       tabActiveKey.value = levels.value.length - 1;
     });
     const onItemSelect = (selectValue: CascaderValue, depth: number) => {
-      const next = stateValue.value.slice(0, depth);
-      if (selectValue !== undefined) {
-        next[depth] = selectValue;
+      if (stateValue.value[depth] === selectValue) {
+        stateValue.value = stateValue.value.slice(0, depth);
+      } else {
+        const next = stateValue.value.slice(0, depth);
+        if (selectValue !== undefined) {
+          next[depth] = selectValue;
+        }
+        stateValue.value = next;
       }
-      stateValue.value = next;
     };
     watch(() => levels.value, () => {
       const selected = levels.value[levels.value.length - 1].selected;
@@ -135,13 +140,13 @@ export const CascaderView = defineComponent({
   render() {
     return <div class={classPrefix}>
       <Tabs
-          value={this.tabActiveKey}
-          swipeable={false}
-          animated={this.animated}
-          onChange={(_, index) => {
-            this.setTabActiveKey(index);
-          }}
-          class={`${classPrefix}-tabs`}>
+        value={this.tabActiveKey}
+        swipeable={false}
+        animated={this.animated}
+        onChange={(_, index) => {
+          this.setTabActiveKey(index);
+        }}
+        class={`${classPrefix}-tabs`}>
         {this.levels.map((level, index) => {
           const selected = level.selected;
           const radioProps = {
@@ -150,23 +155,23 @@ export const CascaderView = defineComponent({
               this.onItemSelect(v, index);
             },
             iconType: 'check',
-            options: level.options,
+            options: this.filterOption ? level.options.filter(this.filterOption) : level.options,
             class: `${classPrefix}-content`
           } as const;
           const hasChildren = level.options.some(it => it.children?.length);
           return (
-              <Tabs.Tab
-                  key={`tab_${index}`}
-                  title={
-                    <div class={`${classPrefix}-header-title`}>
-                      {selected ? selected.label : this.placeholder}
-                    </div>
-                  }
-                  forceRender>
-                {
-                  this.multiple && index === this.levels.length - 1 && !hasChildren ? <CheckboxList {...radioProps}/> : <RadioList {...radioProps}/>
-                }
-              </Tabs.Tab>
+            <Tabs.Tab
+              key={`tab_${index}`}
+              title={
+                <div class={`${classPrefix}-header-title`}>
+                  {selected ? selected.label : this.placeholder}
+                </div>
+              }
+              forceRender>
+              {
+                this.multiple && index === this.levels.length - 1 && !hasChildren ? <CheckboxList {...radioProps}/> : <RadioList {...radioProps}/>
+              }
+            </Tabs.Tab>
           );
         })}
       </Tabs>

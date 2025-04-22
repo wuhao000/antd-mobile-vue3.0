@@ -8,11 +8,11 @@ export default defineComponent({
   props: {
     onLeftClick: {},
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-navbar'
     },
     className: {
-      type: String as PropType<string>
+      type: String
     },
     mode: {
       default: 'dark'

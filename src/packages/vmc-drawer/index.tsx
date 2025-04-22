@@ -24,7 +24,7 @@ const Drawer = defineComponent({
   inheritAttrs: false,
   props: {
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'rmc-drawer'
     },
     sidebarStyle: {
@@ -55,23 +55,23 @@ const Drawer = defineComponent({
       type: Object as PropType<any>
     },
     docked: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     open: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     transitions: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     touch: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     enableDragHandle: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     position: {
@@ -79,7 +79,7 @@ const Drawer = defineComponent({
       default: 'left'
     },
     dragToggleDistance: {
-      type: Number as PropType<number>,
+      type: Number,
       default: 30
     }
   },

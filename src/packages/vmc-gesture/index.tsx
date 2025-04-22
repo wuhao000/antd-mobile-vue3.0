@@ -144,15 +144,15 @@ const Gesture = defineComponent({
   name: 'Gesture',
   props: {
     enableRotate: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     enablePinch: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     direction: {
-      type: String as PropType<string>,
+      type: String,
       default: 'all'
     },
     onPinch: {},

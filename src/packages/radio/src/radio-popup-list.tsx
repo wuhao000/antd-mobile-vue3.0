@@ -14,10 +14,10 @@ export default defineComponent({
       type: [String, Object] as PropType<string>
     },
     placeholder: {
-      type: String as PropType<string>
+      type: String
     },
     clearable: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     }
   },

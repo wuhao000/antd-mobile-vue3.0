@@ -1,6 +1,6 @@
-import {defineComponent, getCurrentInstance, inject, onMounted, PropType} from 'vue';
+import { defineComponent, getCurrentInstance, inject, onMounted, PropType } from 'vue';
 import List from '../../list';
-import {optionsBasedComponentProps, useOptionsBaseComponent} from '../../mixins/options-based-component';
+import { optionsBasedComponentProps, useOptionsBaseComponent } from '../../mixins/options-based-component';
 import SearchBar from '../../search-bar/src';
 import CheckboxItem from './checkbox-item';
 
@@ -12,16 +12,23 @@ export default defineComponent({
       type: Array as PropType<any[]>
     },
     title: {
-      type: String as PropType<string>
+      type: String
     },
     maxHeightPercentage: {
-      type: Number as PropType<number>
+      type: Number
     },
     onChange: Function
   },
-  setup(props, {emit, slots, attrs}) {
+  setup(props, { emit, slots, attrs }) {
     const form = inject('list', undefined);
-    const {getOptions, setStateValue, isReadonly, stateValue, searchKeyword, isDisabled} = useOptionsBaseComponent(props, {
+    const {
+      getOptions,
+      setStateValue,
+      isReadonly,
+      stateValue,
+      searchKeyword,
+      isDisabled
+    } = useOptionsBaseComponent(props, {
       emit,
       attrs,
       slots
@@ -60,7 +67,7 @@ export default defineComponent({
           ['onUpdate:value']: (v) => {
             searchKeyword.value = v;
           }
-        }}/> : null;
+        }} /> : null;
     };
 
     const instance = getCurrentInstance();
@@ -73,12 +80,13 @@ export default defineComponent({
         }
       }
     });
-    return {renderOptions, renderSearch};
+    return { renderOptions, renderSearch };
   },
   render() {
-    return <List required={this.required}
-                 errorMessage={this.errorMessage}
-                 title={this.title}>
+    return <List
+      required={this.required}
+      errorMessage={this.errorMessage}
+      title={this.title}>
       {this.renderSearch()}
       {this.renderOptions()}
     </List>;

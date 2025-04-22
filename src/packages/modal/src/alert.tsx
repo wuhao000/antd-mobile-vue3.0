@@ -12,7 +12,6 @@ export default function alert(
   let closed = false;
 
   if (!title && !message) {
-    // console.log('Must specify either an alert title, or message, or both');
     return {
       close: () => {
       }

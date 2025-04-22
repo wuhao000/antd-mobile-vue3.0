@@ -60,7 +60,7 @@ export default defineComponent({
     onImageClick: {},
     onFail: {},
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-image-picker'
     },
     value: {
@@ -70,15 +70,15 @@ export default defineComponent({
       }
     },
     selectable: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     multiple: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     accept: {
-      type: String as PropType<string>,
+      type: String,
       default: '*'
     },
     length: {
@@ -86,14 +86,14 @@ export default defineComponent({
       default: 4
     },
     maxLength: {
-      type: Number as PropType<number>,
+      type: Number,
       default: 8
     },
     /**
      * 允许上传的最大字节数
      */
     maxSize: {
-      type: Number as PropType<number>,
+      type: Number,
       default: 0
     }
   },

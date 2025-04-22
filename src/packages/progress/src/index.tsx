@@ -6,25 +6,25 @@ export default defineComponent({
   name: 'MProgress',
   props: {
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-progress'
     },
     barStyle: {
       type: Object
     },
     percent: {
-      type: Number as PropType<number>,
+      type: Number,
       default: 0
     },
     position: {
       default: 'fixed'
     },
     unfilled: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     appearTransition: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     }
   },

@@ -6,7 +6,7 @@ export default defineComponent({
   name: 'MPopoverItem',
   props: {
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-popover'
     },
     /**
@@ -17,10 +17,10 @@ export default defineComponent({
      * 是否禁用
      */
     disabled: {
-      type: Boolean as PropType<boolean>
+      type: Boolean
     },
     firstItem: {
-      type: String as PropType<string>
+      type: String
     },
     activeStyle: {}
   },

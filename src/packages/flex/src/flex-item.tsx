@@ -8,11 +8,11 @@ export default defineComponent({
   props: {
     onClick: {},
     disabled: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-flexbox'
     }
   },

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import omit from 'omit.js';
-import { computed, defineComponent, inject, PropType, ref, Ref, VNode, watch } from 'vue';
+import { computed, defineComponent, inject, PropType, ref, Ref, watch } from 'vue';
 import List from '../../list';
 import { optionsBasedComponentProps, useOptionsBaseComponent } from '../../mixins/options-based-component';
 import Popup from '../../popup';
@@ -14,25 +14,25 @@ export default defineComponent({
       type: [String, Object] as PropType<string>
     },
     placeholder: {
-      type: String as PropType<string>,
+      type: String,
       default: '请选择'
     },
     clearable: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     separator: {
-      type: String as PropType<string>,
+      type: String,
       default: '、'
     },
     open: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     }
   },
-  setup(props, {emit, slots, attrs}) {
+  setup(props, { emit, slots, attrs }) {
     const form = inject('list', undefined);
-    const {getOptions, searchKeyword, isReadonly, stateValue, isDisabled} = useOptionsBaseComponent(props, {
+    const { getOptions, searchKeyword, isReadonly, stateValue, isDisabled } = useOptionsBaseComponent(props, {
       emit,
       slots,
       attrs
@@ -94,10 +94,15 @@ export default defineComponent({
       ...this.$props,
       options: this.getOptions()
     };
-    const {stateValue, placeholder} = this;
+    const { stateValue, placeholder } = this;
     listProps.title = undefined;
-    const cancelButton = <div onClick={this.onClear}
-                              class={`am-popup-item am-popup-header-left`}>清除</div> as VNode;
+    const cancelButton = (
+      <div
+        onClick={this.onClear}
+        class={`am-popup-item am-popup-header-left`}>
+        清除
+      </div>
+    );
 
     const slots = {
       control: () => {
@@ -109,33 +114,34 @@ export default defineComponent({
         return <span>{this.title}</span>;
       }
     };
-    return [<List.Item onClick={this.onClick}
-                       error={this.error}
-                       errorMessage={this.errorMessage}
-                       arrow={'horizontal'}
-                       errorDisplayType={this.errorDisplayType}
-                       style={this.$attrs.style}
-                       class={classNames(this.$attrs.class as string | Record<string, string>, {
-                         'am-checkbox-popup-list': true,
-                         'am-checkbox-popup-list-focus': this.isDisabled ? false : this.popupOpen
-                       })}
-                       touchFeedback={!this.isReadonly && !this.isDisabled}
-                       required={this.required}
-                       text={!!this.optionText}
-                       v-slots={slots}
-                       disabled={this.isDisabled}>
-    </List.Item>,
-      <Popup open={this.isDisabled ? false : this.popupOpen}
-             showCancel={this.clearable}
-             cancelButton={cancelButton}
-             title={this.title}
-             onOk={this.closePopup}
-             onCancel={this.closePopup}>
-        <CheckboxList
-          {...omit(listProps, ['errorMessage', 'error', 'errorDisplayType'])}
-          maxHeightPercentage={0.7}
-          onChange={this.onChange}
-        />
-      </Popup>];
+    return [<List.Item
+      onClick={this.onClick}
+      error={this.error}
+      errorMessage={this.errorMessage}
+      arrow={'horizontal'}
+      errorDisplayType={this.errorDisplayType}
+      style={this.$attrs.style}
+      class={classNames(this.$attrs.class as string | Record<string, string>, {
+        'am-checkbox-popup-list': true,
+        'am-checkbox-popup-list-focus': this.isDisabled ? false : this.popupOpen
+      })}
+      touchFeedback={!this.isReadonly && !this.isDisabled}
+      required={this.required}
+      text={!!this.optionText}
+      v-slots={slots}
+      disabled={this.isDisabled}>
+    </List.Item>, <Popup
+      open={this.isDisabled ? false : this.popupOpen}
+      showCancel={this.clearable}
+      cancelButton={cancelButton}
+      title={this.title}
+      onOk={this.closePopup}
+      onCancel={this.closePopup}>
+      <CheckboxList
+        {...omit(listProps, ['errorMessage', 'error', 'errorDisplayType'])}
+        maxHeightPercentage={0.7}
+        onChange={this.onChange}
+      />
+    </Popup>];
   }
 });

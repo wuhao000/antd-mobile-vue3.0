@@ -15,11 +15,11 @@ export default defineComponent({
       default: () => []
     },
     cols: {
-      type: Number as PropType<number>,
+      type: Number,
       default: 3
     },
     disabled: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     pickerItemStyle: {},

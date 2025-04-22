@@ -8,13 +8,13 @@ const Tab = defineComponent({
   name: 'Tab',
   props: {
     dot: {
-      type: Boolean as PropType<boolean>
+      type: Boolean
     },
     badge: {
       type: [String, Number] as PropType<string | number>
     },
     selected: {
-      type: Boolean as PropType<boolean>
+      type: Boolean
     },
     selectedIcon: {
       type: Object as PropType<any>
@@ -23,17 +23,17 @@ const Tab = defineComponent({
       type: Object as PropType<any>
     },
     title: {
-      type: String as PropType<string>
+      type: String
     },
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-tab-item'
     },
     unselectedTintColor: {
-      type: String as PropType<string>
+      type: String
     },
     tintColor: {
-      type: String as PropType<string>
+      type: String
     },
     dataAttrs: {
       type: Object

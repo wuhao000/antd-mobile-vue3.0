@@ -1,27 +1,28 @@
 <template>
-  <div class="svg-container"
-       style="font-size:10px;"
-       v-html="html"></div>
+  <div
+    class="svg-container"
+    style="font-size:10px;"
+    v-html="html" />
 </template>
 <script lang="ts">
-  import {defineComponent} from 'vue';
+import { defineComponent } from 'vue';
 
-  export default defineComponent({
-    name: 'SrcHtml',
-    props: {html: String, onClick: {}}
-  });
+export default defineComponent({
+  name: 'SrcHtml',
+  props: { html: String, onClick: Function }
+});
 </script>
 <style lang="less">
-  .svg-container {
-    text-align: center;
-    vertical-align: center;
-    padding-top: 17px;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    background-color: white;
+.svg-container {
+  text-align: center;
+  vertical-align: center;
+  padding-top: 17px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  background-color: white;
 
-    svg {
-      width: 40px;
-    }
+  svg {
+    width: 40px;
   }
+}
 </style>

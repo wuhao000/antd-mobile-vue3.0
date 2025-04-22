@@ -1,4 +1,4 @@
-function formatIt(date: Date, form: string) {
+function formatIt(date: Date, form: string): string {
   const pad = (n: number) => (n < 10 ? `0${n}` : n);
   const dateStr = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(
     date.getDate()
@@ -19,7 +19,7 @@ function formatIt(date: Date, form: string) {
   return `${dateStr} ${timeStr}`;
 }
 
-export function formatFn(value: Date | number | string, format: string | ((arg) => any), mode: string) {
+export function formatFn(value: Date | number | string, format: string | ((arg) => string), mode: string): string {
   const formatsEnum = {
     date: 'YYYY-MM-DD',
     time: 'HH:mm',

@@ -30,31 +30,31 @@ export const baseComponentProps = {
     default: defaultParser
   },
   value: {
-    type: Number as PropType<number>
+    type: Number
   },
   defaultValue: {
-    type: Number as PropType<number>
+    type: Number
   },
   min: {
-    type: Number as PropType<number>
+    type: Number
   },
   max: {
-    type: Number as PropType<number>
+    type: Number
   },
   autoFocus: {
-    type: Boolean as PropType<boolean>,
+    type: Boolean,
     default: false
   },
   disabled: {
-    type: Boolean as PropType<boolean>,
+    type: Boolean,
     default: false
   },
   readOnly: {
-    type: Boolean as PropType<boolean>,
+    type: Boolean,
     default: false
   },
   precision: {
-    type: Number as PropType<number>
+    type: Number
   }
 };
 export const useBaseComponent = (props, {emit}) => {

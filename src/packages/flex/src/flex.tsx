@@ -11,11 +11,11 @@ export default defineComponent({
       type: String as PropType<'start' | 'end' | 'center' | 'between' | 'around' | 'stretch'>
     },
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-flexbox'
     },
     role: {
-      type: String as PropType<string>
+      type: String
     },
     direction: {
       type: String as PropType<'row' | 'row-reverse' | 'column' | 'column-reverse'>
@@ -31,7 +31,7 @@ export default defineComponent({
       default: 'center'
     },
     disabled: {
-      type: Boolean as PropType<boolean>
+      type: Boolean
     }
   },
   render() {

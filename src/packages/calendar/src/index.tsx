@@ -16,6 +16,7 @@ export default defineComponent({
     timePickerPrefixCls: {type: String, default: 'am-picker'},
     timePickerPickerPrefixCls: {type: String, default: 'am-picker-col'}
   },
+  emits: ['update:value', 'confirm', 'cancel', 'close', 'clear', 'select-has-disable-date', 'change'],
   setup(props, {emit}) {
     const {localValue} = useLocalValue<Date[]>(props, emit, {
       autoEmit: false,

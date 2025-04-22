@@ -10,7 +10,7 @@ export default defineComponent({
       type: [String, Number] as PropType<string | number>
     },
     selected: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: undefined
     },
     icon: {
@@ -24,10 +24,10 @@ export default defineComponent({
       default: ''
     },
     dot: {
-      type: Boolean as PropType<boolean>
+      type: Boolean
     },
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-tab-bar'
     }
   },

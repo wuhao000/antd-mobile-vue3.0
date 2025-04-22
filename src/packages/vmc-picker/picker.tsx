@@ -24,7 +24,7 @@ const Picker = defineComponent({
     select: {type: Function as PropType<(a, b, c) => any>},
     doScrollingComplete: {type: Function as PropType<(a, b, c) => any>},
     noAnimate: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     }
   },

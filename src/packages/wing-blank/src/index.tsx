@@ -5,7 +5,7 @@ export default defineComponent({
   name: 'MWingBlank',
   props: {
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-wingblank'
     },
     size: {

@@ -7,19 +7,19 @@ export default defineComponent({
   name: 'MSegmentedControl',
   props: {
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-segment'
     },
     tintColor: {
-      type: String as PropType<string>,
+      type: String,
       default: ''
     },
     disabled: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     value: {
-      type: Number as PropType<number>,
+      type: Number,
       default: 0
     },
     values: {

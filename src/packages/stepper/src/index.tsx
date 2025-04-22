@@ -8,47 +8,47 @@ export default defineComponent({
   name: 'MStepper',
   props: {
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-stepper'
     },
     showNumber: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     min: {
-      type: Number as PropType<number>
+      type: Number
     },
     max: {
-      type: Number as PropType<number>
+      type: Number
     },
     step: {
       default: 1
     },
     readOnly: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     disabled: {
-      type: Boolean as PropType<boolean>
+      type: Boolean
     },
     autoFocus: {
-      type: Boolean as PropType<boolean>
+      type: Boolean
     },
     value: {
       type: [Number, String] as PropType<number>
     },
     defaultValue: {
-      type: Number as PropType<number>
+      type: Number
     },
     valueEditable: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     upStyle: {},
     downStyle: {},
     inputStyle: {},
     name: {
-      type: String as PropType<string>
+      type: String
     }
   },
   setup(props, {emit, slots}) {

@@ -1,5 +1,5 @@
 import {Dayjs} from 'dayjs';
-import {defineComponent, Prop, PropType, provide, ref, watch} from 'vue';
+import { defineComponent, Prop, PropType, provide, ref, VNode, watch } from 'vue';
 import {getComponentLocale} from '../../utils/getLocale';
 import {setProps} from '../../utils/vnode';
 import RCDatePicker from '../../vmc-date-picker/date-picker';
@@ -16,18 +16,18 @@ export const getDatePicker = (isView: boolean, name: string) => {
     name,
     props: {
       disabled: {
-        type: Boolean as PropType<boolean>
+        type: Boolean
       },
-      cancelText: {},
+      cancelText: [String, Object] as PropType<string | VNode>,
       editable: {
-        type: Boolean as PropType<boolean>,
+        type: Boolean,
         default: true
       },
       extra: {
-        type: String as PropType<string>
+        type: String
       },
       format: {
-        type: [String, Function] as PropType<string | ((arg) => any)>
+        type: [String, Function] as PropType<string | ((arg) => string)>
       },
       locale: {type: Object, default: () => locale},
       maxDate: {
@@ -40,40 +40,41 @@ export const getDatePicker = (isView: boolean, name: string) => {
         type: Date as PropType<Date>
       },
       minuteStep: {
-        type: Number as PropType<number>,
+        type: Number,
         default: 1
       },
       mode: {
         type: String as PropType<DatePickerMode>,
         default: 'datetime'
       },
-      okText: {},
-      title: {},
+      okText: [String, Object] as PropType<string | VNode>,
+      title: [String, Object] as PropType<string | VNode>,
       value: {
         type: [Object, Number, String] as PropType<Date | number | string>
       },
       open: {type: Boolean, default: false},
       placeholder: {
-        type: String as PropType<string>,
+        type: String,
         default: ''
       },
       prefixCls: {
-        type: String as PropType<string>,
+        type: String,
         default: 'am-picker'
       },
       use12Hours: {
-        type: Boolean as PropType<boolean>,
+        type: Boolean,
         default: false
       },
       pickerPrefixCls: {
-        type: String as PropType<string>,
+        type: String,
         default: 'am-picker-col'
       },
       popupPrefixCls: {
-        type: String as PropType<string>,
+        type: String,
         default: 'am-picker-popup'
       }
     },
+    emits: ['change', 'ok', 'update:value', 'update:open'],
     setup(props, {emit}) {
       const getDate = (): Date => {
         if (typeof props.value === 'number') {
@@ -166,21 +167,23 @@ export const getDatePicker = (isView: boolean, name: string) => {
         return datePicker;
       }
       const textValue = value ? formatFn(value, this.format, this.mode) : null;
-      const childExtra = textValue ? textValue : (this.extra || <span class={'am-list-item-placeholder'}>{this.placeholder || extra}</span>);
+      const childExtra = textValue ? textValue : (this.extra ||
+        <span class={'am-list-item-placeholder'}>{this.placeholder || extra}</span>);
       const open = (this.disabled || !this.editable) ? false : this.localOpen;
       return (
-        <PopupDatePicker onOpenChange={this.onOpenChange}
-                         datePicker={datePicker}
-                         {...this.$props}
-                         title={this.title}
-                         disabled={this.disabled}
-                         editable={this.editable}
-                         open={open}
-                         prefixCls={popupPrefixCls}
-                         date={this.getDate()}
-                         cancelText={this.cancelText || cancelText}
-                         okText={this.okText || okText}
-                         ref={this.fixOnOk}>
+        <PopupDatePicker
+          onOpenChange={this.onOpenChange}
+          datePicker={datePicker}
+          {...this.$props}
+          title={this.title}
+          disabled={this.disabled}
+          editable={this.editable}
+          open={open}
+          prefixCls={popupPrefixCls}
+          date={this.getDate()}
+          cancelText={this.cancelText || cancelText}
+          okText={this.okText || okText}
+          ref={this.fixOnOk}>
           {this.$slots.default?.()?.map(it => {
             setProps(it, {
               touchFeedback: true,

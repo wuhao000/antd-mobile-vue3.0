@@ -46,23 +46,23 @@ export default {
     type: Date as PropType<Date>
   },
   minHour: {
-    type: Number as PropType<number>
+    type: Number
   },
   maxHour: {
-    type: Number as PropType<number>
+    type: Number
   },
   minMinute: {
-    type: Number as PropType<number>
+    type: Number
   },
   maxMinute: {
-    type: Number as PropType<number>
+    type: Number
   },
   mode: {
     type: String as PropType<DatePickerMode>,
     default: DATE
   },
   disabled: {
-    type: Boolean as PropType<boolean>,
+    type: Boolean,
     default: false
   },
   locale: {
@@ -70,23 +70,23 @@ export default {
     default: defaultLocale
   },
   minuteStep: {
-    type: Number as PropType<number>,
+    type: Number,
     default: 1
   },
   formatMonth: {type: Function as PropType<(index: number, date: Date) => any>},
   formatDay: {type: Function as PropType<(index: number, date: Date) => any>},
   itemStyle: {type: Function as PropType<any>},
   prefixCls: {
-    type: String as PropType<string>,
+    type: String,
     default: 'rmc-date-picker'
   },
   rootNativeProps: {},
   pickerPrefixCls: {
-    type: String as PropType<string>,
+    type: String,
     default: 'rmc-picker'
   },
   use12Hours: {
-    type: Boolean as PropType<boolean>,
+    type: Boolean,
     default: false
   }
 };

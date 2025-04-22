@@ -11,23 +11,23 @@ const SubMenu = defineComponent({
   name: 'SubMenu',
   props: {
     subMenuPrefixCls: {
-      type: String as PropType<string>
+      type: String
     },
     radioPrefixCls: {
-      type: String as PropType<string>
+      type: String
     },
     subMenuData: {
       type: Object
     },
     showSelect: {
-      type: Boolean as PropType<boolean>
+      type: Boolean
     },
     onSel: {},
     selItem: {
       type: Object
     },
     multiSelect: {
-      type: Boolean as PropType<boolean>
+      type: Boolean
     }
   },
   setup(props, {emit, slots}) {

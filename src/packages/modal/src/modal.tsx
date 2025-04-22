@@ -18,13 +18,13 @@ export default defineComponent({
       default: 'am-modal'
     },
     transitionName: {
-      type: String as PropType<string>
+      type: String
     },
     maskTransitionName: {
-      type: String as PropType<string>
+      type: String
     },
     wrapClassName: {
-      type: String as PropType<string>
+      type: String
     },
     onText: {
       type: String
@@ -35,7 +35,7 @@ export default defineComponent({
     wrapProps: {},
     loading: Boolean,
     platform: {
-      type: String as PropType<string>,
+      type: String,
       default: 'ios'
     },
     bodyStyle: {
@@ -45,11 +45,11 @@ export default defineComponent({
       type: [String, Object]
     },
     maskClosable: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     closable: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     footer: {
@@ -65,7 +65,7 @@ export default defineComponent({
       type: Function
     },
     transparent: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     popup: {
@@ -73,7 +73,7 @@ export default defineComponent({
       default: false
     },
     animated: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     animationType: {
@@ -82,10 +82,10 @@ export default defineComponent({
     },
     onAnimationEnd: {},
     animateAppear: {
-      type: Boolean as PropType<boolean>
+      type: Boolean
     },
     operation: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     open: Boolean

@@ -12,11 +12,11 @@ export default defineComponent({
     ...optionsBasedComponentProps,
     value: {},
     title: {
-      type: String as PropType<string>
+      type: String
     },
     onChange: [Function, Array],
     maxHeightPercentage: {
-      type: Number as PropType<number>
+      type: Number
     },
     iconType: {
       type: String,

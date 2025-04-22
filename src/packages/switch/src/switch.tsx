@@ -7,17 +7,17 @@ export default defineComponent({
   props: {
     ...creatFormComponentProps(),
     color: {
-      type: String as PropType<string>
+      type: String
     },
     name: {
-      type: String as PropType<string>
+      type: String
     },
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-switch'
     },
     platform: {
-      type: String as PropType<string>,
+      type: String,
       default: 'ios'
     }
   },

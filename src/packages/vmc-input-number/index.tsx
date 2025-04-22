@@ -15,19 +15,19 @@ const InputNumber = defineComponent({
   props: {
     ...baseComponentProps,
     valueEditable: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     focusOnUpDown: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'rmc-input-number'
     },
     tabIndex: {
-      type: Number as PropType<number>
+      type: Number
     },
     upHandler: {
       type: Object as PropType<VNode>

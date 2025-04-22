@@ -1,27 +1,27 @@
 import classnames from 'classnames';
-import {defineComponent, onBeforeUnmount, PropType, Ref, ref, Teleport, TeleportProps, watch} from 'vue';
+import { defineComponent, onBeforeUnmount, PropType, Ref, ref, Teleport, TeleportProps } from 'vue';
 import CustomKeyboard from './custom-keyboard';
 
 export default defineComponent({
   name: 'MNumberInput',
   props: {
-    onConfirm: {},
-    onChange: {},
-    onFocus: {},
-    onBlur: {},
-    placeholder: {default: ''},
-    disabled: {type: Boolean, default: false},
-    editable: {type: Boolean, default: true},
+    onConfirm: Function,
+    onChange: Function,
+    onFocus: Function,
+    onBlur: Function,
+    placeholder: { type: String, default: '' },
+    disabled: { type: Boolean, default: false },
+    editable: { type: Boolean, default: true },
     moneyKeyboardAlign: {},
     moneyKeyboardWrapProps: {},
     moneyKeyboardHeader: {},
-    value: {type: [String, Number]},
-    prefixCls: {default: 'am-input'},
-    keyboardPrefixCls: {default: 'am-number-keyboard'},
+    value: { type: [String, Number] },
+    prefixCls: { type: String, default: 'am-input' },
+    keyboardPrefixCls: { type: String, default: 'am-number-keyboard' },
     confirmLabel: {},
-    backspaceLabel: {type: String as PropType<string>},
-    cancelKeyboardLabel: {type: String as PropType<string>},
-    maxLength: {type: Number as PropType<number>},
+    backspaceLabel: { type: String },
+    cancelKeyboardLabel: { type: String },
+    maxLength: { type: Number },
     type: {}
   },
   watch: {
@@ -34,13 +34,10 @@ export default defineComponent({
       }
     }
   },
-  setup(props, {emit}) {
+  setup(props, { emit }) {
     const container: Ref<HTMLElement> = ref(null);
     const focus: Ref<boolean> = ref(false);
     const currentValue: Ref<string> = ref(null);
-    watch(() => focus.value, () => {
-      console.log(focus.value);
-    }, {immediate: true});
     const onChange = (value: any) => {
       if (props.value === undefined) {
         currentValue.value = value.target.value;
@@ -79,7 +76,7 @@ export default defineComponent({
       );
     };
     const getContainer = () => {
-      const {keyboardPrefixCls} = props;
+      const { keyboardPrefixCls } = props;
       if (!container.value) {
         const div: HTMLDivElement = document.createElement('div');
         div.setAttribute('id', `${keyboardPrefixCls}-container-${(new Date().getTime())}`);
@@ -102,18 +99,18 @@ export default defineComponent({
       focus.value = true;
     };
     const onKeyboardClick = (keyboardItemValue: string) => {
-      const {maxLength, value} = props;
+      const { maxLength, value } = props;
       // tslint:disable-next-line:no-this-assignment
 
       let valueAfterChange;
       // 删除键
       if (keyboardItemValue === 'delete') {
         valueAfterChange = value.toString().substring(0, value.toString().length - 1);
-        emit('change', {target: {value: valueAfterChange}});
+        emit('change', { target: { value: valueAfterChange } });
         // 确认键
       } else if (keyboardItemValue === 'confirm') {
         valueAfterChange = value;
-        onChange({target: {value: valueAfterChange}});
+        onChange({ target: { value: valueAfterChange } });
         onInputBlur(value.toString());
         onConfirm(value);
         // 收起键
@@ -125,10 +122,10 @@ export default defineComponent({
         (value + keyboardItemValue).length > maxLength
       ) {
         valueAfterChange = (value + keyboardItemValue).substring(0, maxLength);
-        onChange({target: {value: valueAfterChange}});
+        onChange({ target: { value: valueAfterChange } });
       } else {
         valueAfterChange = value + keyboardItemValue;
-        onChange({target: {value: valueAfterChange}});
+        onChange({ target: { value: valueAfterChange } });
       }
     };
     const onFakeInputClick = () => {
@@ -184,8 +181,8 @@ export default defineComponent({
     };
   },
   render() {
-    const {onFakeInputClick, renderPortal, placeholder, disabled, editable, moneyKeyboardAlign} = this;
-    const {focus, value} = this;
+    const { onFakeInputClick, renderPortal, placeholder, disabled, editable, moneyKeyboardAlign } = this;
+    const { focus, value } = this;
     const preventKeyboard = disabled || !editable;
     const fakeInputCls = classnames(`fake-input`, {
       focus,

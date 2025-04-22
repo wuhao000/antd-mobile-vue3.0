@@ -9,10 +9,10 @@ export default defineComponent({
   name: 'DefaultTabBar',
   props: {
     card: {
-      type: Boolean as PropType<boolean>
+      type: Boolean
     },
     activeCardColor: {
-      type: String as PropType<string>
+      type: String
     },
     prefixCls: {
       default: 'am-tabs-default-bar'
@@ -33,14 +33,14 @@ export default defineComponent({
       default: 0
     },
     animated: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     renderTab: {
       type: Function as PropType<(tab) => any>
     },
     renderUnderline: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     page: {

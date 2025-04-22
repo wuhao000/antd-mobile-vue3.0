@@ -1,6 +1,6 @@
 import VcHandle from 'ant-design-vue/es/vc-slider/src/Handle';
 import RcRange from 'ant-design-vue/es/vc-slider/src/Range';
-import {defineComponent, PropType} from 'vue';
+import { CSSProperties, defineComponent, PropType } from 'vue';
 import {creatFormComponentProps, useFormComponent} from '../../mixins/form-component';
 
 export interface HandleGeneratorInfo {
@@ -16,26 +16,27 @@ export default defineComponent({
   props: {
     ...creatFormComponentProps(),
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-slider'
     },
-    handleStyle: {},
-    trackStyle: {},
-    railStyle: {},
-    onChange: {},
-    onAfterChange: {},
+    handleStyle: Object as PropType<CSSProperties>,
+    trackStyle: Object as PropType<CSSProperties>,
+    railStyle: Object as PropType<CSSProperties>,
+    onChange: Function,
+    onAfterChange: Function,
     tipFormatter: {},
     pushable: {
-      type: Boolean as PropType<boolean>, default: false
+      type: Boolean,
+      default: false
     },
     min: {
-      type: Number as PropType<number>
+      type: Number
     },
     max: {
-      type: Number as PropType<number>
+      type: Number
     },
     step: {
-      type: Number as PropType<number>
+      type: Number
     }
   },
   setup(props, ctx) {

@@ -24,42 +24,42 @@ export default defineComponent({
   props: {
     ...creatFormComponentProps(),
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-textarea'
     },
     prefixListCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-list'
     },
     title: {
       type: [String, Object] as PropType<string | VNode>
     },
     maxLength: {
-      type: Number as PropType<number>
+      type: Number
     },
     name: {
-      type: String as PropType<string>
+      type: String
     },
     placeholder: {
       default: ''
     },
     clearable: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     rows: {
-      type: Number as PropType<number>,
+      type: Number,
       default: 1
     },
     count: {
-      type: Number as PropType<number>
+      type: Number
     },
     autoHeight: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     labelNumber: {
-      type: Number as PropType<number>,
+      type: Number,
       default: 5
     }
   },

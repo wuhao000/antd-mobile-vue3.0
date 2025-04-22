@@ -4,7 +4,7 @@ export const PopupPickerProps = {
   picker: {},
   value: {},
   triggerType: {
-    type: String as PropType<string>,
+    type: String,
     default: 'click'
   },
   WrapComponent: {},
@@ -12,11 +12,11 @@ export const PopupPickerProps = {
   okText: {},
   title: {},
   open: {
-    type: Boolean as PropType<boolean>,
+    type: Boolean,
     default: false
   },
   disabled: {
-    type: Boolean as PropType<boolean>,
+    type: Boolean,
     default: false
   },
   content: {},
@@ -25,8 +25,8 @@ export const PopupPickerProps = {
   /** web only */
   wrapStyle: {},
   prefixCls: {},
-  pickerValueProp: {type: String as PropType<string>},
-  pickerValueChangeProp: {type: String as PropType<string>},
+  pickerValueProp: {type: String},
+  pickerValueChangeProp: {type: String},
   transitionName: {},
   popupTransitionName: {},
   maskTransitionName: {}

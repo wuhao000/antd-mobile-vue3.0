@@ -30,34 +30,34 @@ export default defineComponent({
      * 是否有边框
      */
     bordered: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     /**
      * 列数
      */
     cols: {
-      type: Number as PropType<number>,
+      type: Number,
       default: 4
     },
     carousel: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     carouselMaxRow: {
-      type: Number as PropType<number>,
+      type: Number,
       default: 2
     },
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-grid'
     },
     square: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     activeClassName: {
-      type: String as PropType<string>
+      type: String
     },
     activeStyle: {},
     itemStyle: {

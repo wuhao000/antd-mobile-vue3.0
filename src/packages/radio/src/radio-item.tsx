@@ -20,12 +20,12 @@ export default defineComponent({
       }
     },
     disabled: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     readOnly: Boolean,
     value: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     iconType: {

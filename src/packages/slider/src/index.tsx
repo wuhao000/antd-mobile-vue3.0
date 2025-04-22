@@ -10,28 +10,28 @@ export default defineComponent({
   props: {
     ...creatFormComponentProps(),
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-slider'
     },
     marks: {},
     dots: {
-      type: Boolean as PropType<boolean>
+      type: Boolean
     },
     included: {
-      type: Boolean as PropType<boolean>
+      type: Boolean
     },
     handleStyle: {},
     trackStyle: {},
     railStyle: {},
     tipFormatter: {},
     min: {
-      type: Number as PropType<number>
+      type: Number
     },
     max: {
-      type: Number as PropType<number>
+      type: Number
     },
     step: {
-      type: Number as PropType<number>
+      type: Number
     },
     handle: {},
     onChange: Function

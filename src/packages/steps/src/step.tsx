@@ -15,7 +15,7 @@ export default defineComponent({
   name: 'MStep',
   props: {
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-steps'
     },
     wrapperStyle: {},
@@ -26,7 +26,7 @@ export default defineComponent({
       type: String as PropType<'wait' | 'process' | 'finish' | 'error'>
     },
     iconPrefix: {
-      type: String as PropType<string>,
+      type: String,
       default: 'ant'
     },
     /**
@@ -39,13 +39,13 @@ export default defineComponent({
       type: [Number, String] as PropType<number | string>
     },
     stepNumber: {
-      type: Number as PropType<number>
+      type: Number
     },
     description: {
-      type: String as PropType<string>
+      type: String
     },
     title: {
-      type: String as PropType<string>
+      type: String
     },
     progressDot: {}
   },

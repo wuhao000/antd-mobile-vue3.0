@@ -5,17 +5,17 @@ export default defineComponent({
   name: 'MNotice',
   props: {
     duration: {
-      type: Number as PropType<number>
+      type: Number
     },
     onClose: {
       type: Function as PropType<any>
     },
     children: {},
     prefixCls: {
-      type: String as PropType<string>
+      type: String
     },
     closable: {
-      type: Boolean as PropType<boolean>
+      type: Boolean
     }
   },
   setup(props, {emit, slots}) {

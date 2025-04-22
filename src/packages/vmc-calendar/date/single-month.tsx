@@ -5,7 +5,7 @@ const SingleMonth = defineComponent({
   name: 'SingleMonth',
   props: {
     displayMode: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     locale: {

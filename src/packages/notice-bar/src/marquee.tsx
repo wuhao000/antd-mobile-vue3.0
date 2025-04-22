@@ -1,4 +1,16 @@
-import {defineComponent, getCurrentInstance, onBeforeUnmount, onMounted, onUpdated, PropType, reactive, Ref, ref, VNode} from 'vue';
+import {
+  CSSProperties,
+  defineComponent,
+  getCurrentInstance,
+  onBeforeUnmount,
+  onMounted,
+  onUpdated,
+  PropType,
+  reactive,
+  Ref,
+  ref,
+  VNode
+} from 'vue';
 
 /*
  * https://github.com/jasonslyvia/react-marquee
@@ -19,30 +31,30 @@ const Marquee = defineComponent({
   name: 'Marquee',
   props: {
     prefixCls: {
-      type: String as PropType<string>
+      type: String
     },
     text: {
       type: [String, Object] as PropType<string | VNode>,
       default: ''
     },
     loop: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     leading: {
-      type: Number as PropType<number>,
+      type: Number,
       default: 500
     },
     trailing: {
-      type: Number as PropType<number>,
+      type: Number,
       default: 800
     },
     fps: {
-      type: Number as PropType<number>,
+      type: Number,
       default: 40
     }
   },
-  setup(props, {emit, slots}) {
+  setup(props) {
     const state = reactive({
       animatedWidth: 0,
       overflowWidth: 0
@@ -89,10 +101,10 @@ const Marquee = defineComponent({
     };
     const instance = getCurrentInstance()
     const _measureText = () => {
-      const container = instance.vnode.el;
-      const node: any = textRef.value;
+      const container = instance.vnode.el as HTMLElement;
+      const node: HTMLElement = textRef.value;
       if (container && node) {
-        const containerWidth = (container as any).offsetWidth;
+        const containerWidth = container.offsetWidth;
         const textWidth = node.offsetWidth;
         state.overflowWidth = textWidth - containerWidth;
       }
@@ -117,7 +129,7 @@ const Marquee = defineComponent({
   },
   render() {
     const {prefixCls, text} = this;
-    const style: any = {
+    const style: CSSProperties = {
       position: 'relative',
       right: this.state.animatedWidth + 'px',
       whiteSpace: 'nowrap',
@@ -142,4 +154,4 @@ const Marquee = defineComponent({
 });
 
 
-export default Marquee as any;
+export default Marquee;

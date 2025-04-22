@@ -4,10 +4,10 @@ import {defineComponent, PropType} from 'vue';
 
 const IDecoratorProps = {
   currentSlide: {
-    type: Number as PropType<number>
+    type: Number
   },
   slideCount: {
-    type: Number as PropType<number>
+    type: Number
   },
   frameWidth: {
     type: [Number, String] as PropType<number | string>
@@ -16,16 +16,16 @@ const IDecoratorProps = {
     type: [Number, String] as PropType<number | string>
   },
   slidesToScroll: {
-    type: Number as PropType<number>
+    type: Number
   },
   cellSpacing: {
-    type: Number as PropType<number>
+    type: Number
   },
   slidesToShow: {
-    type: Number as PropType<number>
+    type: Number
   },
   wrapAround: {
-    type: Boolean as PropType<boolean>
+    type: Boolean
   },
   nextSlide: {type: Function},
   previousSlide: {type: Function},

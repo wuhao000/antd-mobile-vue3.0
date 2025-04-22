@@ -10,25 +10,25 @@ export default defineComponent({
      * 是否显示气泡（v-model）
      */
     open: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: false
     },
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-popover'
     },
     /**
      * 是否显示遮罩
      */
     mask: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     /**
      * 是否允许点击遮罩层关闭
      */
     maskClosable: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     placement: {

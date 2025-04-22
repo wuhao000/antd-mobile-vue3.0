@@ -27,28 +27,28 @@ export default defineComponent({
   name: 'MActionSheet',
   props: {
     prefixCls: {
-      type: String as PropType<string>,
+      type: String,
       default: 'am-action-sheet'
     },
     /**
      * 取消按钮文本
      */
     cancelText: {
-      type: String as PropType<string>,
+      type: String,
       default: '取消'
     },
     /**
      * 是否在点击遮罩层时关闭
      */
     closeOnClickingMask: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     /**
      * 是否在点击按钮后关闭
      */
     closeOnClickingMenu: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     menus: {
@@ -59,22 +59,22 @@ export default defineComponent({
      * 是否显示取消按钮
      */
     showCancel: {
-      type: Boolean as PropType<boolean>,
+      type: Boolean,
       default: true
     },
     theme: {
-      type: String as PropType<string>,
+      type: String,
       default: 'ios'
     },
     value: {
-      type: Boolean as PropType<boolean>
+      type: Boolean
     },
     type: {
       type: String as PropType<'normal' | 'share'>,
       default: 'normal'
     },
     title: {
-      type: String as PropType<string>
+      type: String
     }
   },
   setup(props, {emit, slots}) {
